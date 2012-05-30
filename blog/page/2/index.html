@@ -1,0 +1,378 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Tiny's Blog</title>
+  <meta name="author" content="Tiny">
+
+  
+  <meta name="description" content="转载自：
+http://geekontheway.github.com/blog/2011/12/03/octopress-for-freshman/
+Octopress基于jekyll，刚开始使用起来也比较复杂： Octopress会有两个分支：source（编写博客）和master（ &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://tinyxd.github.com/blog/page/2">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Tiny's Blog" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Tiny's Blog</a></h1>
+  
+    <h2>Stay Hungry,Stay Foolish,Stay Patient.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:tinyxd.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/about">About Me</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/05/23/octopress-xin-shou-jiao-cheng/">Octopress:新手教程</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-05-23T20:55:00+08:00" pubdate data-updated="true">May 23<span>rd</span>, 2012</time>
+        
+         | <a href="/blog/2012/05/23/octopress-xin-shou-jiao-cheng/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><em>转载自：</em><br/>
+http://geekontheway.github.com/blog/2011/12/03/octopress-for-freshman/<br/>
+Octopress基于jekyll，刚开始使用起来也比较复杂：</p>
+
+<pre><code>Octopress会有两个分支：source（编写博客）和master（生成好的博客），就像这样：
+
+git remote -v
+
+octopress git://github.com/imathis/octopress.git (fetch)
+octopress git://github.com/imathis/octopress.git (push)
+origin    git@github.com:geekontheway/geekontheway.github.com.git (fetch)
+origin    git@github.com:geekontheway/geekontheway.github.com.git (push)
+
+
+git branch -a
+
+* source
+  remotes/octopress/HEAD -&gt; octopress/master
+  remotes/octopress/compass
+  remotes/octopress/configuration
+  remotes/octopress/edge
+  remotes/octopress/generate_environment
+  remotes/octopress/gh-pages
+  remotes/octopress/master
+  remotes/octopress/move_rakefile_configs
+  remotes/octopress/post_names
+  remotes/octopress/rake_minify_js
+  remotes/octopress/refactor_code_highlight
+  remotes/octopress/refactor_deployment
+  remotes/octopress/refactor_js
+  remotes/octopress/site
+  remotes/octopress/site-deploy-test
+  remotes/octopress/subdir
+remotes/octopress/thor
+</code></pre>
+
+<p>其中只有origin仓库和source分支是必须的，其余分支或仓库建议删掉。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2012/05/23/octopress-xin-shou-jiao-cheng/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/05/23/octopresstian-jia-tu-pian/">Octopress添加图片</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-05-23T20:49:00+08:00" pubdate data-updated="true">May 23<span>rd</span>, 2012</time>
+        
+         | <a href="/blog/2012/05/23/octopresstian-jia-tu-pian/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>If you like Markdown’s syntax for images, you’ll love the simplicity of the Octopress image tag.</p>
+
+<p>Syntax</p>
+
+<blockquote><p>img [class names] /path/to/image [width] [height] [title text [alt text]]</p></blockquote>
+
+<p>Don’t forget brace and percent couple.</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2012/05/23/octopresstian-jia-tu-pian/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/05/23/octopressan-zhuang-bi-ji/">Octopress安装笔记</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-05-23T07:16:00+08:00" pubdate data-updated="true">May 23<span>rd</span>, 2012</time>
+        
+         | <a href="/blog/2012/05/23/octopressan-zhuang-bi-ji/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>在阅读此教程之前，先安装git和ruby环境。</p>
+
+<p><strong>1.安装ruby环境</strong></p>
+
+<p>如果已经安装了ruby,就不用安装rvm 了。
+Archlinux用户建议用pacman 安装ruby,方便省事。</p>
+
+<p>Archlinux安装RVM教程：
+<a href="https://wiki.archlinux.org/index.php/RVM">archlinux安装RVM教程</a></p>
+
+<pre><code>[tinyxd@archbang  ~]$ sudo bash &lt; &lt;(curl -s https://raw.github.com/wayneeseguin/rvm/master/binscripts/rvm-installer )
+</code></pre>
+
+<p>添加当前用户到rvm 组</p>
+
+<pre><code>[tinyxd@archbang  ~]$ sudo usermod -a -G rvm admin
+</code></pre>
+
+<p>查看下添加成功了没：</p>
+
+<pre><code>[tinyxd@archbang ~]$ grep rvm /etc/group
+rvm:x:1004:admin
+</code></pre>
+
+<p>再注销，登录。</p>
+
+<blockquote><p>To start using RVM you need to run <code>source /etc/profile.d/rvm.sh</code> in all your open shell windows, in rare cases you need to reopen all shell windows.</p></blockquote>
+
+<p>已经安装了ruby的就可以从这里开始了。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2012/05/23/octopressan-zhuang-bi-ji/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  <div class="pagination">
+    
+    <a href="/blog/archives">Blog Archives</a>
+    
+    <a class="next" href="/">Newer &rarr;</a>
+    
+  </div>
+</div>
+<aside class="sidebar">
+  
+    <section>
+  <h1>License</h1>
+  <p>
+   本站所有作品采用<a href="http://creativecommons.org/licenses/by-nc-sa/2.5/cn/">知识共享署名-非商业性使用-相同方式共享 2.5 中国大陆许可协议</a>进行许可。
+  </p>
+</section>
+
+
+<section>
+<iframe width="350" height="75" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=350&height=75&fansRow=1&ptype=0&speed=0&skin=1&isTitle=0&noborder=0&isWeibo=0&isFans=0&uid=2328532522&verifier=7efcfd6a&dpc=1"></iframe>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2012/05/27/arch-linuxxia-java-sdkde-an-zhuang-yu-pei-zhi/">arch linux下java SDK的安装与配置</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/05/26/arch-linux-xia-lxrde-an-zhuang/">arch linux 下lxr的安装</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/05/26/bang-nin-kuai-su-ru-men-tide-codec-engine-zhuan-zai/">帮您快速入门TI的Codec Engine(转载)</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/05/25/archbang-arch-linux-an-zhuang-inode/">archbang arch linux 安装inode </a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/05/23/wei-yi-jing-cun-zai-de-github-octopresspei-zhi-ben-di-huan-jing/">为已经存在的github Octopress配置本地环境</a>
+      </li>
+    
+  </ul>
+</section>
+<section>
+  <h1>Categories</h1>
+    <ul id="category-list"><li><a href='/blog/categories/archlinux'>Archlinux (2)</a></li><li><a href='/blog/categories/davinci'>Davinci (1)</a></li><li><a href='/blog/categories/java'>Java (1)</a></li><li><a href='/blog/categories/octopress'>Octopress (4)</a></li></ul>
+</section>
+<section>
+  <h1>Category Cloud</h1>
+    <span id="tag-cloud"><a href='/blog/categories/archlinux' style='font-size: 130.0%'>Archlinux(2)</a> <a href='/blog/categories/davinci' style='font-size: 115.0%'>Davinci(1)</a> <a href='/blog/categories/java' style='font-size: 115.0%'>Java(1)</a> <a href='/blog/categories/octopress' style='font-size: 160.0%'>Octopress(4)</a> </span>
+</section>
+
+
+
+
+
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - Tiny -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'tinyxd';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
