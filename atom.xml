@@ -4,7 +4,7 @@
   <title><![CDATA[Tiny's Blog]]></title>
   <link href="http://tinyxd.github.com/atom.xml" rel="self"/>
   <link href="http://tinyxd.github.com/"/>
-  <updated>2012-06-01T07:30:28+08:00</updated>
+  <updated>2012-06-01T21:16:17+08:00</updated>
   <id>http://tinyxd.github.com/</id>
   <author>
     <name><![CDATA[Tiny]]></name>
@@ -20,14 +20,11 @@
     <id>http://tinyxd.github.com/blog/2012/05/31/cache&#8211;zhi-xing-wen-ti-zong-jie</id>
     <content type="html"><![CDATA[<p>1.现代并行机中，为了提高处理器的速度，处理器往往带有Cache。一个数据在整个系统内可能有多份拷贝，这就引发了Cache一致性问题。
 例如下图中的2个处理器和共享内存构成的系统。初始时刻，处理机P1和P2都将变量X从共享内存装入了私有Cache。
-这时，两个Cache中和共享内存中的变量X的值是一样的。在程序运行的某一时刻，处理机P1把X的值修改为X&#8217;，并更新了私有Cache中 的值。
-此时无论P1采用写直达（write-through），还是写回（write-back）策略，都不会修改P2私有Cache中X的值。这时如果P2需要读取X，则它得到的是过时的值。 <br/>
-<img src="http://tinyxd.github.com/images/cache.gif"></p>
-
+这时，两个Cache中和共享内存中的变量X的值是一样的。在程序运行的某一时刻，处理机P1把X的值修改为X’，并更新了私有Cache中 的值。
+此时无论P1采用写直达（write-through），还是写回（write-back）策略，都不会修改P2私有Cache中X的值。这时如果P2需要读取X，则它得到的是过时的值。 <br />
+<img src="http://tinyxd.github.com/images/cache.gif" /> 
 <!--more-->
-
-
-<p>　　Cache一致性问题是指在含有多个Cache的并行系统中，数据的多个副本（因为没有同步更新）而造成的不一致问题。以上的例子是由于多个处理器共享一个可写变量
+　　Cache一致性问题是指在含有多个Cache的并行系统中，数据的多个副本（因为没有同步更新）而造成的不一致问题。以上的例子是由于多个处理器共享一个可写变量
 造成的Cache不一致。还有其它原因也会造成Cache一致性问题，比如进程迁移和某些I/O操作等。
 2.c64x+与cache一致性问题（http://focus.ti.com.cn/cn/general/docs/gencontent.tsp?contentId=64183）</p>
 
@@ -70,23 +67,23 @@ Master包括Core、EDMA以及串行高速IO（sRIO），EMAC等外设。Master�
 Oracle Java SDK 7 update 1
 </code></pre>
 
-<h2><strong>安装</strong></h2>
-
+<h2 id="section"><strong>安装</strong></h2>
 <ul>
-<li><p>jre <br/>
-这里先安装JDK，虽然据说openjdk的jre也能兼容Oracle Java SDK，但还是有点担心它们的兼容性。  <br/>
-先在<a href="https://aur.archlinux.org/">Arch Linux AUR</a>中找到<a href="https://aur.archlinux.org/packages.php?ID=51908">JRE</a>。<br/>
-<!--more-->
-制作安装包</p>
+  <li>
+    <p>jre <br />
+这里先安装JDK，虽然据说openjdk的jre也能兼容Oracle Java SDK，但还是有点担心它们的兼容性。  <br />
+先在<a href="https://aur.archlinux.org/">Arch Linux AUR</a>中找到<a href="https://aur.archlinux.org/packages.php?ID=51908">JRE</a>。<br />
+ <!--more-->
+制作安装包   </p>
 
-<p>  $ wget &#8211;no-check-certificate -c https://aur.archlinux.org/packages/jr/jre/jre.tar.gz <br/>
-  $ tar -zxvf jre.tar.gz <br/>
-  $ cd  jre <br/>
-  $ makepkg</p></li>
+    <p>$ wget –no-check-certificate -c https://aur.archlinux.org/packages/jr/jre/jre.tar.gz <br />
+$ tar -zxvf jre.tar.gz <br />
+$ cd  jre <br />
+$ makepkg    </p>
+  </li>
 </ul>
 
-
-<p>处理依赖条件，开始安装</p>
+<p>处理依赖条件，开始安装    </p>
 
 <pre><code>$ sudo pacman -S desktop-file-utils libxtst shared-mime-info xdg-utils
 [zzz@archbang jre]$ sudo pacman -U ./jre-7.4-1-i686.pkg.tar.xz 
@@ -120,41 +117,33 @@ Optional dependencies for jre
 <pre><code>$ pwd 
 /opt/java
 $ ls
-jre
+jre 至此，JRE成功安装。 --- *   JDK JDK的安装过程与JRE类似。   
+
+$ wget -c --no-check-certificate https://aur.archlinux.org/packages/jd/jdk/jdk.tar.gz
+$ tar -zxvf jdk.tar.gz
+$ cd jdk
+$ makepkg
+$ sudo pacman -U ./jdk-7.4-1-i686.pkg.tar.xz
+loading packages...
+resolving dependencies...
+looking for inter-conflicts...
+
+Targets (1): jdk-7.4-1
+
+Total Installed Size:   86.05 MiB
+
+Proceed with installation? [Y/n] 
+(1/1) checking package integrity                   [----------------------] 100%
+(1/1) loading package files                        [----------------------] 100%
+(1/1) checking for file conflicts                  [----------------------] 100%
+(1/1) checking available disk space                [----------------------] 100%
+(1/1) installing jdk                               [----------------------] 100%
+
+The jdk package is licensed software.
+You MUST read and agree to the license stored in
+/usr/share/licenses/jdk/LICENSE before using it.
+Please relogin to include jdk in your PATH.
 </code></pre>
-
-<h2>至此，JRE成功安装。</h2>
-
-<ul>
-<li><p>JDK
-JDK的安装过程与JRE类似。</p>
-
-<p>  $ wget -c &#8211;no-check-certificate https://aur.archlinux.org/packages/jd/jdk/jdk.tar.gz
-  $ tar -zxvf jdk.tar.gz
-  $ cd jdk
-  $ makepkg
-  $ sudo pacman -U ./jdk-7.4-1-i686.pkg.tar.xz
-  loading packages&#8230;
-  resolving dependencies&#8230;
-  looking for inter-conflicts&#8230;</p>
-
-<p>  Targets (1): jdk-7.4-1</p>
-
-<p>  Total Installed Size:   86.05 MiB</p>
-
-<p>  Proceed with installation? [Y/n]
-  (1/1) checking package integrity                   [&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;-] 100%
-  (1/1) loading package files                        [&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;-] 100%
-  (1/1) checking for file conflicts                  [&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;-] 100%
-  (1/1) checking available disk space                [&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;-] 100%
-  (1/1) installing jdk                               [&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;-] 100%</p>
-
-<p>  The jdk package is licensed software.
-  You MUST read and agree to the license stored in
-  /usr/share/licenses/jdk/LICENSE before using it.
-  Please relogin to include jdk in your PATH.</p></li>
-</ul>
-
 
 <p>配置
 安装之后打开/etc/environment文件编辑，添加如下内容：</p>
@@ -172,23 +161,17 @@ java version "1.7.0_01"
 Java(TM) SE Runtime Environment (build 1.7.0_01-b08)
 Java HotSpot(TM) Client VM (build 21.1-b02, mixed mode)
 $ javac -version
-javac 1.7.0_01   
-</code></pre>
-
-<p>更详细的内容可参考<a href="http://sillydong.com/myjava/arch-linux%E5%BF%AB%E9%80%9F%E9%85%8D%E7%BD%AEjava%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.html">傻东の学习笔记</a>
-3、解决中文乱码问题，还是用超级用户，进入/usr/share/fonts/wenquanyi，将wqy-zenhei文件夹复制到/opt/java/jre/lib/fonts下，改名为fallback，进入fallback文件夹，终端执行</p>
-
-<pre><code># mkfontdir
+javac 1.7.0_01    更详细的内容可参考[傻东の学习笔记](http://sillydong.com/myjava/arch-linux%E5%BF%AB%E9%80%9F%E9%85%8D%E7%BD%AEjava%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.html) 3、解决中文乱码问题，还是用超级用户，进入/usr/share/fonts/wenquanyi，将wqy-zenhei文件夹复制到/opt/java/jre/lib/fonts下，改名为fallback，进入fallback文件夹，终端执行
+   
+# mkfontdir
 和
 # mkfontscale
 </code></pre>
 
-<p>4、安装eclipse，只需要打开终端执行pacman -S eclipse就可以安装eclipse最新的英文版</p>
+<p>4、安装eclipse，只需要打开终端执行pacman -S eclipse就可以安装eclipse最新的英文版   </p>
 
-<p>5、执行jar文件的办法。在Arch中，jar文件默认是使用归档文件管理器打开的，也就相当于解压缩，而我们需要的是执行这个jar程序，跟我做：在目标jar文件上右击，选择“属性”，找到“打开方式”的标签，选择“添加”，打开“使用自定义命令”，向其中加入下面的命令：</p>
-
-<pre><code>java -jar
-</code></pre>
+<p>5、执行jar文件的办法。在Arch中，jar文件默认是使用归档文件管理器打开的，也就相当于解压缩，而我们需要的是执行这个jar程序，跟我做：在目标jar文件上右击，选择“属性”，找到“打开方式”的标签，选择“添加”，打开“使用自定义命令”，向其中加入下面的命令： <br />
+	java -jar</p>
 
 <p>输完之后选择“添加”，这时候在打开方式标签下有两个选择，一种就是原来就有的“归档文件管理器”，还有就是“java”，勾选上“java”，然后关闭，这时候双击jar文件就是执行它了。</p>
 ]]></content>
@@ -201,7 +184,7 @@ javac 1.7.0_01
     <id>http://tinyxd.github.com/blog/2012/05/26/arch-linux-xia-lxrde-an-zhuang</id>
     <content type="html"><![CDATA[<p>经过自己两天的折腾，参考了好几个资料终于搞定。
 参考资料见文章末尾。
-LXR是使用WEB方式下的源代码整理浏览工具，最大的用途在于清理出了代码中函数、变量的定义、说明、应用的关系，并用链接的形式表现在网页上。LXR整理出代码的结构和调用关系，存在数据库中，并在显示时与源代码树结合，从功能上说，包括代码浏览、标识符搜索、文本搜索和文件搜索，其中的文本搜索和文件搜索利用的是第三方工具（即glimpse或swish-e）（我使用的glimpse）。它的主要组成部分包括三个：Perl编写的网页/CGI部分，基于MySQL的索引数据管理（新版本才有）和通用的文本搜索工具。目前的版本，采用Glimpse或者Swish-e中的一种作为通用文本搜索工具。在安装上，基本上也按照这三个部分来配置。
+LXR是使用WEB方式下的源代码整理浏览工具，最大的用途在于清理出了代码中函数、变量的定义、说明、应用的关系，并用链接的形式表现在网页上。LXR整理出代码的结构和调用关系，存在数据库中，并在显示时与源代码树结合，从功能上说，包括代码浏览、标识符搜索、文本搜索和文件搜索，其中的文本搜索和文件搜索利用的是第三方工具（即glimpse或swish-e）（我使用的glimpse）。它的主要组成部分包括三个：Perl编写的网页/CGI部分，基于MySQL的索引数据管理（新版本才有）和通用的文本搜索工具。目前的版本，采用Glimpse或者Swish-e中的一种作为通用文本搜索工具。在安装上，基本上也按照这三个部分来配置。 
 1.下载安装所需的工具。
 a。glimpse（http://webglimpse.net/download.php）</p>
 
@@ -228,14 +211,11 @@ $ sudo make install
 <pre><code># rc.d restart mysqld
 </code></pre>
 
-<p>本文需要设置密码为空（后面有说明）</p>
-
+<p>本文需要设置密码为空（后面有说明）
 <!--more-->
+用mysql -p -u root</p>
 
-
-<p>用mysql -p -u root</p>
-
-<p>登陆mysql,然后执行下面语句: set password for &#8216;root&#8217;@&#8217;localhost&#8217; =password(&#8221;);flush privileges;e.安装Perl的Magic模块</p>
+<p>登陆mysql,然后执行下面语句: set password for ‘root’@’localhost’ =password(‘’);flush privileges;e.安装Perl的Magic模块</p>
 
 <p>下载地址http://search.cpan.org/~knok/File-MMagic-1.27/MMagic.pm</p>
 
@@ -248,27 +228,24 @@ cp MMagic.pm blib/lib/File/MMagic.pm
 Manifying blib/man3/File::MMagic.3pm
 [root@localhost File-MMagic-1.27]# make install
 Installing /usr/lib/perl5/site_perl/5.8.8/File/MMagic.pm
-Installing /usr/share/man/man3/File::MMagic.3pm Writing /usr/lib/perl5/site_perl/5.8.8/i386-linux-thread-multi/auto/File/MMagic/.packlist Appending installation info to /usr/lib/perl5/5.8.8/i386-linux-thread-multi/perllocal.pod
+Installing /usr/share/man/man3/File::MMagic.3pm Writing /usr/lib/perl5/site_perl/5.8.8/i386-linux-thread-multi/auto/File/MMagic/.packlist Appending installation info to /usr/lib/perl5/5.8.8/i386-linux-thread-multi/perllocal.pod 2.设置
 </code></pre>
 
-<p>2.设置</p>
-
-<p>尽管lxr源码里有一个INSTALL文件，但不详，这里写下来我自己配置的步骤。
-1）位置规划
+<p>尽管lxr源码里有一个INSTALL文件，但不详，这里写下来我自己配置的步骤。 
+1）位置规划 
 LXR除了数据库那一部分不需要考虑存放位置以外，还有CGI/HTML部分、索引生成工具部分和</p>
 
 <p>所需要索引的源代码部分需要考虑，我的实践中使用的与INSTALL缺省的不同，最大的一点不同在于我</p>
 
-<p>将WEB部分和工具部分分离开，只允许WEB部分暴露给浏览器——主要是基于也许会更安全一些的考虑。
+<p>将WEB部分和工具部分分离开，只允许WEB部分暴露给浏览器——主要是基于也许会更安全一些的考虑。 
 另一个不同是用符号链接而不是真正的源代码目录作为源代码部分，因为LXR索引的Linux Kernel是最常用的，</p>
 
-<p>而Kernel本身还被用来重编内核和升级，所以不适合完全拷贝过来。
-本例中使用的是/usr/local/lxr目录作为LXR的根目录。</p>
+<p>而Kernel本身还被用来重编内核和升级，所以不适合完全拷贝过来。 
+本例中使用的是/usr/local/lxr目录作为LXR的根目录。 
+	#tar zxvf lxr-0.9.1.tar.gz -C /usr/local ；将lxr解压到/usr/local/lxr下 
+	#cd /usr/local/</p>
 
-<pre><code>#tar zxvf lxr-0.9.1.tar.gz -C /usr/local ；将lxr解压到/usr/local/lxr下 
-#cd /usr/local/
-
-#mv Local.pm diff ident search source templates  #将web相关部分移到templates下  
+<pre><code>#mv Local.pm diff ident search source templates  #将web相关部分移到templates下  
 
 #mv templates http                            #http目录，用于存放WEB部分  
 
@@ -278,7 +255,7 @@ LXR除了数据库那一部分不需要考虑存放位置以外，还有CGI/HTML
 #mv lib /usr/lib/perl5/site_perl/LXR  #将自定义的perl库文件拷贝
 </code></pre>
 
-<p>到perl/mod_perl使用的缺省库文件目录中</p>
+<p>到perl/mod_perl使用的缺省库文件目录中 </p>
 
 <pre><code>#ln -s /usr/lib/perl5 /usr/local/lib  #否则在运行时会出现Can't locate LXR/Files.pm等错误 
 </code></pre>
@@ -300,7 +277,7 @@ ln -s ../../../../src/linux-2.6.39 2.6.39
 #cd ../../ ；回到/usr/local/lxr 
 </code></pre>
 
-<p>2）修改lxr.conf
+<p>2）修改lxr.conf 
 准备好了目录结构，下一步就是改写lxr.conf文件。缺省的lxr.conf已经从templates拷贝到/usr/local/lxr/http/下了，</p>
 
 <p>并在/usr/local/lxr/下有个连接。 注释掉所有与swish-e相关的变量定义,其余设置如下</p>
@@ -325,7 +302,7 @@ ln -s ../../../../src/linux-2.6.39 2.6.39
 
 'htmlhead' =&gt; '/usr/local/lxr/http/html-head.html' 
 
-
+ 
 
 'sourceroot' =&gt; '/usr/local/lxr/src'       #源码根目录    (注意，最后无/) 
 
@@ -335,7 +312,7 @@ ln -s ../../../../src/linux-2.6.39 2.6.39
 </code></pre>
 
 <p>3）apache的httpd.conf (/etc/httpd/conf/httpd.conf)
-保证装了mod_perl的时候，在httpd.conf中添加以下几行：</p>
+保证装了mod_perl的时候，在httpd.conf中添加以下几行： </p>
 
 <pre><code>Alias /lxr/ /usr/local/lxr/http/ 
 
@@ -357,33 +334,31 @@ PerlOptions +ParseHeaders
 
 &lt;/Files&gt;
 
-&lt;/Directory&gt; 
+&lt;/Directory&gt;  表示访问/lxr就相当于访问/usr/local/lxr/http，且用perl解释search、source、ident、diff和find几个脚本，
 </code></pre>
 
-<p>表示访问/lxr就相当于访问/usr/local/lxr/http，且用perl解释search、source、ident、diff和find几个脚本，</p>
-
-<p>而其他的仍然当成html来使用。
-如果没有mod_perl，可以用SetHandler cgi-script代替perl-script，一样可以用，PerlHandler就不用了。
-4.initialize
+<p>而其他的仍然当成html来使用。 
+如果没有mod_perl，可以用SetHandler cgi-script代替perl-script，一样可以用，PerlHandler就不用了。 
+4.initialize 
 1）初始化MySQL数据库 (mysql) :</p>
 
 <p>进入lxr目录/usr/local/lxr</p>
 
-<h1>mysql</h1>
+<h1 id="mysql">mysql</h1>
 
 <p>. initdb-mysql</p>
 
-<p>2).建glimpse索引  <br/>
-在/usr/local/lxr/src/2.6.39/下运行&#8217;find . -name &#8220;*.[chS]&#8221; -follow | glimpseindex -H . -o -F&#8217;，索引所有.c、.h、.S（汇编）文件。这个过程比较耗时，但比起下一个过程来，就小巫见大巫了。
+<p>2).建glimpse索引  <br />
+在/usr/local/lxr/src/2.6.39/下运行’find . -name “*.[chS]” -follow | glimpseindex -H . -o -F’，索引所有.c、.h、.S（汇编）文件。这个过程比较耗时，但比起下一个过程来，就小巫见大巫了。 
 3.)建identity索引 这是LXR精髓所在
-在/usr/local/lxr/下运行&#8217;./genxref &#8211;version=2.6.39&#8211;url=http://192.168.1.102/lxr&#8217;，这个过程时间比较长，其结果就是在MySQL中添东西。如果已经做过索引了，它就只关心那些修改过的或新的文件，速度就快多了。这个过程如果中断了，最好清空数据库重新来过，否则可能会有错误。  <br/>
-4).修改权限  <br/>
-最简单的办法就是把/usr/local/lxr/http下所有的文件都改成apache的属主。在/usr/local/lxr/下运行&#8217;chown -R apache.apache http &#8216;。   <br/>
-5.startup   (rc.d restart httpd;rc.d restart mysqld) <br/>
-重启mysql和httpd，然后访问http://192.168.1.102/lxr/source/就可以了。比较奇怪的是，因为这个cgi允许用类似目录一样的形式（source/）来访问，所以，如果服务器端有更新，浏览器端仍会使用老的页面，refresh也没用。这时只有清空本地cache了。 <br/>
- 6.参考博客</p>
+在/usr/local/lxr/下运行’./genxref –version=2.6.39–url=http://192.168.1.102/lxr’，这个过程时间比较长，其结果就是在MySQL中添东西。如果已经做过索引了，它就只关心那些修改过的或新的文件，速度就快多了。这个过程如果中断了，最好清空数据库重新来过，否则可能会有错误。  <br />
+4).修改权限  <br />
+最简单的办法就是把/usr/local/lxr/http下所有的文件都改成apache的属主。在/usr/local/lxr/下运行’chown -R apache.apache http ‘。   <br />
+5.startup   (rc.d restart httpd;rc.d restart mysqld) <br />
+重启mysql和httpd，然后访问http://192.168.1.102/lxr/source/就可以了。比较奇怪的是，因为这个cgi允许用类似目录一样的形式（source/）来访问，所以，如果服务器端有更新，浏览器端仍会使用老的页面，refresh也没用。这时只有清空本地cache了。 <br />
+ 6.参考博客   </p>
 
-<p>[内核分析]LXR安装心得(0.9.3版)&#8212;RH8.0测试通过http://www.cnblogs.com/huqingyu/archive/2005/02/19/106080.html</p>
+<p>[内核分析]LXR安装心得(0.9.3版)—RH8.0测试通过http://www.cnblogs.com/huqingyu/archive/2005/02/19/106080.html</p>
 
 <p>利用LXR建立源代码交叉索引 【原】http://hi.baidu.com/kissdev/blog/item/6e493daf15cf33c77cd92af9.html</p>
 
@@ -412,16 +387,16 @@ PerlOptions +ParseHeaders
     <link href="http://tinyxd.github.com/blog/2012/05/26/bang-nin-kuai-su-ru-men-tide-codec-engine-zhuan-zai/"/>
     <updated>2012-05-26T06:18:00+08:00</updated>
     <id>http://tinyxd.github.com/blog/2012/05/26/bang-nin-kuai-su-ru-men-tide-codec-engine-zhuan-zai</id>
-    <content type="html"><![CDATA[<p>转自TI官网：  <br/>
-德州仪器半导体技术（上海）有限公司 通用DSP 技术应用工程师 崔晶</p>
+    <content type="html"><![CDATA[<p>转自TI官网：  <br />
+德州仪器半导体技术（上海）有限公司 通用DSP 技术应用工程师 崔晶   </p>
 
-<p>德州仪器（TI）的第一颗达芬奇（DaVinci）芯片（处理器）DM6446已经问世快三年了。继DM644x之后，TI又陆续推出了DM643x，DM35x，DM6467，OMAP353x等一系列ARM＋DSP或ARM＋视频协处理器的多媒体处理器平台。很多有很强DSP开发经验或ARM开发经验的工程师都转到达芬奇或通用OMAP（OMAP353x）平台上开发视频监控、视频会议及便携式多媒体终端等产品。大家都面临着同一个问题，那就是如何实现ARM和DSP或协处理器的通信和协同工作？TI的数字视频软件开发包（DVSDK）提供了Codec Engine这样一个软件模块来实现ARM和DSP或协处理器的协同工作。有很多工程师反馈这个软件模块非常好用，节省了很多开发时间，也有工程师认为TI提供的资料太多，不知如何快速上手。本文将从一个第一次接触Codec Engine的工程师角度出发，归纳TI提供的相关资源（文档，例程和网络资源）并介绍相关开发调试方法帮您快速入门Codec Engine。 <br/>
-1．Codec Engine概述 <br/>
-Codec Engine是连接ARM和DSP或协处理器的桥梁，是介于应用层（ARM侧的应用程序）和信号处理层（DSP侧的算法）之间的软件模块。ARM应用程序调用Codec Engine的VISA （Video, Image, Speech, Audio）API，如图1中VIDENC_process(a, b, c )。Codec Engine的stub （ARM侧）会把参数a, b, c以及要调用DSP侧process这个信息打包，通过消息队列（message queue）传递到DSP。Codec Engine的skeleton（DSP侧）会解开这个参数包，把参数a, b, c转换成DSP侧对应的参数x, y, z（比如ARM侧传递的是虚拟地址，而DSP只能认物理地址），DSP侧的server（优先级较低，负责和ARM通信的任务）会根据process这一信息创建一个DSP侧的process(x, y, x)任务最终实现VIDENC_process(a, b, c)的操作。 <br/>
-2．Codec Engine入门第一步，从Codec Engine发布说明文档(release notes)开始 <br/>
-3．Codec Engine入门第二步，了解Codec Engine的运行环境及依赖的软件模块和工具</p>
+<p>德州仪器（TI）的第一颗达芬奇（DaVinci）芯片（处理器）DM6446已经问世快三年了。继DM644x之后，TI又陆续推出了DM643x，DM35x，DM6467，OMAP353x等一系列ARM＋DSP或ARM＋视频协处理器的多媒体处理器平台。很多有很强DSP开发经验或ARM开发经验的工程师都转到达芬奇或通用OMAP（OMAP353x）平台上开发视频监控、视频会议及便携式多媒体终端等产品。大家都面临着同一个问题，那就是如何实现ARM和DSP或协处理器的通信和协同工作？TI的数字视频软件开发包（DVSDK）提供了Codec Engine这样一个软件模块来实现ARM和DSP或协处理器的协同工作。有很多工程师反馈这个软件模块非常好用，节省了很多开发时间，也有工程师认为TI提供的资料太多，不知如何快速上手。本文将从一个第一次接触Codec Engine的工程师角度出发，归纳TI提供的相关资源（文档，例程和网络资源）并介绍相关开发调试方法帮您快速入门Codec Engine。 <br />
+1．Codec Engine概述 <br />
+Codec Engine是连接ARM和DSP或协处理器的桥梁，是介于应用层（ARM侧的应用程序）和信号处理层（DSP侧的算法）之间的软件模块。ARM应用程序调用Codec Engine的VISA （Video, Image, Speech, Audio）API，如图1中VIDENC_process(a, b, c )。Codec Engine的stub （ARM侧）会把参数a, b, c以及要调用DSP侧process这个信息打包，通过消息队列（message queue）传递到DSP。Codec Engine的skeleton（DSP侧）会解开这个参数包，把参数a, b, c转换成DSP侧对应的参数x, y, z（比如ARM侧传递的是虚拟地址，而DSP只能认物理地址），DSP侧的server（优先级较低，负责和ARM通信的任务）会根据process这一信息创建一个DSP侧的process(x, y, x)任务最终实现VIDENC_process(a, b, c)的操作。 <br />
+2．Codec Engine入门第一步，从Codec Engine发布说明文档(release notes)开始 <br />
+3．Codec Engine入门第二步，了解Codec Engine的运行环境及依赖的软件模块和工具   </p>
 
-<p>点击Codec Engine的发布说明文档 的Validation Info，我们可以知道Codec Engine 1.20需要和以下软件模块和工具配合使用：</p>
+<p>点击Codec Engine的发布说明文档 的Validation Info，我们可以知道Codec Engine 1.20需要和以下软件模块和工具配合使用：   </p>
 
 <pre><code>Framework Components 1.20.02   
 xDAIS 5.21   
@@ -433,104 +408,101 @@ MontaVista Linux v4.0
 Red Hat Enterprise Linux 3 (SMP)    
 </code></pre>
 
-<p>因此，我们需要在该Codec Engine安装的DVSDK文件包下面检查上面提到的软件模块和工具是否安装，版本是否正确。否则，可能会编译不过 Codec Engine的例子。那么，什么是 Framework Components，什么是xDAIS，什么又是XDC Tools呢？你可以分别到它们的根目录下浏览它们各自的发布说明文档，做一个总体的了解。</p>
-
+<p>因此，我们需要在该Codec Engine安装的DVSDK文件包下面检查上面提到的软件模块和工具是否安装，版本是否正确。否则，可能会编译不过 Codec Engine的例子。那么，什么是 Framework Components，什么是xDAIS，什么又是XDC Tools呢？你可以分别到它们的根目录下浏览它们各自的发布说明文档，做一个总体的了解。 <br />
 <!--more-->
+这里我们简单介绍一下，可以帮助大家尽快找到和自己相关的重点及资源。   </p>
 
+<p>1） Framework Components是TI提供的一个软件模块，负责DSP侧的memory 和DMA资源管理。因此，DSP算法工程师需要了解这个软件模块。 <br />
+http://tiexpressdsp.com/wiki/index.php?title=Framework_Components_FAQ <br />
+2） xDAIS 是一个标准，它定义了TI DSP算法接口的标准。这样大大提高了DSP算法软件的通用性。DSP算法工程师要写出能被ARM通过Codec Engine调用的算法，必须保证自己的算法接口符合这个标准。因此，DSP算法工程师也必须了解这个软件模块。   </p>
 
-<p>这里我们简单介绍一下，可以帮助大家尽快找到和自己相关的重点及资源。</p>
+<p>http://tiexpressdsp.com/wiki/index.php?title=Category:XDAIS   </p>
 
-<p>1） Framework Components是TI提供的一个软件模块，负责DSP侧的memory 和DMA资源管理。因此，DSP算法工程师需要了解这个软件模块。 <br/>
-http://tiexpressdsp.com/wiki/index.php?title=Framework_Components_FAQ <br/>
-2） xDAIS 是一个标准，它定义了TI DSP算法接口的标准。这样大大提高了DSP算法软件的通用性。DSP算法工程师要写出能被ARM通过Codec Engine调用的算法，必须保证自己的算法接口符合这个标准。因此，DSP算法工程师也必须了解这个软件模块。</p>
+<p>3） XDC Tools和gmake类似，是一个工具。XDC根据用户定义的一套build指令，通过调用用户指定的ARM 工具链（Tool Chain）和DSP编译器（C6x Code Generation Tools ）build出ARM侧和DSP侧的可执行文件。可以先不必细究这个工具，只需通过编Codec Engine的例子，知道如何设置build指令就可以了。   </p>
 
-<p>http://tiexpressdsp.com/wiki/index.php?title=Category:XDAIS</p>
+<p>4） DSP/BIOS Link是实现ARM和DSP之间通信的底层软件，Codec Engine就是建立在这个底层软件之上。在修改系统内存分配（缺省是256MB的DDR2）时，DSP/BIOS Link 1.38版本的用户需要修改DSP/BIOS Link的配置文件，并重新build DSP/BIOS Link。而DSP/BIOS Link 1.40版本以后的用户就无需此操作。   </p>
 
-<p>3） XDC Tools和gmake类似，是一个工具。XDC根据用户定义的一套build指令，通过调用用户指定的ARM 工具链（Tool Chain）和DSP编译器（C6x Code Generation Tools ）build出ARM侧和DSP侧的可执行文件。可以先不必细究这个工具，只需通过编Codec Engine的例子，知道如何设置build指令就可以了。</p>
+<p>http://tiexpressdsp.com/wiki/index.php?title=DSPLink_Overview <br />
+http://wiki.davincidsp.com/index.php?title=Changing_the_DVEVM_memory_map   </p>
 
-<p>4） DSP/BIOS Link是实现ARM和DSP之间通信的底层软件，Codec Engine就是建立在这个底层软件之上。在修改系统内存分配（缺省是256MB的DDR2）时，DSP/BIOS Link 1.38版本的用户需要修改DSP/BIOS Link的配置文件，并重新build DSP/BIOS Link。而DSP/BIOS Link 1.40版本以后的用户就无需此操作。</p>
+<p>5） C6x Code Generation Tools是Linux环境下C6000系列DSP的编译器。我们用CCS开发DSP时都是用的Windows环境下的DSP编译器。   </p>
 
-<p>http://tiexpressdsp.com/wiki/index.php?title=DSPLink_Overview <br/>
-http://wiki.davincidsp.com/index.php?title=Changing_the_DVEVM_memory_map</p>
+<p>6） DSP/BIOS是TI 免费提供的DSP实时操作系统。和上面C6x Code Generation Tools一样，这里的DSP/BIOS也是Linux环境下的版本。DSP系统工程师需要了解这个操作系统。   </p>
 
-<p>5） C6x Code Generation Tools是Linux环境下C6000系列DSP的编译器。我们用CCS开发DSP时都是用的Windows环境下的DSP编译器。</p>
+<p>http://tiexpressdsp.com/wiki/index.php?title=Category:DSPBIOS   </p>
 
-<p>6） DSP/BIOS是TI 免费提供的DSP实时操作系统。和上面C6x Code Generation Tools一样，这里的DSP/BIOS也是Linux环境下的版本。DSP系统工程师需要了解这个操作系统。</p>
+<p>4．Codec Engine入门第三步，根据自己的角色参考相关的文档和例子进行开发   </p>
 
-<p>http://tiexpressdsp.com/wiki/index.php?title=Category:DSPBIOS</p>
+<p>开发ARM＋DSP平台需要三类工程师：ARM应用程序工程师、DSP算法工程师和DSP系统工程师。而开发ARM＋协处理器平台只需要ARM应用程序工程师。下面就让我们针对这三类工程师做分别介绍。如果您使用的是TI或TI第三方的编解码算法，就不需要关注DSP算法工程师的部分。如果使用ARM＋协处理器平台，就只需关心ARM应用工程师的部分。   </p>
 
-<p>4．Codec Engine入门第三步，根据自己的角色参考相关的文档和例子进行开发</p>
+<p>4．1 DSP算法工程师应该如何着手？ <br />
+这里我们不讨论如何开发DSP算法，只讨论DSP算法工程师怎样让自己的算法可以被ARM通过Codec Engine调用。（参考http://www.ti.com/litv/pdf/sprued6c，这个文档会讲到codec package及相关的.xs和.xdc文件，Codec Engine1.20及以上版本的用户可以先不细究这些内容，后面会介绍工具帮您自动生成这些文件。）   </p>
 
-<p>开发ARM＋DSP平台需要三类工程师：ARM应用程序工程师、DSP算法工程师和DSP系统工程师。而开发ARM＋协处理器平台只需要ARM应用程序工程师。下面就让我们针对这三类工程师做分别介绍。如果您使用的是TI或TI第三方的编解码算法，就不需要关注DSP算法工程师的部分。如果使用ARM＋协处理器平台，就只需关心ARM应用工程师的部分。</p>
-
-<p>4．1 DSP算法工程师应该如何着手？ <br/>
-这里我们不讨论如何开发DSP算法，只讨论DSP算法工程师怎样让自己的算法可以被ARM通过Codec Engine调用。（参考http://www.ti.com/litv/pdf/sprued6c，这个文档会讲到codec package及相关的.xs和.xdc文件，Codec Engine1.20及以上版本的用户可以先不细究这些内容，后面会介绍工具帮您自动生成这些文件。）</p>
-
-<p>1） 熟悉xDAIS和xDM标准。 <br/>
-xDM只是xDAIS的扩展，因此，需要先了解xDAIS。在xDAIS 软件包根目录下的发布说明文档里，可以很快找到关于xDAIS和xDM的文档链接。 <br/>
-http://focus.ti.com/lit/ug/spruec8b/spruec8b.pdf <br/>
-在xDAIS安装路径下的examples/ti/xdais/dm/examples/g711有一个g711_sun_internal.c，这个算法不符合xDAIS标准。在同一个路径下的g711dec_sun_ialg.c (decoder)和g711enc_sun_ialg.c (encoder)是封装成符合xDM标准之后的编解码算法。可以通过这个例子学习和了解如何把自己算法封装成符合xDM标准的算法。 <br/>
+<p>1） 熟悉xDAIS和xDM标准。 <br />
+xDM只是xDAIS的扩展，因此，需要先了解xDAIS。在xDAIS 软件包根目录下的发布说明文档里，可以很快找到关于xDAIS和xDM的文档链接。 <br />
+http://focus.ti.com/lit/ug/spruec8b/spruec8b.pdf <br />
+在xDAIS安装路径下的examples/ti/xdais/dm/examples/g711有一个g711_sun_internal.c，这个算法不符合xDAIS标准。在同一个路径下的g711dec_sun_ialg.c (decoder)和g711enc_sun_ialg.c (encoder)是封装成符合xDM标准之后的编解码算法。可以通过这个例子学习和了解如何把自己算法封装成符合xDM标准的算法。 <br />
 xDAIS 6.10及其以后的版本，包含了一个工具QualiTI，可以检查您的DSP算法是否满足xDAIS标准（但不会检查是否满足xDM）。具体请参考：
-http://tiexpressdsp.com/wiki/index.php?title=QualiTI_XDAIS_Compliance_Tool</p>
+http://tiexpressdsp.com/wiki/index.php?title=QualiTI_XDAIS_Compliance_Tool   </p>
 
-<p>2） 熟悉Framework Components。 Framework Components主要包括两个模块DSKT2和DMAN3，它们分别负责DSP侧的memory 和EDMA资源管理。DSP算法使用的memory必须是先向DSKT2提出申请并由DSKT2分配得到的。同样DSP算法使用的EDMA通道也是向DMAN3申请并由DMAN3分配得到的。而关于QDMA的操作，是通过ACPY3这个模块实现的。这样的好处是很容易对DSP侧不同的算法做整合，不同的算法之间不用担心资源（Memory和EDMA）的冲突问题。 <br/>
+<p>2） 熟悉Framework Components。 Framework Components主要包括两个模块DSKT2和DMAN3，它们分别负责DSP侧的memory 和EDMA资源管理。DSP算法使用的memory必须是先向DSKT2提出申请并由DSKT2分配得到的。同样DSP算法使用的EDMA通道也是向DMAN3申请并由DMAN3分配得到的。而关于QDMA的操作，是通过ACPY3这个模块实现的。这样的好处是很容易对DSP侧不同的算法做整合，不同的算法之间不用担心资源（Memory和EDMA）的冲突问题。 <br />
 在Framework Components 软件包根目录下的发布说明文档里，可以很快找到相关文档的链接。在Framework Components安装路径下packages\ti\sdo\fc\dman3\examples有一个Fast Copy的例子，可以帮您理解如何基于Framework Components的ACPY3模块实现QDMA的操作。
 另外，有些用户DSP侧的算法比较简单，在确保不和ARM侧EDMA资源冲突的前提下在算法里直接操作EDMA不使用DMAN3也是可以的。这样做的弊端是和其它算法做整合时会遇到资源使用冲突的问题。</p>
 
-<p>4．2 DSP系统工程师应该如何着手？ <br/>
-通常DSP算法工程师都会把自己的符合xDM标准算法编成一个.lib文件（或 .a64P），供DSP系统工程师调用。DSP系统工程师最终build出一个DSP Server（也就是DSP的可执行程序.x64P，和CCS下编译生成的.out类似）。（参考http://focus.ti.com/lit/ug/sprued5b/sprued5b.pdf，这个文档会讲到.xdc和.bld等文件，Codec Engine1.20及以上版本的用户可以先不细究，后面介绍工具帮您自动生成这些文件。）</p>
+<p>4．2 DSP系统工程师应该如何着手？ <br />
+通常DSP算法工程师都会把自己的符合xDM标准算法编成一个.lib文件（或 .a64P），供DSP系统工程师调用。DSP系统工程师最终build出一个DSP Server（也就是DSP的可执行程序.x64P，和CCS下编译生成的.out类似）。（参考http://focus.ti.com/lit/ug/sprued5b/sprued5b.pdf，这个文档会讲到.xdc和.bld等文件，Codec Engine1.20及以上版本的用户可以先不细究，后面介绍工具帮您自动生成这些文件。）   </p>
 
-<p>1） 如果现在有一个.lib文件（或 .a64P）（算法必须符合xDM标准），如何生成自己的DSP Server呢？下面URL有详细的关于RTSC Codec and Server Package Wizard工具介绍，教您如何把一个.lib文件封装成RTSC Codec 包和RTSC DSP Server包，并最终build出DSP的可执行程序.x64P。 <br/>
+<p>1） 如果现在有一个.lib文件（或 .a64P）（算法必须符合xDM标准），如何生成自己的DSP Server呢？下面URL有详细的关于RTSC Codec and Server Package Wizard工具介绍，教您如何把一个.lib文件封装成RTSC Codec 包和RTSC DSP Server包，并最终build出DSP的可执行程序.x64P。 <br />
 http://wiki.davincidsp.com/index.php?title=RTSC_Codec_And_Server_Package_Wizards
-http://wiki.davincidsp.com/index.php?title=I_just_want_my_video_codec_to_work_with_the_DVSDK</p>
+http://wiki.davincidsp.com/index.php?title=I_just_want_my_video_codec_to_work_with_the_DVSDK   </p>
 
-<p>2） 如果您使用的是Codec Engine 1.20以前的版本，请参考Codec Engine安装路径下examples/servers/video_copy这个例子。这时就需要搞清楚sprued6c.pdf和sprued5b.pdf中提到的.xdc和.xs等文件的功能，也可以在video_copy中的相关文件的基础上修改手动创建出自己的RTSC Codec包和RTSC DSP server包。</p>
+<p>2） 如果您使用的是Codec Engine 1.20以前的版本，请参考Codec Engine安装路径下examples/servers/video_copy这个例子。这时就需要搞清楚sprued6c.pdf和sprued5b.pdf中提到的.xdc和.xs等文件的功能，也可以在video_copy中的相关文件的基础上修改手动创建出自己的RTSC Codec包和RTSC DSP server包。   </p>
 
-<p>3） 创建好RTSC Codec 和RTSC DSP Server包之后，就是如何build出.x64P的问题了。点击图2所示的Examples，就可以找到build Codec Engine例子的说明文档的链接。按照这个文档做一遍后，就可以对如何build Codec Server有一个清楚的了解。其中关键是修改user.bld和xdcpaths.mak文件，设置Codec Engine依赖的其它软件模块和工具的正确路径。</p>
+<p>3） 创建好RTSC Codec 和RTSC DSP Server包之后，就是如何build出.x64P的问题了。点击图2所示的Examples，就可以找到build Codec Engine例子的说明文档的链接。按照这个文档做一遍后，就可以对如何build Codec Server有一个清楚的了解。其中关键是修改user.bld和xdcpaths.mak文件，设置Codec Engine依赖的其它软件模块和工具的正确路径。   </p>
 
-<p>4） 如果自己的硬件DDR2大小和例子中的256Mbytes不一致，需要修改DSP的.tcf文件和其他配置。还有些工程师不清楚如何分配memory及如何决定具体段，如：DDRALGHEAP和DDR的大小，以及如何配置./loadmodules里的参数都请参考： http://wiki.davincidsp.com/index.php?title=Changing_the_DVEVM_memory_map。</p>
+<p>4） 如果自己的硬件DDR2大小和例子中的256Mbytes不一致，需要修改DSP的.tcf文件和其他配置。还有些工程师不清楚如何分配memory及如何决定具体段，如：DDRALGHEAP和DDR的大小，以及如何配置./loadmodules里的参数都请参考： http://wiki.davincidsp.com/index.php?title=Changing_the_DVEVM_memory_map。   </p>
 
-<p>4．3 ARM应用程序工程师应该如何着手？ <br/>
+<p>4．3 ARM应用程序工程师应该如何着手？ <br />
 ARM应用工程师需要调用Codec Engine的VISA API，最终编出ARM侧的可执行程序，因此，必须根据自己的应用学习相关的VISA API、如何创建应用侧Codec Engine的package及配置文件。（参考http://focus.ti.com/lit/ug/sprue67d/sprue67d.pdf，这个文档也涉及到如何调试Codec Engine的内容）。</p>
 
 <p>1）了解ARM应用程序调用Codec Engine的流程、VISA API和其他Codec Engine API。可以参考Codec Engine安装路径下examples/apps/video_copy的例子（较简单）或者DVSDK安装路径下demos里的encode/decode/encodedecode例子（较复杂）。
 http://wiki.davincidsp.com/index.php?title=Configuring_Codec_Engine_in_Arm_apps_with_createFromServer
-2） 了解ceapp.cfg文件。sprue67d.pdf有相关介绍，可以先读懂 <br/>
-examples/apps/video_copy/ceapp.cfg。</p>
+2） 了解ceapp.cfg文件。sprue67d.pdf有相关介绍，可以先读懂 <br />
+examples/apps/video_copy/ceapp.cfg。   </p>
 
-<p>3） 用4.2 3)中提到的方法学习如何build ARM侧的可执行程序。</p>
+<p>3） 用4.2 3)中提到的方法学习如何build ARM侧的可执行程序。   </p>
 
-<p>4） 如何在多线程中调用codec engine，参考： <br/>
-http://wiki.davincidsp.com/index.php?title=Multiple_Threads_using_Codec_Engine_Handle</p>
+<p>4） 如何在多线程中调用codec engine，参考： <br />
+http://wiki.davincidsp.com/index.php?title=Multiple_Threads_using_Codec_Engine_Handle   </p>
 
-<p>5）还可以参考以下三个文档了解更多TI demo的ARM应用程序的结构、线程调度等具体的问题。</p>
+<p>5）还可以参考以下三个文档了解更多TI demo的ARM应用程序的结构、线程调度等具体的问题。   </p>
 
-<p>EncodeDecode Demo for the DaVinci DVEVM/DVSDK 1.2 (Rev. A) (spraah0a.htm, 8 KB)<br/>
-27 Jun 2007 Abstract</p>
+<p>EncodeDecode Demo for the DaVinci DVEVM/DVSDK 1.2 (Rev. A) (spraah0a.htm, 8 KB)<br />
+27 Jun 2007 Abstract  </p>
 
-<p>Encode Demo for the DaVinci DVEVM/DVSDK 1.2 (Rev. A) (spraa96a.htm, 8 KB)<br/>
-27 Jun 2007 Abstract</p>
+<p>Encode Demo for the DaVinci DVEVM/DVSDK 1.2 (Rev. A) (spraa96a.htm, 8 KB)<br />
+27 Jun 2007 Abstract  </p>
 
-<p>Decode Demo for the DaVinci DVEVM/DVSDK 1.2 (Rev. A) (spraag9a.htm, 8 KB)<br/>
-27 Jun 2007 Abstract</p>
+<p>Decode Demo for the DaVinci DVEVM/DVSDK 1.2 (Rev. A) (spraag9a.htm, 8 KB)<br />
+27 Jun 2007 Abstract  </p>
 
-<p>5．使用中常碰到的问题</p>
+<p>5．使用中常碰到的问题  </p>
 
-<p>1）如果遇到问题可以先访问 http://wiki.davincidsp.com/index.php?title=Codec_Engine_FAQ。<br/>
-2）有些工程师没有DSP开发经验，或者暂时没有仿真器通过JTAG调试DSP。可以参考下面网页的内容，先做一个“Hello World”的例程对ARM和DSP如何协同工作有个感性认识。</p>
+<p>1）如果遇到问题可以先访问 http://wiki.davincidsp.com/index.php?title=Codec_Engine_FAQ。<br />
+2）有些工程师没有DSP开发经验，或者暂时没有仿真器通过JTAG调试DSP。可以参考下面网页的内容，先做一个“Hello World”的例程对ARM和DSP如何协同工作有个感性认识。   </p>
 
-<p>http://wiki.davincidsp.com/index.php?title=How_to_build_an_ARM/DSP_Hello_World_program_on_the_DaVinci_EVM</p>
+<p>http://wiki.davincidsp.com/index.php?title=How_to_build_an_ARM/DSP_Hello_World_program_on_the_DaVinci_EVM   </p>
 
-<p>3） 很多工程师都是参考video_copy的例子，在它的基础上把自己的算法加进去。因为有源代码，这样比较容易。但肯定要根据自己算法的需要修改ARM和DSP之间传递的buffer和参数，重要的是先保证ARM侧的应用程序可以把buffer和参数正确传递到DSP，DSP可以把处理之后的buffer正确的传到ARM侧的应用程序。把这个通路打通之后，就比较容易定位问题是出在ARM应用程序还是DSP侧的算法。另外，参考video_copy例子时注意代码的注释，以便清楚哪一句代码可以删掉哪一句必须要修改或保留。</p>
+<p>3） 很多工程师都是参考video_copy的例子，在它的基础上把自己的算法加进去。因为有源代码，这样比较容易。但肯定要根据自己算法的需要修改ARM和DSP之间传递的buffer和参数，重要的是先保证ARM侧的应用程序可以把buffer和参数正确传递到DSP，DSP可以把处理之后的buffer正确的传到ARM侧的应用程序。把这个通路打通之后，就比较容易定位问题是出在ARM应用程序还是DSP侧的算法。另外，参考video_copy例子时注意代码的注释，以便清楚哪一句代码可以删掉哪一句必须要修改或保留。   </p>
 
-<p>如果要扩展xDM的数据结构请参考：</p>
+<p>如果要扩展xDM的数据结构请参考：   </p>
 
-<p>http://wiki.davincidsp.com/index.php?title=Extending_data_structures_in_xDM。</p>
+<p>http://wiki.davincidsp.com/index.php?title=Extending_data_structures_in_xDM。   </p>
 
-<p>4） Codec Engine DSP侧会涉及到Cache一致性的问题。请参考： <br/>
-http://wiki.davincidsp.com/index.php?title=Cache_Management</p>
+<p>4） Codec Engine DSP侧会涉及到Cache一致性的问题。请参考： <br />
+http://wiki.davincidsp.com/index.php?title=Cache_Management   </p>
 
-<p>5） 关于Codec Engine系统调试，有以下几种方法：</p>
+<p>5） 关于Codec Engine系统调试，有以下几种方法：   </p>
 
 <pre><code>    A. 打开Codec Engine trace，通过打印信息看问题出在什么地方。比如engine_open失败，DSP侧不能创建codec 等等。   
 
@@ -543,44 +515,36 @@ http://wiki.davincidsp.com/index.php?title=Cache_Management</p>
     C. 用Soc Analyzer可以做系统调试之外，还可以统计具体函数运行（ARM和DSP侧）时间（benchmark）。请参考： http://tiexpressdsp.com/wiki/index.php?title=SoC_Analyzer    
 </code></pre>
 
-<p>6） 因为Codec Engine是介于ARM 应用程序和编解码算法中间的软件模块，很多工程师非常想知道它的开销(overhead)，请参考： <br/>
-http://wiki.davincidsp.com/index.php?title=Codec_Engine_Overhead</p>
+<p>6） 因为Codec Engine是介于ARM 应用程序和编解码算法中间的软件模块，很多工程师非常想知道它的开销(overhead)，请参考： <br />
+http://wiki.davincidsp.com/index.php?title=Codec_Engine_Overhead   </p>
 
-<p>7）如何在Linux环境下编DSP的汇编或线性汇编程序？ <br/>
-在Codec Engine安装路径下/packages/config.bld文件里 <br/>
-var C64P = xdc.useModule(‘ti.targets.C64P’); <br/>
-之后添加：</p>
+<p>7）如何在Linux环境下编DSP的汇编或线性汇编程序？ <br />
+在Codec Engine安装路径下/packages/config.bld文件里 <br />
+var C64P = xdc.useModule(‘ti.targets.C64P’); <br />
+之后添加： <br />
+	C64P.extensions[“.sa”] = {
+	suf: “.sa”, typ: “asm:-fl”
+	}
+或
+	C64P.extensions[“.asm”] = {
+	suf: “.asm”, typ: “asm:-fa”
+	}
+8）DSP侧如何统计具体函数运行时间？ <br />
+TI DSPC64x+内核有一个64位的硬件定时器（Time Stamp Counter），它的频率和CPU频率一致。 <br />
+最简单的办法是使用TSC的低32位TSCL。注意在DM644x中，TSCH用于ARM。 <br />
+	#include void main (){
+	…
+	TSCL=0;
+	…
+	t1=TSCL;
+	my_code_to_benchmark();
+	t2=TSCL;
+	printf(“# cycles == %d\n”, (t2-t1));
+	}</p>
 
-<pre><code>C64P.extensions[“.sa”] = {
-suf: “.sa”, typ: “asm:-fl”
-}
-</code></pre>
+<p>6．结语   </p>
 
-<p>或</p>
-
-<pre><code>C64P.extensions[“.asm”] = {
-suf: “.asm”, typ: “asm:-fa”
-}
-</code></pre>
-
-<p>8）DSP侧如何统计具体函数运行时间？ <br/>
-TI DSPC64x+内核有一个64位的硬件定时器（Time Stamp Counter），它的频率和CPU频率一致。 <br/>
-最简单的办法是使用TSC的低32位TSCL。注意在DM644x中，TSCH用于ARM。</p>
-
-<pre><code>#include void main (){
-…
-TSCL=0;
-…
-t1=TSCL;
-my_code_to_benchmark();
-t2=TSCL;
-printf(“# cycles == %d\n”, (t2-t1));
-}
-</code></pre>
-
-<p>6．结语</p>
-
-<p>以上针对如何上手TI的Codec Engine做了简单的归纳，还有很多具体细节的问题没有涉及到。还请各位工程师从自己要用的软件模块发布说明文档开始找到相关的文档并研究。经常访问TI的网页，http://wiki.davincidsp.com和http://tiexpressdsp.com/wiki找到最新的信息和资料。也非常欢迎您在wiki上提问。</p>
+<p>以上针对如何上手TI的Codec Engine做了简单的归纳，还有很多具体细节的问题没有涉及到。还请各位工程师从自己要用的软件模块发布说明文档开始找到相关的文档并研究。经常访问TI的网页，http://wiki.davincidsp.com和http://tiexpressdsp.com/wiki找到最新的信息和资料。也非常欢迎您在wiki上提问。   </p>
 ]]></content>
   </entry>
   
@@ -589,29 +553,24 @@ printf(“# cycles == %d\n”, (t2-t1));
     <link href="http://tinyxd.github.com/blog/2012/05/25/archbang-arch-linux-an-zhuang-inode/"/>
     <updated>2012-05-25T14:34:00+08:00</updated>
     <id>http://tinyxd.github.com/blog/2012/05/25/archbang-arch-linux-an-zhuang-inode</id>
-    <content type="html"><![CDATA[<p>第一步：cp iNodeClient.tar.gz 到 /home/<strong><strong><em> 目录下。进入~目录下<br/>
-第二步：终端运行 tar -xvf iNodeClient.tar.gz。<br/>
-第三步：修改/home/</em></strong></strong>/iNodeClient/下install.sh，把 OS_UBUNTU=<code>cat /etc/issue | grep 'Ubuntu'</code>那一行及以下的脚本都删除，然后保存，执行sudo ./install.sh。<br/>
-第四步：cp  home/*****/iNodeClient/ 目录下的iNodeAuthService到/etc/rc.d/目录下，并修改权限chmod 755 /etc/rc.d/iNodeAuthService。<br/>
-第五步：打开/etc/rc.conf ，在DAEMONS处添加@iNodeAuthService。（让iNode认证服务开机自启动） <br/>
-第六步：现在执行sudo /etc/rc.d/iNodeAuthService start，发现出错了。错误出现在enablecards.ps这个文件里，打开看，你会发现这个文件的作用只是用来up网卡。一般来说你的网卡都已经up了的啦。你可以把里面的内容改成：</p>
-
-<h1>!/bin/sh</h1>
-
-<p>x=eth0（你所使用的网卡） <br/>
-ifconfig $x up  <br/>
-再运行一次sudo /etc/rc.d/iNodeAuthService start，你应该会发现服务启动成功了。  <br/>
-第七步：命令行里面执行一下sudo ./iNodeClient 然后楼主发现出现了一些库的依赖问题。iNode需要一些比较旧的库，对于jpeg tiff等库 你可以用ln -s 来用新版本的库代替旧版本。而其中有一个是libpng12.so.0是必须需要旧版本的。见附件 或者可以去官网自己下载ftp://ftp.simplesystems.org/pub/libpng/png/src/  <br/>
-需要下载的文件是libpng-1.2.49.tar.bz2 <br/>
-安装方法如下： <br/>
-1.解压，然后执行./configure &#8211;prefix=/usr/ <br/>
-2.编译及安装</p>
-
-<h1>make</h1>
-
-<h1>make install</h1>
-
-<p>安装之前可以make check 以下 看看有没有什么错误，如果没错误 make install 那么libpng就安装好了。</p>
+    <content type="html"><![CDATA[<p>第一步：cp iNodeClient.tar.gz 到 /home/<strong>*** 目录下。进入~目录下<br />
+第二步：终端运行 tar -xvf iNodeClient.tar.gz。<br />
+第三步：修改/home/</strong><strong><em>/iNodeClient/下install.sh，把 OS_UBUNTU=<code>cat /etc/issue | grep 'Ubuntu'</code>那一行及以下的脚本都删除，然后保存，执行sudo ./install.sh。<br />
+第四步：cp  home/</em></strong>**/iNodeClient/ 目录下的iNodeAuthService到/etc/rc.d/目录下，并修改权限chmod 755 /etc/rc.d/iNodeAuthService。<br />
+第五步：打开/etc/rc.conf ，在DAEMONS处添加@iNodeAuthService。（让iNode认证服务开机自启动） <br />
+第六步：现在执行sudo /etc/rc.d/iNodeAuthService start，发现出错了。错误出现在enablecards.ps这个文件里，打开看，你会发现这个文件的作用只是用来up网卡。一般来说你的网卡都已经up了的啦。你可以把里面的内容改成： <br />
+#!/bin/sh<br />
+x=eth0（你所使用的网卡） <br />
+ifconfig $x up  <br />
+再运行一次sudo /etc/rc.d/iNodeAuthService start，你应该会发现服务启动成功了。  <br />
+第七步：命令行里面执行一下sudo ./iNodeClient 然后楼主发现出现了一些库的依赖问题。iNode需要一些比较旧的库，对于jpeg tiff等库 你可以用ln -s 来用新版本的库代替旧版本。而其中有一个是libpng12.so.0是必须需要旧版本的。见附件 或者可以去官网自己下载ftp://ftp.simplesystems.org/pub/libpng/png/src/  <br />
+需要下载的文件是libpng-1.2.49.tar.bz2 <br />
+安装方法如下： <br />
+1.解压，然后执行./configure –prefix=/usr/ <br />
+2.编译及安装 <br />
+#make  <br />
+#make install <br />
+安装之前可以make check 以下 看看有没有什么错误，如果没错误 make install 那么libpng就安装好了。   </p>
 
 <p>参考：http://ecnc.sysu.edu.cn/viewthread.php?tid=18558</p>
 ]]></content>
@@ -622,13 +581,13 @@ ifconfig $x up  <br/>
     <link href="http://tinyxd.github.com/blog/2012/05/23/wei-yi-jing-cun-zai-de-github-octopresspei-zhi-ben-di-huan-jing/"/>
     <updated>2012-05-23T20:59:00+08:00</updated>
     <id>http://tinyxd.github.com/blog/2012/05/23/wei-yi-jing-cun-zai-de-github-octopresspei-zhi-ben-di-huan-jing</id>
-    <content type="html"><![CDATA[<p><strong>转自：</strong><br/>
-http://www.360doc.com/content/12/0520/19/3565338_212362686.shtml</p>
+    <content type="html"><![CDATA[<p><strong>转自：</strong><br />
+http://www.360doc.com/content/12/0520/19/3565338_212362686.shtml  </p>
 
-<p>本文介绍如何为已经存在于github上的octopress配置本地环境。<br/>
-在本地安装RVM(Ruby Version Manager)和Ruby 1.9.2；</p>
+<p>本文介绍如何为已经存在于github上的octopress配置本地环境。<br />
+在本地安装RVM(Ruby Version Manager)和Ruby 1.9.2；  </p>
 
-<p>从你的github得到你的octopress内容：</p>
+<p>从你的github得到你的octopress内容：  	</p>
 
 <pre><code>git clone -b source git@github.com:username/username.github.com.git octopress # get the source code from your "source" branch of your octopress on github
 ＃ learn from: http://stackoverflow.com/questions/1911109/git-clone-a-specific-branch
@@ -637,9 +596,7 @@ git clone git@github.com:username/username.github.com.git _deploy # get your sta
 </code></pre>
 
 <!--more-->
-
-
-<p>安装依赖gems:</p>
+<p>安装依赖gems: </p>
 
 <pre><code>gem install bundler # Install dependencies   
 bundle install   #如果出现bundle命令没找到，还需要修改～/.bashrc
@@ -653,7 +610,7 @@ rake setup_github_pages #需要这个 要不然rake deploy会出错
 
 <p>这就基本结束了。</p>
 
-<p>编写文章，预览部署：</p>
+<p>编写文章，预览部署：  </p>
 
 <pre><code>cd octopress
 rake new_post["Your Title of Your Article"]
@@ -662,7 +619,7 @@ rake preview # start a web server on "http://localhost:4000", you can preview yo
 rake deploy # push your static pages content to your github pages repo ("master" branch)
 </code></pre>
 
-<p>提交你的文本修改到github:</p>
+<p>提交你的文本修改到github:   	</p>
 
 <pre><code>cd your_local_octopress_directory
 git add .
@@ -670,7 +627,7 @@ git commit -m 'your message'
 git push origin source
 </code></pre>
 
-<p>注意：如果要从github得到最新的source内容，请运行以下命令：</p>
+<p>注意：如果要从github得到最新的source内容，请运行以下命令：   </p>
 
 <pre><code>cd your_local_octopress_directory
 cd _deploy
@@ -688,13 +645,12 @@ git pull origin source
     <link href="http://tinyxd.github.com/blog/2012/05/23/octopress-xin-shou-jiao-cheng/"/>
     <updated>2012-05-23T20:55:00+08:00</updated>
     <id>http://tinyxd.github.com/blog/2012/05/23/octopress-xin-shou-jiao-cheng</id>
-    <content type="html"><![CDATA[<p><em>转载自：</em><br/>
-http://geekontheway.github.com/blog/2011/12/03/octopress-for-freshman/<br/>
-Octopress基于jekyll，刚开始使用起来也比较复杂：</p>
+    <content type="html"><![CDATA[<p><em>转载自：</em><br />
+http://geekontheway.github.com/blog/2011/12/03/octopress-for-freshman/<br />
+Octopress基于jekyll，刚开始使用起来也比较复杂：
+    Octopress会有两个分支：source（编写博客）和master（生成好的博客），就像这样：</p>
 
-<pre><code>Octopress会有两个分支：source（编写博客）和master（生成好的博客），就像这样：
-
-git remote -v
+<pre><code>git remote -v
 
 octopress git://github.com/imathis/octopress.git (fetch)
 octopress git://github.com/imathis/octopress.git (push)
@@ -724,12 +680,9 @@ git branch -a
 remotes/octopress/thor
 </code></pre>
 
-<p>其中只有origin仓库和source分支是必须的，其余分支或仓库建议删掉。</p>
-
+<p>其中只有origin仓库和source分支是必须的，其余分支或仓库建议删掉。
 <!--more-->
-
-
-<p>我们来看一下source分支都有什么：</p>
+我们来看一下source分支都有什么：</p>
 
 <pre><code>CHANGELOG.markdown  
 config.ru   
@@ -784,11 +737,11 @@ $ git remote add origin git@github.com:username/yourname.github.com.git
 $ git push origin master
 </code></pre>
 
-<p>对于新手有几个提醒: <br/>
-1.时常git status,git log避免误操作<br/>
-2.不要在github上直接编辑文件<br/>
-3.想清楚了再下手<br/>
-4.github pages的 username 大小写敏感。如果用户名和username不一致的话,默认会生成这个Repo的project pages。</p>
+<p>对于新手有几个提醒: <br />
+1.时常git status,git log避免误操作<br />
+2.不要在github上直接编辑文件<br />
+3.想清楚了再下手<br />
+4.github pages的 username 大小写敏感。如果用户名和username不一致的话,默认会生成这个Repo的project pages。   </p>
 ]]></content>
   </entry>
   
@@ -801,19 +754,22 @@ $ git push origin master
 
 <p>Syntax</p>
 
-<blockquote><p>img [class names] /path/to/image [width] [height] [title text [alt text]]</p></blockquote>
+<blockquote>
+  <p>img [class names] /path/to/image [width] [height] [title text [alt text]]</p>
+</blockquote>
 
 <p>Don’t forget brace and percent couple.</p>
 
 <!--more-->
 
-
 <p>Examples</p>
 
-<blockquote><p>img http://placekitten.com/890/280 <br/>
-img left http://placekitten.com/320/250 Place Kitten #2 <br/>
-img right http://placekitten.com/300/500 150 250 Place Kitten #3 <br/>
-img right http://placekitten.com/300/500 150 250 ‘Place Kitten #4’ ‘An image of a very cute kitten’</p></blockquote>
+<blockquote>
+  <p>img http://placekitten.com/890/280 <br />
+img left http://placekitten.com/320/250 Place Kitten #2 <br />
+img right http://placekitten.com/300/500 150 250 Place Kitten #3 <br />
+img right http://placekitten.com/300/500 150 250 ‘Place Kitten #4’ ‘An image of a very cute kitten’</p>
+</blockquote>
 ]]></content>
   </entry>
   
@@ -835,27 +791,19 @@ Archlinux用户建议用pacman 安装ruby,方便省事。</p>
 <pre><code>[tinyxd@archbang  ~]$ sudo bash &lt; &lt;(curl -s https://raw.github.com/wayneeseguin/rvm/master/binscripts/rvm-installer )
 </code></pre>
 
-<p>添加当前用户到rvm 组</p>
+<p>添加当前用户到rvm 组
+	[tinyxd@archbang  ~]$ sudo usermod -a -G rvm admin</p>
 
-<pre><code>[tinyxd@archbang  ~]$ sudo usermod -a -G rvm admin
-</code></pre>
+<p>查看下添加成功了没：
+	[tinyxd@archbang ~]$ grep rvm /etc/group
+	rvm:x:1004:admin</p>
 
-<p>查看下添加成功了没：</p>
+<p>再注销，登录。
+&gt; To start using RVM you need to run <code>source /etc/profile.d/rvm.sh</code> in all your open shell windows, in rare cases you need to reopen all shell windows.</p>
 
-<pre><code>[tinyxd@archbang ~]$ grep rvm /etc/group
-rvm:x:1004:admin
-</code></pre>
-
-<p>再注销，登录。</p>
-
-<blockquote><p>To start using RVM you need to run <code>source /etc/profile.d/rvm.sh</code> in all your open shell windows, in rare cases you need to reopen all shell windows.</p></blockquote>
-
-<p>已经安装了ruby的就可以从这里开始了。</p>
-
+<p>已经安装了ruby的就可以从这里开始了。
 <!--more-->
-
-
-<p><strong>2.安装依赖</strong></p>
+<strong>2.安装依赖</strong></p>
 
 <pre><code>[tinyxd@archbang ～]$ gem install bundler
 WARNING:  You don't have /home/tinyxd/.gem/ruby/1.9.1/bin in your PATH,
@@ -863,24 +811,16 @@ WARNING:  You don't have /home/tinyxd/.gem/ruby/1.9.1/bin in your PATH,
 vim ~/.bashrc
 #for ruby gem
 PATH=$PATH:~/.gem/ruby/1.9.1/bin
-export PATH
-</code></pre>
-
-<p>注意路径后面不能带/，不然它还是会报错。</p>
-
-<pre><code>[tinyxd@archbang ~]$ sudo gem install bundler
+export PATH 注意路径后面不能带/，不然它还是会报错。
+[tinyxd@archbang ~]$ sudo gem install bundler
 [tinyxd@archbang ~]$ cd ovtopress/
 [tinyxd@archbang ~]$ bundle install
 [tinyxd@archbang ~]$ rake install 
 rake aborted!
 You have already activated rake 0.9.2.2, but your Gemfile requires rake 0.9.2. Using bundle exec may solve this.
 
-(See full trace by running task with --trace)
-</code></pre>
-
-<p>出现上述问题，按以下方法解决：</p>
-
-<pre><code>bundle update
+(See full trace by running task with --trace) 出现上述问题，按以下方法解决：
+bundle update
 rake install
 [tinyxd@archbang octopress]$ rake install
 ## Copying classic theme into ./source and ./sass
@@ -915,30 +855,21 @@ Initialized empty Git repository in /home/admin/public_html/octopress/_deploy/.g
 cd -
 
 ---
-## Now you can deploy to http://ihacklog.github.com with `rake deploy` ##
+## Now you can deploy to http://ihacklog.github.com with `rake deploy` ## &gt;This will:Ask you for your Github Pages repository url.Rename the remote pointing to imathis/octopress from ‘origin’ to ‘octopress’.Add your Github Pages repository as the default origin remote.Switch the active branch from master to source.Configure your blog’s url according to your repository.Setup a master branch in the _deploy directory for deployment.
 </code></pre>
 
-<blockquote><p>This will:Ask you for your Github Pages repository url.Rename the remote pointing to imathis/octopress from ‘origin’ to ‘octopress’.Add your Github Pages repository as the default origin remote.Switch the active branch from master to source.Configure your blog’s url according to your repository.Setup a master branch in the _deploy directory for deployment.</p></blockquote>
-
-<p>生成静态页面：</p>
-
-<pre><code>[tinyxd@archbang octopress]$ rake generate
-</code></pre>
-
-<p>把源码push搭配github上</p>
-
-<pre><code>git add .
-git commit -m "commit the source for my Octopress blog"
-git push origin source
-</code></pre>
+<p>生成静态页面：
+	[tinyxd@archbang octopress]$ rake generate
+把源码push搭配github上
+	git add .
+	git commit -m “commit the source for my Octopress blog”
+	git push origin source</p>
 
 <p>Configuring Octopress配置略，见 http://octopress.org/docs/configuring/</p>
 
-<p>写日志</p>
-
-<pre><code>rake new_post["文章标题"] #新建页面
-rake new_page[super-awesome]
-</code></pre>
+<p>写日志	
+	rake new_post[“文章标题”] #新建页面
+	rake new_page[super-awesome]</p>
 
 <p>详见 http://octopress.org/docs/blogging/
 写完了之后</p>
@@ -955,18 +886,19 @@ rake deploy
 <p>要注意的是，如果修改源码和配置，是在source 分支修改和提交。
 而发布日志，也是在source分支，rake deploy会自动将生成的静态页面push到master分支。因此，master分支的内容不用你管。</p>
 
-<blockquote><p>插一句：如果以后要从另一个电脑pull源码来新电脑，用如下命令：</p>
+<blockquote>
+  <p>插一句：如果以后要从另一个电脑pull源码来新电脑，用如下命令：
+	cd your_local_octopress_directory
+	cd _deploy
+	git pull origin master
+	cd ..
+	git pull origin source
+只要记住“your_local_octopress_directory”对应的的remote source branch，而”_deploy”对应的是remote master branch即可。</p>
+</blockquote>
 
-<pre><code>cd your_local_octopress_directory
-cd _deploy
-git pull origin master
-cd ..
-git pull origin source
-</code></pre>
-
-<p>只要记住“your_local_octopress_directory”对应的的remote source branch，而”_deploy”对应的是remote master branch即可。</p>
-
-<p>   如果你是和别人合作博客，或者自己同时在好几个电脑上写博客，每次开始之前，git pull origin source获得最新的文件,rake generate生成新的页面</p></blockquote>
+<blockquote>
+  <p>如果你是和别人合作博客，或者自己同时在好几个电脑上写博客，每次开始之前，git pull origin source获得最新的文件,rake generate生成新的页面</p>
+</blockquote>
 
 <pre><code>我们在source分支做了博客的发布，或者改变了博客的设置之后，rake generate生成网站
 
@@ -987,17 +919,12 @@ $ touch README
 $ git add .
 $ git commit -m 'first commit'
 $ git remote add origin git@github.com:username/yourname.github.com.git
-$ git push origin master
-</code></pre>
+$ git push origin master &gt;对于新手有几个提醒:
 
-<blockquote><p>对于新手有几个提醒:</p></blockquote>
-
-<pre><code>时常git status,git log避免误操作
+时常git status,git log避免误操作
 不要在github上直接编辑文件
-想清楚了再下手
+想清楚了再下手  &gt;   github pages的 username 大小写敏感。如果用户名和username不一致的话,默认会生成这个Repo的project pages。
 </code></pre>
-
-<blockquote><p>  github pages的 username 大小写敏感。如果用户名和username不一致的话,默认会生成这个Repo的project pages。</p></blockquote>
 
 <p>rake watch 检测文件变化，实时生成新内容
 rake preview 监听本机4000端口，可查看生成页面效果。</p>
@@ -1008,8 +935,9 @@ rake preview 监听本机4000端口，可查看生成页面效果。</p>
 1
 2</p>
 
-<p><link href="http://tinyxd.github.com/assets/font/PT_Serif.css" rel="stylesheet" type="text/css">
-<link href="http://tinyxd.github.com/assets/font/PT_Sans.css" rel="stylesheet" type="text/css"></p>
+<link href="http://tinyxd.github.com/assets/font/PT_Serif.css" rel="stylesheet" type="text/css" />
+
+<link href="http://tinyxd.github.com/assets/font/PT_Sans.css" rel="stylesheet" type="text/css" />
 
 <p>我把下载的google font放在 source/assets/font 目录下面。</p>
 
@@ -1030,22 +958,22 @@ rake preview 监听本机4000端口，可查看生成页面效果。</p>
 <p>文档： http://help.github.com/pages/</p>
 
 <p>其它，如sidebar的修改等，可参考文档。http://octopress.org/docs/theme/template/
-我这就不写了。 <br/>
+我这就不写了。 <br />
 主题的修改参考了这篇文章<a href="http://melandri.net/2012/02/14/octopress-theme-customization/">Octopress Theme Customization</a>，以后自己研究下css，做个自己的。</p>
 
-<p>其它可参考的文章： http://blog.devtang.com/blog/2012/02/10/setup-blog-based-on-github/</p>
+<p>其它可参考的文章： http://blog.devtang.com/blog/2012/02/10/setup-blog-based-on-github/   </p>
 
-<p><strong>一些技术：</strong><br/>
-https://github.com/mojombo/jekyll 静态页面发布技术，使用 Textile or Markdown and Liquid converters，是Github页面引擎背后的技术。<br/>
-http://daringfireball.net/projects/markdown/ 简单的标记语言，现在很多编辑器支持，快速编写并可编译成HTML、LaTeX等格式。<br/>
-http://gembundler.com/ 将一个应用需要的Ruby软件包写入一个Gemfile文件，当应用安装时可以用Bundle命令自动从服务器上下载需要的软件包。<br/>
-http://rack.rubyforge.org/ 基于Ruby的web服务器界面。<br/>
-http://pow.cx/ 配置好的Rack服务，即开即用。<br/>
-http://rake.rubyforge.org/ 用Ruby写成的Make，批处理操作。<br/>
-http://sass-lang.com/ CSS3扩展，方便编写CSS并提供更多功能。<br/>
-http://ethanschoonover.com/solarized 一套便于阅读的代码配色方案。<br/>
-https://github.com/ 代码平台，基于git。<br/>
-http://www.heroku.com/ 云计算平台，发布非常方便。</p>
+<p><strong>一些技术：</strong><br />
+https://github.com/mojombo/jekyll 静态页面发布技术，使用 Textile or Markdown and Liquid converters，是Github页面引擎背后的技术。<br />
+http://daringfireball.net/projects/markdown/ 简单的标记语言，现在很多编辑器支持，快速编写并可编译成HTML、LaTeX等格式。<br />
+http://gembundler.com/ 将一个应用需要的Ruby软件包写入一个Gemfile文件，当应用安装时可以用Bundle命令自动从服务器上下载需要的软件包。<br />
+http://rack.rubyforge.org/ 基于Ruby的web服务器界面。<br />
+http://pow.cx/ 配置好的Rack服务，即开即用。<br />
+http://rake.rubyforge.org/ 用Ruby写成的Make，批处理操作。<br />
+http://sass-lang.com/ CSS3扩展，方便编写CSS并提供更多功能。<br />
+http://ethanschoonover.com/solarized 一套便于阅读的代码配色方案。<br />
+https://github.com/ 代码平台，基于git。<br />
+http://www.heroku.com/ 云计算平台，发布非常方便。  </p>
 ]]></content>
   </entry>
   

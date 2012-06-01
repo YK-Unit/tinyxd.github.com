@@ -30,7 +30,37 @@ http://www.360doc.com/content/12/0520/19/3565338_212362686.shtml 本文介绍如
   <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
 <link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
 
+<!-- mathjax config similar to math.stackexchange -->
 
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript"
+   src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
   
   <script type="text/javascript">
     var _gaq = _gaq || [];
@@ -110,13 +140,13 @@ http://www.360doc.com/content/12/0520/19/3565338_212362686.shtml 本文介绍如
   </header>
 
 
-  <div class="entry-content"><p><strong>转自：</strong><br/>
-http://www.360doc.com/content/12/0520/19/3565338_212362686.shtml</p>
+  <div class="entry-content"><p><strong>转自：</strong><br />
+http://www.360doc.com/content/12/0520/19/3565338_212362686.shtml  </p>
 
-<p>本文介绍如何为已经存在于github上的octopress配置本地环境。<br/>
-在本地安装RVM(Ruby Version Manager)和Ruby 1.9.2；</p>
+<p>本文介绍如何为已经存在于github上的octopress配置本地环境。<br />
+在本地安装RVM(Ruby Version Manager)和Ruby 1.9.2；  </p>
 
-<p>从你的github得到你的octopress内容：</p>
+<p>从你的github得到你的octopress内容：  	</p>
 
 <pre><code>git clone -b source git@github.com:username/username.github.com.git octopress # get the source code from your "source" branch of your octopress on github
 ＃ learn from: http://stackoverflow.com/questions/1911109/git-clone-a-specific-branch
@@ -165,13 +195,12 @@ git clone git@github.com:username/username.github.com.git _deploy # get your sta
   </header>
 
 
-  <div class="entry-content"><p><em>转载自：</em><br/>
-http://geekontheway.github.com/blog/2011/12/03/octopress-for-freshman/<br/>
-Octopress基于jekyll，刚开始使用起来也比较复杂：</p>
+  <div class="entry-content"><p><em>转载自：</em><br />
+http://geekontheway.github.com/blog/2011/12/03/octopress-for-freshman/<br />
+Octopress基于jekyll，刚开始使用起来也比较复杂：
+    Octopress会有两个分支：source（编写博客）和master（生成好的博客），就像这样：</p>
 
-<pre><code>Octopress会有两个分支：source（编写博客）和master（生成好的博客），就像这样：
-
-git remote -v
+<pre><code>git remote -v
 
 octopress git://github.com/imathis/octopress.git (fetch)
 octopress git://github.com/imathis/octopress.git (push)
@@ -201,8 +230,7 @@ git branch -a
 remotes/octopress/thor
 </code></pre>
 
-<p>其中只有origin仓库和source分支是必须的，其余分支或仓库建议删掉。</p>
-
+<p>其中只有origin仓库和source分支是必须的，其余分支或仓库建议删掉。
 </div>
   
   
@@ -248,7 +276,9 @@ remotes/octopress/thor
 
 <p>Syntax</p>
 
-<blockquote><p>img [class names] /path/to/image [width] [height] [title text [alt text]]</p></blockquote>
+<blockquote>
+  <p>img [class names] /path/to/image [width] [height] [title text [alt text]]</p>
+</blockquote>
 
 <p>Don’t forget brace and percent couple.</p>
 
@@ -306,23 +336,17 @@ Archlinux用户建议用pacman 安装ruby,方便省事。</p>
 <pre><code>[tinyxd@archbang  ~]$ sudo bash &lt; &lt;(curl -s https://raw.github.com/wayneeseguin/rvm/master/binscripts/rvm-installer )
 </code></pre>
 
-<p>添加当前用户到rvm 组</p>
+<p>添加当前用户到rvm 组
+	[tinyxd@archbang  ~]$ sudo usermod -a -G rvm admin</p>
 
-<pre><code>[tinyxd@archbang  ~]$ sudo usermod -a -G rvm admin
-</code></pre>
+<p>查看下添加成功了没：
+	[tinyxd@archbang ~]$ grep rvm /etc/group
+	rvm:x:1004:admin</p>
 
-<p>查看下添加成功了没：</p>
+<p>再注销，登录。
+&gt; To start using RVM you need to run <code>source /etc/profile.d/rvm.sh</code> in all your open shell windows, in rare cases you need to reopen all shell windows.</p>
 
-<pre><code>[tinyxd@archbang ~]$ grep rvm /etc/group
-rvm:x:1004:admin
-</code></pre>
-
-<p>再注销，登录。</p>
-
-<blockquote><p>To start using RVM you need to run <code>source /etc/profile.d/rvm.sh</code> in all your open shell windows, in rare cases you need to reopen all shell windows.</p></blockquote>
-
-<p>已经安装了ruby的就可以从这里开始了。</p>
-
+<p>已经安装了ruby的就可以从这里开始了。
 </div>
   
   
