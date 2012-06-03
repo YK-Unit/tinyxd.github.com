@@ -9,9 +9,7 @@
   <meta name="author" content="Tiny">
 
   
-  <meta name="description" content="1.现代并行机中，为了提高处理器的速度，处理器往往带有Cache。一个数据在整个系统内可能有多份拷贝，这就引发了Cache一致性问题。
-例如下图中的2个处理器和共享内存构成的系统。初始时刻，处理机P1和P2都将变量X从共享内存装入了私有Cache。
-这时， &hellip;">
+  <meta name="description" content="lftp的功能比较强大，相比原来用ftp，方便了很多。 1、登陆： lftp ftp://yourname@site pwd:***** 或 open ftp://yourname@site ">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -109,6 +107,57 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/06/04/linuxxia-shi-yong-lftpde-xiao-jie/">Linux下使用lftp的小结(转载)</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-06-04T07:08:00+08:00" pubdate data-updated="true">Jun 4<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/06/04/linuxxia-shi-yong-lftpde-xiao-jie/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>lftp的功能比较强大，相比原来用ftp，方便了很多。</p>
+
+<p>1、登陆：</p>
+
+<p>lftp ftp://yourname@site</p>
+
+<p>pwd:*****</p>
+
+<p>或 open ftp://yourname@site</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2012/06/04/linuxxia-shi-yong-lftpde-xiao-jie/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -353,63 +402,6 @@ Red Hat Enterprise Linux 3 (SMP)
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/05/25/archbang-arch-linux-an-zhuang-inode/">Archbang Arch Linux 安装inode</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-05-25T14:34:00+08:00" pubdate data-updated="true">May 25<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/05/25/archbang-arch-linux-an-zhuang-inode/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>第一步：cp iNodeClient.tar.gz 到 /home/<strong>*** 目录下。进入~目录下<br />
-第二步：终端运行 tar -xvf iNodeClient.tar.gz。<br />
-第三步：修改/home/</strong><strong><em>/iNodeClient/下install.sh，把 OS_UBUNTU=<code>cat /etc/issue | grep 'Ubuntu'</code>那一行及以下的脚本都删除，然后保存，执行sudo ./install.sh。<br />
-第四步：cp  home/</em></strong>**/iNodeClient/ 目录下的iNodeAuthService到/etc/rc.d/目录下，并修改权限chmod 755 /etc/rc.d/iNodeAuthService。<br />
-第五步：打开/etc/rc.conf ，在DAEMONS处添加@iNodeAuthService。（让iNode认证服务开机自启动） <br />
-第六步：现在执行sudo /etc/rc.d/iNodeAuthService start，发现出错了。错误出现在enablecards.ps这个文件里，打开看，你会发现这个文件的作用只是用来up网卡。一般来说你的网卡都已经up了的啦。你可以把里面的内容改成： <br />
-#!/bin/sh<br />
-x=eth0（你所使用的网卡） <br />
-ifconfig $x up  <br />
-再运行一次sudo /etc/rc.d/iNodeAuthService start，你应该会发现服务启动成功了。  <br />
-第七步：命令行里面执行一下sudo ./iNodeClient 然后楼主发现出现了一些库的依赖问题。iNode需要一些比较旧的库，对于jpeg tiff等库 你可以用ln -s 来用新版本的库代替旧版本。而其中有一个是libpng12.so.0是必须需要旧版本的。见附件 或者可以去官网自己下载ftp://ftp.simplesystems.org/pub/libpng/png/src/  <br />
-需要下载的文件是libpng-1.2.49.tar.bz2 <br />
-安装方法如下： <br />
-1.解压，然后执行./configure –prefix=/usr/ <br />
-2.编译及安装 <br />
-#make  <br />
-#make install <br />
-安装之前可以make check 以下 看看有没有什么错误，如果没错误 make install 那么libpng就安装好了。   </p>
-
-<p>参考：http://ecnc.sysu.edu.cn/viewthread.php?tid=18558</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -438,6 +430,10 @@ ifconfig $x up  <br />
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2012/06/04/linuxxia-shi-yong-lftpde-xiao-jie/">linux下使用lftp的小结(转载)</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2012/05/31/cache--zhi-xing-wen-ti-zong-jie/">cache一致性问题总结</a>
       </li>
     
@@ -453,15 +449,11 @@ ifconfig $x up  <br />
         <a href="/blog/2012/05/26/bang-nin-kuai-su-ru-men-tide-codec-engine-zhuan-zai/">帮您快速入门TI的Codec Engine(转载)</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2012/05/25/archbang-arch-linux-an-zhuang-inode/">archbang arch linux 安装inode </a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/archlinux'>Archlinux (2)</a></li><li><a href='/blog/categories/davinci'>Davinci (1)</a></li><li><a href='/blog/categories/embedded'>Embedded (1)</a></li><li><a href='/blog/categories/java'>Java (1)</a></li><li><a href='/blog/categories/octopress'>Octopress (4)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/archlinux'>Archlinux (2)</a></li><li><a href='/blog/categories/davinci'>Davinci (1)</a></li><li><a href='/blog/categories/embedded'>Embedded (1)</a></li><li><a href='/blog/categories/java'>Java (1)</a></li><li><a href='/blog/categories/linux'>Linux (1)</a></li><li><a href='/blog/categories/octopress'>Octopress (4)</a></li></ul>
 </section>
 
 
