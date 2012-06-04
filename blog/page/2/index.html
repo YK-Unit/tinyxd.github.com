@@ -9,9 +9,9 @@
   <meta name="author" content="Tiny">
 
   
-  <meta name="description" content="第一步：cp iNodeClient.tar.gz 到 /home/*** 目录下。进入~目录下
+  <meta name="description" content="第一步：cp iNodeClient.tar.gz 到 /home/ 目录下。进入~目录下
 第二步：终端运行 tar -xvf iNodeClient.tar.gz。
-第三步：修改/home//iNodeClient/下install.sh，把 OS_UBUNTU=cat /etc/ &hellip;">
+第三步：修改/home//iNodeClient/下install.sh，把 OS_UBUNTU=cat /etc/issue &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -140,24 +140,29 @@
   </header>
 
 
-  <div class="entry-content"><p>第一步：cp iNodeClient.tar.gz 到 /home/<strong>*** 目录下。进入~目录下<br />
-第二步：终端运行 tar -xvf iNodeClient.tar.gz。<br />
-第三步：修改/home/</strong><strong><em>/iNodeClient/下install.sh，把 OS_UBUNTU=<code>cat /etc/issue | grep 'Ubuntu'</code>那一行及以下的脚本都删除，然后保存，执行sudo ./install.sh。<br />
-第四步：cp  home/</em></strong>**/iNodeClient/ 目录下的iNodeAuthService到/etc/rc.d/目录下，并修改权限chmod 755 /etc/rc.d/iNodeAuthService。<br />
-第五步：打开/etc/rc.conf ，在DAEMONS处添加@iNodeAuthService。（让iNode认证服务开机自启动） <br />
-第六步：现在执行sudo /etc/rc.d/iNodeAuthService start，发现出错了。错误出现在enablecards.ps这个文件里，打开看，你会发现这个文件的作用只是用来up网卡。一般来说你的网卡都已经up了的啦。你可以把里面的内容改成： <br />
-#!/bin/sh<br />
-x=eth0（你所使用的网卡） <br />
-ifconfig $x up  <br />
-再运行一次sudo /etc/rc.d/iNodeAuthService start，你应该会发现服务启动成功了。  <br />
-第七步：命令行里面执行一下sudo ./iNodeClient 然后楼主发现出现了一些库的依赖问题。iNode需要一些比较旧的库，对于jpeg tiff等库 你可以用ln -s 来用新版本的库代替旧版本。而其中有一个是libpng12.so.0是必须需要旧版本的。见附件 或者可以去官网自己下载ftp://ftp.simplesystems.org/pub/libpng/png/src/  <br />
-需要下载的文件是libpng-1.2.49.tar.bz2 <br />
-安装方法如下： <br />
-1.解压，然后执行./configure –prefix=/usr/ <br />
-2.编译及安装 <br />
-#make  <br />
-#make install <br />
-安装之前可以make check 以下 看看有没有什么错误，如果没错误 make install 那么libpng就安装好了。   </p>
+  <div class="entry-content"><p>第一步：cp iNodeClient.tar.gz 到 /home/<strong><strong><em> 目录下。进入~目录下<br/>
+第二步：终端运行 tar -xvf iNodeClient.tar.gz。<br/>
+第三步：修改/home/</em></strong></strong>/iNodeClient/下install.sh，把 OS_UBUNTU=<code>cat /etc/issue | grep 'Ubuntu'</code>那一行及以下的脚本都删除，然后保存，执行sudo ./install.sh。<br/>
+第四步：cp  home/*****/iNodeClient/ 目录下的iNodeAuthService到/etc/rc.d/目录下，并修改权限chmod 755 /etc/rc.d/iNodeAuthService。<br/>
+第五步：打开/etc/rc.conf ，在DAEMONS处添加@iNodeAuthService。（让iNode认证服务开机自启动） <br/>
+第六步：现在执行sudo /etc/rc.d/iNodeAuthService start，发现出错了。错误出现在enablecards.ps这个文件里，打开看，你会发现这个文件的作用只是用来up网卡。一般来说你的网卡都已经up了的啦。你可以把里面的内容改成：</p>
+
+<h1>!/bin/sh</h1>
+
+<p>x=eth0（你所使用的网卡） <br/>
+ifconfig $x up  <br/>
+再运行一次sudo /etc/rc.d/iNodeAuthService start，你应该会发现服务启动成功了。  <br/>
+第七步：命令行里面执行一下sudo ./iNodeClient 然后楼主发现出现了一些库的依赖问题。iNode需要一些比较旧的库，对于jpeg tiff等库 你可以用ln -s 来用新版本的库代替旧版本。而其中有一个是libpng12.so.0是必须需要旧版本的。见附件 或者可以去官网自己下载ftp://ftp.simplesystems.org/pub/libpng/png/src/  <br/>
+需要下载的文件是libpng-1.2.49.tar.bz2 <br/>
+安装方法如下： <br/>
+1.解压，然后执行./configure &#8211;prefix=/usr/ <br/>
+2.编译及安装</p>
+
+<h1>make</h1>
+
+<h1>make install</h1>
+
+<p>安装之前可以make check 以下 看看有没有什么错误，如果没错误 make install 那么libpng就安装好了。</p>
 
 <p>参考：http://ecnc.sysu.edu.cn/viewthread.php?tid=18558</p>
 </div>
@@ -197,13 +202,13 @@ ifconfig $x up  <br />
   </header>
 
 
-  <div class="entry-content"><p><strong>转自：</strong><br />
-http://www.360doc.com/content/12/0520/19/3565338_212362686.shtml  </p>
+  <div class="entry-content"><p><strong>转自：</strong><br/>
+http://www.360doc.com/content/12/0520/19/3565338_212362686.shtml</p>
 
-<p>本文介绍如何为已经存在于github上的octopress配置本地环境。<br />
-在本地安装RVM(Ruby Version Manager)和Ruby 1.9.2；  </p>
+<p>本文介绍如何为已经存在于github上的octopress配置本地环境。<br/>
+在本地安装RVM(Ruby Version Manager)和Ruby 1.9.2；</p>
 
-<p>从你的github得到你的octopress内容：  	</p>
+<p>从你的github得到你的octopress内容：</p>
 
 <pre><code>git clone -b source git@github.com:username/username.github.com.git octopress # get the source code from your "source" branch of your octopress on github
 ＃ learn from: http://stackoverflow.com/questions/1911109/git-clone-a-specific-branch
@@ -252,12 +257,13 @@ git clone git@github.com:username/username.github.com.git _deploy # get your sta
   </header>
 
 
-  <div class="entry-content"><p><em>转载自：</em><br />
-http://geekontheway.github.com/blog/2011/12/03/octopress-for-freshman/<br />
-Octopress基于jekyll，刚开始使用起来也比较复杂：
-    Octopress会有两个分支：source（编写博客）和master（生成好的博客），就像这样：</p>
+  <div class="entry-content"><p><em>转载自：</em><br/>
+http://geekontheway.github.com/blog/2011/12/03/octopress-for-freshman/<br/>
+Octopress基于jekyll，刚开始使用起来也比较复杂：</p>
 
-<pre><code>git remote -v
+<pre><code>Octopress会有两个分支：source（编写博客）和master（生成好的博客），就像这样：
+
+git remote -v
 
 octopress git://github.com/imathis/octopress.git (fetch)
 octopress git://github.com/imathis/octopress.git (push)
@@ -287,7 +293,8 @@ git branch -a
 remotes/octopress/thor
 </code></pre>
 
-<p>其中只有origin仓库和source分支是必须的，其余分支或仓库建议删掉。
+<p>其中只有origin仓库和source分支是必须的，其余分支或仓库建议删掉。</p>
+
 </div>
   
   
@@ -333,9 +340,7 @@ remotes/octopress/thor
 
 <p>Syntax</p>
 
-<blockquote>
-  <p>img [class names] /path/to/image [width] [height] [title text [alt text]]</p>
-</blockquote>
+<blockquote><p>img [class names] /path/to/image [width] [height] [title text [alt text]]</p></blockquote>
 
 <p>Don’t forget brace and percent couple.</p>
 
@@ -393,17 +398,23 @@ Archlinux用户建议用pacman 安装ruby,方便省事。</p>
 <pre><code>[tinyxd@archbang  ~]$ sudo bash &lt; &lt;(curl -s https://raw.github.com/wayneeseguin/rvm/master/binscripts/rvm-installer )
 </code></pre>
 
-<p>添加当前用户到rvm 组
-	[tinyxd@archbang  ~]$ sudo usermod -a -G rvm admin</p>
+<p>添加当前用户到rvm 组</p>
 
-<p>查看下添加成功了没：
-	[tinyxd@archbang ~]$ grep rvm /etc/group
-	rvm:x:1004:admin</p>
+<pre><code>[tinyxd@archbang  ~]$ sudo usermod -a -G rvm admin
+</code></pre>
 
-<p>再注销，登录。
-&gt; To start using RVM you need to run <code>source /etc/profile.d/rvm.sh</code> in all your open shell windows, in rare cases you need to reopen all shell windows.</p>
+<p>查看下添加成功了没：</p>
 
-<p>已经安装了ruby的就可以从这里开始了。
+<pre><code>[tinyxd@archbang ~]$ grep rvm /etc/group
+rvm:x:1004:admin
+</code></pre>
+
+<p>再注销，登录。</p>
+
+<blockquote><p>To start using RVM you need to run <code>source /etc/profile.d/rvm.sh</code> in all your open shell windows, in rare cases you need to reopen all shell windows.</p></blockquote>
+
+<p>已经安装了ruby的就可以从这里开始了。</p>
+
 </div>
   
   

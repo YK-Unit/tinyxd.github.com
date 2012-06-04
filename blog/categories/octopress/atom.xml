@@ -4,7 +4,7 @@
   <title><![CDATA[Category: octopress | Tiny's Blog]]></title>
   <link href="http://tinyxd.github.com/blog/categories/octopress/atom.xml" rel="self"/>
   <link href="http://tinyxd.github.com/"/>
-  <updated>2012-06-04T07:13:45+08:00</updated>
+  <updated>2012-06-04T22:00:02+08:00</updated>
   <id>http://tinyxd.github.com/</id>
   <author>
     <name><![CDATA[Tiny]]></name>
@@ -18,13 +18,13 @@
     <link href="http://tinyxd.github.com/blog/2012/05/23/wei-yi-jing-cun-zai-de-github-octopresspei-zhi-ben-di-huan-jing/"/>
     <updated>2012-05-23T20:59:00+08:00</updated>
     <id>http://tinyxd.github.com/blog/2012/05/23/wei-yi-jing-cun-zai-de-github-octopresspei-zhi-ben-di-huan-jing</id>
-    <content type="html"><![CDATA[<p><strong>转自：</strong><br />
-http://www.360doc.com/content/12/0520/19/3565338_212362686.shtml  </p>
+    <content type="html"><![CDATA[<p><strong>转自：</strong><br/>
+http://www.360doc.com/content/12/0520/19/3565338_212362686.shtml</p>
 
-<p>本文介绍如何为已经存在于github上的octopress配置本地环境。<br />
-在本地安装RVM(Ruby Version Manager)和Ruby 1.9.2；  </p>
+<p>本文介绍如何为已经存在于github上的octopress配置本地环境。<br/>
+在本地安装RVM(Ruby Version Manager)和Ruby 1.9.2；</p>
 
-<p>从你的github得到你的octopress内容：  	</p>
+<p>从你的github得到你的octopress内容：</p>
 
 <pre><code>git clone -b source git@github.com:username/username.github.com.git octopress # get the source code from your "source" branch of your octopress on github
 ＃ learn from: http://stackoverflow.com/questions/1911109/git-clone-a-specific-branch
@@ -33,7 +33,9 @@ git clone git@github.com:username/username.github.com.git _deploy # get your sta
 </code></pre>
 
 <!--more-->
-<p>安装依赖gems: </p>
+
+
+<p>安装依赖gems:</p>
 
 <pre><code>gem install bundler # Install dependencies   
 bundle install   #如果出现bundle命令没找到，还需要修改～/.bashrc
@@ -47,7 +49,7 @@ rake setup_github_pages #需要这个 要不然rake deploy会出错
 
 <p>这就基本结束了。</p>
 
-<p>编写文章，预览部署：  </p>
+<p>编写文章，预览部署：</p>
 
 <pre><code>cd octopress
 rake new_post["Your Title of Your Article"]
@@ -56,7 +58,7 @@ rake preview # start a web server on "http://localhost:4000", you can preview yo
 rake deploy # push your static pages content to your github pages repo ("master" branch)
 </code></pre>
 
-<p>提交你的文本修改到github:   	</p>
+<p>提交你的文本修改到github:</p>
 
 <pre><code>cd your_local_octopress_directory
 git add .
@@ -64,7 +66,7 @@ git commit -m 'your message'
 git push origin source
 </code></pre>
 
-<p>注意：如果要从github得到最新的source内容，请运行以下命令：   </p>
+<p>注意：如果要从github得到最新的source内容，请运行以下命令：</p>
 
 <pre><code>cd your_local_octopress_directory
 cd _deploy
@@ -82,12 +84,13 @@ git pull origin source
     <link href="http://tinyxd.github.com/blog/2012/05/23/octopress-xin-shou-jiao-cheng/"/>
     <updated>2012-05-23T20:55:00+08:00</updated>
     <id>http://tinyxd.github.com/blog/2012/05/23/octopress-xin-shou-jiao-cheng</id>
-    <content type="html"><![CDATA[<p><em>转载自：</em><br />
-http://geekontheway.github.com/blog/2011/12/03/octopress-for-freshman/<br />
-Octopress基于jekyll，刚开始使用起来也比较复杂：
-    Octopress会有两个分支：source（编写博客）和master（生成好的博客），就像这样：</p>
+    <content type="html"><![CDATA[<p><em>转载自：</em><br/>
+http://geekontheway.github.com/blog/2011/12/03/octopress-for-freshman/<br/>
+Octopress基于jekyll，刚开始使用起来也比较复杂：</p>
 
-<pre><code>git remote -v
+<pre><code>Octopress会有两个分支：source（编写博客）和master（生成好的博客），就像这样：
+
+git remote -v
 
 octopress git://github.com/imathis/octopress.git (fetch)
 octopress git://github.com/imathis/octopress.git (push)
@@ -117,9 +120,12 @@ git branch -a
 remotes/octopress/thor
 </code></pre>
 
-<p>其中只有origin仓库和source分支是必须的，其余分支或仓库建议删掉。
+<p>其中只有origin仓库和source分支是必须的，其余分支或仓库建议删掉。</p>
+
 <!--more-->
-我们来看一下source分支都有什么：</p>
+
+
+<p>我们来看一下source分支都有什么：</p>
 
 <pre><code>CHANGELOG.markdown  
 config.ru   
@@ -174,11 +180,11 @@ $ git remote add origin git@github.com:username/yourname.github.com.git
 $ git push origin master
 </code></pre>
 
-<p>对于新手有几个提醒: <br />
-1.时常git status,git log避免误操作<br />
-2.不要在github上直接编辑文件<br />
-3.想清楚了再下手<br />
-4.github pages的 username 大小写敏感。如果用户名和username不一致的话,默认会生成这个Repo的project pages。   </p>
+<p>对于新手有几个提醒: <br/>
+1.时常git status,git log避免误操作<br/>
+2.不要在github上直接编辑文件<br/>
+3.想清楚了再下手<br/>
+4.github pages的 username 大小写敏感。如果用户名和username不一致的话,默认会生成这个Repo的project pages。</p>
 ]]></content>
   </entry>
   
@@ -191,22 +197,19 @@ $ git push origin master
 
 <p>Syntax</p>
 
-<blockquote>
-  <p>img [class names] /path/to/image [width] [height] [title text [alt text]]</p>
-</blockquote>
+<blockquote><p>img [class names] /path/to/image [width] [height] [title text [alt text]]</p></blockquote>
 
 <p>Don’t forget brace and percent couple.</p>
 
 <!--more-->
 
+
 <p>Examples</p>
 
-<blockquote>
-  <p>img http://placekitten.com/890/280 <br />
-img left http://placekitten.com/320/250 Place Kitten #2 <br />
-img right http://placekitten.com/300/500 150 250 Place Kitten #3 <br />
-img right http://placekitten.com/300/500 150 250 ‘Place Kitten #4’ ‘An image of a very cute kitten’</p>
-</blockquote>
+<blockquote><p>img http://placekitten.com/890/280 <br/>
+img left http://placekitten.com/320/250 Place Kitten #2 <br/>
+img right http://placekitten.com/300/500 150 250 Place Kitten #3 <br/>
+img right http://placekitten.com/300/500 150 250 ‘Place Kitten #4’ ‘An image of a very cute kitten’</p></blockquote>
 ]]></content>
   </entry>
   
@@ -228,19 +231,27 @@ Archlinux用户建议用pacman 安装ruby,方便省事。</p>
 <pre><code>[tinyxd@archbang  ~]$ sudo bash &lt; &lt;(curl -s https://raw.github.com/wayneeseguin/rvm/master/binscripts/rvm-installer )
 </code></pre>
 
-<p>添加当前用户到rvm 组
-	[tinyxd@archbang  ~]$ sudo usermod -a -G rvm admin</p>
+<p>添加当前用户到rvm 组</p>
 
-<p>查看下添加成功了没：
-	[tinyxd@archbang ~]$ grep rvm /etc/group
-	rvm:x:1004:admin</p>
+<pre><code>[tinyxd@archbang  ~]$ sudo usermod -a -G rvm admin
+</code></pre>
 
-<p>再注销，登录。
-&gt; To start using RVM you need to run <code>source /etc/profile.d/rvm.sh</code> in all your open shell windows, in rare cases you need to reopen all shell windows.</p>
+<p>查看下添加成功了没：</p>
 
-<p>已经安装了ruby的就可以从这里开始了。
+<pre><code>[tinyxd@archbang ~]$ grep rvm /etc/group
+rvm:x:1004:admin
+</code></pre>
+
+<p>再注销，登录。</p>
+
+<blockquote><p>To start using RVM you need to run <code>source /etc/profile.d/rvm.sh</code> in all your open shell windows, in rare cases you need to reopen all shell windows.</p></blockquote>
+
+<p>已经安装了ruby的就可以从这里开始了。</p>
+
 <!--more-->
-<strong>2.安装依赖</strong></p>
+
+
+<p><strong>2.安装依赖</strong></p>
 
 <pre><code>[tinyxd@archbang ～]$ gem install bundler
 WARNING:  You don't have /home/tinyxd/.gem/ruby/1.9.1/bin in your PATH,
@@ -248,16 +259,24 @@ WARNING:  You don't have /home/tinyxd/.gem/ruby/1.9.1/bin in your PATH,
 vim ~/.bashrc
 #for ruby gem
 PATH=$PATH:~/.gem/ruby/1.9.1/bin
-export PATH 注意路径后面不能带/，不然它还是会报错。
-[tinyxd@archbang ~]$ sudo gem install bundler
+export PATH
+</code></pre>
+
+<p>注意路径后面不能带/，不然它还是会报错。</p>
+
+<pre><code>[tinyxd@archbang ~]$ sudo gem install bundler
 [tinyxd@archbang ~]$ cd ovtopress/
 [tinyxd@archbang ~]$ bundle install
 [tinyxd@archbang ~]$ rake install 
 rake aborted!
 You have already activated rake 0.9.2.2, but your Gemfile requires rake 0.9.2. Using bundle exec may solve this.
 
-(See full trace by running task with --trace) 出现上述问题，按以下方法解决：
-bundle update
+(See full trace by running task with --trace)
+</code></pre>
+
+<p>出现上述问题，按以下方法解决：</p>
+
+<pre><code>bundle update
 rake install
 [tinyxd@archbang octopress]$ rake install
 ## Copying classic theme into ./source and ./sass
@@ -292,21 +311,30 @@ Initialized empty Git repository in /home/admin/public_html/octopress/_deploy/.g
 cd -
 
 ---
-## Now you can deploy to http://ihacklog.github.com with `rake deploy` ## &gt;This will:Ask you for your Github Pages repository url.Rename the remote pointing to imathis/octopress from ‘origin’ to ‘octopress’.Add your Github Pages repository as the default origin remote.Switch the active branch from master to source.Configure your blog’s url according to your repository.Setup a master branch in the _deploy directory for deployment.
+## Now you can deploy to http://ihacklog.github.com with `rake deploy` ##
 </code></pre>
 
-<p>生成静态页面：
-	[tinyxd@archbang octopress]$ rake generate
-把源码push搭配github上
-	git add .
-	git commit -m “commit the source for my Octopress blog”
-	git push origin source</p>
+<blockquote><p>This will:Ask you for your Github Pages repository url.Rename the remote pointing to imathis/octopress from ‘origin’ to ‘octopress’.Add your Github Pages repository as the default origin remote.Switch the active branch from master to source.Configure your blog’s url according to your repository.Setup a master branch in the _deploy directory for deployment.</p></blockquote>
+
+<p>生成静态页面：</p>
+
+<pre><code>[tinyxd@archbang octopress]$ rake generate
+</code></pre>
+
+<p>把源码push搭配github上</p>
+
+<pre><code>git add .
+git commit -m "commit the source for my Octopress blog"
+git push origin source
+</code></pre>
 
 <p>Configuring Octopress配置略，见 http://octopress.org/docs/configuring/</p>
 
-<p>写日志	
-	rake new_post[“文章标题”] #新建页面
-	rake new_page[super-awesome]</p>
+<p>写日志</p>
+
+<pre><code>rake new_post["文章标题"] #新建页面
+rake new_page[super-awesome]
+</code></pre>
 
 <p>详见 http://octopress.org/docs/blogging/
 写完了之后</p>
@@ -323,19 +351,18 @@ rake deploy
 <p>要注意的是，如果修改源码和配置，是在source 分支修改和提交。
 而发布日志，也是在source分支，rake deploy会自动将生成的静态页面push到master分支。因此，master分支的内容不用你管。</p>
 
-<blockquote>
-  <p>插一句：如果以后要从另一个电脑pull源码来新电脑，用如下命令：
-	cd your_local_octopress_directory
-	cd _deploy
-	git pull origin master
-	cd ..
-	git pull origin source
-只要记住“your_local_octopress_directory”对应的的remote source branch，而”_deploy”对应的是remote master branch即可。</p>
-</blockquote>
+<blockquote><p>插一句：如果以后要从另一个电脑pull源码来新电脑，用如下命令：</p>
 
-<blockquote>
-  <p>如果你是和别人合作博客，或者自己同时在好几个电脑上写博客，每次开始之前，git pull origin source获得最新的文件,rake generate生成新的页面</p>
-</blockquote>
+<pre><code>cd your_local_octopress_directory
+cd _deploy
+git pull origin master
+cd ..
+git pull origin source
+</code></pre>
+
+<p>只要记住“your_local_octopress_directory”对应的的remote source branch，而”_deploy”对应的是remote master branch即可。</p>
+
+<p>   如果你是和别人合作博客，或者自己同时在好几个电脑上写博客，每次开始之前，git pull origin source获得最新的文件,rake generate生成新的页面</p></blockquote>
 
 <pre><code>我们在source分支做了博客的发布，或者改变了博客的设置之后，rake generate生成网站
 
@@ -356,12 +383,17 @@ $ touch README
 $ git add .
 $ git commit -m 'first commit'
 $ git remote add origin git@github.com:username/yourname.github.com.git
-$ git push origin master &gt;对于新手有几个提醒:
-
-时常git status,git log避免误操作
-不要在github上直接编辑文件
-想清楚了再下手  &gt;   github pages的 username 大小写敏感。如果用户名和username不一致的话,默认会生成这个Repo的project pages。
+$ git push origin master
 </code></pre>
+
+<blockquote><p>对于新手有几个提醒:</p></blockquote>
+
+<pre><code>时常git status,git log避免误操作
+不要在github上直接编辑文件
+想清楚了再下手
+</code></pre>
+
+<blockquote><p>  github pages的 username 大小写敏感。如果用户名和username不一致的话,默认会生成这个Repo的project pages。</p></blockquote>
 
 <p>rake watch 检测文件变化，实时生成新内容
 rake preview 监听本机4000端口，可查看生成页面效果。</p>
@@ -372,9 +404,8 @@ rake preview 监听本机4000端口，可查看生成页面效果。</p>
 1
 2</p>
 
-<link href="http://tinyxd.github.com/assets/font/PT_Serif.css" rel="stylesheet" type="text/css" />
-
-<link href="http://tinyxd.github.com/assets/font/PT_Sans.css" rel="stylesheet" type="text/css" />
+<p><link href="http://tinyxd.github.com/assets/font/PT_Serif.css" rel="stylesheet" type="text/css">
+<link href="http://tinyxd.github.com/assets/font/PT_Sans.css" rel="stylesheet" type="text/css"></p>
 
 <p>我把下载的google font放在 source/assets/font 目录下面。</p>
 
@@ -395,22 +426,22 @@ rake preview 监听本机4000端口，可查看生成页面效果。</p>
 <p>文档： http://help.github.com/pages/</p>
 
 <p>其它，如sidebar的修改等，可参考文档。http://octopress.org/docs/theme/template/
-我这就不写了。 <br />
+我这就不写了。 <br/>
 主题的修改参考了这篇文章<a href="http://melandri.net/2012/02/14/octopress-theme-customization/">Octopress Theme Customization</a>，以后自己研究下css，做个自己的。</p>
 
-<p>其它可参考的文章： http://blog.devtang.com/blog/2012/02/10/setup-blog-based-on-github/   </p>
+<p>其它可参考的文章： http://blog.devtang.com/blog/2012/02/10/setup-blog-based-on-github/</p>
 
-<p><strong>一些技术：</strong><br />
-https://github.com/mojombo/jekyll 静态页面发布技术，使用 Textile or Markdown and Liquid converters，是Github页面引擎背后的技术。<br />
-http://daringfireball.net/projects/markdown/ 简单的标记语言，现在很多编辑器支持，快速编写并可编译成HTML、LaTeX等格式。<br />
-http://gembundler.com/ 将一个应用需要的Ruby软件包写入一个Gemfile文件，当应用安装时可以用Bundle命令自动从服务器上下载需要的软件包。<br />
-http://rack.rubyforge.org/ 基于Ruby的web服务器界面。<br />
-http://pow.cx/ 配置好的Rack服务，即开即用。<br />
-http://rake.rubyforge.org/ 用Ruby写成的Make，批处理操作。<br />
-http://sass-lang.com/ CSS3扩展，方便编写CSS并提供更多功能。<br />
-http://ethanschoonover.com/solarized 一套便于阅读的代码配色方案。<br />
-https://github.com/ 代码平台，基于git。<br />
-http://www.heroku.com/ 云计算平台，发布非常方便。  </p>
+<p><strong>一些技术：</strong><br/>
+https://github.com/mojombo/jekyll 静态页面发布技术，使用 Textile or Markdown and Liquid converters，是Github页面引擎背后的技术。<br/>
+http://daringfireball.net/projects/markdown/ 简单的标记语言，现在很多编辑器支持，快速编写并可编译成HTML、LaTeX等格式。<br/>
+http://gembundler.com/ 将一个应用需要的Ruby软件包写入一个Gemfile文件，当应用安装时可以用Bundle命令自动从服务器上下载需要的软件包。<br/>
+http://rack.rubyforge.org/ 基于Ruby的web服务器界面。<br/>
+http://pow.cx/ 配置好的Rack服务，即开即用。<br/>
+http://rake.rubyforge.org/ 用Ruby写成的Make，批处理操作。<br/>
+http://sass-lang.com/ CSS3扩展，方便编写CSS并提供更多功能。<br/>
+http://ethanschoonover.com/solarized 一套便于阅读的代码配色方案。<br/>
+https://github.com/ 代码平台，基于git。<br/>
+http://www.heroku.com/ 云计算平台，发布非常方便。</p>
 ]]></content>
   </entry>
   

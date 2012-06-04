@@ -153,23 +153,23 @@ Arch Linux中Java SDK的安装与配置 因为版权和公司对开源软件的�
 Oracle Java SDK 7 update 1
 </code></pre>
 
-<h2 id="section"><strong>安装</strong></h2>
-<ul>
-  <li>
-    <p>jre <br />
-这里先安装JDK，虽然据说openjdk的jre也能兼容Oracle Java SDK，但还是有点担心它们的兼容性。  <br />
-先在<a href="https://aur.archlinux.org/">Arch Linux AUR</a>中找到<a href="https://aur.archlinux.org/packages.php?ID=51908">JRE</a>。<br />
- <!--more-->
-制作安装包   </p>
+<h2><strong>安装</strong></h2>
 
-    <p>$ wget –no-check-certificate -c https://aur.archlinux.org/packages/jr/jre/jre.tar.gz <br />
-$ tar -zxvf jre.tar.gz <br />
-$ cd  jre <br />
-$ makepkg    </p>
-  </li>
+<ul>
+<li><p>jre <br/>
+这里先安装JDK，虽然据说openjdk的jre也能兼容Oracle Java SDK，但还是有点担心它们的兼容性。  <br/>
+先在<a href="https://aur.archlinux.org/">Arch Linux AUR</a>中找到<a href="https://aur.archlinux.org/packages.php?ID=51908">JRE</a>。<br/>
+<!--more-->
+制作安装包</p>
+
+<p>  $ wget &#8211;no-check-certificate -c https://aur.archlinux.org/packages/jr/jre/jre.tar.gz <br/>
+  $ tar -zxvf jre.tar.gz <br/>
+  $ cd  jre <br/>
+  $ makepkg</p></li>
 </ul>
 
-<p>处理依赖条件，开始安装    </p>
+
+<p>处理依赖条件，开始安装</p>
 
 <pre><code>$ sudo pacman -S desktop-file-utils libxtst shared-mime-info xdg-utils
 [zzz@archbang jre]$ sudo pacman -U ./jre-7.4-1-i686.pkg.tar.xz 
@@ -203,33 +203,41 @@ Optional dependencies for jre
 <pre><code>$ pwd 
 /opt/java
 $ ls
-jre 至此，JRE成功安装。 --- *   JDK JDK的安装过程与JRE类似。   
-
-$ wget -c --no-check-certificate https://aur.archlinux.org/packages/jd/jdk/jdk.tar.gz
-$ tar -zxvf jdk.tar.gz
-$ cd jdk
-$ makepkg
-$ sudo pacman -U ./jdk-7.4-1-i686.pkg.tar.xz
-loading packages...
-resolving dependencies...
-looking for inter-conflicts...
-
-Targets (1): jdk-7.4-1
-
-Total Installed Size:   86.05 MiB
-
-Proceed with installation? [Y/n] 
-(1/1) checking package integrity                   [----------------------] 100%
-(1/1) loading package files                        [----------------------] 100%
-(1/1) checking for file conflicts                  [----------------------] 100%
-(1/1) checking available disk space                [----------------------] 100%
-(1/1) installing jdk                               [----------------------] 100%
-
-The jdk package is licensed software.
-You MUST read and agree to the license stored in
-/usr/share/licenses/jdk/LICENSE before using it.
-Please relogin to include jdk in your PATH.
+jre
 </code></pre>
+
+<h2>至此，JRE成功安装。</h2>
+
+<ul>
+<li><p>JDK
+JDK的安装过程与JRE类似。</p>
+
+<p>  $ wget -c &#8211;no-check-certificate https://aur.archlinux.org/packages/jd/jdk/jdk.tar.gz
+  $ tar -zxvf jdk.tar.gz
+  $ cd jdk
+  $ makepkg
+  $ sudo pacman -U ./jdk-7.4-1-i686.pkg.tar.xz
+  loading packages&#8230;
+  resolving dependencies&#8230;
+  looking for inter-conflicts&#8230;</p>
+
+<p>  Targets (1): jdk-7.4-1</p>
+
+<p>  Total Installed Size:   86.05 MiB</p>
+
+<p>  Proceed with installation? [Y/n]
+  (1/1) checking package integrity                   [&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;-] 100%
+  (1/1) loading package files                        [&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;-] 100%
+  (1/1) checking for file conflicts                  [&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;-] 100%
+  (1/1) checking available disk space                [&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;-] 100%
+  (1/1) installing jdk                               [&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;-] 100%</p>
+
+<p>  The jdk package is licensed software.
+  You MUST read and agree to the license stored in
+  /usr/share/licenses/jdk/LICENSE before using it.
+  Please relogin to include jdk in your PATH.</p></li>
+</ul>
+
 
 <p>配置
 安装之后打开/etc/environment文件编辑，添加如下内容：</p>
@@ -247,17 +255,23 @@ java version "1.7.0_01"
 Java(TM) SE Runtime Environment (build 1.7.0_01-b08)
 Java HotSpot(TM) Client VM (build 21.1-b02, mixed mode)
 $ javac -version
-javac 1.7.0_01    更详细的内容可参考[傻东の学习笔记](http://sillydong.com/myjava/arch-linux%E5%BF%AB%E9%80%9F%E9%85%8D%E7%BD%AEjava%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.html) 3、解决中文乱码问题，还是用超级用户，进入/usr/share/fonts/wenquanyi，将wqy-zenhei文件夹复制到/opt/java/jre/lib/fonts下，改名为fallback，进入fallback文件夹，终端执行
-   
-# mkfontdir
+javac 1.7.0_01   
+</code></pre>
+
+<p>更详细的内容可参考<a href="http://sillydong.com/myjava/arch-linux%E5%BF%AB%E9%80%9F%E9%85%8D%E7%BD%AEjava%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.html">傻东の学习笔记</a>
+3、解决中文乱码问题，还是用超级用户，进入/usr/share/fonts/wenquanyi，将wqy-zenhei文件夹复制到/opt/java/jre/lib/fonts下，改名为fallback，进入fallback文件夹，终端执行</p>
+
+<pre><code># mkfontdir
 和
 # mkfontscale
 </code></pre>
 
-<p>4、安装eclipse，只需要打开终端执行pacman -S eclipse就可以安装eclipse最新的英文版   </p>
+<p>4、安装eclipse，只需要打开终端执行pacman -S eclipse就可以安装eclipse最新的英文版</p>
 
-<p>5、执行jar文件的办法。在Arch中，jar文件默认是使用归档文件管理器打开的，也就相当于解压缩，而我们需要的是执行这个jar程序，跟我做：在目标jar文件上右击，选择“属性”，找到“打开方式”的标签，选择“添加”，打开“使用自定义命令”，向其中加入下面的命令： <br />
-	java -jar</p>
+<p>5、执行jar文件的办法。在Arch中，jar文件默认是使用归档文件管理器打开的，也就相当于解压缩，而我们需要的是执行这个jar程序，跟我做：在目标jar文件上右击，选择“属性”，找到“打开方式”的标签，选择“添加”，打开“使用自定义命令”，向其中加入下面的命令：</p>
+
+<pre><code>java -jar
+</code></pre>
 
 <p>输完之后选择“添加”，这时候在打开方式标签下有两个选择，一种就是原来就有的“归档文件管理器”，还有就是“java”，勾选上“java”，然后关闭，这时候双击jar文件就是执行它了。</p>
 </div>
