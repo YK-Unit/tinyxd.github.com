@@ -285,7 +285,7 @@ ftp中的bookmark命令，是将配置写到~/.lftp/bookmarks文件中；我们�
 
 <p>下附一个自动同步的脚本：</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -297,18 +297,19 @@ ftp中的bookmark命令，是将配置写到~/.lftp/bookmarks文件中；我们�
 <span class='line-number'>10</span>
 <span class='line-number'>11</span>
 <span class='line-number'>12</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>#!bin/bash
-</span><span class='line'>echo “script start at  `date ”+%Y-%m-%d %H:%M:%S”
-</span><span class='line'>HOST=”hostname”
-</span><span class='line'>USER=”yourname”
-</span><span class='line'>PASS=”password”
-</span><span class='line'>LCD=”LocalePath”
-</span><span class='line'>RCD=”RemotePath”
-</span><span class='line'>/usr/sbin/lftp &lt;&lt; EOF
-</span><span class='line'>open ftp://$USER:$PASS@$HOST
-</span><span class='line'>mirror $RCD $LCD
-</span><span class='line'>EOF
-</span><span class='line'>echo “script end at “ `date ”+%Y-%m-%d %H:%M:%S”</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c">#!bin/bash</span>
+</span><span class='line'><span class="nb">echo</span> “script start at  <span class="sb">`</span>date ”+%Y-%m-%d %H:%M:%S”
+</span><span class='line'><span class="nv">HOST</span><span class="o">=</span>”hostname”
+</span><span class='line'><span class="nv">USER</span><span class="o">=</span>”yourname”
+</span><span class='line'><span class="nv">PASS</span><span class="o">=</span>”password”
+</span><span class='line'><span class="nv">LCD</span><span class="o">=</span>”LocalePath”
+</span><span class='line'><span class="nv">RCD</span><span class="o">=</span>”RemotePath”
+</span><span class='line'>/usr/sbin/lftp <span class="s">&lt;&lt; EOF</span>
+</span><span class='line'><span class="s">open ftp://$USER:$PASS@$HOST</span>
+</span><span class='line'><span class="s">mirror $RCD $LCD</span>
+</span><span class='line'><span class="s">EOF</span>
+</span><span class='line'><span class="nb">echo</span> “script end at “ <span class="sb">`</span>date ”+%Y-%m-%d %H:%M:%S”
+</span></code></pre></td></tr></table></div></figure>
 
 
 
@@ -363,6 +364,8 @@ ftp中的bookmark命令，是将配置写到~/.lftp/bookmarks文件中；我们�
         <a class="basic-alignment left" href="/blog/2012/05/31/cache--zhi-xing-wen-ti-zong-jie/" title="Previous Post: cache一致性问题总结">&laquo; cache一致性问题总结</a>
       
       
+        <a class="basic-alignment right" href="/blog/2012/06/05/cannot-find-libpython/" title="Next Post: 解决pygments.rb (RubyPython) 找不到libpython的问题(archlinux下)">解决pygments.rb (RubyPython) 找不到libpython的问题(archlinux下) &raquo;</a>
+      
     </p>
   </footer>
 </article>
@@ -395,6 +398,10 @@ ftp中的bookmark命令，是将配置写到~/.lftp/bookmarks文件中；我们�
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2012/06/05/cannot-find-libpython/">解决pygments.rb (RubyPython) 找不到libpython的问题(archlinux下)</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2012/06/04/linuxxia-shi-yong-lftpde-xiao-jie/">linux下使用lftp的小结(转载)</a>
       </li>
     
@@ -410,15 +417,11 @@ ftp中的bookmark命令，是将配置写到~/.lftp/bookmarks文件中；我们�
         <a href="/blog/2012/05/26/arch-linux-xia-lxrde-an-zhuang/">arch linux 下lxr的安装</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2012/05/26/bang-nin-kuai-su-ru-men-tide-codec-engine-zhuan-zai/">帮您快速入门TI的Codec Engine(转载)</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/archlinux'>Archlinux (2)</a></li><li><a href='/blog/categories/davinci'>Davinci (1)</a></li><li><a href='/blog/categories/embedded'>Embedded (1)</a></li><li><a href='/blog/categories/java'>Java (1)</a></li><li><a href='/blog/categories/linux'>Linux (1)</a></li><li><a href='/blog/categories/octopress'>Octopress (4)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/archlinux'>Archlinux (2)</a></li><li><a href='/blog/categories/davinci'>Davinci (1)</a></li><li><a href='/blog/categories/embedded'>Embedded (1)</a></li><li><a href='/blog/categories/java'>Java (1)</a></li><li><a href='/blog/categories/linux'>Linux (1)</a></li><li><a href='/blog/categories/octopress'>Octopress (4)</a></li><li><a href='/blog/categories/ruby'>Ruby (1)</a></li></ul>
 </section>
 
 

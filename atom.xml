@@ -4,7 +4,7 @@
   <title><![CDATA[Tiny's Blog]]></title>
   <link href="http://tinyxd.github.com/atom.xml" rel="self"/>
   <link href="http://tinyxd.github.com/"/>
-  <updated>2012-06-04T22:00:02+08:00</updated>
+  <updated>2012-06-05T08:31:02+08:00</updated>
   <id>http://tinyxd.github.com/</id>
   <author>
     <name><![CDATA[Tiny]]></name>
@@ -12,6 +12,65 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[解决pygments.rb (RubyPython) 找不到libpython的问题(archlinux下)]]></title>
+    <link href="http://tinyxd.github.com/blog/2012/06/05/cannot-find-libpython/"/>
+    <updated>2012-06-05T08:01:00+08:00</updated>
+    <id>http://tinyxd.github.com/blog/2012/06/05/cannot-find-libpython</id>
+    <content type="html"><![CDATA[<p>本文章转自：<a href="http://ruby-china.org/topics/289">Ruby China 论坛</a> <br/>
+如果找不到python，或者系统默认得python是3.x (比如Arch Linux)，手动制定下路径</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>RubyPython.configure python_exe: '/usr/bin/python2.7'</span></code></pre></td></tr></table></div></figure>
+
+
+<p>对于rails项目比如ruby-china，可以把这行代码丢到config/initializers下。</p>
+
+<p>不过RubyPython仍然可能找不到libpython而提示lib.so not found。这是由于RubyPython确定正确libpython的规则和你的系统不兼容，可以通过手动加些symbol links来解决 (目前RubyPython的git最新代码相对当前稳定版本0.5.3改动非常大，希望新版本能解决这个问题，就先不去提交fixing了)。</p>
+
+<p>可以参考 PythonExec initialize 方法中的规则来建symbol link.</p>
+
+<!--more-->
+
+
+<p>首先运行该python，得到版本号x.y，以python2.7为例</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ python2.7 -c "import sys;print '%d.%d' % sys.version_info[:2]"
+</span><span class='line'>
+</span><span class='line'>=&gt; 2.7</span></code></pre></td></tr></table></div></figure>
+
+
+<p>找到该python对应得libpython，可以用工具ldd:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ ldd /usr/lib/python2.7 | grep python
+</span><span class='line'>
+</span><span class='line'>=&gt; libpython2.7.so.1.0 =&gt; /usr/lib/libpython2.7.so.1.0</span></code></pre></td></tr></table></div></figure>
+
+
+<p>为找到的这个文件创建链接。下面用#{exe_base}表示通过RubyPython.configure指定的python可执行程序的文件名部分，#{x}和#{y}是通过运行这个python找到得版本号，#{libpython}是该python对应得libpython库文件路径。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo ln -s #{libpython} /usr/lib/lib#{exe_base}#{x}#{y}.so
+</span><span class='line'>sudo ln -s #{libpython} /usr/lib/lib#{exe_base}#{x}.#{y}.so</span></code></pre></td></tr></table></div></figure>
+
+
+<p>以我的环境(Arch Linux)为例，exe_base是python2.7，版本号x.y是2.7，libpython是/usr/lib/libpython2.7.so.1.0，</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo ln -s /usr/lib/libpython2.7.so.1.0 /usr/lib/libpython2.727.so
+</span><span class='line'>sudo ln -s /usr/lib/libpython2.7.so.1.0 /usr/lib/libpython2.72.7.so</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[linux下使用lftp的小结(转载)]]></title>
@@ -168,7 +227,7 @@ ftp中的bookmark命令，是将配置写到~/.lftp/bookmarks文件中；我们�
 
 <p>下附一个自动同步的脚本：</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -180,18 +239,19 @@ ftp中的bookmark命令，是将配置写到~/.lftp/bookmarks文件中；我们�
 <span class='line-number'>10</span>
 <span class='line-number'>11</span>
 <span class='line-number'>12</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>#!bin/bash
-</span><span class='line'>echo “script start at  `date ”+%Y-%m-%d %H:%M:%S”
-</span><span class='line'>HOST=”hostname”
-</span><span class='line'>USER=”yourname”
-</span><span class='line'>PASS=”password”
-</span><span class='line'>LCD=”LocalePath”
-</span><span class='line'>RCD=”RemotePath”
-</span><span class='line'>/usr/sbin/lftp &lt;&lt; EOF
-</span><span class='line'>open ftp://$USER:$PASS@$HOST
-</span><span class='line'>mirror $RCD $LCD
-</span><span class='line'>EOF
-</span><span class='line'>echo “script end at “ `date ”+%Y-%m-%d %H:%M:%S”</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c">#!bin/bash</span>
+</span><span class='line'><span class="nb">echo</span> “script start at  <span class="sb">`</span>date ”+%Y-%m-%d %H:%M:%S”
+</span><span class='line'><span class="nv">HOST</span><span class="o">=</span>”hostname”
+</span><span class='line'><span class="nv">USER</span><span class="o">=</span>”yourname”
+</span><span class='line'><span class="nv">PASS</span><span class="o">=</span>”password”
+</span><span class='line'><span class="nv">LCD</span><span class="o">=</span>”LocalePath”
+</span><span class='line'><span class="nv">RCD</span><span class="o">=</span>”RemotePath”
+</span><span class='line'>/usr/sbin/lftp <span class="s">&lt;&lt; EOF</span>
+</span><span class='line'><span class="s">open ftp://$USER:$PASS@$HOST</span>
+</span><span class='line'><span class="s">mirror $RCD $LCD</span>
+</span><span class='line'><span class="s">EOF</span>
+</span><span class='line'><span class="nb">echo</span> “script end at “ <span class="sb">`</span>date ”+%Y-%m-%d %H:%M:%S”
+</span></code></pre></td></tr></table></div></figure>
 
 
 

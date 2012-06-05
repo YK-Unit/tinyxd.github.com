@@ -5,11 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Category: davinci - Tiny's Blog</title>
+  <title>解决pygments.rb (RubyPython) 找不到libpython的问题(archlinux下) - Tiny's Blog</title>
   <meta name="author" content="Tiny">
 
   
-  <meta name="description" content="Category: davinci">
+  <meta name="description" content="本文章转自：Ruby China 论坛 如果找不到python，或者系统默认得python是3.x (比如Arch Linux)，手动制定下路径 1
+RubyPython.configure python_exe: '/usr/bin/python2.7' 对于rails项目比如ruby- &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +19,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://tinyxd.github.comblog/categories/davinci">
+  <link rel="canonical" href="http://tinyxd.github.com/blog/2012/06/05/cannot-find-libpython">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -106,36 +107,146 @@
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">Category: Davinci</h1>
+    
+      <h1 class="entry-title">解决pygments.rb (RubyPython) 找不到libpython的问题(archlinux下)</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-06-05T08:01:00+08:00" pubdate data-updated="true">Jun 5<span>th</span>, 2012</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
     
   </header>
-  
-  <div id="blog-archives" class="category">
 
 
+<div class="entry-content"><p>本文章转自：<a href="http://ruby-china.org/topics/289">Ruby China 论坛</a> <br/>
+如果找不到python，或者系统默认得python是3.x (比如Arch Linux)，手动制定下路径</p>
 
-  
-  <h2>2012</h2>
-
-<article>
-  
-<h1><a href="/blog/2012/05/26/bang-nin-kuai-su-ru-men-tide-codec-engine-zhuan-zai/">帮您快速入门TI的Codec Engine(转载)</a></h1>
-<time datetime="2012-05-26T06:18:00+08:00" pubdate><span class='month'>May</span> <span class='day'>26</span> <span class='year'>2012</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/davinci/'>davinci</a></span>
-</footer>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>RubyPython.configure python_exe: '/usr/bin/python2.7'</span></code></pre></td></tr></table></div></figure>
 
 
-</article>
+<p>对于rails项目比如ruby-china，可以把这行代码丢到config/initializers下。</p>
+
+<p>不过RubyPython仍然可能找不到libpython而提示lib.so not found。这是由于RubyPython确定正确libpython的规则和你的系统不兼容，可以通过手动加些symbol links来解决 (目前RubyPython的git最新代码相对当前稳定版本0.5.3改动非常大，希望新版本能解决这个问题，就先不去提交fixing了)。</p>
+
+<p>可以参考 PythonExec initialize 方法中的规则来建symbol link.</p>
+
+<!--more-->
+
+
+<p>首先运行该python，得到版本号x.y，以python2.7为例</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ python2.7 -c "import sys;print '%d.%d' % sys.version_info[:2]"
+</span><span class='line'>
+</span><span class='line'>=&gt; 2.7</span></code></pre></td></tr></table></div></figure>
+
+
+<p>找到该python对应得libpython，可以用工具ldd:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ ldd /usr/lib/python2.7 | grep python
+</span><span class='line'>
+</span><span class='line'>=&gt; libpython2.7.so.1.0 =&gt; /usr/lib/libpython2.7.so.1.0</span></code></pre></td></tr></table></div></figure>
+
+
+<p>为找到的这个文件创建链接。下面用#{exe_base}表示通过RubyPython.configure指定的python可执行程序的文件名部分，#{x}和#{y}是通过运行这个python找到得版本号，#{libpython}是该python对应得libpython库文件路径。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo ln -s #{libpython} /usr/lib/lib#{exe_base}#{x}#{y}.so
+</span><span class='line'>sudo ln -s #{libpython} /usr/lib/lib#{exe_base}#{x}.#{y}.so</span></code></pre></td></tr></table></div></figure>
+
+
+<p>以我的环境(Arch Linux)为例，exe_base是python2.7，版本号x.y是2.7，libpython是/usr/lib/libpython2.7.so.1.0，</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo ln -s /usr/lib/libpython2.7.so.1.0 /usr/lib/libpython2.727.so
+</span><span class='line'>sudo ln -s /usr/lib/libpython2.7.so.1.0 /usr/lib/libpython2.72.7.so</span></code></pre></td></tr></table></div></figure>
 
 </div>
 
+
+  <footer>
+    <p class="meta">
+      
   
+
+<span class="byline author vcard">Posted by <span class="fn">Tiny</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-06-05T08:01:00+08:00" pubdate data-updated="true">Jun 5<span>th</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/ruby/'>ruby</a>
+  
+</span>
+
+
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://tinyxd.github.com/blog/2012/06/05/cannot-find-libpython/" data-via="" data-counturl="http://tinyxd.github.com/blog/2012/06/05/cannot-find-libpython/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2012/06/04/linuxxia-shi-yong-lftpde-xiao-jie/" title="Previous Post: linux下使用lftp的小结(转载)">&laquo; linux下使用lftp的小结(转载)</a>
+      
+      
+    </p>
+  </footer>
 </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
 
@@ -217,7 +328,10 @@
       var disqus_shortname = 'tinyxd';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://tinyxd.github.com/blog/2012/06/05/cannot-find-libpython/';
+        var disqus_url = 'http://tinyxd.github.com/blog/2012/06/05/cannot-find-libpython/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

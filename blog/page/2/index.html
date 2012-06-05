@@ -9,9 +9,7 @@
   <meta name="author" content="Tiny">
 
   
-  <meta name="description" content="第一步：cp iNodeClient.tar.gz 到 /home/ 目录下。进入~目录下
-第二步：终端运行 tar -xvf iNodeClient.tar.gz。
-第三步：修改/home//iNodeClient/下install.sh，把 OS_UBUNTU=cat /etc/issue &hellip;">
+  <meta name="description" content="转自TI官网： 德州仪器半导体技术（上海）有限公司 通用DSP 技术应用工程师 崔晶 德州仪器（TI）的第一颗达芬奇（DaVinci）芯片（处理器）DM6446已经问世快三年了。继DM644x之后，TI又陆续推出了DM643x，DM35x，DM6467，OMAP353x等一系列ARM＋ &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -109,6 +107,70 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/05/26/bang-nin-kuai-su-ru-men-tide-codec-engine-zhuan-zai/">帮您快速入门TI的Codec Engine(转载)</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-05-26T06:18:00+08:00" pubdate data-updated="true">May 26<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/05/26/bang-nin-kuai-su-ru-men-tide-codec-engine-zhuan-zai/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>转自TI官网：  <br/>
+德州仪器半导体技术（上海）有限公司 通用DSP 技术应用工程师 崔晶</p>
+
+<p>德州仪器（TI）的第一颗达芬奇（DaVinci）芯片（处理器）DM6446已经问世快三年了。继DM644x之后，TI又陆续推出了DM643x，DM35x，DM6467，OMAP353x等一系列ARM＋DSP或ARM＋视频协处理器的多媒体处理器平台。很多有很强DSP开发经验或ARM开发经验的工程师都转到达芬奇或通用OMAP（OMAP353x）平台上开发视频监控、视频会议及便携式多媒体终端等产品。大家都面临着同一个问题，那就是如何实现ARM和DSP或协处理器的通信和协同工作？TI的数字视频软件开发包（DVSDK）提供了Codec Engine这样一个软件模块来实现ARM和DSP或协处理器的协同工作。有很多工程师反馈这个软件模块非常好用，节省了很多开发时间，也有工程师认为TI提供的资料太多，不知如何快速上手。本文将从一个第一次接触Codec Engine的工程师角度出发，归纳TI提供的相关资源（文档，例程和网络资源）并介绍相关开发调试方法帮您快速入门Codec Engine。 <br/>
+1．Codec Engine概述 <br/>
+Codec Engine是连接ARM和DSP或协处理器的桥梁，是介于应用层（ARM侧的应用程序）和信号处理层（DSP侧的算法）之间的软件模块。ARM应用程序调用Codec Engine的VISA （Video, Image, Speech, Audio）API，如图1中VIDENC_process(a, b, c )。Codec Engine的stub （ARM侧）会把参数a, b, c以及要调用DSP侧process这个信息打包，通过消息队列（message queue）传递到DSP。Codec Engine的skeleton（DSP侧）会解开这个参数包，把参数a, b, c转换成DSP侧对应的参数x, y, z（比如ARM侧传递的是虚拟地址，而DSP只能认物理地址），DSP侧的server（优先级较低，负责和ARM通信的任务）会根据process这一信息创建一个DSP侧的process(x, y, x)任务最终实现VIDENC_process(a, b, c)的操作。 <br/>
+2．Codec Engine入门第一步，从Codec Engine发布说明文档(release notes)开始 <br/>
+3．Codec Engine入门第二步，了解Codec Engine的运行环境及依赖的软件模块和工具</p>
+
+<p>点击Codec Engine的发布说明文档 的Validation Info，我们可以知道Codec Engine 1.20需要和以下软件模块和工具配合使用：</p>
+
+<pre><code>Framework Components 1.20.02   
+xDAIS 5.21   
+XDC Tools 2.93.01   
+DSP/BIOS Link 1.40.05, configured for the DM6446 EVM   
+C6x Code Generation Tools version 6.0.8   
+DSP/BIOS 5.31.05   
+MontaVista Linux v4.0   
+Red Hat Enterprise Linux 3 (SMP)    
+</code></pre>
+
+<p>因此，我们需要在该Codec Engine安装的DVSDK文件包下面检查上面提到的软件模块和工具是否安装，版本是否正确。否则，可能会编译不过 Codec Engine的例子。那么，什么是 Framework Components，什么是xDAIS，什么又是XDC Tools呢？你可以分别到它们的根目录下浏览它们各自的发布说明文档，做一个总体的了解。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2012/05/26/bang-nin-kuai-su-ru-men-tide-codec-engine-zhuan-zai/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -355,78 +417,9 @@ remotes/octopress/thor
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/05/23/octopressan-zhuang-bi-ji/">Octopress安装笔记</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-05-23T07:16:00+08:00" pubdate data-updated="true">May 23<span>rd</span>, 2012</time>
-        
-         | <a href="/blog/2012/05/23/octopressan-zhuang-bi-ji/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>在阅读此教程之前，先安装git和ruby环境。</p>
-
-<p><strong>1.安装ruby环境</strong></p>
-
-<p>如果已经安装了ruby,就不用安装rvm 了。
-Archlinux用户建议用pacman 安装ruby,方便省事。</p>
-
-<p>Archlinux安装RVM教程：
-<a href="https://wiki.archlinux.org/index.php/RVM">archlinux安装RVM教程</a></p>
-
-<pre><code>[tinyxd@archbang  ~]$ sudo bash &lt; &lt;(curl -s https://raw.github.com/wayneeseguin/rvm/master/binscripts/rvm-installer )
-</code></pre>
-
-<p>添加当前用户到rvm 组</p>
-
-<pre><code>[tinyxd@archbang  ~]$ sudo usermod -a -G rvm admin
-</code></pre>
-
-<p>查看下添加成功了没：</p>
-
-<pre><code>[tinyxd@archbang ~]$ grep rvm /etc/group
-rvm:x:1004:admin
-</code></pre>
-
-<p>再注销，登录。</p>
-
-<blockquote><p>To start using RVM you need to run <code>source /etc/profile.d/rvm.sh</code> in all your open shell windows, in rare cases you need to reopen all shell windows.</p></blockquote>
-
-<p>已经安装了ruby的就可以从这里开始了。</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2012/05/23/octopressan-zhuang-bi-ji/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
+    
+      <a class="prev" href="/blog/page/3/">&larr; Older</a>
     
     <a href="/blog/archives">Blog Archives</a>
     
@@ -454,6 +447,10 @@ rvm:x:1004:admin
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2012/06/05/cannot-find-libpython/">解决pygments.rb (RubyPython) 找不到libpython的问题(archlinux下)</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2012/06/04/linuxxia-shi-yong-lftpde-xiao-jie/">linux下使用lftp的小结(转载)</a>
       </li>
     
@@ -469,15 +466,11 @@ rvm:x:1004:admin
         <a href="/blog/2012/05/26/arch-linux-xia-lxrde-an-zhuang/">arch linux 下lxr的安装</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2012/05/26/bang-nin-kuai-su-ru-men-tide-codec-engine-zhuan-zai/">帮您快速入门TI的Codec Engine(转载)</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/archlinux'>Archlinux (2)</a></li><li><a href='/blog/categories/davinci'>Davinci (1)</a></li><li><a href='/blog/categories/embedded'>Embedded (1)</a></li><li><a href='/blog/categories/java'>Java (1)</a></li><li><a href='/blog/categories/linux'>Linux (1)</a></li><li><a href='/blog/categories/octopress'>Octopress (4)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/archlinux'>Archlinux (2)</a></li><li><a href='/blog/categories/davinci'>Davinci (1)</a></li><li><a href='/blog/categories/embedded'>Embedded (1)</a></li><li><a href='/blog/categories/java'>Java (1)</a></li><li><a href='/blog/categories/linux'>Linux (1)</a></li><li><a href='/blog/categories/octopress'>Octopress (4)</a></li><li><a href='/blog/categories/ruby'>Ruby (1)</a></li></ul>
 </section>
 
 

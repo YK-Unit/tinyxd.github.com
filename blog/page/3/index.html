@@ -5,11 +5,13 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Category: davinci - Tiny's Blog</title>
+  <title>Tiny's Blog</title>
   <meta name="author" content="Tiny">
 
   
-  <meta name="description" content="Category: davinci">
+  <meta name="description" content="在阅读此教程之前，先安装git和ruby环境。 1.安装ruby环境 如果已经安装了ruby,就不用安装rvm 了。
+Archlinux用户建议用pacman 安装ruby,方便省事。 Archlinux安装RVM教程：
+archlinux安装RVM教程 [tinyxd@archbang ~]$ &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +20,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://tinyxd.github.comblog/categories/davinci">
+  <link rel="canonical" href="http://tinyxd.github.com/blog/page/3">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -105,40 +107,88 @@
 </nav>
   <div id="main">
     <div id="content">
-      <div>
-<article role="article">
+      <div class="blog-index">
   
+  
+  
+    <article>
+      
   <header>
-    <h1 class="entry-title">Category: Davinci</h1>
+    
+      <h1 class="entry-title"><a href="/blog/2012/05/23/octopressan-zhuang-bi-ji/">Octopress安装笔记</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-05-23T07:16:00+08:00" pubdate data-updated="true">May 23<span>rd</span>, 2012</time>
+        
+         | <a href="/blog/2012/05/23/octopressan-zhuang-bi-ji/#disqus_thread">Comments</a>
+        
+      </p>
     
   </header>
-  
-  <div id="blog-archives" class="category">
 
 
+  <div class="entry-content"><p>在阅读此教程之前，先安装git和ruby环境。</p>
 
-  
-  <h2>2012</h2>
+<p><strong>1.安装ruby环境</strong></p>
 
-<article>
-  
-<h1><a href="/blog/2012/05/26/bang-nin-kuai-su-ru-men-tide-codec-engine-zhuan-zai/">帮您快速入门TI的Codec Engine(转载)</a></h1>
-<time datetime="2012-05-26T06:18:00+08:00" pubdate><span class='month'>May</span> <span class='day'>26</span> <span class='year'>2012</span></time>
+<p>如果已经安装了ruby,就不用安装rvm 了。
+Archlinux用户建议用pacman 安装ruby,方便省事。</p>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/davinci/'>davinci</a></span>
-</footer>
+<p>Archlinux安装RVM教程：
+<a href="https://wiki.archlinux.org/index.php/RVM">archlinux安装RVM教程</a></p>
 
+<pre><code>[tinyxd@archbang  ~]$ sudo bash &lt; &lt;(curl -s https://raw.github.com/wayneeseguin/rvm/master/binscripts/rvm-installer )
+</code></pre>
 
-</article>
+<p>添加当前用户到rvm 组</p>
+
+<pre><code>[tinyxd@archbang  ~]$ sudo usermod -a -G rvm admin
+</code></pre>
+
+<p>查看下添加成功了没：</p>
+
+<pre><code>[tinyxd@archbang ~]$ grep rvm /etc/group
+rvm:x:1004:admin
+</code></pre>
+
+<p>再注销，登录。</p>
+
+<blockquote><p>To start using RVM you need to run <code>source /etc/profile.d/rvm.sh</code> in all your open shell windows, in rare cases you need to reopen all shell windows.</p></blockquote>
+
+<p>已经安装了ruby的就可以从这里开始了。</p>
 
 </div>
-
   
-</article>
+  
+    <footer>
+      <a rel="full-article" href="/blog/2012/05/23/octopressan-zhuang-bi-ji/">Read on &rarr;</a>
+    </footer>
+  
 
+
+    </article>
+  
+  <div class="pagination">
+    
+    <a href="/blog/archives">Blog Archives</a>
+    
+    <a class="next" href="/blog/page/2/">Newer &rarr;</a>
+    
+  </div>
 </div>
-
 <aside class="sidebar">
   
     <section>
@@ -199,7 +249,6 @@
 
   
 </aside>
-
 
     </div>
   </div>
