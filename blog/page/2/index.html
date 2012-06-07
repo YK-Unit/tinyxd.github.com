@@ -9,7 +9,9 @@
   <meta name="author" content="Tiny">
 
   
-  <meta name="description" content="转自TI官网： 德州仪器半导体技术（上海）有限公司 通用DSP 技术应用工程师 崔晶 德州仪器（TI）的第一颗达芬奇（DaVinci）芯片（处理器）DM6446已经问世快三年了。继DM644x之后，TI又陆续推出了DM643x，DM35x，DM6467，OMAP353x等一系列ARM＋ &hellip;">
+  <meta name="description" content="经过自己两天的折腾，参考了好几个资料终于搞定。
+参考资料见文章末尾。
+LXR是使用WEB方式下的源代码整理浏览工具，最大的用途在于清理出了代码中函数、变量的定义、说明、应用的关系，并用链接的形式表现在网页上。LXR整理出代码的结构和调用关系，存在数据库中，并在显示时与源代码树结合，从功能上说， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -107,6 +109,78 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/05/26/arch-linux-xia-lxrde-an-zhuang/">Arch Linux 下lxr的安装</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-05-26T23:14:00+08:00" pubdate data-updated="true">May 26<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/05/26/arch-linux-xia-lxrde-an-zhuang/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>经过自己两天的折腾，参考了好几个资料终于搞定。
+参考资料见文章末尾。
+LXR是使用WEB方式下的源代码整理浏览工具，最大的用途在于清理出了代码中函数、变量的定义、说明、应用的关系，并用链接的形式表现在网页上。LXR整理出代码的结构和调用关系，存在数据库中，并在显示时与源代码树结合，从功能上说，包括代码浏览、标识符搜索、文本搜索和文件搜索，其中的文本搜索和文件搜索利用的是第三方工具（即glimpse或swish-e）（我使用的glimpse）。它的主要组成部分包括三个：Perl编写的网页/CGI部分，基于MySQL的索引数据管理（新版本才有）和通用的文本搜索工具。目前的版本，采用Glimpse或者Swish-e中的一种作为通用文本搜索工具。在安装上，基本上也按照这三个部分来配置。
+1.下载安装所需的工具。
+a。glimpse（http://webglimpse.net/download.php）</p>
+
+<p>安装glimpse:（其中会用到flex 安装下就行了）</p>
+
+<pre><code>$ ./configure
+
+$ make
+
+$ sudo make install
+</code></pre>
+
+<p>b。pacman -S apache php php-apache mysql</p>
+
+<p>c。pacman -s ctags perl-dbi perl-dbd-mysql</p>
+
+<p>d。安装完mysql 以root用户身份运行设置脚本</p>
+
+<pre><code># rc.d start mysqld &amp;&amp; mysql_secure_installation
+</code></pre>
+
+<p>然后重启 Mysql</p>
+
+<pre><code># rc.d restart mysqld
+</code></pre>
+
+<p>本文需要设置密码为空（后面有说明）</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2012/05/26/arch-linux-xia-lxrde-an-zhuang/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -368,55 +442,6 @@ remotes/octopress/thor
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/05/23/octopresstian-jia-tu-pian/">Octopress添加图片</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-05-23T20:49:00+08:00" pubdate data-updated="true">May 23<span>rd</span>, 2012</time>
-        
-         | <a href="/blog/2012/05/23/octopresstian-jia-tu-pian/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>If you like Markdown’s syntax for images, you’ll love the simplicity of the Octopress image tag.</p>
-
-<p>Syntax</p>
-
-<blockquote><p>img [class names] /path/to/image [width] [height] [title text [alt text]]</p></blockquote>
-
-<p>Don’t forget brace and percent couple.</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2012/05/23/octopresstian-jia-tu-pian/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/3/">&larr; Older</a>
@@ -447,6 +472,10 @@ remotes/octopress/thor
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2012/06/08/dui-he-zhan-de-qu-bie/">堆和栈的区别(转)</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2012/06/05/cannot-find-libpython/">解决pygments.rb (RubyPython) 找不到libpython的问题(archlinux下)</a>
       </li>
     
@@ -462,15 +491,11 @@ remotes/octopress/thor
         <a href="/blog/2012/05/27/arch-linuxxia-java-sdkde-an-zhuang-yu-pei-zhi/">arch linux下java SDK的安装与配置</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2012/05/26/arch-linux-xia-lxrde-an-zhuang/">arch linux 下lxr的安装</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/archlinux'>Archlinux (2)</a></li><li><a href='/blog/categories/davinci'>Davinci (1)</a></li><li><a href='/blog/categories/embedded'>Embedded (1)</a></li><li><a href='/blog/categories/java'>Java (1)</a></li><li><a href='/blog/categories/linux'>Linux (1)</a></li><li><a href='/blog/categories/octopress'>Octopress (4)</a></li><li><a href='/blog/categories/ruby'>Ruby (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/archlinux'>Archlinux (2)</a></li><li><a href='/blog/categories/c'>C (1)</a></li><li><a href='/blog/categories/davinci'>Davinci (1)</a></li><li><a href='/blog/categories/embedded'>Embedded (1)</a></li><li><a href='/blog/categories/java'>Java (1)</a></li><li><a href='/blog/categories/linux'>Linux (1)</a></li><li><a href='/blog/categories/octopress'>Octopress (4)</a></li><li><a href='/blog/categories/ruby'>Ruby (1)</a></li></ul>
 </section>
 
 

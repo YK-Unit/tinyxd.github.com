@@ -9,8 +9,8 @@
   <meta name="author" content="Tiny">
 
   
-  <meta name="description" content="本文章转自：Ruby China 论坛 如果找不到python，或者系统默认得python是3.x (比如Arch Linux)，手动制定下路径 1
-RubyPython.configure python_exe: '/usr/bin/python2.7' 对于rails项目比如ruby- &hellip;">
+  <meta name="description" content="出自: http://www.cnitexam.com
+一、预备知识—程序的内存分配 一个由c/C++编译的程序占用的内存分为以下几个部分 1、栈区（stack）— 由编译器自动分配释放 ，存放函数的参数值，局部变量的值等。其操作方式类似于数据结构中的栈。 2、堆区（heap） — &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -108,6 +108,62 @@ RubyPython.configure python_exe: '/usr/bin/python2.7' 对于rails项目比如rub
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/06/08/dui-he-zhan-de-qu-bie/">堆和栈的区别(转)</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-06-08T06:59:00+08:00" pubdate data-updated="true">Jun 8<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/06/08/dui-he-zhan-de-qu-bie/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>出自: http://www.cnitexam.com
+一、预备知识—程序的内存分配</p>
+
+<p>一个由c/C++编译的程序占用的内存分为以下几个部分</p>
+
+<p>1、栈区（stack）— 由编译器自动分配释放 ，存放函数的参数值，局部变量的值等。其操作方式类似于数据结构中的栈。</p>
+
+<p>2、堆区（heap） — 一般由程序员分配释放， 若程序员不释放，程序结束时可能由OS回收 。注意它与数据结构中的堆是两回事，分配方式倒是类似于链表，呵呵。</p>
+
+<p>3、全局区（静态区）（static）—，全局变量和静态变量的存储是放在一块的，初始化的全局变量和静态变量在一块区域， 未初始化的全局变量和未初始化的静态变量在相邻的另一块区域。 – 程序结束后有系统释放</p>
+
+<p>4、文字常量区 —常量字符串就是放在这里的。 程序结束后由系统释放</p>
+
+<p>5、程序代码区—存放函数体的二进制代码。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2012/06/08/dui-he-zhan-de-qu-bie/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -324,78 +380,6 @@ Oracle Java SDK 7 update 1
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/05/26/arch-linux-xia-lxrde-an-zhuang/">Arch Linux 下lxr的安装</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-05-26T23:14:00+08:00" pubdate data-updated="true">May 26<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/05/26/arch-linux-xia-lxrde-an-zhuang/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>经过自己两天的折腾，参考了好几个资料终于搞定。
-参考资料见文章末尾。
-LXR是使用WEB方式下的源代码整理浏览工具，最大的用途在于清理出了代码中函数、变量的定义、说明、应用的关系，并用链接的形式表现在网页上。LXR整理出代码的结构和调用关系，存在数据库中，并在显示时与源代码树结合，从功能上说，包括代码浏览、标识符搜索、文本搜索和文件搜索，其中的文本搜索和文件搜索利用的是第三方工具（即glimpse或swish-e）（我使用的glimpse）。它的主要组成部分包括三个：Perl编写的网页/CGI部分，基于MySQL的索引数据管理（新版本才有）和通用的文本搜索工具。目前的版本，采用Glimpse或者Swish-e中的一种作为通用文本搜索工具。在安装上，基本上也按照这三个部分来配置。
-1.下载安装所需的工具。
-a。glimpse（http://webglimpse.net/download.php）</p>
-
-<p>安装glimpse:（其中会用到flex 安装下就行了）</p>
-
-<pre><code>$ ./configure
-
-$ make
-
-$ sudo make install
-</code></pre>
-
-<p>b。pacman -S apache php php-apache mysql</p>
-
-<p>c。pacman -s ctags perl-dbi perl-dbd-mysql</p>
-
-<p>d。安装完mysql 以root用户身份运行设置脚本</p>
-
-<pre><code># rc.d start mysqld &amp;&amp; mysql_secure_installation
-</code></pre>
-
-<p>然后重启 Mysql</p>
-
-<pre><code># rc.d restart mysqld
-</code></pre>
-
-<p>本文需要设置密码为空（后面有说明）</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2012/05/26/arch-linux-xia-lxrde-an-zhuang/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -424,6 +408,10 @@ $ sudo make install
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2012/06/08/dui-he-zhan-de-qu-bie/">堆和栈的区别(转)</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2012/06/05/cannot-find-libpython/">解决pygments.rb (RubyPython) 找不到libpython的问题(archlinux下)</a>
       </li>
     
@@ -439,15 +427,11 @@ $ sudo make install
         <a href="/blog/2012/05/27/arch-linuxxia-java-sdkde-an-zhuang-yu-pei-zhi/">arch linux下java SDK的安装与配置</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2012/05/26/arch-linux-xia-lxrde-an-zhuang/">arch linux 下lxr的安装</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/archlinux'>Archlinux (2)</a></li><li><a href='/blog/categories/davinci'>Davinci (1)</a></li><li><a href='/blog/categories/embedded'>Embedded (1)</a></li><li><a href='/blog/categories/java'>Java (1)</a></li><li><a href='/blog/categories/linux'>Linux (1)</a></li><li><a href='/blog/categories/octopress'>Octopress (4)</a></li><li><a href='/blog/categories/ruby'>Ruby (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/archlinux'>Archlinux (2)</a></li><li><a href='/blog/categories/c'>C (1)</a></li><li><a href='/blog/categories/davinci'>Davinci (1)</a></li><li><a href='/blog/categories/embedded'>Embedded (1)</a></li><li><a href='/blog/categories/java'>Java (1)</a></li><li><a href='/blog/categories/linux'>Linux (1)</a></li><li><a href='/blog/categories/octopress'>Octopress (4)</a></li><li><a href='/blog/categories/ruby'>Ruby (1)</a></li></ul>
 </section>
 
 
