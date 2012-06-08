@@ -9,9 +9,9 @@
   <meta name="author" content="Tiny">
 
   
-  <meta name="description" content="经过自己两天的折腾，参考了好几个资料终于搞定。
-参考资料见文章末尾。
-LXR是使用WEB方式下的源代码整理浏览工具，最大的用途在于清理出了代码中函数、变量的定义、说明、应用的关系，并用链接的形式表现在网页上。LXR整理出代码的结构和调用关系，存在数据库中，并在显示时与源代码树结合，从功能上说， &hellip;">
+  <meta name="description" content="为了节省以后查资料的时间，故而转到自己的blog做个备份。
+转自：
+Arch Linux中Java SDK的安装与配置 因为版权和公司对开源软件的态度，Oracle Java SDK已经不再包含于Arch Linux默认的Repository。 不过对于有开发需要， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -109,6 +109,69 @@ LXR是使用WEB方式下的源代码整理浏览工具，最大的用途在于�
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/05/27/arch-linuxxia-java-sdkde-an-zhuang-yu-pei-zhi/">Arch Linux下java SDK的安装与配置</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-05-27T19:58:00+08:00" pubdate data-updated="true">May 27<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/05/27/arch-linuxxia-java-sdkde-an-zhuang-yu-pei-zhi/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>为了节省以后查资料的时间，故而转到自己的blog做个备份。
+转自：
+<a href="http://www.cnblogs.com/heart-runner/archive/2011/11/30/2269640.html">Arch Linux中Java SDK的安装与配置</a></p>
+
+<p>因为版权和公司对开源软件的态度，Oracle Java SDK已经不再包含于Arch Linux默认的Repository。</p>
+
+<p>不过对于有开发需要，又不得不使用Oracle公司的产品的民工们，还好有AUR中提供的相应支持，让我们能方便地用安装脚本来处理Oracle Java SDK的安装和配置。</p>
+
+<p>下面就简单地记录下的JDK的安装方法。</p>
+
+<p>安装环境如下：</p>
+
+<pre><code>archbang 3.3.6-1-ARCH
+Oracle Java SDK 7 update 1
+</code></pre>
+
+<h2><strong>安装</strong></h2>
+
+<ul>
+<li><p>jre <br/>
+这里先安装JDK，虽然据说openjdk的jre也能兼容Oracle Java SDK，但还是有点担心它们的兼容性。  <br/>
+先在<a href="https://aur.archlinux.org/">Arch Linux AUR</a>中找到<a href="https://aur.archlinux.org/packages.php?ID=51908">JRE</a>。<br/>
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2012/05/27/arch-linuxxia-java-sdkde-an-zhuang-yu-pei-zhi/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -363,85 +426,6 @@ git clone git@github.com:username/username.github.com.git _deploy # get your sta
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/05/23/octopress-xin-shou-jiao-cheng/">Octopress:新手教程</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-05-23T20:55:00+08:00" pubdate data-updated="true">May 23<span>rd</span>, 2012</time>
-        
-         | <a href="/blog/2012/05/23/octopress-xin-shou-jiao-cheng/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><em>转载自：</em><br/>
-http://geekontheway.github.com/blog/2011/12/03/octopress-for-freshman/<br/>
-Octopress基于jekyll，刚开始使用起来也比较复杂：</p>
-
-<pre><code>Octopress会有两个分支：source（编写博客）和master（生成好的博客），就像这样：
-
-git remote -v
-
-octopress git://github.com/imathis/octopress.git (fetch)
-octopress git://github.com/imathis/octopress.git (push)
-origin    git@github.com:geekontheway/geekontheway.github.com.git (fetch)
-origin    git@github.com:geekontheway/geekontheway.github.com.git (push)
-
-
-git branch -a
-
-* source
-  remotes/octopress/HEAD -&gt; octopress/master
-  remotes/octopress/compass
-  remotes/octopress/configuration
-  remotes/octopress/edge
-  remotes/octopress/generate_environment
-  remotes/octopress/gh-pages
-  remotes/octopress/master
-  remotes/octopress/move_rakefile_configs
-  remotes/octopress/post_names
-  remotes/octopress/rake_minify_js
-  remotes/octopress/refactor_code_highlight
-  remotes/octopress/refactor_deployment
-  remotes/octopress/refactor_js
-  remotes/octopress/site
-  remotes/octopress/site-deploy-test
-  remotes/octopress/subdir
-remotes/octopress/thor
-</code></pre>
-
-<p>其中只有origin仓库和source分支是必须的，其余分支或仓库建议删掉。</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2012/05/23/octopress-xin-shou-jiao-cheng/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/3/">&larr; Older</a>
@@ -472,6 +456,10 @@ remotes/octopress/thor
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2012/06/08/c-plus-plus-ju-bing-lei/">读C++ Primer 之句柄类(转自Linux社区 作者：xizero00)</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2012/06/08/dui-he-zhan-de-qu-bie/">堆和栈的区别(转)</a>
       </li>
     
@@ -487,15 +475,11 @@ remotes/octopress/thor
         <a href="/blog/2012/05/31/cache--zhi-xing-wen-ti-zong-jie/">cache一致性问题总结</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2012/05/27/arch-linuxxia-java-sdkde-an-zhuang-yu-pei-zhi/">arch linux下java SDK的安装与配置</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/archlinux'>Archlinux (2)</a></li><li><a href='/blog/categories/c'>C (1)</a></li><li><a href='/blog/categories/davinci'>Davinci (1)</a></li><li><a href='/blog/categories/embedded'>Embedded (1)</a></li><li><a href='/blog/categories/java'>Java (1)</a></li><li><a href='/blog/categories/linux'>Linux (1)</a></li><li><a href='/blog/categories/octopress'>Octopress (4)</a></li><li><a href='/blog/categories/ruby'>Ruby (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/archlinux'>Archlinux (2)</a></li><li><a href='/blog/categories/c'>C (1)</a></li><li><a href='/blog/categories/c-'>C++ (1)</a></li><li><a href='/blog/categories/davinci'>Davinci (1)</a></li><li><a href='/blog/categories/embedded'>Embedded (1)</a></li><li><a href='/blog/categories/java'>Java (1)</a></li><li><a href='/blog/categories/linux'>Linux (1)</a></li><li><a href='/blog/categories/octopress'>Octopress (4)</a></li><li><a href='/blog/categories/ruby'>Ruby (1)</a></li></ul>
 </section>
 
 

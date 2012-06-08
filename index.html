@@ -9,7 +9,7 @@
   <meta name="author" content="Tiny">
 
   
-  <meta name="description" content="出自: http://www.cnitexam.com 一、预备知识—程序的内存分配 一个由c/C++编译的程序占用的内存分为以下几个部分 1、栈区（stack）— 由编译器自动分配释放 ，存放函数的参数值，局部变量的值等。其操作方式类似于数据结构中的栈。 2、堆区（heap） — &hellip;">
+  <meta name="description" content="转自：http://www.linuxidc.com/Linux/2011-08/40175.htm 我们知道C++中最令人头疼的当属指针，如果您申请了对象却没有释放它，时间一长就会造成系统崩溃，大量的内存溢出使得您的程序的健壮性出现问题 而句柄类就是为了能够解决这一问题而出现的， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -107,6 +107,55 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/06/08/c-plus-plus-ju-bing-lei/">读C++ Primer 之句柄类(转自Linux社区 作者：xizero00)</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-06-08T20:28:00+08:00" pubdate data-updated="true">Jun 8<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/06/08/c-plus-plus-ju-bing-lei/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>转自：http://www.linuxidc.com/Linux/2011-08/40175.htm</p>
+
+<p>我们知道C++中最令人头疼的当属指针，如果您申请了对象却没有释放它，时间一长就会造成系统崩溃，大量的内存溢出使得您的程序的健壮性出现问题</p>
+
+<p>而句柄类就是为了能够解决这一问题而出现的，句柄类有点类似于智能指针。</p>
+
+<p>好了，废话不多说，我们来看代码</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2012/06/08/c-plus-plus-ju-bing-lei/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -316,69 +365,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/05/27/arch-linuxxia-java-sdkde-an-zhuang-yu-pei-zhi/">Arch Linux下java SDK的安装与配置</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-05-27T19:58:00+08:00" pubdate data-updated="true">May 27<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/05/27/arch-linuxxia-java-sdkde-an-zhuang-yu-pei-zhi/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>为了节省以后查资料的时间，故而转到自己的blog做个备份。
-转自：
-<a href="http://www.cnblogs.com/heart-runner/archive/2011/11/30/2269640.html">Arch Linux中Java SDK的安装与配置</a></p>
-
-<p>因为版权和公司对开源软件的态度，Oracle Java SDK已经不再包含于Arch Linux默认的Repository。</p>
-
-<p>不过对于有开发需要，又不得不使用Oracle公司的产品的民工们，还好有AUR中提供的相应支持，让我们能方便地用安装脚本来处理Oracle Java SDK的安装和配置。</p>
-
-<p>下面就简单地记录下的JDK的安装方法。</p>
-
-<p>安装环境如下：</p>
-
-<pre><code>archbang 3.3.6-1-ARCH
-Oracle Java SDK 7 update 1
-</code></pre>
-
-<h2><strong>安装</strong></h2>
-
-<ul>
-<li><p>jre <br/>
-这里先安装JDK，虽然据说openjdk的jre也能兼容Oracle Java SDK，但还是有点担心它们的兼容性。  <br/>
-先在<a href="https://aur.archlinux.org/">Arch Linux AUR</a>中找到<a href="https://aur.archlinux.org/packages.php?ID=51908">JRE</a>。<br/>
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2012/05/27/arch-linuxxia-java-sdkde-an-zhuang-yu-pei-zhi/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -407,6 +393,10 @@ Oracle Java SDK 7 update 1
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2012/06/08/c-plus-plus-ju-bing-lei/">读C++ Primer 之句柄类(转自Linux社区 作者：xizero00)</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2012/06/08/dui-he-zhan-de-qu-bie/">堆和栈的区别(转)</a>
       </li>
     
@@ -422,15 +412,11 @@ Oracle Java SDK 7 update 1
         <a href="/blog/2012/05/31/cache--zhi-xing-wen-ti-zong-jie/">cache一致性问题总结</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2012/05/27/arch-linuxxia-java-sdkde-an-zhuang-yu-pei-zhi/">arch linux下java SDK的安装与配置</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/archlinux'>Archlinux (2)</a></li><li><a href='/blog/categories/c'>C (1)</a></li><li><a href='/blog/categories/davinci'>Davinci (1)</a></li><li><a href='/blog/categories/embedded'>Embedded (1)</a></li><li><a href='/blog/categories/java'>Java (1)</a></li><li><a href='/blog/categories/linux'>Linux (1)</a></li><li><a href='/blog/categories/octopress'>Octopress (4)</a></li><li><a href='/blog/categories/ruby'>Ruby (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/archlinux'>Archlinux (2)</a></li><li><a href='/blog/categories/c'>C (1)</a></li><li><a href='/blog/categories/c-'>C++ (1)</a></li><li><a href='/blog/categories/davinci'>Davinci (1)</a></li><li><a href='/blog/categories/embedded'>Embedded (1)</a></li><li><a href='/blog/categories/java'>Java (1)</a></li><li><a href='/blog/categories/linux'>Linux (1)</a></li><li><a href='/blog/categories/octopress'>Octopress (4)</a></li><li><a href='/blog/categories/ruby'>Ruby (1)</a></li></ul>
 </section>
 
 
