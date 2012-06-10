@@ -9,9 +9,9 @@
   <meta name="author" content="Tiny">
 
   
-  <meta name="description" content="为了节省以后查资料的时间，故而转到自己的blog做个备份。
-转自：
-Arch Linux中Java SDK的安装与配置 因为版权和公司对开源软件的态度，Oracle Java SDK已经不再包含于Arch Linux默认的Repository。 不过对于有开发需要， &hellip;">
+  <meta name="description" content="1.现代并行机中，为了提高处理器的速度，处理器往往带有Cache。一个数据在整个系统内可能有多份拷贝，这就引发了Cache一致性问题。
+例如下图中的2个处理器和共享内存构成的系统。初始时刻，处理机P1和P2都将变量X从共享内存装入了私有Cache。
+这时， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -108,6 +108,53 @@ Arch Linux中Java SDK的安装与配置 因为版权和公司对开源软件的�
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/05/31/cache--zhi-xing-wen-ti-zong-jie/">Cache一致性问题总结</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-05-31T20:59:00+08:00" pubdate data-updated="true">May 31<span>st</span>, 2012</time>
+        
+         | <a href="/blog/2012/05/31/cache--zhi-xing-wen-ti-zong-jie/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>1.现代并行机中，为了提高处理器的速度，处理器往往带有Cache。一个数据在整个系统内可能有多份拷贝，这就引发了Cache一致性问题。
+例如下图中的2个处理器和共享内存构成的系统。初始时刻，处理机P1和P2都将变量X从共享内存装入了私有Cache。
+这时，两个Cache中和共享内存中的变量X的值是一样的。在程序运行的某一时刻，处理机P1把X的值修改为X&#8217;，并更新了私有Cache中 的值。
+此时无论P1采用写直达（write-through），还是写回（write-back）策略，都不会修改P2私有Cache中X的值。这时如果P2需要读取X，则它得到的是过时的值。 <br/>
+<img src="/images/cache.gif"></p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2012/05/31/cache--zhi-xing-wen-ti-zong-jie/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -370,61 +417,6 @@ ifconfig $x up  <br/>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/05/23/wei-yi-jing-cun-zai-de-github-octopresspei-zhi-ben-di-huan-jing/">为已经存在的github Octopress配置本地环境</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-05-23T20:59:00+08:00" pubdate data-updated="true">May 23<span>rd</span>, 2012</time>
-        
-         | <a href="/blog/2012/05/23/wei-yi-jing-cun-zai-de-github-octopresspei-zhi-ben-di-huan-jing/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><strong>转自：</strong><br/>
-http://www.360doc.com/content/12/0520/19/3565338_212362686.shtml</p>
-
-<p>本文介绍如何为已经存在于github上的octopress配置本地环境。<br/>
-在本地安装RVM(Ruby Version Manager)和Ruby 1.9.2；</p>
-
-<p>从你的github得到你的octopress内容：</p>
-
-<pre><code>git clone -b source git@github.com:username/username.github.com.git octopress # get the source code from your "source" branch of your octopress on github
-＃ learn from: http://stackoverflow.com/questions/1911109/git-clone-a-specific-branch
-cd octopress
-git clone git@github.com:username/username.github.com.git _deploy # get your static pages content from your "master"branch of your cotopress on github
-</code></pre>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2012/05/23/wei-yi-jing-cun-zai-de-github-octopresspei-zhi-ben-di-huan-jing/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/3/">&larr; Older</a>
@@ -451,6 +443,10 @@ git clone git@github.com:username/username.github.com.git _deploy # get your sta
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2012/06/10/qian-ru-shi-linuxying-yong-cheng-xu-zi-qi-dong/">嵌入式linux应用程序自启动</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2012/06/08/c-plus-plus-ju-bing-lei/">读C++ Primer 之句柄类(转自Linux社区 作者：xizero00)</a>
       </li>
     
@@ -466,15 +462,11 @@ git clone git@github.com:username/username.github.com.git _deploy # get your sta
         <a href="/blog/2012/06/04/linuxxia-shi-yong-lftpde-xiao-jie/">linux下使用lftp的小结(转载)</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2012/05/31/cache--zhi-xing-wen-ti-zong-jie/">cache一致性问题总结</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/archlinux'>Archlinux (2)</a></li><li><a href='/blog/categories/c'>C (1)</a></li><li><a href='/blog/categories/c-'>C++ (1)</a></li><li><a href='/blog/categories/davinci'>Davinci (1)</a></li><li><a href='/blog/categories/embedded'>Embedded (1)</a></li><li><a href='/blog/categories/java'>Java (1)</a></li><li><a href='/blog/categories/linux'>Linux (1)</a></li><li><a href='/blog/categories/octopress'>Octopress (4)</a></li><li><a href='/blog/categories/ruby'>Ruby (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/archlinux'>Archlinux (2)</a></li><li><a href='/blog/categories/davinci'>Davinci (1)</a></li><li><a href='/blog/categories/embedded-systerm'>Embedded systerm (2)</a></li><li><a href='/blog/categories/java'>Java (1)</a></li><li><a href='/blog/categories/linux'>Linux (1)</a></li><li><a href='/blog/categories/octopress'>Octopress (4)</a></li><li><a href='/blog/categories/ruby'>Ruby (1)</a></li><li><a href='/blog/categories/software-programming'>Software programming (2)</a></li></ul>
 </section>
 
 
