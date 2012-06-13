@@ -5,13 +5,13 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>抱歉，你要访问的网页不存在 - Keen on Art of Tech</title>
+  <title>Keen on Art of Tech</title>
   <meta name="author" content="Tiny">
 
   
-  <meta name="description" content="抱歉，你要访问的网页不存在 看看下面有木有你要找的东东？ 用new申请动态空间的问题
-Jun 14 2012 posted in Software programming 函数压栈的一些思考
-Jun 13 2012 posted in Software programming &hellip;">
+  <meta name="description" content="在阅读此教程之前，先安装git和ruby环境。 1.安装ruby环境 如果已经安装了ruby,就不用安装rvm 了。
+Archlinux用户建议用pacman 安装ruby,方便省事。 Archlinux安装RVM教程：
+archlinux安装RVM教程 [tinyxd@archbang ~]$ &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -20,7 +20,7 @@ Jun 13 2012 posted in Software programming &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://tinyxd.github.com/404.html">
+  <link rel="canonical" href="http://tinyxd.github.com/blog/page/4">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -107,144 +107,88 @@ Jun 13 2012 posted in Software programming &hellip;">
 </nav>
   <div id="main">
     <div id="content">
-      <div>
-<article role="article">
+      <div class="blog-index">
   
+  
+  
+    <article>
+      
   <header>
-    <h1 class="entry-title">抱歉，你要访问的网页不存在</h1>
+    
+      <h1 class="entry-title"><a href="/blog/2012/05/23/octopressan-zhuang-bi-ji/">Octopress安装笔记</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-05-23T07:16:00+08:00" pubdate data-updated="true">May 23<span>rd</span>, 2012</time>
+        
+         | <a href="/blog/2012/05/23/octopressan-zhuang-bi-ji/#disqus_thread">Comments</a>
+        
+      </p>
     
   </header>
-  
-  <h3> 看看下面有木有你要找的东东？</h3>
-<div id="blog-archives">
-
-<article>
-  
-<h1><a href="/blog/2012/06/14/yong-newshen-qing-dong-tai-kong-jian-de-wen-ti/">用new申请动态空间的问题</a></h1>
-<time datetime="2012-06-14T07:27:00+08:00" pubdate><span class='month'>Jun</span> <span class='day'>14</span> <span class='year'>2012</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/software-programming/'>Software programming</a></span>
-</footer>
 
 
-</article>
+  <div class="entry-content"><p>在阅读此教程之前，先安装git和ruby环境。</p>
 
-<article>
-  
-<h1><a href="/blog/2012/06/13/han-shu-ya-zhan/">函数压栈的一些思考</a></h1>
-<time datetime="2012-06-13T07:22:00+08:00" pubdate><span class='month'>Jun</span> <span class='day'>13</span> <span class='year'>2012</span></time>
+<p><strong>1.安装ruby环境</strong></p>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/software-programming/'>Software programming</a></span>
-</footer>
+<p>如果已经安装了ruby,就不用安装rvm 了。
+Archlinux用户建议用pacman 安装ruby,方便省事。</p>
 
+<p>Archlinux安装RVM教程：
+<a href="https://wiki.archlinux.org/index.php/RVM">archlinux安装RVM教程</a></p>
 
-</article>
+<pre><code>[tinyxd@archbang  ~]$ sudo bash &lt; &lt;(curl -s https://raw.github.com/wayneeseguin/rvm/master/binscripts/rvm-installer )
+</code></pre>
 
-<article>
-  
-<h1><a href="/blog/2012/06/10/qian-ru-shi-linuxying-yong-cheng-xu-zi-qi-dong/">嵌入式linux应用程序自启动</a></h1>
-<time datetime="2012-06-10T19:46:00+08:00" pubdate><span class='month'>Jun</span> <span class='day'>10</span> <span class='year'>2012</span></time>
+<p>添加当前用户到rvm 组</p>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/embedded-systerm/'>Embedded systerm</a></span>
-</footer>
+<pre><code>[tinyxd@archbang  ~]$ sudo usermod -a -G rvm admin
+</code></pre>
 
+<p>查看下添加成功了没：</p>
 
-</article>
+<pre><code>[tinyxd@archbang ~]$ grep rvm /etc/group
+rvm:x:1004:admin
+</code></pre>
 
-<article>
-  
-<h1><a href="/blog/2012/06/08/c-plus-plus-ju-bing-lei/">读C++ Primer 之句柄类(转自Linux社区 作者：xizero00)</a></h1>
-<time datetime="2012-06-08T20:28:00+08:00" pubdate><span class='month'>Jun</span> <span class='day'>08</span> <span class='year'>2012</span></time>
+<p>再注销，登录。</p>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/software-programming/'>Software programming</a></span>
-</footer>
+<blockquote><p>To start using RVM you need to run <code>source /etc/profile.d/rvm.sh</code> in all your open shell windows, in rare cases you need to reopen all shell windows.</p></blockquote>
 
-
-</article>
-
-<article>
-  
-<h1><a href="/blog/2012/06/08/dui-he-zhan-de-qu-bie/">堆和栈的区别(转)</a></h1>
-<time datetime="2012-06-08T06:59:00+08:00" pubdate><span class='month'>Jun</span> <span class='day'>08</span> <span class='year'>2012</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/software-programming/'>Software programming</a></span>
-</footer>
-
-
-</article>
-
-<article>
-  
-<h1><a href="/blog/2012/06/05/cannot-find-libpython/">解决pygments.rb (RubyPython) 找不到libpython的问题(archlinux下)</a></h1>
-<time datetime="2012-06-05T08:01:00+08:00" pubdate><span class='month'>Jun</span> <span class='day'>05</span> <span class='year'>2012</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/ruby/'>ruby</a></span>
-</footer>
-
-
-</article>
-
-<article>
-  
-<h1><a href="/blog/2012/06/04/linuxxia-shi-yong-lftpde-xiao-jie/">linux下使用lftp的小结(转载)</a></h1>
-<time datetime="2012-06-04T07:08:00+08:00" pubdate><span class='month'>Jun</span> <span class='day'>04</span> <span class='year'>2012</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/linux/'>linux</a></span>
-</footer>
-
-
-</article>
-
-<article>
-  
-<h1><a href="/blog/2012/05/31/cache--zhi-xing-wen-ti-zong-jie/">cache一致性问题总结</a></h1>
-<time datetime="2012-05-31T20:59:00+08:00" pubdate><span class='month'>May</span> <span class='day'>31</span> <span class='year'>2012</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/embedded-systerm/'>Embedded systerm</a></span>
-</footer>
-
-
-</article>
-
-<article>
-  
-<h1><a href="/blog/2012/05/27/arch-linuxxia-java-sdkde-an-zhuang-yu-pei-zhi/">arch linux下java SDK的安装与配置</a></h1>
-<time datetime="2012-05-27T19:58:00+08:00" pubdate><span class='month'>May</span> <span class='day'>27</span> <span class='year'>2012</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/java/'>java</a></span>
-</footer>
-
-
-</article>
-
-<article>
-  
-<h1><a href="/blog/2012/05/26/arch-linux-xia-lxrde-an-zhuang/">arch linux 下lxr的安装</a></h1>
-<time datetime="2012-05-26T23:14:00+08:00" pubdate><span class='month'>May</span> <span class='day'>26</span> <span class='year'>2012</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/linux/'>linux</a></span>
-</footer>
-
-
-</article>
+<p>已经安装了ruby的就可以从这里开始了。</p>
 
 </div>
-
   
-</article>
+  
+    <footer>
+      <a rel="full-article" href="/blog/2012/05/23/octopressan-zhuang-bi-ji/">Read on &rarr;</a>
+    </footer>
+  
 
+
+    </article>
+  
+  <div class="pagination">
+    
+    <a href="/blog/archives">Blog Archives</a>
+    
+    <a class="next" href="/blog/page/3/">Newer &rarr;</a>
+    
+  </div>
 </div>
-
 <aside class="sidebar">
   
     <section>
@@ -303,7 +247,7 @@ Jun 13 2012 posted in Software programming &hellip;">
   <p>
   <ul>
     <li>
-    <a href="http://tinyxd.tk"> Tiny's wordpress blog </a>
+    <a href="http://tinyxd.tk"> Tiny&#8217;s wordpress blog </a>
     </li>
 
   </ul>
@@ -311,7 +255,6 @@ Jun 13 2012 posted in Software programming &hellip;">
 </section>
   
 </aside>
-
 
     </div>
   </div>

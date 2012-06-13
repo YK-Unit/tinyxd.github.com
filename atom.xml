@@ -4,7 +4,7 @@
   <title><![CDATA[Keen on Art of Tech]]></title>
   <link href="http://tinyxd.github.com/atom.xml" rel="self"/>
   <link href="http://tinyxd.github.com/"/>
-  <updated>2012-06-13T08:20:43+08:00</updated>
+  <updated>2012-06-14T07:35:31+08:00</updated>
   <id>http://tinyxd.github.com/</id>
   <author>
     <name><![CDATA[Tiny]]></name>
@@ -12,6 +12,195 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[用new申请动态空间的问题]]></title>
+    <link href="http://tinyxd.github.com/blog/2012/06/14/yong-newshen-qing-dong-tai-kong-jian-de-wen-ti/"/>
+    <updated>2012-06-14T07:27:00+08:00</updated>
+    <id>http://tinyxd.github.com/blog/2012/06/14/yong-newshen-qing-dong-tai-kong-jian-de-wen-ti</id>
+    <content type="html"><![CDATA[<p>先分析一下new的分配：</p>
+
+<p>1.T<em>   p   =   new   T;  ···   delete   p;
+等价于
+T</em>   p   =   new   T[1]; ··· delete[]   p;</p>
+
+<p>2.int   (*p)[n]   =   new   int[m][n];这种方式是可行的</p>
+
+<p>3.所以new一个3x3的数组，也就是T   =   int[3][3] ，  那么可以这样写：
+int   (*p)[3][3]   =   new   int[1][3][3];     删除时请调用delete[]   p;</p>
+
+<!--more-->
+
+
+<p>4.int** a；很容易造成内存泄漏最好不要用。</p>
+
+<p>下面是自己写的一个test：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+</pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="cp">#include &lt;iostream&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+</span><span class='line'><span class="kt">int</span> <span class="n">main</span><span class="p">()</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="n">size_t</span> <span class="n">m</span><span class="o">=</span><span class="mi">10</span><span class="p">;</span>
+</span><span class='line'>  <span class="kt">int</span> <span class="p">(</span><span class="o">*</span><span class="n">p</span><span class="p">)[</span><span class="mi">10</span><span class="p">]</span><span class="o">=</span><span class="k">new</span> <span class="kt">int</span><span class="p">[</span><span class="n">m</span><span class="p">][</span><span class="mi">10</span><span class="p">]();</span>
+</span><span class='line'>  <span class="k">for</span><span class="p">(</span><span class="n">size_t</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">!=</span><span class="mi">10</span><span class="p">;</span><span class="o">++</span><span class="n">i</span><span class="p">)</span>
+</span><span class='line'>      <span class="k">for</span><span class="p">(</span><span class="n">size_t</span> <span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">j</span><span class="o">!=</span><span class="mi">10</span><span class="p">;</span><span class="o">++</span><span class="n">j</span><span class="p">)</span>
+</span><span class='line'>      <span class="p">{</span>
+</span><span class='line'>          <span class="n">cout</span><span class="o">&lt;&lt;</span> <span class="n">p</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">+</span><span class="n">j</span> <span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="p">}</span>
+</span><span class='line'>  <span class="n">cout</span><span class="o">&lt;&lt;</span><span class="k">sizeof</span><span class="p">(</span><span class="n">p</span><span class="p">)</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">delete</span>  <span class="p">[]</span> <span class="n">p</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>还有一个问题是 ，c++中new的空间地址是连续的么？？</p>
+
+<p>由于学习过linux内核，经过分析，有些时候是虚拟地址是连续的，而物理地址是不连续的。由于在内核中需要申请连续的物理地址空间的时候，使用类似kmalloc（）的函数，这样的话，如果size比较小的话，申请成功的概率还算高（尤其是刚开机不久），而申请大内存的话就有可能申请失败。申请虚拟地址的时候用vmalloc（），这个只能确保在虚拟地址上是连续的，而不能保证在物理地址是连续的，但是这个可以申请比较大的空间。</p>
+
+<p>而看到网上说不同的操作系统会有不同的内存管理机制，而至于windows是咋样的，还需要进一步查找资料。</p>
+
+<p>下面是转载的如何申请连续的地址空间（c++）（http://blog.csdn.net/zhongshengjun/article/details/4632156）：</p>
+
+<blockquote><p>   地址连续的二维数组在C语言数值计算中有重要意义，很多二维数组的算法是基于一维数组写的。另外，在序列化时或内存复制时，连续空间易于进行整块内存的操作。</p>
+
+<p>   子程序说明：</p>
+
+<p>   1- Array2D和FreeArray2D可实现地址连续的动态二维数组的地址分配和释放。</p>
+
+<p>  2- 作为对照，下面给出了地址不连续的二维数组地址分配与释放的子程序。</p></blockquote>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+</pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="c1">// 创建 n X m 的动态数组，该数组的元素地址在内存中是连续的</span>
+</span><span class='line'><span class="c1">// n - 输入参数，数组的行数</span>
+</span><span class='line'><span class="c1">// m - 输入参数，数组的列数</span>
+</span><span class='line'><span class="c1">// 返回，double **，指向指针的指针，用于以二维数组的方式访问一段内存。</span>
+</span><span class='line'><span class="kt">double</span> <span class="o">**</span><span class="n">Array2D</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">,</span><span class="kt">int</span> <span class="n">m</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'> <span class="c1">// 建立数组的存储区，即在内存中分配一片连续的空间，元素个数为 n*m，</span>
+</span><span class='line'> <span class="c1">// 返回指向double的指针。</span>
+</span><span class='line'>    <span class="kt">double</span> <span class="o">*</span><span class="n">Array1D</span><span class="o">=</span><span class="k">new</span> <span class="kt">double</span><span class="p">[</span><span class="n">n</span><span class="o">*</span><span class="n">m</span><span class="p">];</span>
+</span><span class='line'> <span class="c1">// 建立数组的索引区，返回指向 double *的指针（指向指针的指针），长度为 n。</span>
+</span><span class='line'>    <span class="kt">double</span> <span class="o">**</span><span class="n">Array2D</span><span class="o">=</span><span class="k">new</span> <span class="kt">double</span><span class="o">*</span> <span class="p">[</span><span class="n">n</span><span class="p">];</span>
+</span><span class='line'> <span class="c1">// 将索引区的每个元素指向数据存储区对应元素的地址，Array2D[0] 指向 Array1D[0]，</span>
+</span><span class='line'> <span class="c1">// Array2D[1] 指向 Array1D[m]，其余类推。</span>
+</span><span class='line'>    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>     <span class="n">Array2D</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=&amp;</span><span class="n">Array1D</span><span class="p">[</span><span class="n">i</span><span class="o">*</span><span class="n">m</span><span class="p">];</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>    <span class="k">return</span> <span class="n">Array2D</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// 释放数组的空间，首先释放一维数组占用的n*m个double空间</span>
+</span><span class='line'><span class="c1">// 再释放索引数组（指针数组）占用的n个double*空间</span>
+</span><span class='line'> <span class="kt">void</span> <span class="n">FreeArray2D</span><span class="p">(</span><span class="kt">double</span> <span class="o">**</span><span class="n">Array2D</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="k">delete</span><span class="p">[]</span> <span class="n">Array2D</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+</span><span class='line'>  <span class="k">delete</span><span class="p">[]</span> <span class="n">Array2D</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// 二维数组空间分配，地址一般不连续，不是推荐的方法</span>
+</span><span class='line'> <span class="kt">double</span> <span class="o">**</span><span class="n">Array2D_A</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">,</span><span class="kt">int</span> <span class="n">m</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'> <span class="c1">// 建立数组的索引区，返回指向 double *的指针（指向指针的指针），长度为 n。</span>
+</span><span class='line'>    <span class="kt">double</span> <span class="o">**</span><span class="n">Array2D</span><span class="o">=</span><span class="k">new</span> <span class="kt">double</span><span class="o">*</span> <span class="p">[</span><span class="n">n</span><span class="p">];</span>
+</span><span class='line'>
+</span><span class='line'> <span class="c1">// 建立数组的存储区，对于Array2D的每一个指针元素，分配m个double空间</span>
+</span><span class='line'>    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span><span class='line'>     <span class="n">Array2D</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="k">new</span> <span class="kt">double</span><span class="p">[</span><span class="n">m</span><span class="p">];</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">return</span> <span class="n">Array2D</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// 释放数组的空间，与Array2D_A配套使用</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// 首先释放n个一维数组（每个占用m个double空间）</span>
+</span><span class='line'><span class="c1">// 再释放索引数组（指针数组）占用的n个double*空间</span>
+</span><span class='line'> <span class="kt">void</span> <span class="n">FreeArray2D_A</span><span class="p">(</span><span class="kt">double</span> <span class="o">**</span><span class="n">Array2D</span><span class="p">,</span><span class="kt">int</span> <span class="n">n</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span><span class='line'>    <span class="k">delete</span><span class="p">[]</span> <span class="n">Array2D</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+</span><span class='line'>  <span class="k">delete</span><span class="p">[]</span> <span class="n">Array2D</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<blockquote></blockquote>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[函数压栈的一些思考]]></title>
