@@ -4,7 +4,7 @@
   <title><![CDATA[Keen on Art of Tech]]></title>
   <link href="http://tinyxd.github.com/atom.xml" rel="self"/>
   <link href="http://tinyxd.github.com/"/>
-  <updated>2012-06-14T07:35:31+08:00</updated>
+  <updated>2012-06-14T07:42:11+08:00</updated>
   <id>http://tinyxd.github.com/</id>
   <author>
     <name><![CDATA[Tiny]]></name>
@@ -20,9 +20,9 @@
     <id>http://tinyxd.github.com/blog/2012/06/14/yong-newshen-qing-dong-tai-kong-jian-de-wen-ti</id>
     <content type="html"><![CDATA[<p>先分析一下new的分配：</p>
 
-<p>1.T<em>   p   =   new   T;  ···   delete   p;
+<p>1.T*   p   =   new   T;  ···   delete   p;
 等价于
-T</em>   p   =   new   T[1]; ··· delete[]   p;</p>
+T*   p   =   new   T[1]; ··· delete[]   p;</p>
 
 <p>2.int   (*p)[n]   =   new   int[m][n];这种方式是可行的</p>
 

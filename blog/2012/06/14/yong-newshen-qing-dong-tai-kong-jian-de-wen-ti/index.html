@@ -9,9 +9,9 @@
   <meta name="author" content="Tiny">
 
   
-  <meta name="description" content="先分析一下new的分配： 1.T p = new T; ··· delete p;
+  <meta name="description" content="先分析一下new的分配： 1.T* p = new T; ··· delete p;
 等价于
-T p = new T[1]; ··· delete[] p; 2.int (*p)[n] = new int[m][n];这种方式是可行的 3.所以new一个3x3的数组，也就是T = int[3][3 &hellip;">
+T* p = new T[1]; ··· delete[] p; 2.int (*p)[n] = new int[m][n];这种方式是可行的 3.所以new一个3x3的数组，也就是T = int[3][ &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -139,9 +139,9 @@ T p = new T[1]; ··· delete[] p; 2.int (*p)[n] = new int[m][n];这种方式是
 
 <div class="entry-content"><p>先分析一下new的分配：</p>
 
-<p>1.T<em>   p   =   new   T;  ···   delete   p;
+<p>1.T*   p   =   new   T;  ···   delete   p;
 等价于
-T</em>   p   =   new   T[1]; ··· delete[]   p;</p>
+T*   p   =   new   T[1]; ··· delete[]   p;</p>
 
 <p>2.int   (*p)[n]   =   new   int[m][n];这种方式是可行的</p>
 
