@@ -4,7 +4,7 @@
   <title><![CDATA[Category: linux | Keen on Art of Tech]]></title>
   <link href="http://tinyxd.github.com/blog/categories/linux/atom.xml" rel="self"/>
   <link href="http://tinyxd.github.com/"/>
-  <updated>2012-06-15T22:32:32+08:00</updated>
+  <updated>2012-06-16T07:46:35+08:00</updated>
   <id>http://tinyxd.github.com/</id>
   <author>
     <name><![CDATA[Tiny]]></name>
@@ -97,7 +97,7 @@ lftp site -p port -u user,password  <br/>
 lftp site:port -u user,password  <br/>
 上面的几种方式都能正常工作，不过密码都是明文，这样好像不太安全哦。没关系  <br/>
 lftp user@site:port  <br/>
-系统会提示输入password，密码就回显为<em>*****了  <br/>
+系统会提示输入password，密码就回显为******了  <br/>
 不过每次都输入这么多，好麻烦哦。 如果有类似leapftp的站点管理器就好了，其实lftp早就给我们想好了： 这就是bookmark。后面我们将会看到。  <br/>
 常用命令  <br/>
 在终端运行  <br/>
@@ -113,7 +113,7 @@ cd  <br/>
 get  <br/>
 下载远端文件。  <br/>
 mget  <br/>
-下载远端文件(可以用通配符也就是 </em>)。  <br/>
+下载远端文件(可以用通配符也就是 *)。  <br/>
 pget  <br/>
 使用多个线程来下载远端文件, 预设为五个。  <br/>
 mirror  <br/>
@@ -193,8 +193,9 @@ echo “script end at “</code>date ”+%Y-%m-%d %H:%M:%S”
     <id>http://tinyxd.github.com/blog/2012/05/26/arch-linux-xia-lxrde-an-zhuang</id>
     <content type="html"><![CDATA[<p>经过自己两天的折腾，参考了好几个资料终于搞定。
 参考资料见文章末尾。
-LXR是使用WEB方式下的源代码整理浏览工具，最大的用途在于清理出了代码中函数、变量的定义、说明、应用的关系，并用链接的形式表现在网页上。LXR整理出代码的结构和调用关系，存在数据库中，并在显示时与源代码树结合，从功能上说，包括代码浏览、标识符搜索、文本搜索和文件搜索，其中的文本搜索和文件搜索利用的是第三方工具（即glimpse或swish-e）（我使用的glimpse）。它的主要组成部分包括三个：Perl编写的网页/CGI部分，基于MySQL的索引数据管理（新版本才有）和通用的文本搜索工具。目前的版本，采用Glimpse或者Swish-e中的一种作为通用文本搜索工具。在安装上，基本上也按照这三个部分来配置。
-1.下载安装所需的工具。
+LXR是使用WEB方式下的源代码整理浏览工具，最大的用途在于清理出了代码中函数、变量的定义、说明、应用的关系，并用链接的形式表现在网页上。LXR整理出代码的结构和调用关系，存在数据库中，并在显示时与源代码树结合，从功能上说，包括代码浏览、标识符搜索、文本搜索和文件搜索，其中的文本搜索和文件搜索利用的是第三方工具（即glimpse或swish-e）（我使用的glimpse）。它的主要组成部分包括三个：Perl编写的网页/CGI部分，基于MySQL的索引数据管理（新版本才有）和通用的文本搜索工具。目前的版本，采用Glimpse或者Swish-e中的一种作为通用文本搜索工具。在安装上，基本上也按照这三个部分来配置。</p>
+
+<p>1.下载安装所需的工具。 <br/>
 a。glimpse（http://webglimpse.net/download.php）</p>
 
 <p>安装glimpse:（其中会用到flex 安装下就行了）</p>
@@ -361,9 +362,9 @@ PerlOptions +ParseHeaders
 
 <p>进入lxr目录/usr/local/lxr</p>
 
-<h1>mysql</h1>
+<p># mysql</p>
 
-<p>. initdb-mysql</p>
+<p>(反斜杠). initdb-mysql</p>
 
 <p>2).建glimpse索引  <br/>
 在/usr/local/lxr/src/2.6.39/下运行'find . -name "*.[chS]" -follow | glimpseindex -H . -o -F'，索引所有.c、.h、.S（汇编）文件。这个过程比较耗时，但比起下一个过程来，就小巫见大巫了。
@@ -404,29 +405,24 @@ PerlOptions +ParseHeaders
     <link href="http://tinyxd.github.com/blog/2012/05/25/archbang-arch-linux-an-zhuang-inode/"/>
     <updated>2012-05-25T14:34:00+08:00</updated>
     <id>http://tinyxd.github.com/blog/2012/05/25/archbang-arch-linux-an-zhuang-inode</id>
-    <content type="html"><![CDATA[<p>第一步：cp iNodeClient.tar.gz 到 /home/<strong><strong><em> 目录下。进入~目录下<br/>
+    <content type="html"><![CDATA[<p>第一步：cp iNodeClient.tar.gz 到 /home/***** 目录下。进入~目录下  <br/>
 第二步：终端运行 tar -xvf iNodeClient.tar.gz。<br/>
-第三步：修改/home/</em></strong></strong>/iNodeClient/下install.sh，把 OS_UBUNTU=<code>cat /etc/issue | grep 'Ubuntu'</code>那一行及以下的脚本都删除，然后保存，执行sudo ./install.sh。<br/>
+第三步：修改/home//iNodeClient/下install.sh，把 OS_UBUNTU=`cat /etc/issue | grep 'Ubuntu'`那一行及以下的脚本都删除，然后保存，执行sudo ./install.sh。<br/>
 第四步：cp  home/*****/iNodeClient/ 目录下的iNodeAuthService到/etc/rc.d/目录下，并修改权限chmod 755 /etc/rc.d/iNodeAuthService。<br/>
 第五步：打开/etc/rc.conf ，在DAEMONS处添加@iNodeAuthService。（让iNode认证服务开机自启动） <br/>
-第六步：现在执行sudo /etc/rc.d/iNodeAuthService start，发现出错了。错误出现在enablecards.ps这个文件里，打开看，你会发现这个文件的作用只是用来up网卡。一般来说你的网卡都已经up了的啦。你可以把里面的内容改成：</p>
-
-<h1>!/bin/sh</h1>
-
-<p>x=eth0（你所使用的网卡） <br/>
+第六步：现在执行sudo /etc/rc.d/iNodeAuthService start，发现出错了。错误出现在enablecards.ps这个文件里，打开看，你会发现这个文件的作用只是用来up网卡。一般来说你的网卡都已经up了的啦。你可以把里面的内容改成： <br/>
+#!/bin/sh<br/>
+x=eth0（你所使用的网卡） <br/>
 ifconfig $x up  <br/>
 再运行一次sudo /etc/rc.d/iNodeAuthService start，你应该会发现服务启动成功了。  <br/>
 第七步：命令行里面执行一下sudo ./iNodeClient 然后楼主发现出现了一些库的依赖问题。iNode需要一些比较旧的库，对于jpeg tiff等库 你可以用ln -s 来用新版本的库代替旧版本。而其中有一个是libpng12.so.0是必须需要旧版本的。见附件 或者可以去官网自己下载ftp://ftp.simplesystems.org/pub/libpng/png/src/  <br/>
 需要下载的文件是libpng-1.2.49.tar.bz2 <br/>
 安装方法如下： <br/>
 1.解压，然后执行./configure --prefix=/usr/ <br/>
-2.编译及安装</p>
-
-<h1>make</h1>
-
-<h1>make install</h1>
-
-<p>安装之前可以make check 以下 看看有没有什么错误，如果没错误 make install 那么libpng就安装好了。</p>
+2.编译及安装 <br/>
+#make  <br/>
+#make install <br/>
+安装之前可以make check 以下 看看有没有什么错误，如果没错误 make install 那么libpng就安装好了。</p>
 
 <p>参考：http://ecnc.sysu.edu.cn/viewthread.php?tid=18558</p>
 ]]></content>

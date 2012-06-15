@@ -156,17 +156,24 @@ Oracle Java SDK 7 update 1
 <h2><strong>安装</strong></h2>
 
 <ul>
-<li><p>jre <br/>
+<li>jre <br/>
 这里先安装JDK，虽然据说openjdk的jre也能兼容Oracle Java SDK，但还是有点担心它们的兼容性。  <br/>
 先在<a href="https://aur.archlinux.org/">Arch Linux AUR</a>中找到<a href="https://aur.archlinux.org/packages.php?ID=51908">JRE</a>。<br/>
 <!--more-->
-制作安装包</p>
-
-<p>  $ wget &#8211;no-check-certificate -c https://aur.archlinux.org/packages/jr/jre/jre.tar.gz <br/>
-  $ tar -zxvf jre.tar.gz <br/>
-  $ cd  jre <br/>
-  $ makepkg</p></li>
+制作安装包</li>
 </ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ wget --no-check-certificate -c https://aur.archlinux.org/packages/jr/jre/jre.tar.gz   
+</span><span class='line'>$ tar -zxvf jre.tar.gz   
+</span><span class='line'>$ cd  jre   
+</span><span class='line'>$ makepkg    
+</span><span class='line'>   </span></code></pre></td></tr></table></div></figure>
 
 
 <p>处理依赖条件，开始安装</p>
@@ -212,29 +219,29 @@ jre
 <li><p>JDK
 JDK的安装过程与JRE类似。</p>
 
-<p>  $ wget -c &#8211;no-check-certificate https://aur.archlinux.org/packages/jd/jdk/jdk.tar.gz
-  $ tar -zxvf jdk.tar.gz
-  $ cd jdk
-  $ makepkg
-  $ sudo pacman -U ./jdk-7.4-1-i686.pkg.tar.xz
-  loading packages&#8230;
-  resolving dependencies&#8230;
+<p>  \$ wget -c &#8211;no-check-certificate https://aur.archlinux.org/packages/jd/jdk/jdk.tar.gz <br/>
+  \$ tar -zxvf jdk.tar.gz <br/>
+  \$ cd jdk <br/>
+  \$ makepkg <br/>
+  \$ sudo pacman -U ./jdk-7.4-1-i686.pkg.tar.xz <br/>
+  loading packages&#8230; <br/>
+  resolving dependencies&#8230; <br/>
   looking for inter-conflicts&#8230;</p>
 
 <p>  Targets (1): jdk-7.4-1</p>
 
 <p>  Total Installed Size:   86.05 MiB</p>
 
-<p>  Proceed with installation? [Y/n]
-  (1/1) checking package integrity                   [&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;-] 100%
-  (1/1) loading package files                        [&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;-] 100%
-  (1/1) checking for file conflicts                  [&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;-] 100%
-  (1/1) checking available disk space                [&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;-] 100%
+<p>  Proceed with installation? [Y/n]  <br/>
+  (1/1) checking package integrity                   [&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;-] 100% <br/>
+  (1/1) loading package files                        [&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;-] 100% <br/>
+  (1/1) checking for file conflicts                  [&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;-] 100% <br/>
+  (1/1) checking available disk space                [&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;-] 100% <br/>
   (1/1) installing jdk                               [&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;-] 100%</p>
 
-<p>  The jdk package is licensed software.
-  You MUST read and agree to the license stored in
-  /usr/share/licenses/jdk/LICENSE before using it.
+<p>  The jdk package is licensed software. <br/>
+  You MUST read and agree to the license stored in <br/>
+  /usr/share/licenses/jdk/LICENSE before using it. <br/>
   Please relogin to include jdk in your PATH.</p></li>
 </ul>
 

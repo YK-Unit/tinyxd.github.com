@@ -214,7 +214,7 @@ lftp site -p port -u user,password  <br/>
 lftp site:port -u user,password  <br/>
 上面的几种方式都能正常工作，不过密码都是明文，这样好像不太安全哦。没关系  <br/>
 lftp user@site:port  <br/>
-系统会提示输入password，密码就回显为<em>*****了  <br/>
+系统会提示输入password，密码就回显为******了  <br/>
 不过每次都输入这么多，好麻烦哦。 如果有类似leapftp的站点管理器就好了，其实lftp早就给我们想好了： 这就是bookmark。后面我们将会看到。  <br/>
 常用命令  <br/>
 在终端运行  <br/>
@@ -230,7 +230,7 @@ cd  <br/>
 get  <br/>
 下载远端文件。  <br/>
 mget  <br/>
-下载远端文件(可以用通配符也就是 </em>)。  <br/>
+下载远端文件(可以用通配符也就是 *)。  <br/>
 pget  <br/>
 使用多个线程来下载远端文件, 预设为五个。  <br/>
 mirror  <br/>

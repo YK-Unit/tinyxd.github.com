@@ -4,7 +4,7 @@
   <title><![CDATA[Keen on Art of Tech]]></title>
   <link href="http://tinyxd.github.com/atom.xml" rel="self"/>
   <link href="http://tinyxd.github.com/"/>
-  <updated>2012-06-15T22:32:32+08:00</updated>
+  <updated>2012-06-16T07:46:35+08:00</updated>
   <id>http://tinyxd.github.com/</id>
   <author>
     <name><![CDATA[Tiny]]></name>
@@ -1056,7 +1056,7 @@ lftp site -p port -u user,password  <br/>
 lftp site:port -u user,password  <br/>
 上面的几种方式都能正常工作，不过密码都是明文，这样好像不太安全哦。没关系  <br/>
 lftp user@site:port  <br/>
-系统会提示输入password，密码就回显为<em>*****了  <br/>
+系统会提示输入password，密码就回显为******了  <br/>
 不过每次都输入这么多，好麻烦哦。 如果有类似leapftp的站点管理器就好了，其实lftp早就给我们想好了： 这就是bookmark。后面我们将会看到。  <br/>
 常用命令  <br/>
 在终端运行  <br/>
@@ -1072,7 +1072,7 @@ cd  <br/>
 get  <br/>
 下载远端文件。  <br/>
 mget  <br/>
-下载远端文件(可以用通配符也就是 </em>)。  <br/>
+下载远端文件(可以用通配符也就是 *)。  <br/>
 pget  <br/>
 使用多个线程来下载远端文件, 预设为五个。  <br/>
 mirror  <br/>
@@ -1163,7 +1163,9 @@ ftp中的bookmark命令，是将配置写到~/.lftp/bookmarks文件中；我们�
     <link href="http://tinyxd.github.com/blog/2012/05/31/cache--zhi-xing-wen-ti-zong-jie/"/>
     <updated>2012-05-31T20:59:00+08:00</updated>
     <id>http://tinyxd.github.com/blog/2012/05/31/cache&#8211;zhi-xing-wen-ti-zong-jie</id>
-    <content type="html"><![CDATA[<p>1.现代并行机中，为了提高处理器的速度，处理器往往带有Cache。一个数据在整个系统内可能有多份拷贝，这就引发了Cache一致性问题。
+    <content type="html"><![CDATA[<h2>1.现代并行机中，为了提高处理器的速度，处理器往往带有Cache。</h2>
+
+<p>一个数据在整个系统内可能有多份拷贝，这就引发了Cache一致性问题。
 例如下图中的2个处理器和共享内存构成的系统。初始时刻，处理机P1和P2都将变量X从共享内存装入了私有Cache。
 这时，两个Cache中和共享内存中的变量X的值是一样的。在程序运行的某一时刻，处理机P1把X的值修改为X&#8217;，并更新了私有Cache中 的值。
 此时无论P1采用写直达（write-through），还是写回（write-back）策略，都不会修改P2私有Cache中X的值。这时如果P2需要读取X，则它得到的是过时的值。 <br/>
@@ -1173,8 +1175,9 @@ ftp中的bookmark命令，是将配置写到~/.lftp/bookmarks文件中；我们�
 
 
 <p>　　Cache一致性问题是指在含有多个Cache的并行系统中，数据的多个副本（因为没有同步更新）而造成的不一致问题。以上的例子是由于多个处理器共享一个可写变量
-造成的Cache不一致。还有其它原因也会造成Cache一致性问题，比如进程迁移和某些I/O操作等。
-2.c64x+与cache一致性问题（http://focus.ti.com.cn/cn/general/docs/gencontent.tsp?contentId=64183）</p>
+造成的Cache不一致。还有其它原因也会造成Cache一致性问题，比如进程迁移和某些I/O操作等。</p>
+
+<h2>2.c64x+与cache一致性问题（http://focus.ti.com.cn/cn/general/docs/gencontent.tsp?contentId=64183）</h2>
 
 <p>在各种数字信号处理系统中，CACHE被广泛用于弥补Core与存储器之间的速度差异。在CACHE的使用过程中，存在不同类型存储器之间数据是否一致的问题。
 本文着重分析TI高性能C64x+ DSP系列中各级CACHE之间数据一致性问题以及如何进行一致性维护。CACHE作为Core和低速存储器之间的桥梁，基于代码和
@@ -1185,8 +1188,9 @@ Core始终能够得到存储器中最新的数据。但是当有其它可以更�
 Master包括Core、EDMA以及串行高速IO（sRIO），EMAC等外设。Master可以直接通过SCR发起到Slave的数据传输。Slave包括每一个Core的内存，DDR2外存以及
 其它不能直接发起数据传输的外设，Slave之间的数据传输，需要通过DMA协助完成。各款基于C64x+DSP的数据手册上详细描述了SCR的配置和Master、Slave的情况。</p>
 
-<p>3.DMA与cache一致性问题
-　Cache数据与主存数据不一致是指：在采用Cache的系统中，同样一个数据可能既存在于Cache中，也存在于主存中，两者数据相同则具有一致性，
+<h2>3.DMA与cache一致性问题</h2>
+
+<p>　Cache数据与主存数据不一致是指：在采用Cache的系统中，同样一个数据可能既存在于Cache中，也存在于主存中，两者数据相同则具有一致性，
 数据不相同就叫做不一致性。如果不能保证数据的一致性，那么，后续程序的运行就要出现问题。假设DMA针对内存的目的地址与Cache缓存的对象
 没有重叠区域，DMA和Cache之间将相安无事。但是如果DMA的目的地址与Cache所缓冲的内存地址访问有重叠，经过DMA操作Cache缓冲所对应的内存数据已经被修改，
 而CPU本身并不知道，它仍然认为Cache中的数据就是内存中的数据，以后访问Cache映射的内存时，它仍然使用陈旧的Cache数据。这样就发生Cache与内存之间数据“
@@ -1218,17 +1222,24 @@ Oracle Java SDK 7 update 1
 <h2><strong>安装</strong></h2>
 
 <ul>
-<li><p>jre <br/>
+<li>jre <br/>
 这里先安装JDK，虽然据说openjdk的jre也能兼容Oracle Java SDK，但还是有点担心它们的兼容性。  <br/>
 先在<a href="https://aur.archlinux.org/">Arch Linux AUR</a>中找到<a href="https://aur.archlinux.org/packages.php?ID=51908">JRE</a>。<br/>
 <!--more-->
-制作安装包</p>
-
-<p>  $ wget &#8211;no-check-certificate -c https://aur.archlinux.org/packages/jr/jre/jre.tar.gz <br/>
-  $ tar -zxvf jre.tar.gz <br/>
-  $ cd  jre <br/>
-  $ makepkg</p></li>
+制作安装包</li>
 </ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ wget --no-check-certificate -c https://aur.archlinux.org/packages/jr/jre/jre.tar.gz   
+</span><span class='line'>$ tar -zxvf jre.tar.gz   
+</span><span class='line'>$ cd  jre   
+</span><span class='line'>$ makepkg    
+</span><span class='line'>   </span></code></pre></td></tr></table></div></figure>
 
 
 <p>处理依赖条件，开始安装</p>
@@ -1274,29 +1285,29 @@ jre
 <li><p>JDK
 JDK的安装过程与JRE类似。</p>
 
-<p>  $ wget -c &#8211;no-check-certificate https://aur.archlinux.org/packages/jd/jdk/jdk.tar.gz
-  $ tar -zxvf jdk.tar.gz
-  $ cd jdk
-  $ makepkg
-  $ sudo pacman -U ./jdk-7.4-1-i686.pkg.tar.xz
-  loading packages&#8230;
-  resolving dependencies&#8230;
+<p>  \$ wget -c &#8211;no-check-certificate https://aur.archlinux.org/packages/jd/jdk/jdk.tar.gz <br/>
+  \$ tar -zxvf jdk.tar.gz <br/>
+  \$ cd jdk <br/>
+  \$ makepkg <br/>
+  \$ sudo pacman -U ./jdk-7.4-1-i686.pkg.tar.xz <br/>
+  loading packages&#8230; <br/>
+  resolving dependencies&#8230; <br/>
   looking for inter-conflicts&#8230;</p>
 
 <p>  Targets (1): jdk-7.4-1</p>
 
 <p>  Total Installed Size:   86.05 MiB</p>
 
-<p>  Proceed with installation? [Y/n]
-  (1/1) checking package integrity                   [&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;-] 100%
-  (1/1) loading package files                        [&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;-] 100%
-  (1/1) checking for file conflicts                  [&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;-] 100%
-  (1/1) checking available disk space                [&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;-] 100%
+<p>  Proceed with installation? [Y/n]  <br/>
+  (1/1) checking package integrity                   [&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;-] 100% <br/>
+  (1/1) loading package files                        [&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;-] 100% <br/>
+  (1/1) checking for file conflicts                  [&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;-] 100% <br/>
+  (1/1) checking available disk space                [&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;-] 100% <br/>
   (1/1) installing jdk                               [&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;-] 100%</p>
 
-<p>  The jdk package is licensed software.
-  You MUST read and agree to the license stored in
-  /usr/share/licenses/jdk/LICENSE before using it.
+<p>  The jdk package is licensed software. <br/>
+  You MUST read and agree to the license stored in <br/>
+  /usr/share/licenses/jdk/LICENSE before using it. <br/>
   Please relogin to include jdk in your PATH.</p></li>
 </ul>
 
@@ -1346,8 +1357,9 @@ javac 1.7.0_01
     <id>http://tinyxd.github.com/blog/2012/05/26/arch-linux-xia-lxrde-an-zhuang</id>
     <content type="html"><![CDATA[<p>经过自己两天的折腾，参考了好几个资料终于搞定。
 参考资料见文章末尾。
-LXR是使用WEB方式下的源代码整理浏览工具，最大的用途在于清理出了代码中函数、变量的定义、说明、应用的关系，并用链接的形式表现在网页上。LXR整理出代码的结构和调用关系，存在数据库中，并在显示时与源代码树结合，从功能上说，包括代码浏览、标识符搜索、文本搜索和文件搜索，其中的文本搜索和文件搜索利用的是第三方工具（即glimpse或swish-e）（我使用的glimpse）。它的主要组成部分包括三个：Perl编写的网页/CGI部分，基于MySQL的索引数据管理（新版本才有）和通用的文本搜索工具。目前的版本，采用Glimpse或者Swish-e中的一种作为通用文本搜索工具。在安装上，基本上也按照这三个部分来配置。
-1.下载安装所需的工具。
+LXR是使用WEB方式下的源代码整理浏览工具，最大的用途在于清理出了代码中函数、变量的定义、说明、应用的关系，并用链接的形式表现在网页上。LXR整理出代码的结构和调用关系，存在数据库中，并在显示时与源代码树结合，从功能上说，包括代码浏览、标识符搜索、文本搜索和文件搜索，其中的文本搜索和文件搜索利用的是第三方工具（即glimpse或swish-e）（我使用的glimpse）。它的主要组成部分包括三个：Perl编写的网页/CGI部分，基于MySQL的索引数据管理（新版本才有）和通用的文本搜索工具。目前的版本，采用Glimpse或者Swish-e中的一种作为通用文本搜索工具。在安装上，基本上也按照这三个部分来配置。</p>
+
+<p>1.下载安装所需的工具。 <br/>
 a。glimpse（http://webglimpse.net/download.php）</p>
 
 <p>安装glimpse:（其中会用到flex 安装下就行了）</p>
@@ -1514,9 +1526,9 @@ PerlOptions +ParseHeaders
 
 <p>进入lxr目录/usr/local/lxr</p>
 
-<h1>mysql</h1>
+<p># mysql</p>
 
-<p>. initdb-mysql</p>
+<p>(反斜杠). initdb-mysql</p>
 
 <p>2).建glimpse索引  <br/>
 在/usr/local/lxr/src/2.6.39/下运行&#8217;find . -name &#8220;*.[chS]&#8221; -follow | glimpseindex -H . -o -F&#8217;，索引所有.c、.h、.S（汇编）文件。这个过程比较耗时，但比起下一个过程来，就小巫见大巫了。
@@ -1734,29 +1746,24 @@ printf(“# cycles == %d\n”, (t2-t1));
     <link href="http://tinyxd.github.com/blog/2012/05/25/archbang-arch-linux-an-zhuang-inode/"/>
     <updated>2012-05-25T14:34:00+08:00</updated>
     <id>http://tinyxd.github.com/blog/2012/05/25/archbang-arch-linux-an-zhuang-inode</id>
-    <content type="html"><![CDATA[<p>第一步：cp iNodeClient.tar.gz 到 /home/<strong><strong><em> 目录下。进入~目录下<br/>
+    <content type="html"><![CDATA[<p>第一步：cp iNodeClient.tar.gz 到 /home/***** 目录下。进入~目录下  <br/>
 第二步：终端运行 tar -xvf iNodeClient.tar.gz。<br/>
-第三步：修改/home/</em></strong></strong>/iNodeClient/下install.sh，把 OS_UBUNTU=<code>cat /etc/issue | grep 'Ubuntu'</code>那一行及以下的脚本都删除，然后保存，执行sudo ./install.sh。<br/>
+第三步：修改/home//iNodeClient/下install.sh，把 OS_UBUNTU=`cat /etc/issue | grep &#8216;Ubuntu&#8217;`那一行及以下的脚本都删除，然后保存，执行sudo ./install.sh。<br/>
 第四步：cp  home/*****/iNodeClient/ 目录下的iNodeAuthService到/etc/rc.d/目录下，并修改权限chmod 755 /etc/rc.d/iNodeAuthService。<br/>
 第五步：打开/etc/rc.conf ，在DAEMONS处添加@iNodeAuthService。（让iNode认证服务开机自启动） <br/>
-第六步：现在执行sudo /etc/rc.d/iNodeAuthService start，发现出错了。错误出现在enablecards.ps这个文件里，打开看，你会发现这个文件的作用只是用来up网卡。一般来说你的网卡都已经up了的啦。你可以把里面的内容改成：</p>
-
-<h1>!/bin/sh</h1>
-
-<p>x=eth0（你所使用的网卡） <br/>
+第六步：现在执行sudo /etc/rc.d/iNodeAuthService start，发现出错了。错误出现在enablecards.ps这个文件里，打开看，你会发现这个文件的作用只是用来up网卡。一般来说你的网卡都已经up了的啦。你可以把里面的内容改成： <br/>
+#!/bin/sh<br/>
+x=eth0（你所使用的网卡） <br/>
 ifconfig $x up  <br/>
 再运行一次sudo /etc/rc.d/iNodeAuthService start，你应该会发现服务启动成功了。  <br/>
 第七步：命令行里面执行一下sudo ./iNodeClient 然后楼主发现出现了一些库的依赖问题。iNode需要一些比较旧的库，对于jpeg tiff等库 你可以用ln -s 来用新版本的库代替旧版本。而其中有一个是libpng12.so.0是必须需要旧版本的。见附件 或者可以去官网自己下载ftp://ftp.simplesystems.org/pub/libpng/png/src/  <br/>
 需要下载的文件是libpng-1.2.49.tar.bz2 <br/>
 安装方法如下： <br/>
 1.解压，然后执行./configure &#8211;prefix=/usr/ <br/>
-2.编译及安装</p>
-
-<h1>make</h1>
-
-<h1>make install</h1>
-
-<p>安装之前可以make check 以下 看看有没有什么错误，如果没错误 make install 那么libpng就安装好了。</p>
+2.编译及安装 <br/>
+#make  <br/>
+#make install <br/>
+安装之前可以make check 以下 看看有没有什么错误，如果没错误 make install 那么libpng就安装好了。</p>
 
 <p>参考：http://ecnc.sysu.edu.cn/viewthread.php?tid=18558</p>
 ]]></content>
