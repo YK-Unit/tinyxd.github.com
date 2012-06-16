@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: davinci | Keen on Art of Tech]]></title>
-  <link href="http://tinyxd.github.com/blog/categories/davinci/atom.xml" rel="self"/>
-  <link href="http://tinyxd.github.com/"/>
-  <updated>2012-06-16T07:51:24+08:00</updated>
-  <id>http://tinyxd.github.com/</id>
+  <link href="http://tinyxd.me/blog/categories/davinci/atom.xml" rel="self"/>
+  <link href="http://tinyxd.me/"/>
+  <updated>2012-06-16T19:35:35+08:00</updated>
+  <id>http://tinyxd.me/</id>
   <author>
     <name><![CDATA[Tiny]]></name>
     <email><![CDATA[admin@tinyxd.me]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[帮您快速入门TI的Codec Engine(转载)]]></title>
-    <link href="http://tinyxd.github.com/blog/2012/05/26/bang-nin-kuai-su-ru-men-tide-codec-engine-zhuan-zai/"/>
+    <link href="http://tinyxd.me/blog/2012/05/26/bang-nin-kuai-su-ru-men-tide-codec-engine-zhuan-zai/"/>
     <updated>2012-05-26T06:18:00+08:00</updated>
-    <id>http://tinyxd.github.com/blog/2012/05/26/bang-nin-kuai-su-ru-men-tide-codec-engine-zhuan-zai</id>
+    <id>http://tinyxd.me/blog/2012/05/26/bang-nin-kuai-su-ru-men-tide-codec-engine-zhuan-zai</id>
     <content type="html"><![CDATA[<p>转自TI官网：  <br/>
 德州仪器半导体技术（上海）有限公司 通用DSP 技术应用工程师 崔晶</p>
 

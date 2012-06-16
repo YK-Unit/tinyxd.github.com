@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: java | Keen on Art of Tech]]></title>
-  <link href="http://tinyxd.github.com/blog/categories/java/atom.xml" rel="self"/>
-  <link href="http://tinyxd.github.com/"/>
-  <updated>2012-06-16T07:51:24+08:00</updated>
-  <id>http://tinyxd.github.com/</id>
+  <link href="http://tinyxd.me/blog/categories/java/atom.xml" rel="self"/>
+  <link href="http://tinyxd.me/"/>
+  <updated>2012-06-16T19:35:35+08:00</updated>
+  <id>http://tinyxd.me/</id>
   <author>
     <name><![CDATA[Tiny]]></name>
     <email><![CDATA[admin@tinyxd.me]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[arch linux下java SDK的安装与配置]]></title>
-    <link href="http://tinyxd.github.com/blog/2012/05/27/arch-linuxxia-java-sdkde-an-zhuang-yu-pei-zhi/"/>
+    <link href="http://tinyxd.me/blog/2012/05/27/arch-linuxxia-java-sdkde-an-zhuang-yu-pei-zhi/"/>
     <updated>2012-05-27T19:58:00+08:00</updated>
-    <id>http://tinyxd.github.com/blog/2012/05/27/arch-linuxxia-java-sdkde-an-zhuang-yu-pei-zhi</id>
+    <id>http://tinyxd.me/blog/2012/05/27/arch-linuxxia-java-sdkde-an-zhuang-yu-pei-zhi</id>
     <content type="html"><![CDATA[<p>为了节省以后查资料的时间，故而转到自己的blog做个备份。
 转自：
 <a href="http://www.cnblogs.com/heart-runner/archive/2011/11/30/2269640.html">Arch Linux中Java SDK的安装与配置</a></p>

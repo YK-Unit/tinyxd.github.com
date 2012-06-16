@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Software programming | Keen on Art of Tech]]></title>
-  <link href="http://tinyxd.github.com/blog/categories/software-programming/atom.xml" rel="self"/>
-  <link href="http://tinyxd.github.com/"/>
-  <updated>2012-06-16T07:51:24+08:00</updated>
-  <id>http://tinyxd.github.com/</id>
+  <link href="http://tinyxd.me/blog/categories/software-programming/atom.xml" rel="self"/>
+  <link href="http://tinyxd.me/"/>
+  <updated>2012-06-16T19:35:35+08:00</updated>
+  <id>http://tinyxd.me/</id>
   <author>
     <name><![CDATA[Tiny]]></name>
     <email><![CDATA[admin@tinyxd.me]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[用new申请动态空间的问题]]></title>
-    <link href="http://tinyxd.github.com/blog/2012/06/14/yong-newshen-qing-dong-tai-kong-jian-de-wen-ti/"/>
+    <link href="http://tinyxd.me/blog/2012/06/14/yong-newshen-qing-dong-tai-kong-jian-de-wen-ti/"/>
     <updated>2012-06-14T07:27:00+08:00</updated>
-    <id>http://tinyxd.github.com/blog/2012/06/14/yong-newshen-qing-dong-tai-kong-jian-de-wen-ti</id>
+    <id>http://tinyxd.me/blog/2012/06/14/yong-newshen-qing-dong-tai-kong-jian-de-wen-ti</id>
     <content type="html"><![CDATA[<p>先分析一下new的分配：</p>
 
 <p>1.T*   p   =   new   T;  ···   delete   p;
@@ -140,9 +140,9 @@ double **Array2D(int n,int m)
   
   <entry>
     <title type="html"><![CDATA[函数压栈的一些思考]]></title>
-    <link href="http://tinyxd.github.com/blog/2012/06/13/han-shu-ya-zhan/"/>
+    <link href="http://tinyxd.me/blog/2012/06/13/han-shu-ya-zhan/"/>
     <updated>2012-06-13T07:22:00+08:00</updated>
-    <id>http://tinyxd.github.com/blog/2012/06/13/han-shu-ya-zhan</id>
+    <id>http://tinyxd.me/blog/2012/06/13/han-shu-ya-zhan</id>
     <content type="html"><![CDATA[<p>今天，有个同学跑过来问我一个问题fun（i，i++，++i），我立马想到这个是跟函数压栈的顺序有关的，随后去网上查找资料，并开始写了一些测试实验。</p>
 
 <p>先把cu上的一个解释先贴上来：</p>
@@ -203,9 +203,9 @@ int arr[]={6,7,8,9,10};</p>
   
   <entry>
     <title type="html"><![CDATA[读C++ Primer 之句柄类(转自Linux社区 作者：xizero00)]]></title>
-    <link href="http://tinyxd.github.com/blog/2012/06/08/c-plus-plus-ju-bing-lei/"/>
+    <link href="http://tinyxd.me/blog/2012/06/08/c-plus-plus-ju-bing-lei/"/>
     <updated>2012-06-08T20:28:00+08:00</updated>
-    <id>http://tinyxd.github.com/blog/2012/06/08/c-plus-plus-ju-bing-lei</id>
+    <id>http://tinyxd.me/blog/2012/06/08/c-plus-plus-ju-bing-lei</id>
     <content type="html"><![CDATA[<p>转自：http://www.linuxidc.com/Linux/2011-08/40175.htm</p>
 
 <p>我们知道C++中最令人头疼的当属指针，如果您申请了对象却没有释放它，时间一长就会造成系统崩溃，大量的内存溢出使得您的程序的健壮性出现问题</p>
@@ -444,9 +444,9 @@ Sales_item的引用计数器初始化为1
   
   <entry>
     <title type="html"><![CDATA[堆和栈的区别(转)]]></title>
-    <link href="http://tinyxd.github.com/blog/2012/06/08/dui-he-zhan-de-qu-bie/"/>
+    <link href="http://tinyxd.me/blog/2012/06/08/dui-he-zhan-de-qu-bie/"/>
     <updated>2012-06-08T06:59:00+08:00</updated>
-    <id>http://tinyxd.github.com/blog/2012/06/08/dui-he-zhan-de-qu-bie</id>
+    <id>http://tinyxd.me/blog/2012/06/08/dui-he-zhan-de-qu-bie</id>
     <content type="html"><![CDATA[<p>出自: http://www.cnitexam.com <br/>
 一、预备知识—程序的内存分配</p>
 

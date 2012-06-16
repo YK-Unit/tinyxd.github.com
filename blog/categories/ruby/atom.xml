@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: ruby | Keen on Art of Tech]]></title>
-  <link href="http://tinyxd.github.com/blog/categories/ruby/atom.xml" rel="self"/>
-  <link href="http://tinyxd.github.com/"/>
-  <updated>2012-06-16T07:51:24+08:00</updated>
-  <id>http://tinyxd.github.com/</id>
+  <link href="http://tinyxd.me/blog/categories/ruby/atom.xml" rel="self"/>
+  <link href="http://tinyxd.me/"/>
+  <updated>2012-06-16T19:35:35+08:00</updated>
+  <id>http://tinyxd.me/</id>
   <author>
     <name><![CDATA[Tiny]]></name>
     <email><![CDATA[admin@tinyxd.me]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[解决pygments.rb (RubyPython) 找不到libpython的问题(archlinux下)]]></title>
-    <link href="http://tinyxd.github.com/blog/2012/06/05/cannot-find-libpython/"/>
+    <link href="http://tinyxd.me/blog/2012/06/05/cannot-find-libpython/"/>
     <updated>2012-06-05T08:01:00+08:00</updated>
-    <id>http://tinyxd.github.com/blog/2012/06/05/cannot-find-libpython</id>
+    <id>http://tinyxd.me/blog/2012/06/05/cannot-find-libpython</id>
     <content type="html"><![CDATA[<p>本文章转自：<a href="http://ruby-china.org/topics/289">Ruby China 论坛</a> <br/>
 如果找不到python，或者系统默认得python是3.x (比如Arch Linux)，手动制定下路径 <br/>
 <code>

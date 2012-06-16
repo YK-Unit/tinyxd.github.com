@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Keen on Art of Tech]]></title>
-  <link href="http://tinyxd.github.com/atom.xml" rel="self"/>
-  <link href="http://tinyxd.github.com/"/>
-  <updated>2012-06-16T07:51:24+08:00</updated>
-  <id>http://tinyxd.github.com/</id>
+  <link href="http://tinyxd.me/atom.xml" rel="self"/>
+  <link href="http://tinyxd.me/"/>
+  <updated>2012-06-16T19:35:35+08:00</updated>
+  <id>http://tinyxd.me/</id>
   <author>
     <name><![CDATA[Tiny]]></name>
     <email><![CDATA[admin@tinyxd.me]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[用new申请动态空间的问题]]></title>
-    <link href="http://tinyxd.github.com/blog/2012/06/14/yong-newshen-qing-dong-tai-kong-jian-de-wen-ti/"/>
+    <link href="http://tinyxd.me/blog/2012/06/14/yong-newshen-qing-dong-tai-kong-jian-de-wen-ti/"/>
     <updated>2012-06-14T07:27:00+08:00</updated>
-    <id>http://tinyxd.github.com/blog/2012/06/14/yong-newshen-qing-dong-tai-kong-jian-de-wen-ti</id>
+    <id>http://tinyxd.me/blog/2012/06/14/yong-newshen-qing-dong-tai-kong-jian-de-wen-ti</id>
     <content type="html"><![CDATA[<p>先分析一下new的分配：</p>
 
 <p>1.T*   p   =   new   T;  ···   delete   p;
@@ -204,9 +204,9 @@ int   (*p)[3][3]   =   new   int[1][3][3];     删除时请调用delete[]   p;</
   
   <entry>
     <title type="html"><![CDATA[函数压栈的一些思考]]></title>
-    <link href="http://tinyxd.github.com/blog/2012/06/13/han-shu-ya-zhan/"/>
+    <link href="http://tinyxd.me/blog/2012/06/13/han-shu-ya-zhan/"/>
     <updated>2012-06-13T07:22:00+08:00</updated>
-    <id>http://tinyxd.github.com/blog/2012/06/13/han-shu-ya-zhan</id>
+    <id>http://tinyxd.me/blog/2012/06/13/han-shu-ya-zhan</id>
     <content type="html"><![CDATA[<p>今天，有个同学跑过来问我一个问题fun（i，i++，++i），我立马想到这个是跟函数压栈的顺序有关的，随后去网上查找资料，并开始写了一些测试实验。</p>
 
 <p>先把cu上的一个解释先贴上来：</p>
@@ -282,9 +282,9 @@ naked   call不产生这样的代码。naked   call不是类型修饰符，故�
   
   <entry>
     <title type="html"><![CDATA[嵌入式linux应用程序自启动]]></title>
-    <link href="http://tinyxd.github.com/blog/2012/06/10/qian-ru-shi-linuxying-yong-cheng-xu-zi-qi-dong/"/>
+    <link href="http://tinyxd.me/blog/2012/06/10/qian-ru-shi-linuxying-yong-cheng-xu-zi-qi-dong/"/>
     <updated>2012-06-10T19:46:00+08:00</updated>
-    <id>http://tinyxd.github.com/blog/2012/06/10/qian-ru-shi-linuxying-yong-cheng-xu-zi-qi-dong</id>
+    <id>http://tinyxd.me/blog/2012/06/10/qian-ru-shi-linuxying-yong-cheng-xu-zi-qi-dong</id>
     <content type="html"><![CDATA[<p>在很多嵌入式系统中，由于可用资源较少，常常在系统启动后就直接让应用程序自动启动，以减少用户操作和节省资源。如何让自己的应用程序自动启动呢？    在Linux系统中，配置应用程序自动启动的方法有以下三种：</p>
 
 <!--more-->
@@ -314,9 +314,9 @@ naked   call不产生这样的代码。naked   call不是类型修饰符，故�
   
   <entry>
     <title type="html"><![CDATA[读C++ Primer 之句柄类(转自Linux社区 作者：xizero00)]]></title>
-    <link href="http://tinyxd.github.com/blog/2012/06/08/c-plus-plus-ju-bing-lei/"/>
+    <link href="http://tinyxd.me/blog/2012/06/08/c-plus-plus-ju-bing-lei/"/>
     <updated>2012-06-08T20:28:00+08:00</updated>
-    <id>http://tinyxd.github.com/blog/2012/06/08/c-plus-plus-ju-bing-lei</id>
+    <id>http://tinyxd.me/blog/2012/06/08/c-plus-plus-ju-bing-lei</id>
     <content type="html"><![CDATA[<p>转自：http://www.linuxidc.com/Linux/2011-08/40175.htm</p>
 
 <p>我们知道C++中最令人头疼的当属指针，如果您申请了对象却没有释放它，时间一长就会造成系统崩溃，大量的内存溢出使得您的程序的健壮性出现问题</p>
@@ -688,9 +688,9 @@ Sales_item的引用计数器初始化为1
   
   <entry>
     <title type="html"><![CDATA[堆和栈的区别(转)]]></title>
-    <link href="http://tinyxd.github.com/blog/2012/06/08/dui-he-zhan-de-qu-bie/"/>
+    <link href="http://tinyxd.me/blog/2012/06/08/dui-he-zhan-de-qu-bie/"/>
     <updated>2012-06-08T06:59:00+08:00</updated>
-    <id>http://tinyxd.github.com/blog/2012/06/08/dui-he-zhan-de-qu-bie</id>
+    <id>http://tinyxd.me/blog/2012/06/08/dui-he-zhan-de-qu-bie</id>
     <content type="html"><![CDATA[<p>出自: http://www.cnitexam.com <br/>
 一、预备知识—程序的内存分配</p>
 
@@ -915,9 +915,9 @@ Sales_item的引用计数器初始化为1
   
   <entry>
     <title type="html"><![CDATA[解决pygments.rb (RubyPython) 找不到libpython的问题(archlinux下)]]></title>
-    <link href="http://tinyxd.github.com/blog/2012/06/05/cannot-find-libpython/"/>
+    <link href="http://tinyxd.me/blog/2012/06/05/cannot-find-libpython/"/>
     <updated>2012-06-05T08:01:00+08:00</updated>
-    <id>http://tinyxd.github.com/blog/2012/06/05/cannot-find-libpython</id>
+    <id>http://tinyxd.me/blog/2012/06/05/cannot-find-libpython</id>
     <content type="html"><![CDATA[<p>本文章转自：<a href="http://ruby-china.org/topics/289">Ruby China 论坛</a> <br/>
 如果找不到python，或者系统默认得python是3.x (比如Arch Linux)，手动制定下路径</p>
 
@@ -974,9 +974,9 @@ Sales_item的引用计数器初始化为1
   
   <entry>
     <title type="html"><![CDATA[linux下使用lftp的小结(转载)]]></title>
-    <link href="http://tinyxd.github.com/blog/2012/06/04/linuxxia-shi-yong-lftpde-xiao-jie/"/>
+    <link href="http://tinyxd.me/blog/2012/06/04/linuxxia-shi-yong-lftpde-xiao-jie/"/>
     <updated>2012-06-04T07:08:00+08:00</updated>
-    <id>http://tinyxd.github.com/blog/2012/06/04/linuxxia-shi-yong-lftpde-xiao-jie</id>
+    <id>http://tinyxd.me/blog/2012/06/04/linuxxia-shi-yong-lftpde-xiao-jie</id>
     <content type="html"><![CDATA[<p>lftp的功能比较强大，相比原来用ftp，方便了很多。</p>
 
 <p>1、登陆：</p>
@@ -1160,16 +1160,16 @@ ftp中的bookmark命令，是将配置写到~/.lftp/bookmarks文件中；我们�
   
   <entry>
     <title type="html"><![CDATA[cache一致性问题总结]]></title>
-    <link href="http://tinyxd.github.com/blog/2012/05/31/cache--zhi-xing-wen-ti-zong-jie/"/>
+    <link href="http://tinyxd.me/blog/2012/05/31/cache--zhi-xing-wen-ti-zong-jie/"/>
     <updated>2012-05-31T20:59:00+08:00</updated>
-    <id>http://tinyxd.github.com/blog/2012/05/31/cache&#8211;zhi-xing-wen-ti-zong-jie</id>
+    <id>http://tinyxd.me/blog/2012/05/31/cache&#8211;zhi-xing-wen-ti-zong-jie</id>
     <content type="html"><![CDATA[<h2>1.现代并行机中，为了提高处理器的速度，处理器往往带有Cache。</h2>
 
 <p>一个数据在整个系统内可能有多份拷贝，这就引发了Cache一致性问题。
 例如下图中的2个处理器和共享内存构成的系统。初始时刻，处理机P1和P2都将变量X从共享内存装入了私有Cache。
 这时，两个Cache中和共享内存中的变量X的值是一样的。在程序运行的某一时刻，处理机P1把X的值修改为X&#8217;，并更新了私有Cache中 的值。
 此时无论P1采用写直达（write-through），还是写回（write-back）策略，都不会修改P2私有Cache中X的值。这时如果P2需要读取X，则它得到的是过时的值。 <br/>
-<img src="http://tinyxd.github.com/images/cache.gif"></p>
+<img src="http://tinyxd.me/images/cache.gif"></p>
 
 <!--more-->
 
@@ -1200,9 +1200,9 @@ Master包括Core、EDMA以及串行高速IO（sRIO），EMAC等外设。Master�
   
   <entry>
     <title type="html"><![CDATA[arch linux下java SDK的安装与配置]]></title>
-    <link href="http://tinyxd.github.com/blog/2012/05/27/arch-linuxxia-java-sdkde-an-zhuang-yu-pei-zhi/"/>
+    <link href="http://tinyxd.me/blog/2012/05/27/arch-linuxxia-java-sdkde-an-zhuang-yu-pei-zhi/"/>
     <updated>2012-05-27T19:58:00+08:00</updated>
-    <id>http://tinyxd.github.com/blog/2012/05/27/arch-linuxxia-java-sdkde-an-zhuang-yu-pei-zhi</id>
+    <id>http://tinyxd.me/blog/2012/05/27/arch-linuxxia-java-sdkde-an-zhuang-yu-pei-zhi</id>
     <content type="html"><![CDATA[<p>为了节省以后查资料的时间，故而转到自己的blog做个备份。
 转自：
 <a href="http://www.cnblogs.com/heart-runner/archive/2011/11/30/2269640.html">Arch Linux中Java SDK的安装与配置</a></p>
@@ -1352,9 +1352,9 @@ javac 1.7.0_01
   
   <entry>
     <title type="html"><![CDATA[arch linux 下lxr的安装]]></title>
-    <link href="http://tinyxd.github.com/blog/2012/05/26/arch-linux-xia-lxrde-an-zhuang/"/>
+    <link href="http://tinyxd.me/blog/2012/05/26/arch-linux-xia-lxrde-an-zhuang/"/>
     <updated>2012-05-26T23:14:00+08:00</updated>
-    <id>http://tinyxd.github.com/blog/2012/05/26/arch-linux-xia-lxrde-an-zhuang</id>
+    <id>http://tinyxd.me/blog/2012/05/26/arch-linux-xia-lxrde-an-zhuang</id>
     <content type="html"><![CDATA[<p>经过自己两天的折腾，参考了好几个资料终于搞定。
 参考资料见文章末尾。
 LXR是使用WEB方式下的源代码整理浏览工具，最大的用途在于清理出了代码中函数、变量的定义、说明、应用的关系，并用链接的形式表现在网页上。LXR整理出代码的结构和调用关系，存在数据库中，并在显示时与源代码树结合，从功能上说，包括代码浏览、标识符搜索、文本搜索和文件搜索，其中的文本搜索和文件搜索利用的是第三方工具（即glimpse或swish-e）（我使用的glimpse）。它的主要组成部分包括三个：Perl编写的网页/CGI部分，基于MySQL的索引数据管理（新版本才有）和通用的文本搜索工具。目前的版本，采用Glimpse或者Swish-e中的一种作为通用文本搜索工具。在安装上，基本上也按照这三个部分来配置。</p>
@@ -1566,9 +1566,9 @@ PerlOptions +ParseHeaders
   
   <entry>
     <title type="html"><![CDATA[帮您快速入门TI的Codec Engine(转载)]]></title>
-    <link href="http://tinyxd.github.com/blog/2012/05/26/bang-nin-kuai-su-ru-men-tide-codec-engine-zhuan-zai/"/>
+    <link href="http://tinyxd.me/blog/2012/05/26/bang-nin-kuai-su-ru-men-tide-codec-engine-zhuan-zai/"/>
     <updated>2012-05-26T06:18:00+08:00</updated>
-    <id>http://tinyxd.github.com/blog/2012/05/26/bang-nin-kuai-su-ru-men-tide-codec-engine-zhuan-zai</id>
+    <id>http://tinyxd.me/blog/2012/05/26/bang-nin-kuai-su-ru-men-tide-codec-engine-zhuan-zai</id>
     <content type="html"><![CDATA[<p>转自TI官网：  <br/>
 德州仪器半导体技术（上海）有限公司 通用DSP 技术应用工程师 崔晶</p>
 
@@ -1743,9 +1743,9 @@ printf(“# cycles == %d\n”, (t2-t1));
   
   <entry>
     <title type="html"><![CDATA[archbang arch linux 安装inode ]]></title>
-    <link href="http://tinyxd.github.com/blog/2012/05/25/archbang-arch-linux-an-zhuang-inode/"/>
+    <link href="http://tinyxd.me/blog/2012/05/25/archbang-arch-linux-an-zhuang-inode/"/>
     <updated>2012-05-25T14:34:00+08:00</updated>
-    <id>http://tinyxd.github.com/blog/2012/05/25/archbang-arch-linux-an-zhuang-inode</id>
+    <id>http://tinyxd.me/blog/2012/05/25/archbang-arch-linux-an-zhuang-inode</id>
     <content type="html"><![CDATA[<p>第一步：cp iNodeClient.tar.gz 到 /home/***** 目录下。进入~目录下  <br/>
 第二步：终端运行 tar -xvf iNodeClient.tar.gz。<br/>
 第三步：修改/home//iNodeClient/下install.sh，把 OS_UBUNTU=`cat /etc/issue | grep &#8216;Ubuntu&#8217;`那一行及以下的脚本都删除，然后保存，执行sudo ./install.sh。<br/>
@@ -1771,9 +1771,9 @@ ifconfig $x up  <br/>
   
   <entry>
     <title type="html"><![CDATA[为已经存在的github Octopress配置本地环境]]></title>
-    <link href="http://tinyxd.github.com/blog/2012/05/23/wei-yi-jing-cun-zai-de-github-octopresspei-zhi-ben-di-huan-jing/"/>
+    <link href="http://tinyxd.me/blog/2012/05/23/wei-yi-jing-cun-zai-de-github-octopresspei-zhi-ben-di-huan-jing/"/>
     <updated>2012-05-23T20:59:00+08:00</updated>
-    <id>http://tinyxd.github.com/blog/2012/05/23/wei-yi-jing-cun-zai-de-github-octopresspei-zhi-ben-di-huan-jing</id>
+    <id>http://tinyxd.me/blog/2012/05/23/wei-yi-jing-cun-zai-de-github-octopresspei-zhi-ben-di-huan-jing</id>
     <content type="html"><![CDATA[<p><strong>转自：</strong><br/>
 http://www.360doc.com/content/12/0520/19/3565338_212362686.shtml</p>
 
@@ -1837,9 +1837,9 @@ git pull origin source
   
   <entry>
     <title type="html"><![CDATA[Octopress:新手教程]]></title>
-    <link href="http://tinyxd.github.com/blog/2012/05/23/octopress-xin-shou-jiao-cheng/"/>
+    <link href="http://tinyxd.me/blog/2012/05/23/octopress-xin-shou-jiao-cheng/"/>
     <updated>2012-05-23T20:55:00+08:00</updated>
-    <id>http://tinyxd.github.com/blog/2012/05/23/octopress-xin-shou-jiao-cheng</id>
+    <id>http://tinyxd.me/blog/2012/05/23/octopress-xin-shou-jiao-cheng</id>
     <content type="html"><![CDATA[<p><em>转载自：</em><br/>
 http://geekontheway.github.com/blog/2011/12/03/octopress-for-freshman/<br/>
 Octopress基于jekyll，刚开始使用起来也比较复杂：</p>
@@ -1946,9 +1946,9 @@ $ git push origin master
   
   <entry>
     <title type="html"><![CDATA[Octopress添加图片]]></title>
-    <link href="http://tinyxd.github.com/blog/2012/05/23/octopresstian-jia-tu-pian/"/>
+    <link href="http://tinyxd.me/blog/2012/05/23/octopresstian-jia-tu-pian/"/>
     <updated>2012-05-23T20:49:00+08:00</updated>
-    <id>http://tinyxd.github.com/blog/2012/05/23/octopresstian-jia-tu-pian</id>
+    <id>http://tinyxd.me/blog/2012/05/23/octopresstian-jia-tu-pian</id>
     <content type="html"><![CDATA[<p>If you like Markdown’s syntax for images, you’ll love the simplicity of the Octopress image tag.</p>
 
 <p>Syntax</p>
@@ -1971,9 +1971,9 @@ img right http://placekitten.com/300/500 150 250 ‘Place Kitten #4’ ‘An ima
   
   <entry>
     <title type="html"><![CDATA[Octopress安装笔记]]></title>
-    <link href="http://tinyxd.github.com/blog/2012/05/23/octopressan-zhuang-bi-ji/"/>
+    <link href="http://tinyxd.me/blog/2012/05/23/octopressan-zhuang-bi-ji/"/>
     <updated>2012-05-23T07:16:00+08:00</updated>
-    <id>http://tinyxd.github.com/blog/2012/05/23/octopressan-zhuang-bi-ji</id>
+    <id>http://tinyxd.me/blog/2012/05/23/octopressan-zhuang-bi-ji</id>
     <content type="html"><![CDATA[<p>在阅读此教程之前，先安装git和ruby环境。</p>
 
 <p><strong>1.安装ruby环境</strong></p>
@@ -2160,8 +2160,8 @@ rake preview 监听本机4000端口，可查看生成页面效果。</p>
 1
 2</p>
 
-<p><link href="http://tinyxd.github.com/assets/font/PT_Serif.css" rel="stylesheet" type="text/css">
-<link href="http://tinyxd.github.com/assets/font/PT_Sans.css" rel="stylesheet" type="text/css"></p>
+<p><link href="http://tinyxd.me/assets/font/PT_Serif.css" rel="stylesheet" type="text/css">
+<link href="http://tinyxd.me/assets/font/PT_Sans.css" rel="stylesheet" type="text/css"></p>
 
 <p>我把下载的google font放在 source/assets/font 目录下面。</p>
 

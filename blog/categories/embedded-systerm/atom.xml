@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Embedded systerm | Keen on Art of Tech]]></title>
-  <link href="http://tinyxd.github.com/blog/categories/embedded-systerm/atom.xml" rel="self"/>
-  <link href="http://tinyxd.github.com/"/>
-  <updated>2012-06-16T07:51:24+08:00</updated>
-  <id>http://tinyxd.github.com/</id>
+  <link href="http://tinyxd.me/blog/categories/embedded-systerm/atom.xml" rel="self"/>
+  <link href="http://tinyxd.me/"/>
+  <updated>2012-06-16T19:35:35+08:00</updated>
+  <id>http://tinyxd.me/</id>
   <author>
     <name><![CDATA[Tiny]]></name>
     <email><![CDATA[admin@tinyxd.me]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[嵌入式linux应用程序自启动]]></title>
-    <link href="http://tinyxd.github.com/blog/2012/06/10/qian-ru-shi-linuxying-yong-cheng-xu-zi-qi-dong/"/>
+    <link href="http://tinyxd.me/blog/2012/06/10/qian-ru-shi-linuxying-yong-cheng-xu-zi-qi-dong/"/>
     <updated>2012-06-10T19:46:00+08:00</updated>
-    <id>http://tinyxd.github.com/blog/2012/06/10/qian-ru-shi-linuxying-yong-cheng-xu-zi-qi-dong</id>
+    <id>http://tinyxd.me/blog/2012/06/10/qian-ru-shi-linuxying-yong-cheng-xu-zi-qi-dong</id>
     <content type="html"><![CDATA[<p>在很多嵌入式系统中，由于可用资源较少，常常在系统启动后就直接让应用程序自动启动，以减少用户操作和节省资源。如何让自己的应用程序自动启动呢？    在Linux系统中，配置应用程序自动启动的方法有以下三种：</p>
 
 <!--more-->
@@ -47,9 +47,9 @@
   
   <entry>
     <title type="html"><![CDATA[cache一致性问题总结]]></title>
-    <link href="http://tinyxd.github.com/blog/2012/05/31/cache--zhi-xing-wen-ti-zong-jie/"/>
+    <link href="http://tinyxd.me/blog/2012/05/31/cache--zhi-xing-wen-ti-zong-jie/"/>
     <updated>2012-05-31T20:59:00+08:00</updated>
-    <id>http://tinyxd.github.com/blog/2012/05/31/cache--zhi-xing-wen-ti-zong-jie</id>
+    <id>http://tinyxd.me/blog/2012/05/31/cache--zhi-xing-wen-ti-zong-jie</id>
     <content type="html"><![CDATA[<h2>1.现代并行机中，为了提高处理器的速度，处理器往往带有Cache。</h2>
 
 <p>一个数据在整个系统内可能有多份拷贝，这就引发了Cache一致性问题。

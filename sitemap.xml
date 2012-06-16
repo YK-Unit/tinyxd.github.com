@@ -1,97 +1,95 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
-        <loc>http://tinyxd.github.com/blog/2012/05/23/octopressan-zhuang-bi-ji/</loc>
+        <loc>http://tinyxd.me/blog/2012/05/23/octopressan-zhuang-bi-ji/</loc>
         <lastmod>2012-06-16T07:50:48+08:00</lastmod>
     </url>
     <url>
-        <loc>http://tinyxd.github.com/blog/2012/05/23/octopresstian-jia-tu-pian/</loc>
+        <loc>http://tinyxd.me/blog/2012/05/23/octopresstian-jia-tu-pian/</loc>
         <lastmod>2012-06-16T07:50:48+08:00</lastmod>
     </url>
     <url>
-        <loc>http://tinyxd.github.com/blog/2012/05/23/octopress-xin-shou-jiao-cheng/</loc>
-        <lastmod>2012-06-16T07:50:48+08:00</lastmod>
-    </url>
-    <url>
-        <loc>
-            http://tinyxd.github.com/blog/2012/05/23/wei-yi-jing-cun-zai-de-github-octopresspei-zhi-ben-di-huan-jing/
-        </loc>
-        <lastmod>2012-06-16T07:50:48+08:00</lastmod>
-    </url>
-    <url>
-        <loc>http://tinyxd.github.com/blog/2012/05/25/archbang-arch-linux-an-zhuang-inode/</loc>
+        <loc>http://tinyxd.me/blog/2012/05/23/octopress-xin-shou-jiao-cheng/</loc>
         <lastmod>2012-06-16T07:50:48+08:00</lastmod>
     </url>
     <url>
         <loc>
-            http://tinyxd.github.com/blog/2012/05/26/bang-nin-kuai-su-ru-men-tide-codec-engine-zhuan-zai/
+            http://tinyxd.me/blog/2012/05/23/wei-yi-jing-cun-zai-de-github-octopresspei-zhi-ben-di-huan-jing/
         </loc>
         <lastmod>2012-06-16T07:50:48+08:00</lastmod>
     </url>
     <url>
-        <loc>http://tinyxd.github.com/blog/2012/05/26/arch-linux-xia-lxrde-an-zhuang/</loc>
+        <loc>http://tinyxd.me/blog/2012/05/25/archbang-arch-linux-an-zhuang-inode/</loc>
         <lastmod>2012-06-16T07:50:48+08:00</lastmod>
     </url>
     <url>
         <loc>
-            http://tinyxd.github.com/blog/2012/05/27/arch-linuxxia-java-sdkde-an-zhuang-yu-pei-zhi/
+            http://tinyxd.me/blog/2012/05/26/bang-nin-kuai-su-ru-men-tide-codec-engine-zhuan-zai/
         </loc>
         <lastmod>2012-06-16T07:50:48+08:00</lastmod>
     </url>
     <url>
-        <loc>http://tinyxd.github.com/blog/2012/05/31/cache--zhi-xing-wen-ti-zong-jie/</loc>
+        <loc>http://tinyxd.me/blog/2012/05/26/arch-linux-xia-lxrde-an-zhuang/</loc>
         <lastmod>2012-06-16T07:50:48+08:00</lastmod>
     </url>
     <url>
-        <loc>http://tinyxd.github.com/blog/2012/06/04/linuxxia-shi-yong-lftpde-xiao-jie/</loc>
+        <loc>http://tinyxd.me/blog/2012/05/27/arch-linuxxia-java-sdkde-an-zhuang-yu-pei-zhi/</loc>
         <lastmod>2012-06-16T07:50:48+08:00</lastmod>
     </url>
     <url>
-        <loc>http://tinyxd.github.com/blog/2012/06/05/cannot-find-libpython/</loc>
+        <loc>http://tinyxd.me/blog/2012/05/31/cache--zhi-xing-wen-ti-zong-jie/</loc>
         <lastmod>2012-06-16T07:50:48+08:00</lastmod>
     </url>
     <url>
-        <loc>http://tinyxd.github.com/blog/2012/06/08/dui-he-zhan-de-qu-bie/</loc>
+        <loc>http://tinyxd.me/blog/2012/06/04/linuxxia-shi-yong-lftpde-xiao-jie/</loc>
         <lastmod>2012-06-16T07:50:48+08:00</lastmod>
     </url>
     <url>
-        <loc>http://tinyxd.github.com/blog/2012/06/08/c-plus-plus-ju-bing-lei/</loc>
+        <loc>http://tinyxd.me/blog/2012/06/05/cannot-find-libpython/</loc>
+        <lastmod>2012-06-16T07:50:48+08:00</lastmod>
+    </url>
+    <url>
+        <loc>http://tinyxd.me/blog/2012/06/08/dui-he-zhan-de-qu-bie/</loc>
+        <lastmod>2012-06-16T07:50:48+08:00</lastmod>
+    </url>
+    <url>
+        <loc>http://tinyxd.me/blog/2012/06/08/c-plus-plus-ju-bing-lei/</loc>
         <lastmod>2012-06-16T07:50:48+08:00</lastmod>
     </url>
     <url>
         <loc>
-            http://tinyxd.github.com/blog/2012/06/10/qian-ru-shi-linuxying-yong-cheng-xu-zi-qi-dong/
+            http://tinyxd.me/blog/2012/06/10/qian-ru-shi-linuxying-yong-cheng-xu-zi-qi-dong/
         </loc>
         <lastmod>2012-06-16T07:50:48+08:00</lastmod>
     </url>
     <url>
-        <loc>http://tinyxd.github.com/blog/2012/06/13/han-shu-ya-zhan/</loc>
+        <loc>http://tinyxd.me/blog/2012/06/13/han-shu-ya-zhan/</loc>
         <lastmod>2012-06-16T07:50:48+08:00</lastmod>
     </url>
     <url>
         <loc>
-            http://tinyxd.github.com/blog/2012/06/14/yong-newshen-qing-dong-tai-kong-jian-de-wen-ti/
+            http://tinyxd.me/blog/2012/06/14/yong-newshen-qing-dong-tai-kong-jian-de-wen-ti/
         </loc>
         <lastmod>2012-06-16T07:50:48+08:00</lastmod>
     </url>
     <url>
-        <loc>http://tinyxd.github.com/</loc>
+        <loc>http://tinyxd.me/</loc>
         <lastmod>2012-06-16T07:50:48+08:00</lastmod>
     </url>
     <url>
-        <loc>http://tinyxd.github.com/blog/archives/</loc>
+        <loc>http://tinyxd.me/blog/archives/</loc>
         <lastmod>2012-06-16T07:50:48+08:00</lastmod>
     </url>
     <url>
-        <loc>http://tinyxd.github.com/blog/archives/tag.html</loc>
+        <loc>http://tinyxd.me/blog/archives/tag.html</loc>
         <lastmod>2012-06-16T07:50:48+08:00</lastmod>
     </url>
     <url>
-        <loc>http://tinyxd.github.com/about/</loc>
+        <loc>http://tinyxd.me/about/</loc>
         <lastmod>2012-06-16T07:50:48+08:00</lastmod>
     </url>
     <url>
-        <loc>http://tinyxd.github.com/404.html</loc>
+        <loc>http://tinyxd.me/404.html</loc>
         <lastmod>2012-06-16T07:50:48+08:00</lastmod>
     </url>
 </urlset>

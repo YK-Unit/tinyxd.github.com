@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: octopress | Keen on Art of Tech]]></title>
-  <link href="http://tinyxd.github.com/blog/categories/octopress/atom.xml" rel="self"/>
-  <link href="http://tinyxd.github.com/"/>
-  <updated>2012-06-16T07:51:24+08:00</updated>
-  <id>http://tinyxd.github.com/</id>
+  <link href="http://tinyxd.me/blog/categories/octopress/atom.xml" rel="self"/>
+  <link href="http://tinyxd.me/"/>
+  <updated>2012-06-16T19:35:35+08:00</updated>
+  <id>http://tinyxd.me/</id>
   <author>
     <name><![CDATA[Tiny]]></name>
     <email><![CDATA[admin@tinyxd.me]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[为已经存在的github Octopress配置本地环境]]></title>
-    <link href="http://tinyxd.github.com/blog/2012/05/23/wei-yi-jing-cun-zai-de-github-octopresspei-zhi-ben-di-huan-jing/"/>
+    <link href="http://tinyxd.me/blog/2012/05/23/wei-yi-jing-cun-zai-de-github-octopresspei-zhi-ben-di-huan-jing/"/>
     <updated>2012-05-23T20:59:00+08:00</updated>
-    <id>http://tinyxd.github.com/blog/2012/05/23/wei-yi-jing-cun-zai-de-github-octopresspei-zhi-ben-di-huan-jing</id>
+    <id>http://tinyxd.me/blog/2012/05/23/wei-yi-jing-cun-zai-de-github-octopresspei-zhi-ben-di-huan-jing</id>
     <content type="html"><![CDATA[<p><strong>转自：</strong><br/>
 http://www.360doc.com/content/12/0520/19/3565338_212362686.shtml</p>
 
@@ -81,9 +81,9 @@ git pull origin source
   
   <entry>
     <title type="html"><![CDATA[Octopress:新手教程]]></title>
-    <link href="http://tinyxd.github.com/blog/2012/05/23/octopress-xin-shou-jiao-cheng/"/>
+    <link href="http://tinyxd.me/blog/2012/05/23/octopress-xin-shou-jiao-cheng/"/>
     <updated>2012-05-23T20:55:00+08:00</updated>
-    <id>http://tinyxd.github.com/blog/2012/05/23/octopress-xin-shou-jiao-cheng</id>
+    <id>http://tinyxd.me/blog/2012/05/23/octopress-xin-shou-jiao-cheng</id>
     <content type="html"><![CDATA[<p><em>转载自：</em><br/>
 http://geekontheway.github.com/blog/2011/12/03/octopress-for-freshman/<br/>
 Octopress基于jekyll，刚开始使用起来也比较复杂：</p>
@@ -190,9 +190,9 @@ $ git push origin master
   
   <entry>
     <title type="html"><![CDATA[Octopress添加图片]]></title>
-    <link href="http://tinyxd.github.com/blog/2012/05/23/octopresstian-jia-tu-pian/"/>
+    <link href="http://tinyxd.me/blog/2012/05/23/octopresstian-jia-tu-pian/"/>
     <updated>2012-05-23T20:49:00+08:00</updated>
-    <id>http://tinyxd.github.com/blog/2012/05/23/octopresstian-jia-tu-pian</id>
+    <id>http://tinyxd.me/blog/2012/05/23/octopresstian-jia-tu-pian</id>
     <content type="html"><![CDATA[<p>If you like Markdown’s syntax for images, you’ll love the simplicity of the Octopress image tag.</p>
 
 <p>Syntax</p>
@@ -215,9 +215,9 @@ img right http://placekitten.com/300/500 150 250 ‘Place Kitten #4’ ‘An ima
   
   <entry>
     <title type="html"><![CDATA[Octopress安装笔记]]></title>
-    <link href="http://tinyxd.github.com/blog/2012/05/23/octopressan-zhuang-bi-ji/"/>
+    <link href="http://tinyxd.me/blog/2012/05/23/octopressan-zhuang-bi-ji/"/>
     <updated>2012-05-23T07:16:00+08:00</updated>
-    <id>http://tinyxd.github.com/blog/2012/05/23/octopressan-zhuang-bi-ji</id>
+    <id>http://tinyxd.me/blog/2012/05/23/octopressan-zhuang-bi-ji</id>
     <content type="html"><![CDATA[<p>在阅读此教程之前，先安装git和ruby环境。</p>
 
 <p><strong>1.安装ruby环境</strong></p>
@@ -404,8 +404,8 @@ rake preview 监听本机4000端口，可查看生成页面效果。</p>
 1
 2</p>
 
-<p><link href="http://tinyxd.github.com/assets/font/PT_Serif.css" rel="stylesheet" type="text/css">
-<link href="http://tinyxd.github.com/assets/font/PT_Sans.css" rel="stylesheet" type="text/css"></p>
+<p><link href="http://tinyxd.me/assets/font/PT_Serif.css" rel="stylesheet" type="text/css">
+<link href="http://tinyxd.me/assets/font/PT_Sans.css" rel="stylesheet" type="text/css"></p>
 
 <p>我把下载的google font放在 source/assets/font 目录下面。</p>
 
