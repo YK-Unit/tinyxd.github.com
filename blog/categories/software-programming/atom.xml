@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Software programming | Keen on Art of Tech]]></title>
   <link href="http://tinyxd.me/blog/categories/software-programming/atom.xml" rel="self"/>
   <link href="http://tinyxd.me/"/>
-  <updated>2012-06-16T19:35:35+08:00</updated>
+  <updated>2012-06-17T09:05:35+08:00</updated>
   <id>http://tinyxd.me/</id>
   <author>
     <name><![CDATA[Tiny]]></name>
@@ -202,11 +202,11 @@ int arr[]={6,7,8,9,10};</p>
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[读C++ Primer 之句柄类(转自Linux社区 作者：xizero00)]]></title>
+    <title type="html"><![CDATA[读C++ Primer 之句柄类]]></title>
     <link href="http://tinyxd.me/blog/2012/06/08/c-plus-plus-ju-bing-lei/"/>
     <updated>2012-06-08T20:28:00+08:00</updated>
     <id>http://tinyxd.me/blog/2012/06/08/c-plus-plus-ju-bing-lei</id>
-    <content type="html"><![CDATA[<p>转自：http://www.linuxidc.com/Linux/2011-08/40175.htm</p>
+    <content type="html"><![CDATA[<p>转自Linux社区 作者：xizero00：http://www.linuxidc.com/Linux/2011-08/40175.htm</p>
 
 <p>我们知道C++中最令人头疼的当属指针，如果您申请了对象却没有释放它，时间一长就会造成系统崩溃，大量的内存溢出使得您的程序的健壮性出现问题</p>
 
