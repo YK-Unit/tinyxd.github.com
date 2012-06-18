@@ -5,12 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>archbang arch linux 安装inode  - Keen on Art of Tech</title>
+  <title>debian安装nvidia显卡驱动 - Keen on Art of Tech</title>
   <meta name="author" content="Tiny">
 
   
-  <meta name="description" content="第一步：cp iNodeClient.tar.gz 到 /home/***** 目录下。进入~目录下 第二步：终端运行 tar -xvf iNodeClient.tar.gz。
-第三步：修改/home//iNodeClient/下install.sh，把 OS_UBUNTU=`cat /etc/ &hellip;">
+  <meta name="description" content="在自己的电脑上硬盘安装了Debian.下面介绍一下我是如何安装显卡驱动的.我的显卡是GForce 7100GS的. 1>下载显卡驱动. 这个可以到Nvidia的官网上去找,找到自己对应的版本就可以了。 2>安装gcc并设置版本. #apt-get install gcc 这样安装的是gcc-4.4 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://tinyxd.me/blog/2012/05/25/archbang-arch-linux-an-zhuang-inode">
+  <link rel="canonical" href="http://tinyxd.me/blog/2012/06/18/debianan-zhuang-nvidiaxian-qia-qu-dong">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -111,7 +110,7 @@
   
   <header>
     
-      <h1 class="entry-title">Archbang Arch Linux 安装inode</h1>
+      <h1 class="entry-title">Debian安装nvidia显卡驱动</h1>
     
     
       <p class="meta">
@@ -127,7 +126,7 @@
   
 
 
-<time datetime="2012-05-25T14:34:00+08:00" pubdate data-updated="true">May 25<span>th</span>, 2012</time>
+<time datetime="2012-06-18T20:31:00+08:00" pubdate data-updated="true">Jun 18<span>th</span>, 2012</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -136,26 +135,48 @@
   </header>
 
 
-<div class="entry-content"><p>第一步：cp iNodeClient.tar.gz 到 /home/***** 目录下。进入~目录下  <br/>
-第二步：终端运行 tar -xvf iNodeClient.tar.gz。<br/>
-第三步：修改/home//iNodeClient/下install.sh，把 OS_UBUNTU=`cat /etc/issue | grep &#8216;Ubuntu&#8217;`那一行及以下的脚本都删除，然后保存，执行sudo ./install.sh。<br/>
-第四步：cp  home/*****/iNodeClient/ 目录下的iNodeAuthService到/etc/rc.d/目录下，并修改权限chmod 755 /etc/rc.d/iNodeAuthService。<br/>
-第五步：打开/etc/rc.conf ，在DAEMONS处添加@iNodeAuthService。（让iNode认证服务开机自启动） <br/>
-第六步：现在执行sudo /etc/rc.d/iNodeAuthService start，发现出错了。错误出现在enablecards.ps这个文件里，打开看，你会发现这个文件的作用只是用来up网卡。一般来说你的网卡都已经up了的啦。你可以把里面的内容改成： <br/>
-#!/bin/sh<br/>
-x=eth0（你所使用的网卡） <br/>
-ifconfig $x up  <br/>
-再运行一次sudo /etc/rc.d/iNodeAuthService start，你应该会发现服务启动成功了。  <br/>
-第七步：命令行里面执行一下sudo ./iNodeClient 然后楼主发现出现了一些库的依赖问题。iNode需要一些比较旧的库，对于jpeg tiff等库 你可以用ln -s 来用新版本的库代替旧版本。而其中有一个是libpng12.so.0是必须需要旧版本的。见附件 或者可以去官网自己下载ftp://ftp.simplesystems.org/pub/libpng/png/src/  <br/>
-需要下载的文件是libpng-1.2.49.tar.bz2 <br/>
-安装方法如下： <br/>
-1.解压，然后执行./configure &#8211;prefix=/usr/ <br/>
-2.编译及安装 <br/>
-#make  <br/>
-#make install <br/>
-安装之前可以make check 以下 看看有没有什么错误，如果没错误 make install 那么libpng就安装好了。</p>
+<div class="entry-content"><p>在自己的电脑上硬盘安装了Debian.下面介绍一下我是如何安装显卡驱动的.我的显卡是GForce 7100GS的.</p>
 
-<p>参考：http://ecnc.sysu.edu.cn/viewthread.php?tid=18558</p>
+<p>1>下载显卡驱动.</p>
+
+<p>这个可以到Nvidia的官网上去找,找到自己对应的版本就可以了。</p>
+
+<p>2>安装gcc并设置版本.</p>
+
+<p>#apt-get install gcc 这样安装的是gcc-4.4,如果在安装过程中提示您安装的gcc版本有问题,你可以再安装一下gcc-4.3并将gcc版本设置为4.3,具体做法:</p>
+
+<p>#apt-get install gcc-4.3</p>
+
+<p>#ln -sf /usr/bin/gcc-4.3 /usr/bin/gcc 这一句用来将gcc的版本设置为4.3</p>
+
+<p>#ls -l /usr/bin/gcc* 这一句用来查看当前使用的gcc版本</p>
+
+<!--more-->
+
+
+<p>3>安装make</p>
+
+<p>#apt-get install make</p>
+
+<p>4>安装编译头文件</p>
+
+<p>#apt-get install build-essential linux-headers-$(uname -r)</p>
+
+<p>5>编辑 /boot/gurb/grub.cfg</p>
+
+<p>在linux /vmlinuz -2.6.32-5&#8230;&#8230;&#8230;quite 后面加上 nomodeset  (作用是将原来普适的显卡驱动禁用)</p>
+
+<p>6>进入字符界面 Ctrl+Alt+F1</p>
+
+<p>7>停用X-Server:</p>
+
+<p>#/etc/init.d/gdm3 stop</p>
+
+<p>8>安装显卡驱动:</p>
+
+<p> # sh &#8230;. (省略号部分为你下载的显卡驱动的名称) 你将会看到安装的进度条.</p>
+
+<p>9>#startx</p>
 </div>
 
 
@@ -178,7 +199,7 @@ ifconfig $x up  <br/>
   
 
 
-<time datetime="2012-05-25T14:34:00+08:00" pubdate data-updated="true">May 25<span>th</span>, 2012</time>
+<time datetime="2012-06-18T20:31:00+08:00" pubdate data-updated="true">Jun 18<span>th</span>, 2012</time>
       
 
 <span class="categories">
@@ -195,7 +216,7 @@ ifconfig $x up  <br/>
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://tinyxd.me/blog/2012/05/25/archbang-arch-linux-an-zhuang-inode/" data-via="" data-counturl="http://tinyxd.me/blog/2012/05/25/archbang-arch-linux-an-zhuang-inode/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://tinyxd.me/blog/2012/06/18/debianan-zhuang-nvidiaxian-qia-qu-dong/" data-via="" data-counturl="http://tinyxd.me/blog/2012/06/18/debianan-zhuang-nvidiaxian-qia-qu-dong/" >Tweet</a>
   
   
   
@@ -204,10 +225,8 @@ ifconfig $x up  <br/>
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2012/05/23/wei-yi-jing-cun-zai-de-github-octopresspei-zhi-ben-di-huan-jing/" title="Previous Post: 为已经存在的github Octopress配置本地环境">&laquo; 为已经存在的github Octopress配置本地环境</a>
+        <a class="basic-alignment left" href="/blog/2012/06/14/yong-newshen-qing-dong-tai-kong-jian-de-wen-ti/" title="Previous Post: 用new申请动态空间的问题">&laquo; 用new申请动态空间的问题</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2012/05/26/bang-nin-kuai-su-ru-men-tide-codec-engine-zhuan-zai/" title="Next Post: 帮您快速入门TI的Codec Engine(转载)">帮您快速入门TI的Codec Engine(转载) &raquo;</a>
       
     </p>
   </footer>
@@ -319,8 +338,8 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://tinyxd.me/blog/2012/05/25/archbang-arch-linux-an-zhuang-inode/';
-        var disqus_url = 'http://tinyxd.me/blog/2012/05/25/archbang-arch-linux-an-zhuang-inode/';
+        var disqus_identifier = 'http://tinyxd.me/blog/2012/06/18/debianan-zhuang-nvidiaxian-qia-qu-dong/';
+        var disqus_url = 'http://tinyxd.me/blog/2012/06/18/debianan-zhuang-nvidiaxian-qia-qu-dong/';
         var disqus_script = 'embed.js';
       
     (function () {
