@@ -4,7 +4,7 @@
   <title><![CDATA[Keen on Art of Tech]]></title>
   <link href="http://tinyxd.me/atom.xml" rel="self"/>
   <link href="http://tinyxd.me/"/>
-  <updated>2012-06-19T07:25:53+08:00</updated>
+  <updated>2012-06-19T21:08:20+08:00</updated>
   <id>http://tinyxd.me/</id>
   <author>
     <name><![CDATA[Tiny]]></name>
@@ -12,6 +12,83 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[php初学]]></title>
+    <link href="http://tinyxd.me/blog/2012/06/19/learn-php/"/>
+    <updated>2012-06-19T20:28:00+08:00</updated>
+    <id>http://tinyxd.me/blog/2012/06/19/learn-php</id>
+    <content type="html"><![CDATA[<p>1.搭建学习环境 采用简单的打包好的：lamp. <br/>
+<a href="https://help.ubuntu.com/community/ApacheMySQLPHP#Run.2C_Stop.2C_Test.2C_And_Restart_Apache">help web sites</a></p>
+
+<p>2.PHP中文手册 <br/>
+http://www.phpchina.com/resource/manual/phpnew/</p>
+
+<!--more-->
+
+
+<p>example： <br/>
+第一个 PHP 脚本：hello.php</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="x">&lt;html&gt;</span>
+</span><span class='line'><span class="x"> &lt;head&gt;</span>
+</span><span class='line'><span class="x">  &lt;title&gt;PHP 测试&lt;/title&gt;</span>
+</span><span class='line'><span class="x"> &lt;/head&gt;</span>
+</span><span class='line'><span class="x"> &lt;body&gt;</span>
+</span><span class='line'><span class="x"> </span><span class="cp">&lt;?php</span> <span class="k">echo</span> <span class="s1">&#39;&lt;p&gt;Hello World</span>
+</span><span class='line'><span class="s1">&#39;</span><span class="p">;</span> <span class="cp">?&gt;</span><span class="x"></span>
+</span><span class='line'><span class="x"> &lt;/body&gt;</span>
+</span><span class='line'><span class="x">&lt;/html&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>PHP基本语法：</p>
+
+<p>四种标量类型：</p>
+
+<ul>
+<li> boolean （布尔型）</li>
+<li> integer （整型）</li>
+<li> float （浮点型, 也称作 double)</li>
+<li> string （字符串）</li>
+</ul>
+
+
+<p>两种复合类型：</p>
+
+<ul>
+<li> array （数组）</li>
+<li> object （对象）</li>
+</ul>
+
+
+<p>最后是两种特殊类型：</p>
+
+<ul>
+<li> resource　（资源）</li>
+<li> NULL　（NULL）</li>
+</ul>
+
+
+<p>为了确保代码的易读性，本手册还介绍了一些伪类型：</p>
+
+<ul>
+<li> mixed</li>
+<li> number</li>
+<li> callback</li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[debian安装nvidia显卡驱动]]></title>
@@ -737,7 +814,7 @@ Sales_item的引用计数器初始化为1
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[堆和栈的区别(转)]]></title>
+    <title type="html"><![CDATA[堆和栈的区别]]></title>
     <link href="http://tinyxd.me/blog/2012/06/08/dui-he-zhan-de-qu-bie/"/>
     <updated>2012-06-08T06:59:00+08:00</updated>
     <id>http://tinyxd.me/blog/2012/06/08/dui-he-zhan-de-qu-bie</id>
@@ -1023,7 +1100,7 @@ Sales_item的引用计数器初始化为1
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[linux下使用lftp的小结(转载)]]></title>
+    <title type="html"><![CDATA[linux下使用lftp的小结]]></title>
     <link href="http://tinyxd.me/blog/2012/06/04/linuxxia-shi-yong-lftpde-xiao-jie/"/>
     <updated>2012-06-04T07:08:00+08:00</updated>
     <id>http://tinyxd.me/blog/2012/06/04/linuxxia-shi-yong-lftpde-xiao-jie</id>
@@ -1615,7 +1692,7 @@ PerlOptions +ParseHeaders
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[帮您快速入门TI的Codec Engine(转载)]]></title>
+    <title type="html"><![CDATA[帮您快速入门TI的Codec Engine]]></title>
     <link href="http://tinyxd.me/blog/2012/05/26/bang-nin-kuai-su-ru-men-tide-codec-engine-zhuan-zai/"/>
     <updated>2012-05-26T06:18:00+08:00</updated>
     <id>http://tinyxd.me/blog/2012/05/26/bang-nin-kuai-su-ru-men-tide-codec-engine-zhuan-zai</id>
