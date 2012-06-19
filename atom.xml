@@ -4,7 +4,7 @@
   <title><![CDATA[Keen on Art of Tech]]></title>
   <link href="http://tinyxd.me/atom.xml" rel="self"/>
   <link href="http://tinyxd.me/"/>
-  <updated>2012-06-19T21:08:20+08:00</updated>
+  <updated>2012-06-19T21:18:27+08:00</updated>
   <id>http://tinyxd.me/</id>
   <author>
     <name><![CDATA[Tiny]]></name>
@@ -12,6 +12,36 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[给octopress添加关键字和网站描述（SEO）]]></title>
+    <link href="http://tinyxd.me/blog/2012/06/19/seo-meta-octopress/"/>
+    <updated>2012-06-19T21:10:00+08:00</updated>
+    <id>http://tinyxd.me/blog/2012/06/19/seo-meta-octopress</id>
+    <content type="html"><![CDATA[<p>给octopress添加keywords和description。
+1.修改source / _includes / head.html</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;meta name="author" content="Tiny"&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;meta name="description" content="How to optimize Octopress for SEO"&gt;
+</span><span class='line'>&lt;meta name="keywords" content="octopress, meta,seo"&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<p>2.在_config.yml中添加如下内容</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>description: Keen on the software programming and Embedded development.（专注软件编程及嵌入式技术。）
+</span><span class='line'>keywords: ruby , linux , archlinux , debian , software ,programming , embedded ,gem,web development ,ubuntu , java</span></code></pre></td></tr></table></div></figure>
+
+
+<p>3.这样在主页代码中也会出现keywords和description信息。每个post也会出现。方便被搜索网站索引。这个涉及到了SEO优化。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[php初学]]></title>
