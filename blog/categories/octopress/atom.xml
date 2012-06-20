@@ -4,7 +4,7 @@
   <title><![CDATA[Category: octopress | Keen on Art of Tech]]></title>
   <link href="http://tinyxd.me/blog/categories/octopress/atom.xml" rel="self"/>
   <link href="http://tinyxd.me/"/>
-  <updated>2012-06-21T07:14:28+08:00</updated>
+  <updated>2012-06-21T07:47:35+08:00</updated>
   <id>http://tinyxd.me/</id>
   <author>
     <name><![CDATA[Tiny]]></name>
@@ -25,7 +25,7 @@
 &lt;meta name="author" content="Tiny"&gt;
 
 &lt;meta name="description" content="Category: octopress"&gt;
-&lt;meta name="keywords" content="ruby , linux , archlinux , debian , software ,programming , embedded ,gem,web development ,ubuntu , java"&gt;
+&lt;meta name="keywords" content="ruby , linux , archlinux , debian , software , programming , embedded , gem, web ,ubuntu , java"&gt;
 </code>
 2.在</em>config.yml中添加如下内容
 <code>
