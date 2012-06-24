@@ -1,0 +1,513 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Tag: linux | Keen on Art of Tech]]></title>
+  <link href="http://tinyxd.me/tags/linux/atom.xml" rel="self"/>
+  <link href="http://tinyxd.me/"/>
+  <updated>2012-06-25T00:27:24+08:00</updated>
+  <id>http://tinyxd.me/</id>
+  <author>
+    <name><![CDATA[Tiny]]></name>
+    <email><![CDATA[admin@tinyxd.me]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[debian安装nvidia显卡驱动]]></title>
+    <link href="http://tinyxd.me/blog/2012/06/18/debianan-zhuang-nvidiaxian-qia-qu-dong/"/>
+    <updated>2012-06-18T20:31:00+08:00</updated>
+    <id>http://tinyxd.me/blog/2012/06/18/debianan-zhuang-nvidiaxian-qia-qu-dong</id>
+    <content type="html"><![CDATA[<p>在自己的电脑上硬盘安装了Debian.下面介绍一下我是如何安装显卡驱动的.我的显卡是GForce 7100GS的.</p>
+
+<p>1>下载显卡驱动.</p>
+
+<p>这个可以到Nvidia的官网上去找,找到自己对应的版本就可以了。</p>
+
+<p>2>安装gcc并设置版本.</p>
+
+<p>#apt-get install gcc 这样安装的是gcc-4.4,如果在安装过程中提示您安装的gcc版本有问题,你可以再安装一下gcc-4.3并将gcc版本设置为4.3,具体做法:</p>
+
+<p>#apt-get install gcc-4.3</p>
+
+<p>#ln -sf /usr/bin/gcc-4.3 /usr/bin/gcc 这一句用来将gcc的版本设置为4.3</p>
+
+<p>#ls -l /usr/bin/gcc* 这一句用来查看当前使用的gcc版本</p>
+
+<!--more-->
+
+
+<p>3>安装make</p>
+
+<p>#apt-get install make</p>
+
+<p>4>安装编译头文件</p>
+
+<p>#apt-get install build-essential linux-headers-$(uname -r)</p>
+
+<p>5>编辑 /boot/gurb/grub.cfg</p>
+
+<p>在linux /vmlinuz -2.6.32-5.........quite 后面加上 nomodeset  (作用是将原来普适的显卡驱动禁用)</p>
+
+<p>6>进入字符界面 Ctrl+Alt+F1</p>
+
+<p>7>停用X-Server:</p>
+
+<p>#/etc/init.d/gdm3 stop</p>
+
+<p>8>安装显卡驱动:</p>
+
+<p> # sh .... (省略号部分为你下载的显卡驱动的名称) 你将会看到安装的进度条.</p>
+
+<p>9>#startx</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[嵌入式linux应用程序自启动]]></title>
+    <link href="http://tinyxd.me/blog/2012/06/10/qian-ru-shi-linuxying-yong-cheng-xu-zi-qi-dong/"/>
+    <updated>2012-06-10T19:46:00+08:00</updated>
+    <id>http://tinyxd.me/blog/2012/06/10/qian-ru-shi-linuxying-yong-cheng-xu-zi-qi-dong</id>
+    <content type="html"><![CDATA[<p>在很多嵌入式系统中，由于可用资源较少，常常在系统启动后就直接让应用程序自动启动，以减少用户操作和节省资源。如何让自己的应用程序自动启动呢？    在Linux系统中，配置应用程序自动启动的方法有以下三种：</p>
+
+<!--more-->
+
+
+<h2>1.通过/Linuxrc脚本直接启动</h2>
+
+<p>Linux内核一旦开始执行，它将通过驱动程序来初始化所有硬件设备，这个初始化过程可以在启动时的PC显示器上看到，每个驱动程序都打印一些相关信息。初始化完成后，通常调用的是init，通过loader调用init内的init=/app_program语句（通过loader向核心传入init=/program可以定制首先运行的程序）。 <br/>
+比如在桌面Linux系统中，init进程会读取/etc/inittab文件，来决定执行级别和哪些脚本和命令。嵌入式应用开发中，可以根据实际情况决定是否使用标准的init执行方式，也许这个init是个静态程序，它能够完成我们的嵌入应用的特定任务，那完全不用考虑inittab了，在这里可以采用比较灵活的措施。</p>
+
+<h2>2.在/etc/init.d下添加启动脚本</h2>
+
+<p>一般情况下，大多数的Linux操作系统使用/etc/init.d/(或/etc/rc.d/init.d)下的脚本来配置应用程序的自动启动。 <br/>
+例如，在某些Linux系统中，corn程序通过/etc/init.d/corn脚本启动，Apache通过/etc/init.d/httpd启动，syslogd通过/etc/init.d/syslogd启动，而sshd则通过/etc/init.d/sshd脚本启动。 <br/>
+通常这些脚本通过来自特定rc.d目录的符号链接运行。为了配置从哪个rc.d目录运行脚本，Linux系统提供了许多不同的工具，同时也可以手工进行配置。Linux系统有一个包含所有实际启动脚本文件的目录。它可能是/etc/init.d，也可能是/etc/rc.d/rc.d。同时对应每个运行级别（runlevel）又有一个另外的目录，它们可能是/etc/rc2.d，也可能是/etc/rc.d/rc2.d。这些目录中的文件通常是指向实际脚本文件的符号链接。</p>
+
+<h2>3.直接在/etc/rc.d/rc.local脚本中添加命令</h2>
+
+<p>在Linux系统中，有一个类似Windows系统中autoexec.bat的文件，它就是/etc/rc.d/rc.local，系统开机后自动运行用户的应用程序或启动系统服务的命令保存在开发板根文件系统的这个文件中。因此可以编辑rc.local文件，将要执行的程序（命令）添加到该文件夹中。Linux系统在启动后还未登录前，将自动执行该程序（命令），达到开机自动运行用户的应用程序的目的。 <br/>
+下面具体说明：  <br/>
+首先解压ramdisk.image.gz文件，然后挂载到系统中。接着创建自己的应用程序文件夹hello，将所要自动运行的应用程序hello复制到该文件夹。 <br/>
+然后打开/usr/etc/rc.local文件，在最后一行加入：/Myapp/hello/hello <br/>
+再按上面的顺序将ramdisk.image打包下载到目标板，启动运行，则可以看到用户编写的应用程序一启动就运行起来了。 <br/>
+本文参考《基于ARM9的嵌入式Linux开发技术》，李新峰等编著。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[linux下使用lftp的小结]]></title>
+    <link href="http://tinyxd.me/blog/2012/06/04/linuxxia-shi-yong-lftpde-xiao-jie/"/>
+    <updated>2012-06-04T07:08:00+08:00</updated>
+    <id>http://tinyxd.me/blog/2012/06/04/linuxxia-shi-yong-lftpde-xiao-jie</id>
+    <content type="html"><![CDATA[<p>lftp的功能比较强大，相比原来用ftp，方便了很多。</p>
+
+<p>1、登陆：</p>
+
+<p>lftp ftp://yourname@site</p>
+
+<p>pwd:*****</p>
+
+<p>或 open ftp://yourname@site</p>
+
+<!--more-->
+
+
+<p>2、基本操作（转） <br/>
+lftp使用介绍</p>
+
+<p>lftp 是一个功能强大的下载工具，它支持访问文件的协议: ftp, ftps, http, https, hftp, fish.(其中ftps和https需要在编译的时候包含openssl库)。llftp的界面非常想一个shell: 有命令补全，历史记录，允许多个后台任务执行等功能，使用起来非常方便。它还有书签、排队、镜像、断点续传、多进程下载等功能。 <br/>
+命令行语法
+要看lftp的命令行语法，只要在shell中输入lftp --help <br/>
+lftp [OPTS]
+'lftp'是在 rc 文件执行后 lftp 执行的第一个命令 <br/>
+-f 执行文件中的命令后退出 <br/>
+-c 执行命令后退出 <br/>
+--help 显示帮助信息后退出 <br/>
+--version 显示 lftp 版本后退出 <br/>
+其他的选项同 'open' 命令 <br/>
+-e 在选择后执行命令 <br/>
+-u [,] 使用指定的用户名/口令进行验证 <br/>
+-p 连接指定的端口 <br/>
+主机名, URL 或书签的名字 <br/>
+如果在命令行中输入的站点名称，lftp将直接登录站点，比如 <br/>
+ftp ftp://............. <br/>
+如果在命令行不输入站点名称，则必须在进入到lftp界面后用open命令打开 <br/>
+[yhj@ccse-yhj yhj]$ lftp <br/>
+lftp :~> open ftp://................... <br/>
+常用命令 <br/>
+* 下载单个文件和一组文件，断点续传用-c参数 <br/>
+lftp ................:/> get -c ls-lR.txt <br/>
+lftp ...............:/> mget *.txt <br/>
+* 镜像(反镜像即上传)一个目录，可以用多个线程并行镜像一个目录(--parallel=N) <br/>
+lftp ................:/> mirror incoming local_name <br/>
+lftp ................:/> mirror -R local_name <br/>
+lftp ................:/> mirror --parallel=3 incoming local_name <br/>
+* 多线程下载，类似网络蚂蚁的功能;缺省是5个线程 <br/>
+lftp ................:/> pget -n 4 ls-lR.txt <br/>
+* 后台任务管理 <br/>
+缺省情况下，按 Ctrl+z,正在执行的任务将转为后台执行，也可以在命令行末尾加&amp;符号使任务在后台执行。用jobs命令可以查看所有的后台进程。用queue命令可以排队新的任务。如果退出lftp是还有任务在后台执行，lftp将转为后台执行。 <br/>
+* 其它用法 <br/>
+lftp支持类似bash的管道操作，例如用下面的命令可以将ftp服务器上的特定目录下(也可以是整个站点)所有文件的大小存到本地的文件ls.txt中 <br/>
+lftp ................:/> du incoming > ls.txt <br/>
+相关文件
+/etc/lftp.conf <br/>
+全局配置文件，实际位置依赖系统配置文件目录，可能在/etc，也可能在/usr/local/etc <br/>
+~/.lftp/rc, ~/.lftprc <br/>
+用户配置文件，将在/etc/lftp.conf之后执行，所以这里面的设置会覆盖/etc/lftp.conf中的设置。 <br/>
+lftp 缺省不会显示 ftp 服务器的欢迎信息和错误信息，这在很多时候不方便，因为你有可能想知道这个服务器到底是因为没开机连不上，还是连接数已满。如果是这样，你可以在 ~/.lftprc 里写入一行 <br/>
+debug 3
+就可以看到出错信息了。 <br/>
+更多的配置选项请查man手册或在lftp界面内用命令 set -a 获得。 <br/>
+~/.lftp/log <br/>
+当lftp转为后台非挂起模式执行时，输出将重定向到这里 <br/>
+~/.lftp/bookmarks <br/>
+这是lftp存储书签的地方，可以lftp查看bookmark命令 <br/>
+~/.lftp/cwd_history <br/>
+这个文件用来存储访问过的站点的工作目录</p>
+
+<p>~/.lftprc  <br/>
+在用lftp访问国内一些ftp服务器时，往往看到的中文是乱码  <br/>
+^_<sup>不用慌，这是由于服务器和本地编码不一致造成的。我们只要在主目录下新建一个文件~/.lftprc或者~/.lftp/rc</sup>  <br/>
+并在其中加入以下内容：  <br/>
+debug 3set ftp:charset GBKset file:charset UTF-8#set ftp:passtive-mode no#alias utf8 " set ftp:charset UTF-8"#alias gbk " set ftp:charset GBK"  <br/>
+登录ftp服务器  <br/>
+言归正传，我们先来看看怎么登录ftp服务器  <br/>
+lftp ftp://user:password@site:port  <br/>
+lftp user:password@site:port  <br/>
+lftp site -p port -u user,password  <br/>
+lftp site:port -u user,password  <br/>
+上面的几种方式都能正常工作，不过密码都是明文，这样好像不太安全哦。没关系  <br/>
+lftp user@site:port  <br/>
+系统会提示输入password，密码就回显为******了  <br/>
+不过每次都输入这么多，好麻烦哦。 如果有类似leapftp的站点管理器就好了，其实lftp早就给我们想好了： 这就是bookmark。后面我们将会看到。  <br/>
+常用命令  <br/>
+在终端运行  <br/>
+man lftp  <br/>
+或登录ftp后输入  <br/>
+help  <br/>
+就可以看到命令列表  <br/>
+下面我们看一下lftp常用的命令：  <br/>
+ls  <br/>
+显示远端文件列表(!ls 显示本地文件列表)。  <br/>
+cd  <br/>
+切换远端目录(lcd 切换本地目录)。  <br/>
+get  <br/>
+下载远端文件。  <br/>
+mget  <br/>
+下载远端文件(可以用通配符也就是 *)。  <br/>
+pget  <br/>
+使用多个线程来下载远端文件, 预设为五个。  <br/>
+mirror  <br/>
+下载/上传(mirror -R)/同步 整个目录。  <br/>
+put  <br/>
+上传文件。  <br/>
+mput  <br/>
+上传多个文件(支持通配符)。  <br/>
+mv  <br/>
+移动远端文件(远端文件改名)。  <br/>
+rm  <br/>
+删除远端文件。  <br/>
+mrm  <br/>
+删除多个远端文件(支持通配符)。  <br/>
+mkdir  <br/>
+建立远端目录。  <br/>
+rmdir  <br/>
+删除远端目录。  <br/>
+pwd  <br/>
+显示目前远端所在目录(lpwd 显示本地目录)。  <br/>
+du  <br/>
+计算远端目录的大小  <br/>
+!  <br/>
+执行本地 shell的命令(由于lftp 没有 lls, 故可用 !ls 来替代)  <br/>
+lcd  <br/>
+切换本地目录  <br/>
+lpwd  <br/>
+显示本地目录  <br/>
+alias  <br/>
+定义别名  <br/>
+bookmark  <br/>
+设定书签。  <br/>
+exit  <br/>
+退出ftp  <br/>
+快捷书签  <br/>
+补充作者：aBiNg  <br/>
+ftp中的bookmark命令，是将配置写到~/.lftp/bookmarks文件中；我们可以直接修改此文件，快速登陆ftp服务器。</p>
+
+<p>3、mirror 同步镜像，备份服务器文件</p>
+
+<p>今天主要的问题是解决如何备份服务器端文件的问题。了解了mirror指令的用法后，发现比较适合而且好用。</p>
+
+<p>基本使用方法：</p>
+
+<p>1）、下载服务器端文件：</p>
+
+<p> mirror –vn RCD LCD   //RCD为远程路径，LCD为本地路径</p>
+
+<p>2）、上传文件：</p>
+
+<p> mirror –R LCD RCD</p>
+
+<p>下附一个自动同步的脚本：
+```bash</p>
+
+<h1>!bin/bash</h1>
+
+<p>echo “script start at  <code>date ”+%Y-%m-%d %H:%M:%S”
+HOST=”hostname”
+USER=”yourname”
+PASS=”password”
+LCD=”LocalePath”
+RCD=”RemotePath”
+/usr/sbin/lftp &lt;&lt; EOF
+open ftp://$USER:$PASS@$HOST
+mirror $RCD $LCD
+EOF
+echo “script end at “</code>date ”+%Y-%m-%d %H:%M:%S”
+```</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[arch linux 下lxr的安装]]></title>
+    <link href="http://tinyxd.me/blog/2012/05/26/arch-linux-xia-lxrde-an-zhuang/"/>
+    <updated>2012-05-26T23:14:00+08:00</updated>
+    <id>http://tinyxd.me/blog/2012/05/26/arch-linux-xia-lxrde-an-zhuang</id>
+    <content type="html"><![CDATA[<p>经过自己两天的折腾，参考了好几个资料终于搞定。
+参考资料见文章末尾。
+LXR是使用WEB方式下的源代码整理浏览工具，最大的用途在于清理出了代码中函数、变量的定义、说明、应用的关系，并用链接的形式表现在网页上。LXR整理出代码的结构和调用关系，存在数据库中，并在显示时与源代码树结合，从功能上说，包括代码浏览、标识符搜索、文本搜索和文件搜索，其中的文本搜索和文件搜索利用的是第三方工具（即glimpse或swish-e）（我使用的glimpse）。它的主要组成部分包括三个：Perl编写的网页/CGI部分，基于MySQL的索引数据管理（新版本才有）和通用的文本搜索工具。目前的版本，采用Glimpse或者Swish-e中的一种作为通用文本搜索工具。在安装上，基本上也按照这三个部分来配置。</p>
+
+<p>1.下载安装所需的工具。 <br/>
+a。glimpse（http://webglimpse.net/download.php）</p>
+
+<p>安装glimpse:（其中会用到flex 安装下就行了）</p>
+
+<pre><code>$ ./configure
+
+$ make
+
+$ sudo make install
+</code></pre>
+
+<p>b。pacman -S apache php php-apache mysql</p>
+
+<p>c。pacman -s ctags perl-dbi perl-dbd-mysql</p>
+
+<p>d。安装完mysql 以root用户身份运行设置脚本</p>
+
+<pre><code># rc.d start mysqld &amp;&amp; mysql_secure_installation
+</code></pre>
+
+<p>然后重启 Mysql</p>
+
+<pre><code># rc.d restart mysqld
+</code></pre>
+
+<p>本文需要设置密码为空（后面有说明）</p>
+
+<!--more-->
+
+
+<p>用mysql -p -u root</p>
+
+<p>登陆mysql,然后执行下面语句: set password for 'root'@'localhost' =password('');flush privileges;e.安装Perl的Magic模块</p>
+
+<p>下载地址http://search.cpan.org/~knok/File-MMagic-1.27/MMagic.pm</p>
+
+<pre><code>[root@localhost File-MMagic-1.27]# ls ChangeLog COPYING      MANIFEST MMagic.pm README.ja contrib    Makefile.PL META.yml README.en t [root@localhost File-MMagic-1.27]# perl Makefile.PL Checking if your kit is complete... Looks good Writing Makefile for File::MMagic [root@localhost File-MMagic-1.27]# ls
+ChangeLog COPYING   Makefile.PL META.yml   README.en t
+contrib    Makefile MANIFEST     MMagic.pm README.ja
+
+[root@localhost File-MMagic-1.27]# make
+cp MMagic.pm blib/lib/File/MMagic.pm
+Manifying blib/man3/File::MMagic.3pm
+[root@localhost File-MMagic-1.27]# make install
+Installing /usr/lib/perl5/site_perl/5.8.8/File/MMagic.pm
+Installing /usr/share/man/man3/File::MMagic.3pm Writing /usr/lib/perl5/site_perl/5.8.8/i386-linux-thread-multi/auto/File/MMagic/.packlist Appending installation info to /usr/lib/perl5/5.8.8/i386-linux-thread-multi/perllocal.pod
+</code></pre>
+
+<p>2.设置</p>
+
+<p>尽管lxr源码里有一个INSTALL文件，但不详，这里写下来我自己配置的步骤。
+1）位置规划
+LXR除了数据库那一部分不需要考虑存放位置以外，还有CGI/HTML部分、索引生成工具部分和</p>
+
+<p>所需要索引的源代码部分需要考虑，我的实践中使用的与INSTALL缺省的不同，最大的一点不同在于我</p>
+
+<p>将WEB部分和工具部分分离开，只允许WEB部分暴露给浏览器——主要是基于也许会更安全一些的考虑。
+另一个不同是用符号链接而不是真正的源代码目录作为源代码部分，因为LXR索引的Linux Kernel是最常用的，</p>
+
+<p>而Kernel本身还被用来重编内核和升级，所以不适合完全拷贝过来。
+本例中使用的是/usr/local/lxr目录作为LXR的根目录。</p>
+
+<pre><code>#tar zxvf lxr-0.9.1.tar.gz -C /usr/local ；将lxr解压到/usr/local/lxr下 
+#cd /usr/local/
+
+#mv Local.pm diff ident search source templates  #将web相关部分移到templates下  
+
+#mv templates http                            #http目录，用于存放WEB部分  
+
+#ln -s /usr/local/lxr/http/Local.pm /usr/lib/perl5/site_perl/ 
+
+#ln -s http/lxr.conf         #为web部分和工具部分都需要用的文件建符号连接 
+#mv lib /usr/lib/perl5/site_perl/LXR  #将自定义的perl库文件拷贝
+</code></pre>
+
+<p>到perl/mod_perl使用的缺省库文件目录中</p>
+
+<pre><code>#ln -s /usr/lib/perl5 /usr/local/lib  #否则在运行时会出现Can't locate LXR/Files.pm等错误 
+</code></pre>
+
+<p>建立源代码根目录,（当前在lxr目录）</p>
+
+<pre><code>#mkdir src ；源代码部分的根 
+
+并将 linux-2.6.39的源码链接到此目录下。
+
+#cd src 
+
+mkdir glimpse 
+
+ln -s ../../../../src/linux-2.6.39 2.6.39
+
+#vi versions ；编辑/usr/local/lxr/src/versions文件，内容为2.6.39，表示让lxr索引2.6.39
+
+#cd ../../ ；回到/usr/local/lxr 
+</code></pre>
+
+<p>2）修改lxr.conf
+准备好了目录结构，下一步就是改写lxr.conf文件。缺省的lxr.conf已经从templates拷贝到/usr/local/lxr/http/下了，</p>
+
+<p>并在/usr/local/lxr/下有个连接。 注释掉所有与swish-e相关的变量定义,其余设置如下</p>
+
+<pre><code>'glimpsebin' =&gt; '/usr/local/bin/glimpse', 
+
+'glimpseindex' =&gt; '/usr/local/bin/glimpseindex', 
+
+'ectagsbin' =&gt; '/usr/bin/ctags', 
+
+'genericconf' =&gt; '/usr/lib/perl5/site_perl/LXR/Lang/generic.conf' 
+
+'ectagsconf' =&gt; '/usr/lib/perl5/site_perl/LXR/Lang/ectags.conf' 
+
+'baseurl' =&gt; 'http://192.168.1.102/lxr'                 #主机的IP地址 
+
+'range' =&gt; [ readfile('/usr/local/lxr/src/versions') ]  
+
+'default' =&gt; '2.6.39'                                  #缺省的代码树名 
+
+# Templates used for headers and footers 下所有路径均设置为绝对路径,如 
+
+'htmlhead' =&gt; '/usr/local/lxr/http/html-head.html' 
+
+
+
+'sourceroot' =&gt; '/usr/local/lxr/src'       #源码根目录    (注意，最后无/) 
+
+'sourcerootname' =&gt; 'Linux-$v'        #它将显示在缺省的最高级源码目录上 
+
+'glimpsedir' =&gt; '/usr/local/lxr/src/glimpse'         #(注意，最后无/) 
+</code></pre>
+
+<p>3）apache的httpd.conf (/etc/httpd/conf/httpd.conf)
+保证装了mod_perl的时候，在httpd.conf中添加以下几行：</p>
+
+<pre><code>Alias /lxr/ /usr/local/lxr/http/ 
+
+&lt;Directory /usr/local/lxr/http/&gt;
+
+AllowOverride None
+
+Options FollowSymLinks
+
+&lt;Files ~  "(search|source|ident|diff|find)$"&gt;
+
+SetHandler perl-script
+
+PerlHandler ModPerl::Registry       #注意这里不是Apache::Registry
+
+Options +ExecCGI
+
+PerlOptions +ParseHeaders
+
+&lt;/Files&gt;
+
+&lt;/Directory&gt; 
+</code></pre>
+
+<p>表示访问/lxr就相当于访问/usr/local/lxr/http，且用perl解释search、source、ident、diff和find几个脚本，</p>
+
+<p>而其他的仍然当成html来使用。
+如果没有mod_perl，可以用SetHandler cgi-script代替perl-script，一样可以用，PerlHandler就不用了。
+4.initialize
+1）初始化MySQL数据库 (mysql) :</p>
+
+<p>进入lxr目录/usr/local/lxr</p>
+
+<p># mysql</p>
+
+<p>(反斜杠). initdb-mysql</p>
+
+<p>2).建glimpse索引  <br/>
+在/usr/local/lxr/src/2.6.39/下运行'find . -name "*.[chS]" -follow | glimpseindex -H . -o -F'，索引所有.c、.h、.S（汇编）文件。这个过程比较耗时，但比起下一个过程来，就小巫见大巫了。
+3.)建identity索引 这是LXR精髓所在
+在/usr/local/lxr/下运行'./genxref --version=2.6.39--url=http://192.168.1.102/lxr'，这个过程时间比较长，其结果就是在MySQL中添东西。如果已经做过索引了，它就只关心那些修改过的或新的文件，速度就快多了。这个过程如果中断了，最好清空数据库重新来过，否则可能会有错误。  <br/>
+4).修改权限  <br/>
+最简单的办法就是把/usr/local/lxr/http下所有的文件都改成apache的属主。在/usr/local/lxr/下运行'chown -R apache.apache http '。   <br/>
+5.startup   (rc.d restart httpd;rc.d restart mysqld) <br/>
+重启mysql和httpd，然后访问http://192.168.1.102/lxr/source/就可以了。比较奇怪的是，因为这个cgi允许用类似目录一样的形式（source/）来访问，所以，如果服务器端有更新，浏览器端仍会使用老的页面，refresh也没用。这时只有清空本地cache了。 <br/>
+ 6.参考博客</p>
+
+<p>[内核分析]LXR安装心得(0.9.3版)---RH8.0测试通过http://www.cnblogs.com/huqingyu/archive/2005/02/19/106080.html</p>
+
+<p>利用LXR建立源代码交叉索引 【原】http://hi.baidu.com/kissdev/blog/item/6e493daf15cf33c77cd92af9.html</p>
+
+<p>LXR安装过程简介(0.3版) http://blog.chinaunix.net/u1/46901/showart_397299.html</p>
+
+<p>高亮LXR的代码 http://mjxian.cn/wordpress/archives/lxr-syntax-highlighting.html</p>
+
+<p>mysql wiki：https://wiki.archlinux.org/index.php/MySQL_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87</p>
+
+<p>附：部分软件版本</p>
+
+<p>File-MMagic-1.27.tar.gz</p>
+
+<p>perl-dbi-1.616-2-i686.pkg.tar.xz</p>
+
+<p>perl-dbd-mysql-4.020-1-i686.pkg.tar.xz</p>
+
+<p>lxr-0.9.10.tgz</p>
+
+<p>glimpse-4.18.6</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[archbang arch linux 安装inode ]]></title>
+    <link href="http://tinyxd.me/blog/2012/05/25/archbang-arch-linux-an-zhuang-inode/"/>
+    <updated>2012-05-25T14:34:00+08:00</updated>
+    <id>http://tinyxd.me/blog/2012/05/25/archbang-arch-linux-an-zhuang-inode</id>
+    <content type="html"><![CDATA[<p>第一步：cp iNodeClient.tar.gz 到 /home/***** 目录下。进入~目录下  <br/>
+第二步：终端运行 tar -xvf iNodeClient.tar.gz。<br/>
+第三步：修改/home//iNodeClient/下install.sh，把 OS_UBUNTU=`cat /etc/issue | grep 'Ubuntu'`那一行及以下的脚本都删除，然后保存，执行sudo ./install.sh。<br/>
+第四步：cp  home/*****/iNodeClient/ 目录下的iNodeAuthService到/etc/rc.d/目录下，并修改权限chmod 755 /etc/rc.d/iNodeAuthService。<br/>
+第五步：打开/etc/rc.conf ，在DAEMONS处添加@iNodeAuthService。（让iNode认证服务开机自启动） <br/>
+第六步：现在执行sudo /etc/rc.d/iNodeAuthService start，发现出错了。错误出现在enablecards.ps这个文件里，打开看，你会发现这个文件的作用只是用来up网卡。一般来说你的网卡都已经up了的啦。你可以把里面的内容改成： <br/>
+#!/bin/sh<br/>
+x=eth0（你所使用的网卡） <br/>
+ifconfig $x up  <br/>
+再运行一次sudo /etc/rc.d/iNodeAuthService start，你应该会发现服务启动成功了。  <br/>
+第七步：命令行里面执行一下sudo ./iNodeClient 然后楼主发现出现了一些库的依赖问题。iNode需要一些比较旧的库，对于jpeg tiff等库 你可以用ln -s 来用新版本的库代替旧版本。而其中有一个是libpng12.so.0是必须需要旧版本的。见附件 或者可以去官网自己下载ftp://ftp.simplesystems.org/pub/libpng/png/src/  <br/>
+需要下载的文件是libpng-1.2.49.tar.bz2 <br/>
+安装方法如下： <br/>
+1.解压，然后执行./configure --prefix=/usr/ <br/>
+2.编译及安装 <br/>
+#make  <br/>
+#make install <br/>
+安装之前可以make check 以下 看看有没有什么错误，如果没错误 make install 那么libpng就安装好了。</p>
+
+<p>参考：http://ecnc.sysu.edu.cn/viewthread.php?tid=18558</p>
+]]></content>
+  </entry>
+  
+</feed>
