@@ -28,6 +28,20 @@
   <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
 <link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
 
+<!-- Add jQuery library -->
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
+<!-- Add fancyBox -->
+<link rel="stylesheet" href="/stylesheets/jquery.fancybox.css?v=2.0.6" type="text/css" media="screen" />
+<script type="text/javascript" src="/javascripts/jquery.fancybox.pack.js?v=2.0.6"></script>
+<!-- Add fancyBox jQuery -->
+<script type="text/javascript">
+  jQuery.noConflict();    // prevents conflicts with Ender.js, use jQuery instead of $
+  jQuery(document).ready(function() {
+      jQuery(".fancybox").fancybox();
+  });
+</script>
+<!-- End fancyBox insert -->
+
 <!-- mathjax config similar to math.stackexchange -->
 
 <script type="text/x-mathjax-config">
@@ -59,6 +73,8 @@
 <script type="text/javascript"
    src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 </script>
+
+
   
   <script type="text/javascript">
     var _gaq = _gaq || [];
@@ -83,6 +99,7 @@
     <h2>Stay Hungry,Stay Foolish,Stay Patient.</h2>
   
 </hgroup>
+
 </header>
   <nav role="navigation"><ul class="subscription" data-subscription="rss">
   <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
