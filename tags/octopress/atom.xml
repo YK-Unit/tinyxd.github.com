@@ -4,7 +4,7 @@
   <title><![CDATA[Tag: octopress | Keen on Art of Tech]]></title>
   <link href="http://tinyxd.me/tags/octopress/atom.xml" rel="self"/>
   <link href="http://tinyxd.me/"/>
-  <updated>2012-06-25T01:09:21+08:00</updated>
+  <updated>2012-06-25T01:16:35+08:00</updated>
   <id>http://tinyxd.me/</id>
   <author>
     <name><![CDATA[Tiny]]></name>
@@ -41,7 +41,7 @@
 <p>```</p>
 
 <p>然后把显示tagcloud的页面 class改为cloud(class="cloud")。 <br/>
-大功告成，tag cloud页面请点击<a href="http://tinyxd.me/tags/tags.html">这里</a>。</p>
+大功告成，tag cloud页面请点击<a href="http://tinyxd.me/tags/index.html">这里</a>。</p>
 ]]></content>
   </entry>
   
