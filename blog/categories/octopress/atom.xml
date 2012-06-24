@@ -4,7 +4,7 @@
   <title><![CDATA[Category: octopress | Keen on Art of Tech]]></title>
   <link href="http://tinyxd.me/blog/categories/octopress/atom.xml" rel="self"/>
   <link href="http://tinyxd.me/"/>
-  <updated>2012-06-25T00:33:44+08:00</updated>
+  <updated>2012-06-25T01:00:57+08:00</updated>
   <id>http://tinyxd.me/</id>
   <author>
     <name><![CDATA[Tiny]]></name>
@@ -12,6 +12,39 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[octopress博客添加标签云]]></title>
+    <link href="http://tinyxd.me/blog/2012/06/25/octopress-add-tag-cloud/"/>
+    <updated>2012-06-25T00:35:00+08:00</updated>
+    <id>http://tinyxd.me/blog/2012/06/25/octopress-add-tag-cloud</id>
+    <content type="html"><![CDATA[<p>折腾了好久，终于弄好了。我基本是follow这篇文章的：<a href="http://log4d.com/2012/05/tag-cloud/">给 Octopress 加上标签功能</a> <br/>
+官方只提供了category的云显示，和列表显示，这是其<a href="https://github.com/tokkonopapa/octopress-tagcloud">github地址</a>，其实官方提供的这个第三方插件并没有 <br/>
+给文章加入tag的概念。（category和tag分别代表日志分类和标签）</p>
+
+<!--more-->
+
+
+<p>
+现在我还对ruby不是很熟悉，但是看到了<a href="http://log4d.com/2012/05/tag-cloud/">这篇文章</a>，找到了<a href="https://github.com/robbyedwards/octopress-tag-pages">robbyedwards / octopress-tag-pages</a>和<a href="https://github.com/robbyedwards/octopress-tag-cloud">robbyedwards / octopress-tag-cloud</a>。前者采集文章的tag，后者是标签云的显示。 <br/>
+这两个使用方法相同，把文件放到相应的目录即可。而第二个插件<code>octopress-tag-cloud</code> 会和官方的有冲突，直接用<a href="https://github.com/alswl/octopress-category-list">这个</a>就好。 <br/>
+还有最后一点非常重要，得修改两个地方： <br/>
+一个是sass/custom/_styles.scss
+```</p>
+
+<h1>content article .cloud li{</h1>
+
+<p>  display: inline;
+  list-style: none outside none;
+  padding: 0 4px;
+}</p>
+
+<p>```</p>
+
+<p>然后把显示tagcloud的页面 class改为cloud(class="cloud")。 <br/>
+大功告成，tag cloud页面请点击<a href="http://tinyxd.me/tags/tags.html">这里</a>。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[给octopress添加关键字和网站描述]]></title>
@@ -22,10 +55,10 @@
 
 <p>1.修改source / <em>includes / head.html
 <code>
-&lt;meta name="author" content="Tiny"&gt;
-
-&lt;meta name="description" content="Category: octopress"&gt;
-&lt;meta name="keywords" content="ruby , linux , archlinux , debian , software , programming , embedded , gem, web ,ubuntu , java"&gt;
+&lt;meta name="author" content="{{ site.author }}"&gt;
+{% capture description %}{% if page.description %}{{ page.description }}{% elsif site.description %}{{ site.description }}{%else%}{{ content | raw_content }}{% endif %}{% endcapture %}
+&lt;meta name="description" content="{{ description | strip_html | condense_spaces | truncate:150 }}"&gt;
+{% if page.keywords %}&lt;meta name="keywords" content="{{ page.keywords }}"&gt;{%else%}&lt;meta name="keywords" content="{{ site.keywords }}"&gt;{% endif %}
 </code>
 2.在</em>config.yml中添加如下内容
 <code>
@@ -233,238 +266,6 @@ $ git push origin master
 img left http://placekitten.com/320/250 Place Kitten #2 <br/>
 img right http://placekitten.com/300/500 150 250 Place Kitten #3 <br/>
 img right http://placekitten.com/300/500 150 250 ‘Place Kitten #4’ ‘An image of a very cute kitten’</p></blockquote>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Octopress安装笔记]]></title>
-    <link href="http://tinyxd.me/blog/2012/05/23/octopressan-zhuang-bi-ji/"/>
-    <updated>2012-05-23T07:16:00+08:00</updated>
-    <id>http://tinyxd.me/blog/2012/05/23/octopressan-zhuang-bi-ji</id>
-    <content type="html"><![CDATA[<p>在阅读此教程之前，先安装git和ruby环境。</p>
-
-<p><strong>1.安装ruby环境</strong></p>
-
-<p>如果已经安装了ruby,就不用安装rvm 了。
-Archlinux用户建议用pacman 安装ruby,方便省事。</p>
-
-<p>Archlinux安装RVM教程：
-<a href="https://wiki.archlinux.org/index.php/RVM">archlinux安装RVM教程</a></p>
-
-<pre><code>[tinyxd@archbang  ~]$ sudo bash &lt; &lt;(curl -s https://raw.github.com/wayneeseguin/rvm/master/binscripts/rvm-installer )
-</code></pre>
-
-<p>添加当前用户到rvm 组</p>
-
-<pre><code>[tinyxd@archbang  ~]$ sudo usermod -a -G rvm admin
-</code></pre>
-
-<p>查看下添加成功了没：</p>
-
-<pre><code>[tinyxd@archbang ~]$ grep rvm /etc/group
-rvm:x:1004:admin
-</code></pre>
-
-<p>再注销，登录。</p>
-
-<blockquote><p>To start using RVM you need to run <code>source /etc/profile.d/rvm.sh</code> in all your open shell windows, in rare cases you need to reopen all shell windows.</p></blockquote>
-
-<p>已经安装了ruby的就可以从这里开始了。</p>
-
-<!--more-->
-
-
-<p><strong>2.安装依赖</strong></p>
-
-<pre><code>[tinyxd@archbang ～]$ gem install bundler
-WARNING:  You don't have /home/tinyxd/.gem/ruby/1.9.1/bin in your PATH,
-      gem executables will not run.
-vim ~/.bashrc
-#for ruby gem
-PATH=$PATH:~/.gem/ruby/1.9.1/bin
-export PATH
-</code></pre>
-
-<p>注意路径后面不能带/，不然它还是会报错。</p>
-
-<pre><code>[tinyxd@archbang ~]$ sudo gem install bundler
-[tinyxd@archbang ~]$ cd ovtopress/
-[tinyxd@archbang ~]$ bundle install
-[tinyxd@archbang ~]$ rake install 
-rake aborted!
-You have already activated rake 0.9.2.2, but your Gemfile requires rake 0.9.2. Using bundle exec may solve this.
-
-(See full trace by running task with --trace)
-</code></pre>
-
-<p>出现上述问题，按以下方法解决：</p>
-
-<pre><code>bundle update
-rake install
-[tinyxd@archbang octopress]$ rake install
-## Copying classic theme into ./source and ./sass
-mkdir -p source
-cp -r .themes/classic/source/. source
-mkdir -p sass
-cp -r .themes/classic/sass/. sass
-mkdir -p source/_posts
-mkdir -p public
-</code></pre>
-
-<p><strong>3.Deploying to Github Pages</strong></p>
-
-<p>http://octopress.org/docs/deploying/github/</p>
-
-<p>首次deploy 之前的准备活动
-创建 username.github.com 仓库
-执行rake setup_github_pages来设置。</p>
-
-<pre><code>[tinyxd@archbang octopress]$ rake setup_github_pages
-Enter the read/write url for your repository: git@github.com:akm/akm.github.com.git
-Added remote git@github.com:akm/akm.github.com.git as origin
-Set origin as default remote
-Master branch renamed to 'source' for committing your blog source files
-rm -rf _deploy
-mkdir _deploy
-cd _deploy
-Initialized empty Git repository in /home/admin/public_html/octopress/_deploy/.git/
-[master (root-commit) ff105cf] Octopress init
- 1 file changed, 1 insertion(+)
- create mode 100644 index.html
-cd -
-
----
-## Now you can deploy to http://ihacklog.github.com with `rake deploy` ##
-</code></pre>
-
-<blockquote><p>This will:Ask you for your Github Pages repository url.Rename the remote pointing to imathis/octopress from ‘origin’ to ‘octopress’.Add your Github Pages repository as the default origin remote.Switch the active branch from master to source.Configure your blog’s url according to your repository.Setup a master branch in the _deploy directory for deployment.</p></blockquote>
-
-<p>生成静态页面：</p>
-
-<pre><code>[tinyxd@archbang octopress]$ rake generate
-</code></pre>
-
-<p>把源码push搭配github上</p>
-
-<pre><code>git add .
-git commit -m "commit the source for my Octopress blog"
-git push origin source
-</code></pre>
-
-<p>Configuring Octopress配置略，见 http://octopress.org/docs/configuring/</p>
-
-<p>写日志</p>
-
-<pre><code>rake new_post["文章标题"] #新建页面
-rake new_page[super-awesome]
-</code></pre>
-
-<p>详见 http://octopress.org/docs/blogging/
-写完了之后</p>
-
-<pre><code>rake generate
-rake deploy
-</code></pre>
-
-<p>如果想本地预览一下效果，可以用</p>
-
-<pre><code>rake preview
-</code></pre>
-
-<p>要注意的是，如果修改源码和配置，是在source 分支修改和提交。
-而发布日志，也是在source分支，rake deploy会自动将生成的静态页面push到master分支。因此，master分支的内容不用你管。</p>
-
-<blockquote><p>插一句：如果以后要从另一个电脑pull源码来新电脑，用如下命令：</p>
-
-<pre><code>cd your_local_octopress_directory
-cd _deploy
-git pull origin master
-cd ..
-git pull origin source
-</code></pre>
-
-<p>只要记住“your_local_octopress_directory”对应的的remote source branch，而”_deploy”对应的是remote master branch即可。</p>
-
-<p>   如果你是和别人合作博客，或者自己同时在好几个电脑上写博客，每次开始之前，git pull origin source获得最新的文件,rake generate生成新的页面</p></blockquote>
-
-<pre><code>我们在source分支做了博客的发布，或者改变了博客的设置之后，rake generate生成网站
-
-rake watch+pow 或者rake review+http://localhost:4000就可以看到我们所做的变化
-
-确认无误后，rake deploy文章就发布到了博客中
-
-当然，不要忘了更新项目 git push origin source
-
-特别的，如果你克隆了博客，记得在git checkout source，然后rake setup_github_pages执行初始化，当然，在那之前也需要bundle install，然后rake generate就生成页面了.
-
-如果是新建的Repo ，记得
-$ mkdir yourrepo
-$ cd yourrepo
-$ git init
-# 其实这这时如果你多新建一个index.html文件的话，github会为你生成一个jekyll博客。
-$ touch README
-$ git add .
-$ git commit -m 'first commit'
-$ git remote add origin git@github.com:username/yourname.github.com.git
-$ git push origin master
-</code></pre>
-
-<blockquote><p>对于新手有几个提醒:</p></blockquote>
-
-<pre><code>时常git status,git log避免误操作
-不要在github上直接编辑文件
-想清楚了再下手
-</code></pre>
-
-<blockquote><p>  github pages的 username 大小写敏感。如果用户名和username不一致的话,默认会生成这个Repo的project pages。</p></blockquote>
-
-<p>rake watch 检测文件变化，实时生成新内容
-rake preview 监听本机4000端口，可查看生成页面效果。</p>
-
-<p>个性化
-文档： http://octopress.org/docs/theme/template/
-修改定制文件/source/_includes/custom/head.html 把google的自定义字体去掉或自行定义，如我的（自己下载了google font)：
-1
-2</p>
-
-<p><link href="http://tinyxd.me/assets/font/PT_Serif.css" rel="stylesheet" type="text/css">
-<link href="http://tinyxd.me/assets/font/PT_Sans.css" rel="stylesheet" type="text/css"></p>
-
-<p>我把下载的google font放在 source/assets/font 目录下面。</p>
-
-<p>图片发布
-我把图片放在source/static 目录。
-在文章中引用（注意URL前面的/)：</p>
-
-<pre><code>![ Ultrablog.vim post title bug ](/static/2012/04/UltraBlog-post-title-bug.png)
-</code></pre>
-
-<p>个性域名
-先去给域名建立一个CNAME记录，指向 username.github.com ,如 ihacklog.github.com
-在source目录下建一个名为CNAME的文件，然后将自己的域名输入进去
-如：</p>
-
-<p>tinyxd.tk</p>
-
-<p>文档： http://help.github.com/pages/</p>
-
-<p>其它，如sidebar的修改等，可参考文档。http://octopress.org/docs/theme/template/
-我这就不写了。 <br/>
-主题的修改参考了这篇文章<a href="http://melandri.net/2012/02/14/octopress-theme-customization/">Octopress Theme Customization</a>，以后自己研究下css，做个自己的。</p>
-
-<p>其它可参考的文章： http://blog.devtang.com/blog/2012/02/10/setup-blog-based-on-github/</p>
-
-<p><strong>一些技术：</strong><br/>
-https://github.com/mojombo/jekyll 静态页面发布技术，使用 Textile or Markdown and Liquid converters，是Github页面引擎背后的技术。<br/>
-http://daringfireball.net/projects/markdown/ 简单的标记语言，现在很多编辑器支持，快速编写并可编译成HTML、LaTeX等格式。<br/>
-http://gembundler.com/ 将一个应用需要的Ruby软件包写入一个Gemfile文件，当应用安装时可以用Bundle命令自动从服务器上下载需要的软件包。<br/>
-http://rack.rubyforge.org/ 基于Ruby的web服务器界面。<br/>
-http://pow.cx/ 配置好的Rack服务，即开即用。<br/>
-http://rake.rubyforge.org/ 用Ruby写成的Make，批处理操作。<br/>
-http://sass-lang.com/ CSS3扩展，方便编写CSS并提供更多功能。<br/>
-http://ethanschoonover.com/solarized 一套便于阅读的代码配色方案。<br/>
-https://github.com/ 代码平台，基于git。<br/>
-http://www.heroku.com/ 云计算平台，发布非常方便。</p>
 ]]></content>
   </entry>
   
