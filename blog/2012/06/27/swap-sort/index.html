@@ -5,12 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>cache一致性问题总结 - Keen on Art of Tech</title>
+  <title>排序算法总结（二） - Keen on Art of Tech</title>
 <meta name="author" content="Tiny">
 
 
-<meta name="description" content="cache一致性问题总结">
-<meta name="keywords" content="cache">
+<meta name="description" content="排序算法总结（二）交换排序">
+<meta name="keywords" content="c++,software,交换排序">
 
   <!-- http://t.co/dKP3o1e -->
   <meta name="HandheldFriendly" content="True">
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://tinyxd.me/blog/2012/05/31/cache--zhi-xing-wen-ti-zong-jie">
+  <link rel="canonical" href="http://tinyxd.me/blog/2012/06/27/swap-sort">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -128,7 +128,7 @@
   
   <header>
     
-      <h1 class="entry-title">Cache一致性问题总结</h1>
+      <h1 class="entry-title">排序算法总结（二）</h1>
     
     
       <p class="meta">
@@ -144,7 +144,7 @@
   
 
 
-<time datetime="2012-05-31T20:59:00+08:00" pubdate data-updated="true">May 31<span>st</span>, 2012</time>
+<time datetime="2012-06-27T20:50:00+08:00" pubdate data-updated="true">Jun 27<span>th</span>, 2012</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -153,38 +153,69 @@
   </header>
 
 
-<div class="entry-content"><h2>1.现代并行机中，为了提高处理器的速度，处理器往往带有Cache。</h2>
+<div class="entry-content"><p>昨天总结了插入排序，今天总结交换排序。 <br/>
+交换排序是一种主要以交换的方式对序列进行排序的方法。排序的基本方法或手段主要就是比较和交换，像选择法等都借助了交换的手段，但都不是主要以交换为手段，如在直接选择排序的时候，一轮比较就能确定最大元素的位置，最后再进行交换。交换排序被公认为“稳定”的排序方法。</p>
 
-<p>一个数据在整个系统内可能有多份拷贝，这就引发了Cache一致性问题。
-例如下图中的2个处理器和共享内存构成的系统。初始时刻，处理机P1和P2都将变量X从共享内存装入了私有Cache。
-这时，两个Cache中和共享内存中的变量X的值是一样的。在程序运行的某一时刻，处理机P1把X的值修改为X&#8217;，并更新了私有Cache中 的值。
-此时无论P1采用写直达（write-through），还是写回（write-back）策略，都不会修改P2私有Cache中X的值。这时如果P2需要读取X，则它得到的是过时的值。 <br/>
-<img src="/images/cache.gif"></p>
+<h2>冒泡排序</h2>
+
+<p>冒泡排序，是指计算机的一种排序方法，它的时间复杂度为O（ n<sup>2</sup> ），虽然不及堆排序、快速排序的O（nlog n，底数为2），但是有两个优点：</p>
 
 <!--more-->
 
 
-<p>　　Cache一致性问题是指在含有多个Cache的并行系统中，数据的多个副本（因为没有同步更新）而造成的不一致问题。以上的例子是由于多个处理器共享一个可写变量
-造成的Cache不一致。还有其它原因也会造成Cache一致性问题，比如进程迁移和某些I/O操作等。</p>
+<p>
+1. “编程复杂度”很低，很容易写出代码； <br/>
+2. 具有稳定性，这里的稳定性是指原序列中相同元素的相对顺序仍然保持到排序后的序列，而堆排序、快速排序均不具有稳定性。不过，一路、二路归并排序、不平衡二叉树排序的速度均比冒泡排序快，且具有稳定性，但速度不及堆排序、快速排序。 <br/>
+冒泡排序（BubbleSort）的基本概念是：依次比较相邻的两个数，将小数放在前面，大数放在后面。即在第一趟：首先比较第1个和第2个数，将小数放前，大数放后。然后比较第2个数和第3个数，将小数放前，大数放后，如此继续，直至比较最后两个数，将小数放前，大数放后。至此第一趟结束，将最大的数放到了最后。在第二趟：仍从第一对数开始比较（因为可能由于第2个数和第3个数的交换，使得第1个数不再小于第2个数），将小数放前，大数放后，一直比较到倒数第二个数（倒数第一的位置上已经是
+最大的），第二趟结束，在倒数第二的位置上得到一个新的最大数（其实在整个数列中是第二大的数）。如此下去，重复以上过程，直至最终完成排序。 <br/>
+由于在排序过程中总是小数往前放，大数往后放，相当于气泡往上升，所以称作冒泡排序。 <br/>
+若记录序列的初始状态为&#8221;正序&#8221;，则冒泡排序过程只需进行一趟排序，在排序过程中只需进行n-1次比较，且不移动记录；反之，若记录序列的初始状态为&#8221;逆序&#8221;，则需进行n(n-1）/2次比较和记录移动。因此冒泡排序总的时间复杂度为O(n*n)。</p>
 
-<h2>2.c64x+与cache一致性问题（http://focus.ti.com.cn/cn/general/docs/gencontent.tsp?contentId=64183）</h2>
+<h2>快速排序（不稳定）</h2>
 
-<p>在各种数字信号处理系统中，CACHE被广泛用于弥补Core与存储器之间的速度差异。在CACHE的使用过程中，存在不同类型存储器之间数据是否一致的问题。
-本文着重分析TI高性能C64x+ DSP系列中各级CACHE之间数据一致性问题以及如何进行一致性维护。CACHE作为Core和低速存储器之间的桥梁，基于代码和
-数据的时间和空间相关性，以块为单位由硬件控制器自动加载Core所需要的代码和数据。如果所有程序和数据的存取都由Core完成，基于CACHE的运行机制，
-Core始终能够得到存储器中最新的数据。但是当有其它可以更改存储器内容的部件存在时，例如不需要Core干预的直接数据存取（DMA）引擎，就可能出现
-由于CACHE的存在而导致Core或者DMA不能够得到最新数据的现象，也就是CACHE一致性的问题。 C64x+ 存储器组织结构：TI对高性能C64x核进行了改进，
-使其性能大大提升，称之为C64x+DSP核。基于C64x+核开发的DSP芯片，所有部件都以交换网络（SCR）为核心连接起来。SCR上的部件分为两类：Master和Slave。
-Master包括Core、EDMA以及串行高速IO（sRIO），EMAC等外设。Master可以直接通过SCR发起到Slave的数据传输。Slave包括每一个Core的内存，DDR2外存以及
-其它不能直接发起数据传输的外设，Slave之间的数据传输，需要通过DMA协助完成。各款基于C64x+DSP的数据手册上详细描述了SCR的配置和Master、Slave的情况。</p>
+<p>快速排序（Quicksort）是对冒泡排序的一种改进。由C. A. R. Hoare在1962年提出。它的基本思想是：通过一趟排序将要排序的数据分割成独立的两部分，其中一部分的所有数据都比另外一部分的所有数据都要小，然后再按此方法对这两部分数据分别进行快速排序，整个排序过程可以递归进行，以此达到整个数据变成有序序列。</p>
 
-<h2>3.DMA与cache一致性问题</h2>
+<figure class='code'><figcaption><span>C++，快速排续</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="c1">//C++，快速排序</span>
+</span><span class='line'>
+</span><span class='line'><span class="kt">void</span> <span class="n">sort</span><span class="p">(</span><span class="kt">int</span> <span class="o">*</span><span class="n">a</span><span class="p">,</span><span class="kt">int</span> <span class="n">left</span><span class="p">,</span><span class="kt">int</span> <span class="n">right</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="n">left</span><span class="p">,</span><span class="n">j</span><span class="o">=</span><span class="n">right</span><span class="p">;</span>
+</span><span class='line'>  <span class="kt">int</span> <span class="n">k</span><span class="o">=</span><span class="n">a</span><span class="p">[</span><span class="n">left</span><span class="p">];</span>
+</span><span class='line'>  <span class="k">if</span><span class="p">(</span><span class="n">left</span><span class="o">&gt;=</span><span class="n">right</span><span class="p">)</span> <span class="k">return</span> <span class="p">;</span>
+</span><span class='line'>  <span class="k">while</span><span class="p">(</span><span class="n">i</span><span class="o">!=</span><span class="n">j</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">{</span>
+</span><span class='line'>      <span class="k">while</span><span class="p">(</span><span class="n">i</span><span class="o">&lt;</span><span class="n">j</span><span class="o">&amp;&amp;</span> <span class="n">a</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">&gt;=</span><span class="n">k</span><span class="p">)</span> <span class="n">j</span><span class="o">--</span><span class="p">;</span>
+</span><span class='line'>      <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="n">a</span><span class="p">[</span><span class="n">j</span><span class="p">];</span>
+</span><span class='line'>      <span class="k">while</span><span class="p">(</span><span class="n">i</span><span class="o">&lt;</span><span class="n">j</span><span class="o">&amp;&amp;</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">&lt;=</span><span class="n">k</span><span class="p">)</span> <span class="n">i</span><span class="o">++</span><span class="p">;</span>
+</span><span class='line'>      <span class="n">a</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">=</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>  <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="n">k</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">sort</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">left</span><span class="p">,</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+</span><span class='line'>  <span class="n">sort</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">right</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<p>　Cache数据与主存数据不一致是指：在采用Cache的系统中，同样一个数据可能既存在于Cache中，也存在于主存中，两者数据相同则具有一致性，
-数据不相同就叫做不一致性。如果不能保证数据的一致性，那么，后续程序的运行就要出现问题。假设DMA针对内存的目的地址与Cache缓存的对象
-没有重叠区域，DMA和Cache之间将相安无事。但是如果DMA的目的地址与Cache所缓冲的内存地址访问有重叠，经过DMA操作Cache缓冲所对应的内存数据已经被修改，
-而CPU本身并不知道，它仍然认为Cache中的数据就是内存中的数据，以后访问Cache映射的内存时，它仍然使用陈旧的Cache数据。这样就发生Cache与内存之间数据“
-不一致性”的错误。</p>
+
+<p>本文是查阅书籍和网络资料整理而来，转载请注明出处。并以超链接的形式注明本文地址：http://tinyxd.me/blog/2012/06/27/swap-sort/ <br/>
+下一节更新选择排序。</p>
 </div>
 
 
@@ -207,12 +238,12 @@ Master包括Core、EDMA以及串行高速IO（sRIO），EMAC等外设。Master�
   
 
 
-<time datetime="2012-05-31T20:59:00+08:00" pubdate data-updated="true">May 31<span>st</span>, 2012</time>
+<time datetime="2012-06-27T20:50:00+08:00" pubdate data-updated="true">Jun 27<span>th</span>, 2012</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/embedded/'>embedded</a>
+    <a class='category' href='/blog/categories/software/'>software</a>
   
 </span>
 
@@ -221,7 +252,7 @@ Master包括Core、EDMA以及串行高速IO（sRIO），EMAC等外设。Master�
 
 <span class="tags">
   
-     Tag: <a class='tag' href='/tags/cache/'>cache</a>, <a class='tag' href='/tags/dsp/'>dsp</a>, <a class='tag' href='/tags/embedded/'>embedded</a>
+     Tag: <a class='tag' href='/tags/c-/'>c++</a>, <a class='tag' href='/tags/software/'>software</a>, <a class='tag' href='/tags/sort/'>sort</a>
   
 </span>
 
@@ -245,10 +276,8 @@ Master包括Core、EDMA以及串行高速IO（sRIO），EMAC等外设。Master�
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2012/05/27/arch-linuxxia-java-sdkde-an-zhuang-yu-pei-zhi/" title="Previous Post: arch linux下java SDK的安装与配置">&laquo; arch linux下java SDK的安装与配置</a>
+        <a class="basic-alignment left" href="/blog/2012/06/27/straight-insertion-sort/" title="Previous Post: 排序算法总结（一）">&laquo; 排序算法总结（一）</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2012/06/04/linuxxia-shi-yong-lftpde-xiao-jie/" title="Next Post: linux下使用lftp的小结">linux下使用lftp的小结 &raquo;</a>
       
     </p>
   </footer>
@@ -364,8 +393,8 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://tinyxd.me/blog/2012/05/31/cache--zhi-xing-wen-ti-zong-jie/';
-        var disqus_url = 'http://tinyxd.me/blog/2012/05/31/cache--zhi-xing-wen-ti-zong-jie/';
+        var disqus_identifier = 'http://tinyxd.me/blog/2012/06/27/swap-sort/';
+        var disqus_url = 'http://tinyxd.me/blog/2012/06/27/swap-sort/';
         var disqus_script = 'embed.js';
       
     (function () {
