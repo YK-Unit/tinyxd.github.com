@@ -131,6 +131,60 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2012/06/05/cannot-find-libpython/">解决pygments.rb (RubyPython) 找不到libpython的问题(archlinux下)</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-06-05T08:01:00+08:00" pubdate data-updated="true">Jun 5<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/06/05/cannot-find-libpython/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>本文章转自：<a href="http://ruby-china.org/topics/289">Ruby China 论坛</a> <br/>
+如果找不到python，或者系统默认得python是3.x (比如Arch Linux)，手动制定下路径</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>RubyPython.configure python_exe: '/usr/bin/python2.7'</span></code></pre></td></tr></table></div></figure>
+
+
+<p>对于rails项目比如ruby-china，可以把这行代码丢到config/initializers下。</p>
+
+<p>不过RubyPython仍然可能找不到libpython而提示lib.so not found。这是由于RubyPython确定正确libpython的规则和你的系统不兼容，可以通过手动加些symbol links来解决 (目前RubyPython的git最新代码相对当前稳定版本0.5.3改动非常大，希望新版本能解决这个问题，就先不去提交fixing了)。</p>
+
+<p>可以参考 PythonExec initialize 方法中的规则来建symbol link.</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2012/06/05/cannot-find-libpython/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2012/06/04/linuxxia-shi-yong-lftpde-xiao-jie/">Linux下使用lftp的小结</a></h1>
     
     
@@ -666,78 +720,9 @@ remotes/octopress/thor
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/05/23/octopressan-zhuang-bi-ji/">Octopress安装笔记</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-05-23T07:16:00+08:00" pubdate data-updated="true">May 23<span>rd</span>, 2012</time>
-        
-         | <a href="/blog/2012/05/23/octopressan-zhuang-bi-ji/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>在阅读此教程之前，先安装git和ruby环境。</p>
-
-<p><strong>1.安装ruby环境</strong></p>
-
-<p>如果已经安装了ruby,就不用安装rvm 了。
-Archlinux用户建议用pacman 安装ruby,方便省事。</p>
-
-<p>Archlinux安装RVM教程：
-<a href="https://wiki.archlinux.org/index.php/RVM">archlinux安装RVM教程</a></p>
-
-<pre><code>[tinyxd@archbang  ~]$ sudo bash &lt; &lt;(curl -s https://raw.github.com/wayneeseguin/rvm/master/binscripts/rvm-installer )
-</code></pre>
-
-<p>添加当前用户到rvm 组</p>
-
-<pre><code>[tinyxd@archbang  ~]$ sudo usermod -a -G rvm admin
-</code></pre>
-
-<p>查看下添加成功了没：</p>
-
-<pre><code>[tinyxd@archbang ~]$ grep rvm /etc/group
-rvm:x:1004:admin
-</code></pre>
-
-<p>再注销，登录。</p>
-
-<blockquote><p>To start using RVM you need to run <code>source /etc/profile.d/rvm.sh</code> in all your open shell windows, in rare cases you need to reopen all shell windows.</p></blockquote>
-
-<p>已经安装了ruby的就可以从这里开始了。</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2012/05/23/octopressan-zhuang-bi-ji/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
+    
+      <a class="prev" href="/blog/page/3/">&larr; Older</a>
     
     <a href="/blog/archives">Blog Archives</a>
     
@@ -761,6 +746,10 @@ rvm:x:1004:admin
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2012/06/27/straight-insertion-sort/">排序算法总结（一）</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2012/06/25/octopress-add-tag-cloud/">octopress博客添加标签云</a>
       </li>
     
@@ -776,15 +765,11 @@ rvm:x:1004:admin
         <a href="/blog/2012/06/18/debianan-zhuang-nvidiaxian-qia-qu-dong/">debian安装nvidia显卡驱动</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2012/06/14/yong-newshen-qing-dong-tai-kong-jian-de-wen-ti/">用new申请动态空间的问题</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Category Cloud</h1>
-    <span id="tag-cloud"><a href='/blog/categories/davinci' style='font-size: 110.0%'>Davinci(1)</a> <a href='/blog/categories/embedded-systerm' style='font-size: 120.0%'>Embedded systerm(2)</a> <a href='/blog/categories/java' style='font-size: 110.0%'>Java(1)</a> <a href='/blog/categories/linux' style='font-size: 140.0%'>Linux(4)</a> <a href='/blog/categories/octopress' style='font-size: 160.0%'>Octopress(6)</a> <a href='/blog/categories/php' style='font-size: 110.0%'>Php(1)</a> <a href='/blog/categories/ruby' style='font-size: 110.0%'>Ruby(1)</a> <a href='/blog/categories/software-programming' style='font-size: 140.0%'>Software programming(4)</a> </span>
+    <span id="tag-cloud"><a href='/blog/categories/davinci' style='font-size: 110.0%'>Davinci(1)</a> <a href='/blog/categories/embedded-systerm' style='font-size: 120.0%'>Embedded systerm(2)</a> <a href='/blog/categories/java' style='font-size: 110.0%'>Java(1)</a> <a href='/blog/categories/linux' style='font-size: 140.0%'>Linux(4)</a> <a href='/blog/categories/octopress' style='font-size: 160.0%'>Octopress(6)</a> <a href='/blog/categories/php' style='font-size: 110.0%'>Php(1)</a> <a href='/blog/categories/programming' style='font-size: 110.0%'>Programming(1)</a> <a href='/blog/categories/ruby' style='font-size: 110.0%'>Ruby(1)</a> <a href='/blog/categories/software' style='font-size: 110.0%'>Software(1)</a> <a href='/blog/categories/software-programming' style='font-size: 140.0%'>Software programming(4)</a> </span>
 </section>
 
 
