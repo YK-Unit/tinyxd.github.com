@@ -4,7 +4,7 @@
   <title><![CDATA[Category: octopress | Keen on Art of Tech]]></title>
   <link href="http://tinyxd.me/blog/categories/octopress/atom.xml" rel="self"/>
   <link href="http://tinyxd.me/"/>
-  <updated>2012-06-28T22:54:52+08:00</updated>
+  <updated>2012-06-28T23:43:27+08:00</updated>
   <id>http://tinyxd.me/</id>
   <author>
     <name><![CDATA[Tiny]]></name>
@@ -54,10 +54,10 @@
 
 <p>1.修改source / <em>includes / head.html
 <code>
-&lt;meta name="author" content="Tiny"&gt;
-
-&lt;meta name="description" content="Category: octopress"&gt;
-&lt;meta name="keywords" content="ruby , linux , archlinux , debian , software , programming , embedded , gem, web ,ubuntu , java"&gt;
+&lt;meta name="author" content="{{ site.author }}"&gt;
+{% capture description %}{% if page.description %}{{ page.description }}{% elsif site.description %}{{ site.description }}{%else%}{{ content | raw_content }}{% endif %}{% endcapture %}
+&lt;meta name="description" content="{{ description | strip_html | condense_spaces | truncate:150 }}"&gt;
+{% if page.keywords %}&lt;meta name="keywords" content="{{ page.keywords }}"&gt;{%else%}&lt;meta name="keywords" content="{{ site.keywords }}"&gt;{% endif %}
 </code>
 2.在</em>config.yml中添加如下内容
 <code>
