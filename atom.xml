@@ -4,7 +4,7 @@
   <title><![CDATA[Keen on Art of Tech]]></title>
   <link href="http://tinyxd.me/atom.xml" rel="self"/>
   <link href="http://tinyxd.me/"/>
-  <updated>2012-06-28T07:50:25+08:00</updated>
+  <updated>2012-06-28T13:02:30+08:00</updated>
   <id>http://tinyxd.me/</id>
   <author>
     <name><![CDATA[Tiny]]></name>
@@ -12,6 +12,274 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[排序算法总结（三）]]></title>
+    <link href="http://tinyxd.me/blog/2012/06/28/select-sort/"/>
+    <updated>2012-06-28T12:38:00+08:00</updated>
+    <id>http://tinyxd.me/blog/2012/06/28/select-sort</id>
+    <content type="html"><![CDATA[<p>选择排序是指在每次排序时，选择最大或者最小项，将其放入适当的位置上，反复操作，直到所有数据排序完成为止。选择排序是一类比较常见的排序，现实生活中也比较常见，比如一个班级的学生排队，先将最高的学生排到队首，然后在其他学生中再挑出最高的一个，排在第二的位置，以此类推，直到全部排完。</p>
+
+<p>选择排序的交换操作介于 0 和 ( n - 1 ) 次之间。选择排序的比较操作为 n ( n - 1 ) / 2 次之间。选择排序的赋值操作介于 0 和 3 ( n - 1 ) 次之间。 比较次数O（  n<sup>2</sup> ）,比较次数与关键字的初始状态无关，总的比较次数N=(n-1)+(n-2)+&#8230;+1=n*(n-1)/2。 交换次数O(n),最好情况是，已经有序，交换0次；最坏情况是，逆序，交换n-1次。 交换次数比冒泡排序少多了，由于交换所需CPU时间比比较所需的CPU时间多，n值较小时，选择排序比冒泡排序快。</p>
+
+<h2>直接选择排序（不稳定）</h2>
+
+<figure class='code'><figcaption><span>直接选择排序</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+</pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="kt">void</span> <span class="n">SelectSort</span><span class="p">(</span><span class="n">elemtype</span> <span class="n">R</span><span class="p">[],</span> <span class="kt">int</span> <span class="n">n</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="kt">int</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">m</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">elemtype</span> <span class="n">t</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">for</span><span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">{</span>
+</span><span class='line'>      <span class="n">m</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
+</span><span class='line'>      <span class="k">for</span><span class="p">(</span><span class="n">j</span> <span class="o">=</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span>
+</span><span class='line'>      <span class="p">{</span>
+</span><span class='line'>          <span class="k">if</span><span class="p">(</span><span class="n">R</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">R</span><span class="p">[</span><span class="n">m</span><span class="p">])</span>
+</span><span class='line'>          <span class="n">m</span> <span class="o">=</span> <span class="n">j</span><span class="p">;</span>
+</span><span class='line'>      <span class="p">}</span>
+</span><span class='line'>      <span class="k">if</span><span class="p">(</span><span class="n">m</span> <span class="o">!=</span> <span class="n">i</span><span class="p">)</span>
+</span><span class='line'>      <span class="p">{</span>
+</span><span class='line'>          <span class="n">t</span> <span class="o">=</span> <span class="n">R</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+</span><span class='line'>          <span class="n">R</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">R</span><span class="p">[</span><span class="n">m</span><span class="p">];</span>
+</span><span class='line'>          <span class="n">R</span><span class="p">[</span><span class="n">m</span><span class="p">]</span> <span class="o">=</span> <span class="n">t</span><span class="p">;</span>
+</span><span class='line'>      <span class="p">}</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<!--more-->
+
+
+<h2>堆排序(Heapsort)</h2>
+
+<h3>“堆”定义</h3>
+
+<p>树中任一非叶结点的关键字均不大于（或不小于）其左右孩子（若存在）结点的关键字。</p>
+
+<h3>堆的高度</h3>
+
+<p>堆可以被看成是一棵树，结点在堆中的高度可以被定义为从本结点到叶子结点的最长简单下降路径上边的数目；定义堆的高度为树根的高度。我们将看到，堆结构上的一些基本操作的运行时间至多是与树的高度成正比，为O（lgn）。</p>
+
+<h3>堆排序思想</h3>
+
+<p>堆排序利用了大根堆（或小根堆）堆顶记录的关键字最大（或最小）这一特征，使得在当前无序区中选取最大（或最小）关键字的记录变得简单。 <br/>
+（1）用大根堆排序的基本思想 <br/>
+① 先将初始文件R[1..n]建成一个大根堆，此堆为初始的无序区    <br/>
+② 再将关键字最大的记录R[1]（即堆顶）和无序区的最后一个记录R[n]交换，由此得到新的无序区R[1..n-1]和有序区R[n]，且满足R[1..n-1].keys≤R[n].key   <br/>
+③由于交换后新的根R[1]可能违反堆性质，故应将当前无序区R[1..n-1]调整为堆。然后再次将R[1..n-1]中关键字最大的记录R[1]和该区间的最后一个记录R[n-1]交换，由此得到新的无序区R[1..n-2]和有序区R[n-1..n]，且仍满足关系R[1..n-2].keys≤R[n-1..n].keys，同样要将R[1..n-2]调整为堆。
+&#8230;&#8230;</p>
+
+<p>直到无序区只有一个元素为止。 <br/>
+（2）大根堆排序算法的基本操作： <br/>
+① 初始化操作：将R[1..n]构造为初始堆； <br/>
+② 每一趟排序的基本操作：将当前无序区的堆顶记录R[1]和该区间的最后一个记录交换，然后将新的无序区调整为堆（亦称重建堆）。 <br/>
+注意： <br/>
+①只需做n-1趟排序，选出较大的n-1个关键字即可以使得文件递增有序。 ②用小根堆排序与利用大根堆类似，只不过其排序结果是递减有序的。堆排序和直接选择排序相反：在任何时刻堆排序中无序区总是在有序区之前，且有序区是在原向量的尾部由后往前逐步扩大至整个向量为止。</p>
+
+<h3>特点</h3>
+
+<p>堆排序（HeapSort）是一树形选择排序。堆排序的特点是：在排序过程中，将R[l..n]看成是一棵完全二叉树的顺序存储结构，利用完全二叉树中双亲结点和孩子结点之间的内在关系（参见二叉树的顺序存储结构），在当前无序区中选择关键字最大（或最小）的记录</p>
+
+<h3>堆排序与直接选择排序的区别</h3>
+
+<p>直接选择排序中，为了从R[1..n]中选出关键字最小的记录，必须进行n-1次比较，然后在R[2..n]中选出关键字最小的记录，又需要做n-2次比较。事实上，后面的n-2次比较中，有许多比较可能在前面的n-1次比较中已经做过，但由于前一趟排序时未保留这些比较结果，所以后一趟排序时又重复执行了这些比较操作。 <br/>
+堆排序可通过树形结构保存部分比较结果，可减少比较次数。</p>
+
+<h3>算法分析</h3>
+
+<p>堆排序的时间，主要由建立初始堆和反复重建堆这两部分的时间开销构成，它们均是通过调用Heapify实现的。堆排序的最坏时间复杂度为O(nlogn)。堆序的平均性能较接近于最坏性能。由于建初始堆所需的比较次数较多，所以堆排序不适宜于记录数较少的文件。堆排序是就地排序，辅助空间为O(1），它是<strong>不稳定</strong>的排序方法。</p>
+
+<figure class='code'><figcaption><span>堆排序c语言实现</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="c1">//C语言描述</span>
+</span><span class='line'><span class="c1">// array是待调整的堆数组，i是待调整的数组元素的位置，nlength是数组的长度</span>
+</span><span class='line'><span class="kt">void</span> <span class="nf">HeapAdjust</span><span class="p">(</span><span class="kt">int</span> <span class="n">array</span><span class="p">[],</span><span class="kt">int</span> <span class="n">i</span><span class="p">,</span><span class="kt">int</span> <span class="n">nLength</span><span class="p">)</span><span class="c1">//本函数功能是：根据数组array构建大根堆</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="kt">int</span> <span class="n">nChild</span><span class="p">;</span>
+</span><span class='line'>  <span class="kt">int</span> <span class="n">nTemp</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">for</span> <span class="p">(</span><span class="n">nTemp</span> <span class="o">=</span> <span class="n">array</span><span class="p">[</span><span class="n">i</span><span class="p">];</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">&lt;</span> <span class="n">nLength</span><span class="p">;</span> <span class="n">i</span> <span class="o">=</span> <span class="n">nChild</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">{</span>
+</span><span class='line'>      <span class="c1">// 子结点的位置=2*（父结点位置）+ 1</span>
+</span><span class='line'>      <span class="n">nChild</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+</span><span class='line'>      <span class="c1">// 得到子结点中较大的结点</span>
+</span><span class='line'>      <span class="k">if</span> <span class="p">(</span><span class="n">nChild</span> <span class="o">&lt;</span> <span class="n">nLength</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="n">array</span><span class="p">[</span><span class="n">nChild</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">array</span><span class="p">[</span><span class="n">nChild</span><span class="p">])</span>
+</span><span class='line'>      <span class="o">++</span><span class="n">nChild</span><span class="p">;</span>
+</span><span class='line'>      <span class="c1">// 如果较大的子结点大于父结点那么把较大的子结点往上移动，替换它的父结点</span>
+</span><span class='line'>      <span class="k">if</span> <span class="p">(</span><span class="n">nTemp</span> <span class="o">&lt;</span> <span class="n">array</span><span class="p">[</span><span class="n">nChild</span><span class="p">])</span>
+</span><span class='line'>      <span class="p">{</span>
+</span><span class='line'>      <span class="n">array</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span> <span class="n">array</span><span class="p">[</span><span class="n">nChild</span><span class="p">];</span>
+</span><span class='line'>      <span class="p">}</span>
+</span><span class='line'>      <span class="k">else</span> <span class="c1">// 否则退出循环</span>
+</span><span class='line'>      <span class="p">{</span>
+</span><span class='line'>      <span class="k">break</span><span class="p">;</span>
+</span><span class='line'>      <span class="p">}</span>
+</span><span class='line'>      <span class="c1">// 最后把需要调整的元素值放到合适的位置</span>
+</span><span class='line'>      <span class="n">array</span><span class="p">[</span><span class="n">nChild</span><span class="p">]</span><span class="o">=</span> <span class="n">nTemp</span><span class="p">;</span>
+</span><span class='line'>      <span class="p">}</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>  <span class="c1">// 堆排序算法</span>
+</span><span class='line'>  <span class="kt">void</span> <span class="nf">HeapSort</span><span class="p">(</span><span class="kt">int</span> <span class="n">array</span><span class="p">[],</span><span class="kt">int</span> <span class="n">length</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">{</span>
+</span><span class='line'>      <span class="c1">// 调整序列的前半部分元素，调整完之后第一个元素是序列的最大的元素</span>
+</span><span class='line'>      <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">length</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">;</span> <span class="o">--</span><span class="n">i</span><span class="p">)</span>
+</span><span class='line'>      <span class="p">{</span>
+</span><span class='line'>      <span class="n">HeapAdjust</span><span class="p">(</span><span class="n">array</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">length</span><span class="p">);</span>
+</span><span class='line'>      <span class="p">}</span>
+</span><span class='line'>      <span class="c1">// 从最后一个元素开始对序列进行调整，不断的缩小调整的范围直到第一个元素</span>
+</span><span class='line'>      <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">length</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">;</span> <span class="o">--</span><span class="n">i</span><span class="p">)</span>
+</span><span class='line'>      <span class="p">{</span>
+</span><span class='line'>      <span class="c1">// 把第一个元素和当前的最后一个元素交换，</span>
+</span><span class='line'>      <span class="c1">// 保证当前的最后一个位置的元素都是在现在的这个序列之中最大的</span>
+</span><span class='line'>      <span class="n">Swap</span><span class="p">(</span><span class="o">&amp;</span><span class="n">array</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="o">&amp;</span><span class="n">array</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+</span><span class='line'>      <span class="c1">// 不断缩小调整heap的范围，每一次调整完毕保证第一个元素是当前序列的最大值</span>
+</span><span class='line'>      <span class="n">HeapAdjust</span><span class="p">(</span><span class="n">array</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">i</span><span class="p">);</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<figure class='code'><figcaption><span>堆排序算法（c++描述）</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+</pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="err">堆排序算法（</span><span class="n">C</span><span class="o">++</span><span class="err">描述）</span>
+</span><span class='line'><span class="cp">#define MAX 100</span><span class="c1">//数据元素的最大个数</span>
+</span><span class='line'><span class="k">typedef</span> <span class="k">struct</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="kt">int</span> <span class="n">r</span><span class="p">[</span><span class="n">MAX</span><span class="p">];</span>
+</span><span class='line'>  <span class="kt">int</span> <span class="n">length</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span><span class="n">SqList</span><span class="p">;</span><span class="c1">//定义一个线性表用于存放数据元素</span>
+</span><span class='line'><span class="kt">void</span> <span class="n">HeapAdjust</span><span class="p">(</span><span class="n">SqList</span> <span class="o">&amp;</span><span class="n">L</span><span class="p">,</span><span class="kt">int</span> <span class="n">s</span><span class="p">,</span><span class="kt">int</span> <span class="n">m</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="c1">//已知L.r[s...m]中记录除L.r[s]外均满足堆的定义，本函数用于使L.r[s...m]成为一个大顶堆</span>
+</span><span class='line'>  <span class="kt">int</span> <span class="n">j</span><span class="p">;</span>
+</span><span class='line'>  <span class="kt">int</span> <span class="n">e</span><span class="o">=</span><span class="n">L</span><span class="p">.</span><span class="n">r</span><span class="p">[</span><span class="n">s</span><span class="p">];</span>
+</span><span class='line'>  <span class="k">for</span><span class="p">(</span><span class="n">j</span><span class="o">=</span><span class="mi">2</span><span class="o">*</span><span class="n">s</span><span class="p">;</span><span class="n">j</span><span class="o">&lt;=</span><span class="n">m</span><span class="p">;</span><span class="n">j</span><span class="o">*=</span><span class="mi">2</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">{</span>
+</span><span class='line'>      <span class="k">if</span><span class="p">(</span><span class="n">j</span><span class="o">&lt;</span><span class="n">M</span><span class="o">&amp;&amp;</span><span class="n">L</span><span class="p">.</span><span class="n">R</span><span class="p">[</span><span class="n">J</span><span class="p">]</span><span class="o">&lt;</span><span class="n">L</span><span class="p">.</span><span class="n">R</span><span class="p">[</span><span class="n">J</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span> <span class="o">++</span><span class="n">j</span><span class="p">;</span>
+</span><span class='line'>      <span class="k">if</span><span class="p">(</span><span class="n">e</span><span class="o">&gt;=</span><span class="n">L</span><span class="p">.</span><span class="n">r</span><span class="p">[</span><span class="n">j</span><span class="p">])</span> <span class="k">break</span><span class="p">;</span>
+</span><span class='line'>      <span class="n">L</span><span class="p">.</span><span class="n">r</span><span class="p">[</span><span class="n">s</span><span class="p">]</span><span class="o">=</span><span class="n">L</span><span class="p">.</span><span class="n">r</span><span class="p">[</span><span class="n">j</span><span class="p">];</span>
+</span><span class='line'>      <span class="n">s</span><span class="o">=</span><span class="n">j</span><span class="p">;</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>  <span class="n">L</span><span class="p">.</span><span class="n">r</span><span class="p">[</span><span class="n">s</span><span class="p">]</span><span class="o">=</span><span class="n">e</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="kt">void</span> <span class="n">HeapSort</span><span class="p">(</span><span class="n">SqList</span> <span class="o">&amp;</span><span class="n">L</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="c1">//对顺序表L进行堆排序</span>
+</span><span class='line'>  <span class="kt">int</span> <span class="n">i</span><span class="p">,</span><span class="n">e</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">for</span><span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="n">L</span><span class="p">.</span><span class="n">length</span><span class="o">/</span><span class="mi">2</span><span class="p">;</span><span class="n">i</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">--</span><span class="p">)</span>
+</span><span class='line'>  <span class="n">HeapAdjust</span><span class="p">(</span><span class="n">L</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">L</span><span class="p">.</span><span class="n">length</span><span class="p">);</span>
+</span><span class='line'>  <span class="k">for</span><span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="n">L</span><span class="p">.</span><span class="n">length</span><span class="p">;</span><span class="n">i</span><span class="o">&gt;</span><span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">--</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">{</span>
+</span><span class='line'>      <span class="c1">//将大顶堆的顶记录和最后一个记录相互交换</span>
+</span><span class='line'>      <span class="n">e</span><span class="o">=</span><span class="n">L</span><span class="p">.</span><span class="n">r</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
+</span><span class='line'>      <span class="n">L</span><span class="p">.</span><span class="n">r</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">=</span><span class="n">L</span><span class="p">.</span><span class="n">r</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+</span><span class='line'>      <span class="n">L</span><span class="p">.</span><span class="n">r</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="n">e</span><span class="p">;</span>
+</span><span class='line'>      <span class="n">HeapAdjust</span><span class="p">(</span><span class="n">L</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>本文是查阅书籍和网络资料整理而来，转载请注明出处。并以超链接的形式注明本文地址： <br/>
+<code>http://tinyxd.me/blog/2012/06/28/select-sort/</code> <br/>
+下一节更新基数排序。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[排序算法总结（二）]]></title>
@@ -79,7 +347,8 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>本文是查阅书籍和网络资料整理而来，转载请注明出处。并以超链接的形式注明本文地址：http://tinyxd.me/blog/2012/06/27/swap-sort/ <br/>
+<p>本文是查阅书籍和网络资料整理而来，转载请注明出处。并以超链接的形式注明本文地址： <br/>
+<code>http://tinyxd.me/blog/2012/06/27/swap-sort/</code> <br/>
 下一节更新选择排序。</p>
 ]]></content>
   </entry>
@@ -2233,115 +2502,6 @@ git pull origin source
 </code></pre>
 
 <p>原则很简单，只要记住“your_local_octopress_directory”对应的的remote source branch，而”_deploy”对应的是remote master branch即可。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Octopress:新手教程]]></title>
-    <link href="http://tinyxd.me/blog/2012/05/23/octopress-xin-shou-jiao-cheng/"/>
-    <updated>2012-05-23T20:55:00+08:00</updated>
-    <id>http://tinyxd.me/blog/2012/05/23/octopress-xin-shou-jiao-cheng</id>
-    <content type="html"><![CDATA[<p><em>转载自：</em><br/>
-http://geekontheway.github.com/blog/2011/12/03/octopress-for-freshman/<br/>
-Octopress基于jekyll，刚开始使用起来也比较复杂：</p>
-
-<pre><code>Octopress会有两个分支：source（编写博客）和master（生成好的博客），就像这样：
-
-git remote -v
-
-octopress git://github.com/imathis/octopress.git (fetch)
-octopress git://github.com/imathis/octopress.git (push)
-origin    git@github.com:geekontheway/geekontheway.github.com.git (fetch)
-origin    git@github.com:geekontheway/geekontheway.github.com.git (push)
-
-
-git branch -a
-
-* source
-  remotes/octopress/HEAD -&gt; octopress/master
-  remotes/octopress/compass
-  remotes/octopress/configuration
-  remotes/octopress/edge
-  remotes/octopress/generate_environment
-  remotes/octopress/gh-pages
-  remotes/octopress/master
-  remotes/octopress/move_rakefile_configs
-  remotes/octopress/post_names
-  remotes/octopress/rake_minify_js
-  remotes/octopress/refactor_code_highlight
-  remotes/octopress/refactor_deployment
-  remotes/octopress/refactor_js
-  remotes/octopress/site
-  remotes/octopress/site-deploy-test
-  remotes/octopress/subdir
-remotes/octopress/thor
-</code></pre>
-
-<p>其中只有origin仓库和source分支是必须的，其余分支或仓库建议删掉。</p>
-
-<!--more-->
-
-
-<p>我们来看一下source分支都有什么：</p>
-
-<pre><code>CHANGELOG.markdown  
-config.ru   
- _deploy  部署文件夹，在.gitignore中被设置了
-.DS_Store 文件夹显示属性，在.gitignore中被设置了
-Gemfile.lock  
-.gitignore  
-plugins  
-.pygments-cache   
-.rbenv-version Ruby版本有特殊要求 这个文件在.gitignore中被设置了   
-.rvmrc   Ruby版本有特殊要求
-.sass-cache  
-source
-config.rb           
-_config.yml  
-Gemfile  
-.git          
-.idea   Rubymine设置文件，在.gitignore中被设置了    
-public  在.gitignore中被设置了  
-Rakefile         
-README.markdown  
-sass    
-.slugignore  
-.themes
-</code></pre>
-
-<p>其中_deploy,source,public这三个文件夹很有趣：</p>
-
-<pre><code>如果你是和别人合作博客，或者自己同时在好几个电脑上写博客，每次开始之前，git pull origin source获得最新的文件,rake generate生成新的页面
-
-我们在source分支做了博客的发布，或者改变了博客的设置之后，rake generate生成网站
-
-rake watch+pow 或者rake review+http://localhost:4000就可以看到我们所做的变化
-
-确认无误后，rake deploy文章就发布到了博客中
-
-当然，不要忘了更新项目 git push origin source
-
-特别的，如果你克隆了博客，记得在git checkout source，然后rake setup_github_pages执行初始化，当然，在那之前也需要bundle install，然后rake generate就生成页面了.
-
-如果是新建的Repo ，记得
-
-
-$ mkdir yourrepo
-$ cd yourrepo
-$ git init
-# 其实这这时如果你多新建一个index.html文件的话，github会为你生成一个jekyll博客。
-$ touch README
-$ git add .
-$ git commit -m 'first commit'
-$ git remote add origin git@github.com:username/yourname.github.com.git
-$ git push origin master
-</code></pre>
-
-<p>对于新手有几个提醒: <br/>
-1.时常git status,git log避免误操作<br/>
-2.不要在github上直接编辑文件<br/>
-3.想清楚了再下手<br/>
-4.github pages的 username 大小写敏感。如果用户名和username不一致的话,默认会生成这个Repo的project pages。</p>
 ]]></content>
   </entry>
   
