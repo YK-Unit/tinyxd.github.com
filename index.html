@@ -131,6 +131,50 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2012/06/29/radix-sort/">排序算法总结（四）</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-06-29T23:28:00+08:00" pubdate data-updated="true">Jun 29<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/06/29/radix-sort/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>“基数排序法”属于“分配式排序”（distribution sort），基数排序法又称“桶子法”（bucket sort）或bin sort ，它是通过键值的部分资讯，将要排序的元素分配至某些“桶”中，借以达到排序的作用。基数排序法是属于稳定性的排序，其时间复杂度为O（nlog(r)m），其中r为所采用的基数，而m为堆数。在某些时候，基数排序法的效率高于其他的比较性排序。 <br/>
+什么是基数排序： 基数排序也称桶排序，是一种当关键字为整数类型时的一种非常高效的排序方法。基数排序算法进出桶中的数据元素序列满足先进先出的原则（桶实际就是队列）。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2012/06/29/radix-sort/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2012/06/28/select-sort/">排序算法总结（三）</a></h1>
     
     
@@ -418,16 +462,14 @@ C/C++代码实现直接插入排序：</p>
 
   <div class="entry-content"><p>给octopress添加keywords和description。</p>
 
-<p>1.修改source / _includes / head.html</p>
+<p>1.修改source/_includes/head.html</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;meta name="author" content="Tiny"&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;meta name="description" content="How to optimize Octopress for SEO"&gt;
-</span><span class='line'>&lt;meta name="keywords" content="octopress, meta,seo"&gt;</span></code></pre></td></tr></table></div></figure>
+<div><script src='https://gist.github.com/2460469.js?file=head.html'></script>
+<noscript><pre><code>&lt;meta name=&quot;author&quot; content=&quot;{{ site.author }}&quot;&gt;
+{% capture description %}{% if page.description %}{{ page.description }}{% elsif site.description %}{{ site.description }}{%else%}{{ content | raw_content }}{% endif %}{% endcapture %}
+&lt;meta name=&quot;description&quot; content=&quot;{{ description | strip_html | condense_spaces | truncate:150 }}&quot;&gt;
+{% if page.keywords %}&lt;meta name=&quot;keywords&quot; content=&quot;{{ page.keywords }}&quot;&gt;{%else%}&lt;meta name=&quot;keywords&quot; content=&quot;{{ site.keywords }}&quot;&gt;{% endif %}
+</code></pre></noscript></div>
 
 
 <p>2.在_config.yml中添加如下内容</p>
@@ -438,7 +480,8 @@ C/C++代码实现直接插入排序：</p>
 </span><span class='line'>keywords: ruby , linux , archlinux , debian , software ,programming , embedded ,gem,web development ,ubuntu , java</span></code></pre></td></tr></table></div></figure>
 
 
-<p>3.这样在主页代码中也会出现keywords和description信息。每个post也会出现。方便被搜索网站索引。这个涉及到了SEO优化。</p>
+<p>3.这样在主页代码中也会出现keywords和description信息。每个post也会出现。方便被搜索网站索引。这个涉及到了SEO。
+以上文章参考自<a href="http://www.yatishmehta.in/seo-for-octopress">这里</a>。</p>
 </div>
   
   
@@ -649,49 +692,6 @@ int   (*p)[3][3]   =   new   int[1][3][3];     删除时请调用delete[]   p;</
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/06/10/qian-ru-shi-linuxying-yong-cheng-xu-zi-qi-dong/">嵌入式linux应用程序自启动</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-06-10T19:46:00+08:00" pubdate data-updated="true">Jun 10<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/06/10/qian-ru-shi-linuxying-yong-cheng-xu-zi-qi-dong/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>在很多嵌入式系统中，由于可用资源较少，常常在系统启动后就直接让应用程序自动启动，以减少用户操作和节省资源。如何让自己的应用程序自动启动呢？    在Linux系统中，配置应用程序自动启动的方法有以下三种：</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2012/06/10/qian-ru-shi-linuxying-yong-cheng-xu-zi-qi-dong/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -715,6 +715,10 @@ int   (*p)[3][3]   =   new   int[1][3][3];     删除时请调用delete[]   p;</
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2012/06/29/radix-sort/">排序算法总结（四）</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2012/06/28/select-sort/">排序算法总结（三）</a>
       </li>
     
@@ -730,15 +734,11 @@ int   (*p)[3][3]   =   new   int[1][3][3];     删除时请调用delete[]   p;</
         <a href="/blog/2012/06/25/octopress-add-tag-cloud/">octopress博客添加标签云</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2012/06/19/seo-meta-octopress/">给octopress添加关键字和网站描述</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Category Cloud</h1>
-    <span id="tag-cloud"><a href='/blog/categories/davinci' style='font-size: 108.57142857142857%'>Davinci(1)</a> <a href='/blog/categories/embedded' style='font-size: 117.14285714285714%'>Embedded(2)</a> <a href='/blog/categories/java' style='font-size: 108.57142857142857%'>Java(1)</a> <a href='/blog/categories/linux' style='font-size: 134.28571428571428%'>Linux(4)</a> <a href='/blog/categories/octopress' style='font-size: 151.42857142857144%'>Octopress(6)</a> <a href='/blog/categories/php' style='font-size: 108.57142857142857%'>Php(1)</a> <a href='/blog/categories/ruby' style='font-size: 108.57142857142857%'>Ruby(1)</a> <a href='/blog/categories/software' style='font-size: 160.0%'>Software(7)</a> </span>
+    <span id="tag-cloud"><a href='/blog/categories/davinci' style='font-size: 107.5%'>Davinci(1)</a> <a href='/blog/categories/embedded' style='font-size: 115.0%'>Embedded(2)</a> <a href='/blog/categories/java' style='font-size: 107.5%'>Java(1)</a> <a href='/blog/categories/linux' style='font-size: 130.0%'>Linux(4)</a> <a href='/blog/categories/octopress' style='font-size: 145.0%'>Octopress(6)</a> <a href='/blog/categories/php' style='font-size: 107.5%'>Php(1)</a> <a href='/blog/categories/ruby' style='font-size: 107.5%'>Ruby(1)</a> <a href='/blog/categories/software' style='font-size: 160.0%'>Software(8)</a> </span>
 </section>
 
 

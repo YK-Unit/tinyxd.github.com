@@ -4,7 +4,7 @@
   <title><![CDATA[Tag: seo | Keen on Art of Tech]]></title>
   <link href="http://tinyxd.me/tags/seo/atom.xml" rel="self"/>
   <link href="http://tinyxd.me/"/>
-  <updated>2012-06-28T23:43:27+08:00</updated>
+  <updated>2012-06-29T23:37:18+08:00</updated>
   <id>http://tinyxd.me/</id>
   <author>
     <name><![CDATA[Tiny]]></name>
@@ -20,19 +20,21 @@
     <id>http://tinyxd.me/blog/2012/06/19/seo-meta-octopress</id>
     <content type="html"><![CDATA[<p>给octopress添加keywords和description。</p>
 
-<p>1.修改source / <em>includes / head.html
-<code>
-&lt;meta name="author" content="{{ site.author }}"&gt;
+<p>1.修改source/<em>includes/head.html <br/>
+<div><script src='https://gist.github.com/2460469.js?file=head.html'></script>
+<noscript><pre><code>&lt;meta name=&quot;author&quot; content=&quot;{{ site.author }}&quot;&gt;
 {% capture description %}{% if page.description %}{{ page.description }}{% elsif site.description %}{{ site.description }}{%else%}{{ content | raw_content }}{% endif %}{% endcapture %}
-&lt;meta name="description" content="{{ description | strip_html | condense_spaces | truncate:150 }}"&gt;
-{% if page.keywords %}&lt;meta name="keywords" content="{{ page.keywords }}"&gt;{%else%}&lt;meta name="keywords" content="{{ site.keywords }}"&gt;{% endif %}
-</code>
+&lt;meta name=&quot;description&quot; content=&quot;{{ description | strip_html | condense_spaces | truncate:150 }}&quot;&gt;
+{% if page.keywords %}&lt;meta name=&quot;keywords&quot; content=&quot;{{ page.keywords }}&quot;&gt;{%else%}&lt;meta name=&quot;keywords&quot; content=&quot;{{ site.keywords }}&quot;&gt;{% endif %}
+</code></pre></noscript></div>
+ <br/>
 2.在</em>config.yml中添加如下内容
 <code>
 description: Keen on the software programming and Embedded development.（专注软件编程及嵌入式技术。）
 keywords: ruby , linux , archlinux , debian , software ,programming , embedded ,gem,web development ,ubuntu , java
 </code>
-3.这样在主页代码中也会出现keywords和description信息。每个post也会出现。方便被搜索网站索引。这个涉及到了SEO优化。</p>
+3.这样在主页代码中也会出现keywords和description信息。每个post也会出现。方便被搜索网站索引。这个涉及到了SEO。
+以上文章参考自<a href="http://www.yatishmehta.in/seo-for-octopress">这里</a>。</p>
 ]]></content>
   </entry>
   
