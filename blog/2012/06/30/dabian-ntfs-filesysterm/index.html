@@ -5,12 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>给octopress添加关键字和网站描述 - Keen on Art of Tech</title>
+  <title>让Debian支持ntfs文件系统读写 - Keen on Art of Tech</title>
 <meta name="author" content="Tiny">
 
 
-<meta name="description" content="How to optimize Octopress for SEO">
-<meta name="keywords" content="octopress, meta,seo">
+<meta name="description" content="debian , ntfs , linux , filesysterm，文件系统">
+<meta name="keywords" content="debian , ntfs , linux , filesysterm，文件系统">
 
   <!-- http://t.co/dKP3o1e -->
   <meta name="HandheldFriendly" content="True">
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://tinyxd.me/blog/2012/06/19/seo-meta-octopress">
+  <link rel="canonical" href="http://tinyxd.me/blog/2012/06/30/dabian-ntfs-filesysterm">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -128,7 +128,7 @@
   
   <header>
     
-      <h1 class="entry-title">给octopress添加关键字和网站描述</h1>
+      <h1 class="entry-title">让Debian支持ntfs文件系统读写</h1>
     
     
       <p class="meta">
@@ -144,7 +144,7 @@
   
 
 
-<time datetime="2012-06-19T21:10:00+08:00" pubdate data-updated="true">Jun 19<span>th</span>, 2012</time>
+<time datetime="2012-06-30T15:45:00+08:00" pubdate data-updated="true">Jun 30<span>th</span>, 2012</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -153,28 +153,92 @@
   </header>
 
 
-<div class="entry-content"><p>给octopress添加keywords和description。</p>
+<div class="entry-content"><p>刚装好debian发现在debian下往windows盘下拷贝不过去资料，上网查了些资料发现是因为不知道ntfs的读写。 <br/>
+查看我的版本号6.0.5</p>
 
-<p>1.修改source/_includes/head.html</p>
+<pre><code>#more /etc/debian_version   
+6.0.5   
+</code></pre>
 
-<div><script src='https://gist.github.com/2460469.js?file=head.html'></script>
-<noscript><pre><code>&lt;meta name=&quot;author&quot; content=&quot;{{ site.author }}&quot;&gt;
-{% capture description %}{% if page.description %}{{ page.description }}{% elsif site.description %}{{ site.description }}{%else%}{{ content | raw_content }}{% endif %}{% endcapture %}
-&lt;meta name=&quot;description&quot; content=&quot;{{ description | strip_html | condense_spaces | truncate:150 }}&quot;&gt;
-{% if page.keywords %}&lt;meta name=&quot;keywords&quot; content=&quot;{{ page.keywords }}&quot;&gt;{%else%}&lt;meta name=&quot;keywords&quot; content=&quot;{{ site.keywords }}&quot;&gt;{% endif %}
-</code></pre></noscript></div>
+<p>我的Debian系统: 6.0.5 <br/>
+要是用的软件使用软件:ntfs-3g <br/>
+1.修改默认源 <br/>
+因为我们学校有自己的源，故而修改成我们学校的源，而后进行更新</p>
+
+<pre><code>apt-get update   
+</code></pre>
+
+<!--more-->
 
 
-<p>2.在_config.yml中添加如下内容</p>
+<p>2.执行安装 <br/>
+执行命令:</p>
+
+<pre><code>apt-get install ntfs-3g   
+</code></pre>
+
+<p>3.使用 <br/>
+直接使用执行命令:</p>
+
+<pre><code>mount -t ntfs-3g /dev/hdax /mnt/windows   
+</code></pre>
+
+<p>这里的/dev/hdax 请改为你自己的windows磁盘分区，可利用fdisk -l 查看。  <br/>
+如下：</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>description: Keen on the software programming and Embedded development.（专注软件编程及嵌入式技术。）
-</span><span class='line'>keywords: ruby , linux , archlinux , debian , software ,programming , embedded ,gem,web development ,ubuntu , java</span></code></pre></td></tr></table></div></figure>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>debian:/mnt# fdisk -l
+</span><span class='line'>Disk /dev/sda: 500.1 GB, 500107862016 bytes
+</span><span class='line'>255 heads, 63 sectors/track, 60801 cylinders
+</span><span class='line'>Units = cylinders of 16065 * 512 = 8225280 bytes
+</span><span class='line'>Sector size (logical/physical): 512 bytes / 512 bytes
+</span><span class='line'>I/O size (minimum/optimal): 512 bytes / 512 bytes
+</span><span class='line'>Disk identifier: 0x559ed1e5
+</span><span class='line'>
+</span><span class='line'>  Device Boot      Start         End      Blocks   Id  System
+</span><span class='line'>/dev/sda1               1        6528    52436128+   7  HPFS/NTFS
+</span><span class='line'>/dev/sda2            6529       60802   435949345+   f  W95 Ext'd (LBA)
+</span><span class='line'>/dev/sda5            6529       24543   144705456    7  HPFS/NTFS
+</span><span class='line'>/dev/sda6           24544       42558   144705456    7  HPFS/NTFS
+</span><span class='line'>/dev/sda7           42559       53060    84357283+   7  HPFS/NTFS
+</span><span class='line'>/dev/sda8           53061       53321     2096451    b  W95 FAT32
+</span><span class='line'>/dev/sda9   *       53322       53346      194560   83  Linux
+</span><span class='line'>/dev/sda10          53346       53589     1951744   82  Linux swap / Solaris
+</span><span class='line'>/dev/sda11          53589       55413    14647296   83  Linux
+</span><span class='line'>/dev/sda12          55413       60802    43287552   83  Linux   </span></code></pre></td></tr></table></div></figure>
 
 
-<p>3.这样在主页代码中也会出现keywords和description信息。每个post也会出现。方便被搜索网站索引。这个涉及到了SEO。
-以上文章参考自<a href="http://www.yatishmehta.in/seo-for-octopress">这里</a>。</p>
+<p>如果是加入开机自动映射的话，编辑/etc/fstab,加入如下内容就可以了。</p>
+
+<pre><code>/dev/hdax /mnt/windows ntfs-3g defaults 0 0   
+</code></pre>
+
+<p>下面是我的系统加载NTFS文件系统的相关命令：</p>
+
+<pre><code>mount -t ntfs-3g /dev/sda6 /mnt/D
+mount -t ntfs-3g /dev/sda7 /mnt/E   
+</code></pre>
+
+<p>以上文章是对网上搜集的资料的整理。如需转载请注明出处，本文地址： <br/>
+<code>http://tinyxd.me/blog/2012/06/30/debian-ntfs-filesysterm/</code></p>
 </div>
 
 
@@ -197,12 +261,12 @@
   
 
 
-<time datetime="2012-06-19T21:10:00+08:00" pubdate data-updated="true">Jun 19<span>th</span>, 2012</time>
+<time datetime="2012-06-30T15:45:00+08:00" pubdate data-updated="true">Jun 30<span>th</span>, 2012</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/octopress/'>octopress</a>
+    <a class='category' href='/blog/categories/linux/'>linux</a>
   
 </span>
 
@@ -211,7 +275,7 @@
 
 <span class="tags">
   
-     Tag: <a class='tag' href='/tags/meta/'>meta</a>, <a class='tag' href='/tags/octopress/'>octopress</a>, <a class='tag' href='/tags/seo/'>seo</a>
+     Tag: <a class='tag' href='/tags/debian/'>debian</a>, <a class='tag' href='/tags/linux/'>linux</a>, <a class='tag' href='/tags/ntfs/'>ntfs</a>
   
 </span>
 
@@ -235,10 +299,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2012/06/19/learn-php/" title="Previous Post: php初学">&laquo; php初学</a>
+        <a class="basic-alignment left" href="/blog/2012/06/29/radix-sort/" title="Previous Post: 排序算法总结（四）">&laquo; 排序算法总结（四）</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2012/06/25/octopress-add-tag-cloud/" title="Next Post: octopress博客添加标签云">octopress博客添加标签云 &raquo;</a>
       
     </p>
   </footer>
@@ -354,8 +416,8 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://tinyxd.me/blog/2012/06/19/seo-meta-octopress/';
-        var disqus_url = 'http://tinyxd.me/blog/2012/06/19/seo-meta-octopress/';
+        var disqus_identifier = 'http://tinyxd.me/blog/2012/06/30/dabian-ntfs-filesysterm/';
+        var disqus_url = 'http://tinyxd.me/blog/2012/06/30/dabian-ntfs-filesysterm/';
         var disqus_script = 'embed.js';
       
     (function () {
