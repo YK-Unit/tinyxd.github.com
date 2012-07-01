@@ -5,12 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Tag: 堆栈 - Keen on Art of Tech</title>
+  <title>排序算法总结（五） - Keen on Art of Tech</title>
 <meta name="author" content="Tiny">
 
 
-<meta name="description" content="Tag: 堆栈">
-<meta name="keywords" content="octopress , tiny , 嵌入式 , Embedded， linux , software , archlinux , debian , ubuntu">
+<meta name="description" content="排序算法总结（五）归并排序">
+<meta name="keywords" content="c++,software,归并排序">
 
   <!-- http://t.co/dKP3o1e -->
   <meta name="HandheldFriendly" content="True">
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://tinyxd.metags/堆栈">
+  <link rel="canonical" href="http://tinyxd.me/blog/2012/07/01/merge-sort">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -126,52 +126,158 @@
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">Tag: 堆栈</h1>
+    
+      <h1 class="entry-title">排序算法总结（五）</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-07-01T23:45:00+08:00" pubdate data-updated="true">Jul 1<span>st</span>, 2012</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
     
   </header>
+
+
+<div class="entry-content"><p>归并（Merge）排序法是将两个（或两个以上）有序表合并成一个新的有序表，即把待排序序列分为若干个子序列，每个子序列是有序的。然后再把有序子序列合并为整体有序序列。 <br/>
+归并排序是建立在归并操作上的一种有效的排序算法。该算法是采用分治法（Divide and Conquer）的一个非常典型的应用。 <br/>
+将已有序的子序列合并，得到完全有序的序列；即先使每个子序列有序，再使子序列段间有序。若将两个有序表合并成一个有序表，称为2-路归并。 <br/>
+与快速排序比较：归并排序是稳定的排序.即相等的元素的顺序不会改变。如输入记录 1(1) 3(2) 2(3) 2(4) 5(5) (括号中是记录的关键字)时输出的 1(1) 2(3) 2(4) 3(2) 5(5) 中的2 和 2 是按输入的顺序。这对要排序数据包含多个信息而要按其中的某一个信息排序，要求其它信息尽量按输入的顺序排列时很重要。这也是它比快速排序优势的地方.。</p>
+
+<!--more-->
+
+
+<p>用途： <br/>
+1、排序 <br/>
+速度仅次于快速排序，但较稳定。 <br/>
+2、求逆序对数 <br/>
+具体思路是，在归并的过程中计算每个小区间的逆序对数，进而计算出大区间的逆序对数（也可以用树状数组来求解）。 <br/>
+c语言实现  <br/>
+输入参数中，需要排序的数组为array[],起始索引为first，终止索引为last。调用完成后，array[]中从first到last处于升序排列。</p>
+
+<figure class='code'><figcaption><span>归并算法（Merge sort）</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="kt">void</span> <span class="nf">MergeSort</span><span class="p">(</span><span class="kt">int</span> <span class="n">array</span><span class="p">[],</span> <span class="kt">int</span> <span class="n">first</span><span class="p">,</span> <span class="kt">int</span> <span class="n">last</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="kt">int</span> <span class="n">mid</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">if</span><span class="p">(</span><span class="n">first</span><span class="o">&lt;</span><span class="n">last</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">{</span>
+</span><span class='line'>      <span class="n">mid</span> <span class="o">=</span> <span class="p">(</span><span class="n">first</span><span class="o">+</span><span class="n">last</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">;</span>
+</span><span class='line'>      <span class="n">MergeSort</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">first</span><span class="p">,</span> <span class="n">mid</span><span class="p">);</span>
+</span><span class='line'>      <span class="n">MergeSort</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">mid</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">last</span><span class="p">);</span>
+</span><span class='line'>      <span class="n">Merge</span><span class="p">(</span><span class="n">array</span><span class="p">,</span><span class="n">first</span><span class="p">,</span><span class="n">mid</span><span class="p">,</span><span class="n">last</span><span class="p">);</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>本文是查阅书籍和网络资料整理而来，转载请注明出处。并以超链接的形式注明本文地址： <br/>
+<code>http://tinyxd.me/blog/2012/07/01/merge-sort/</code></p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
   
-  <div id="blog-archives" class="tag">
+
+<span class="byline author vcard">Posted by <span class="fn">Tiny</span></span>
+
+      
+
+
+
+
+
 
 
 
   
-  <h2>2012</h2>
 
-<article>
+
+<time datetime="2012-07-01T23:45:00+08:00" pubdate data-updated="true">Jul 1<span>st</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/software/'>software</a>
+  
+</span>
+
+
+      
+
+<span class="tags">
+  
+     Tag: <a class='tag' href='/tags/c-/'>c++</a>, <a class='tag' href='/tags/software/'>software</a>, <a class='tag' href='/tags/sort/'>sort</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+
   
 
-<h1><a href="/blog/2012/06/08/dui-he-zhan-de-qu-bie/">堆和栈的区别</a></h1>
-<time datetime="2012-06-08T06:59:00+08:00" pubdate><span class='month'>Jun</span> <span class='day'>08</span> <span class='year'>2012</span></time>
-
-<footer>
-
-  <span class="categories">posted in <a class='category' href='/blog/categories/software/'>software</a></span>
-
-
-  <span class="tags">tagged with <a class='tag' href='/tags/heap/'>heap</a>, <a class='tag' href='/tags/stack/'>stack</a>, <a class='tag' href='/tags/堆栈/'>堆栈</a></span>
-
-</footer>
-
-
-</article>
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+  
+    <a class="bshareDiv" href="http://www.bshare.cn/share">Sharing</a><script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/buttonLite.js#uuid=5c055483-dee0-46ed-899f-06e078ca57ca&amp;style=999&amp;img=http%3A%2F%2Fstatic.bshare.cn%2Fimages%2Fbuttons%2Fbox-shareTo-zh.gif&amp;w=147&amp;h=21"></script>
+  
 
 </div>
 
-  
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2012/06/30/dabian-ntfs-filesysterm/" title="Previous Post: 让Debian支持ntfs文件系统读写">&laquo; 让Debian支持ntfs文件系统读写</a>
+      
+      
+    </p>
+  </footer>
 </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
 
 <aside class="sidebar">
   
-    <section>
-  <h1>Contact Me</h1>
-  <p>
-  <img src="/images/my_email.png"  alt="my_email" />
-  </p>
+    
+<section>
+<iframe width="350" height="75" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=350&height=75&fansRow=1&ptype=0&speed=0&skin=1&isTitle=0&noborder=0&isWeibo=0&isFans=0&uid=2328532522&verifier=7efcfd6a&dpc=1"></iframe>
 </section>
 <section>
   <h1>Recent Posts</h1>
@@ -252,7 +358,10 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
       var disqus_shortname = 'tinyxd';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://tinyxd.me/blog/2012/07/01/merge-sort/';
+        var disqus_url = 'http://tinyxd.me/blog/2012/07/01/merge-sort/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

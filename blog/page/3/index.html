@@ -117,6 +117,7 @@
   <li><a href="/">Blog</a></li>
   <li><a href="/blog/archives">Archives</a></li>
   <li><a href="/tags">Tag Cloud</a></li>
+  <li><a href="/reading-list">Reading List</a></li>
   <li><a href="/about">About Me</a></li>
   <li><a href="/message-board">Message Board</a></li>
 </ul>
@@ -126,6 +127,70 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/05/26/bang-nin-kuai-su-ru-men-tide-codec-engine-zhuan-zai/">帮您快速入门TI的Codec Engine</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-05-26T06:18:00+08:00" pubdate data-updated="true">May 26<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/05/26/bang-nin-kuai-su-ru-men-tide-codec-engine-zhuan-zai/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>转自TI官网：  <br/>
+德州仪器半导体技术（上海）有限公司 通用DSP 技术应用工程师 崔晶</p>
+
+<p>德州仪器（TI）的第一颗达芬奇（DaVinci）芯片（处理器）DM6446已经问世快三年了。继DM644x之后，TI又陆续推出了DM643x，DM35x，DM6467，OMAP353x等一系列ARM＋DSP或ARM＋视频协处理器的多媒体处理器平台。很多有很强DSP开发经验或ARM开发经验的工程师都转到达芬奇或通用OMAP（OMAP353x）平台上开发视频监控、视频会议及便携式多媒体终端等产品。大家都面临着同一个问题，那就是如何实现ARM和DSP或协处理器的通信和协同工作？TI的数字视频软件开发包（DVSDK）提供了Codec Engine这样一个软件模块来实现ARM和DSP或协处理器的协同工作。有很多工程师反馈这个软件模块非常好用，节省了很多开发时间，也有工程师认为TI提供的资料太多，不知如何快速上手。本文将从一个第一次接触Codec Engine的工程师角度出发，归纳TI提供的相关资源（文档，例程和网络资源）并介绍相关开发调试方法帮您快速入门Codec Engine。 <br/>
+1．Codec Engine概述 <br/>
+Codec Engine是连接ARM和DSP或协处理器的桥梁，是介于应用层（ARM侧的应用程序）和信号处理层（DSP侧的算法）之间的软件模块。ARM应用程序调用Codec Engine的VISA （Video, Image, Speech, Audio）API，如图1中VIDENC_process(a, b, c )。Codec Engine的stub （ARM侧）会把参数a, b, c以及要调用DSP侧process这个信息打包，通过消息队列（message queue）传递到DSP。Codec Engine的skeleton（DSP侧）会解开这个参数包，把参数a, b, c转换成DSP侧对应的参数x, y, z（比如ARM侧传递的是虚拟地址，而DSP只能认物理地址），DSP侧的server（优先级较低，负责和ARM通信的任务）会根据process这一信息创建一个DSP侧的process(x, y, x)任务最终实现VIDENC_process(a, b, c)的操作。 <br/>
+2．Codec Engine入门第一步，从Codec Engine发布说明文档(release notes)开始 <br/>
+3．Codec Engine入门第二步，了解Codec Engine的运行环境及依赖的软件模块和工具</p>
+
+<p>点击Codec Engine的发布说明文档 的Validation Info，我们可以知道Codec Engine 1.20需要和以下软件模块和工具配合使用：</p>
+
+<pre><code>Framework Components 1.20.02   
+xDAIS 5.21   
+XDC Tools 2.93.01   
+DSP/BIOS Link 1.40.05, configured for the DM6446 EVM   
+C6x Code Generation Tools version 6.0.8   
+DSP/BIOS 5.31.05   
+MontaVista Linux v4.0   
+Red Hat Enterprise Linux 3 (SMP)    
+</code></pre>
+
+<p>因此，我们需要在该Codec Engine安装的DVSDK文件包下面检查上面提到的软件模块和工具是否安装，版本是否正确。否则，可能会编译不过 Codec Engine的例子。那么，什么是 Framework Components，什么是xDAIS，什么又是XDC Tools呢？你可以分别到它们的根目录下浏览它们各自的发布说明文档，做一个总体的了解。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2012/05/26/bang-nin-kuai-su-ru-men-tide-codec-engine-zhuan-zai/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -461,6 +526,10 @@ rvm:x:1004:admin
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2012/07/01/merge-sort/">排序算法总结（五）</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2012/06/30/dabian-ntfs-filesysterm/">让Debian支持ntfs文件系统读写</a>
       </li>
     
@@ -476,15 +545,11 @@ rvm:x:1004:admin
         <a href="/blog/2012/06/27/swap-sort/">排序算法总结（二）</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2012/06/27/straight-insertion-sort/">排序算法总结（一）</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Category Cloud</h1>
-    <span id="tag-cloud"><a href='/blog/categories/davinci' style='font-size: 107.5%'>Davinci(1)</a> <a href='/blog/categories/embedded' style='font-size: 115.0%'>Embedded(2)</a> <a href='/blog/categories/java' style='font-size: 107.5%'>Java(1)</a> <a href='/blog/categories/linux' style='font-size: 137.5%'>Linux(5)</a> <a href='/blog/categories/octopress' style='font-size: 145.0%'>Octopress(6)</a> <a href='/blog/categories/php' style='font-size: 107.5%'>Php(1)</a> <a href='/blog/categories/ruby' style='font-size: 107.5%'>Ruby(1)</a> <a href='/blog/categories/software' style='font-size: 160.0%'>Software(8)</a> </span>
+    <span id="tag-cloud"><a href='/blog/categories/davinci' style='font-size: 106.66666666666667%'>Davinci(1)</a> <a href='/blog/categories/embedded' style='font-size: 113.33333333333333%'>Embedded(2)</a> <a href='/blog/categories/java' style='font-size: 106.66666666666667%'>Java(1)</a> <a href='/blog/categories/linux' style='font-size: 133.33333333333334%'>Linux(5)</a> <a href='/blog/categories/octopress' style='font-size: 140.0%'>Octopress(6)</a> <a href='/blog/categories/php' style='font-size: 106.66666666666667%'>Php(1)</a> <a href='/blog/categories/ruby' style='font-size: 106.66666666666667%'>Ruby(1)</a> <a href='/blog/categories/software' style='font-size: 160.0%'>Software(9)</a> </span>
 </section>
 <section>
   <h1>Blogroll</h1>
