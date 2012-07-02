@@ -4,7 +4,7 @@
   <title><![CDATA[Category: octopress | Keen on Art of Tech]]></title>
   <link href="http://tinyxd.me/blog/categories/octopress/atom.xml" rel="self"/>
   <link href="http://tinyxd.me/"/>
-  <updated>2012-07-02T00:03:55+08:00</updated>
+  <updated>2012-07-02T11:57:04+08:00</updated>
   <id>http://tinyxd.me/</id>
   <author>
     <name><![CDATA[Tiny]]></name>
@@ -12,6 +12,55 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[octopress博客添加flickr侧边栏]]></title>
+    <link href="http://tinyxd.me/blog/2012/07/02/add-flickr-aside-in-octopress/"/>
+    <updated>2012-07-02T11:14:00+08:00</updated>
+    <id>http://tinyxd.me/blog/2012/07/02/add-flickr-aside-in-octopress</id>
+    <content type="html"><![CDATA[<p>octopress添加侧边栏： <br/>
+1.新建 <code>source/_includes/custom/asides/flickr.html</code>，代码如下：
+<div><script src='https://gist.github.com/1421792.js?file=flickr.html'></script>
+<noscript><pre><code>{% if site.flickr_user %}
+&lt;section class=&quot;flickr&quot;&gt;
+&lt;h1&gt;My Flickr&lt;/h1&gt;
+&lt;!-- Start of Flickr Badge --&gt;
+&lt;style type=&quot;text/css&quot;&gt;
+/*
+Images are wrapped in divs classed &quot;flickr_badge_image&quot; with ids &quot;flickr_badge_imageX&quot; where &quot;X&quot; is an integer specifying ordinal position. Below are some styles to get you started!
+*/
+#flickr_badge_wrapper {padding:10px 0 10px 0;}
+.flickr_badge_image {margin: 0 9px 8px 0px;display: inline-block;}
+&lt;/style&gt;
+&lt;div id=&quot;flickr_badge_uber_wrapper&quot;&gt;&lt;div id=&quot;flickr_badge_wrapper&quot;&gt;
+&lt;script type=&quot;text/javascript&quot; src=&quot;http://www.flickr.com/badge_code_v2.gne?count={{ site.flickr_count }}&amp;display=latest&amp;size=s&amp;layout=x&amp;source=user&amp;user={{ site.flickr_user }}&quot;&gt;&lt;/script&gt;
+&lt;/div&gt;&lt;/div&gt;
+&lt;!-- End of Flickr Badge --&gt;
+&lt;/section&gt;
+{% endif %}</code></pre></noscript></div>
+</p>
+
+<!--more-->
+
+
+<p>
+2.在_config.yml添加 <br/>
+```</p>
+
+<h1>Flick Badges</h1>
+
+<h1>Find your user id here: http://idgettr.com/ It should be something like "81221217@N08".</h1>
+
+<p>flickr_user: 81221217@N08
+flickr_count: 6
+<code>``   
+记住要把 flickr_user 换成你自己的 id。   
+ID在这个[网址](http://idgettr.com/)获取，只需把username换成自己的，然后点find。   
+3.在</code>_config_yml<code>中</code>default_asides<code>添加</code>custom/asides/flickr.html`。 <br/>
+4.大功告成。
+本文参考了：<a href="http://lucifr.com/2011/12/02/add-flickr-aside-to-octopress/">Lucifr</a>和<a href="http://melandri.net/2012/01/10/octopress-flickr-aside/">melandri</a>。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[octopress博客添加标签云]]></title>
@@ -242,31 +291,6 @@ $ git push origin master
 2.不要在github上直接编辑文件<br/>
 3.想清楚了再下手<br/>
 4.github pages的 username 大小写敏感。如果用户名和username不一致的话,默认会生成这个Repo的project pages。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Octopress添加图片]]></title>
-    <link href="http://tinyxd.me/blog/2012/05/23/octopresstian-jia-tu-pian/"/>
-    <updated>2012-05-23T20:49:00+08:00</updated>
-    <id>http://tinyxd.me/blog/2012/05/23/octopresstian-jia-tu-pian</id>
-    <content type="html"><![CDATA[<p>If you like Markdown’s syntax for images, you’ll love the simplicity of the Octopress image tag.</p>
-
-<p>Syntax</p>
-
-<blockquote><p>img [class names] /path/to/image [width] [height] [title text [alt text]]</p></blockquote>
-
-<p>Don’t forget brace and percent couple.</p>
-
-<!--more-->
-
-
-<p>Examples</p>
-
-<blockquote><p>img http://placekitten.com/890/280 <br/>
-img left http://placekitten.com/320/250 Place Kitten #2 <br/>
-img right http://placekitten.com/300/500 150 250 Place Kitten #3 <br/>
-img right http://placekitten.com/300/500 150 250 ‘Place Kitten #4’ ‘An image of a very cute kitten’</p></blockquote>
 ]]></content>
   </entry>
   

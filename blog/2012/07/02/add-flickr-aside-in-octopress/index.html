@@ -5,12 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>让Debian支持ntfs文件系统读写 - Keen on Art of Tech</title>
+  <title>octopress博客添加flickr侧边栏 - Keen on Art of Tech</title>
 <meta name="author" content="Tiny">
 
 
-<meta name="description" content="debian , ntfs , linux , filesysterm，文件系统">
-<meta name="keywords" content="debian , ntfs , linux , filesysterm，文件系统">
+<meta name="description" content="add flickr aside in octopress(octopress博客添加flickr侧边栏)">
+<meta name="keywords" content="octopress , flickr">
 
   <!-- http://t.co/dKP3o1e -->
   <meta name="HandheldFriendly" content="True">
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://tinyxd.me/blog/2012/06/30/dabian-ntfs-filesysterm">
+  <link rel="canonical" href="http://tinyxd.me/blog/2012/07/02/add-flickr-aside-in-octopress">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -114,7 +114,7 @@
 </form>
   
 <ul class="main-navigation">
-  <li><a href="/">Blog</a></li>
+  <li><a href="/">Home</a></li>
   <li><a href="/blog/archives">Archives</a></li>
   <li><a href="/tags">Tag Cloud</a></li>
   <li><a href="/reading-list">Reading List</a></li>
@@ -130,7 +130,7 @@
   
   <header>
     
-      <h1 class="entry-title">让Debian支持ntfs文件系统读写</h1>
+      <h1 class="entry-title">Octopress博客添加flickr侧边栏</h1>
     
     
       <p class="meta">
@@ -146,7 +146,7 @@
   
 
 
-<time datetime="2012-06-30T15:45:00+08:00" pubdate data-updated="true">Jun 30<span>th</span>, 2012</time>
+<time datetime="2012-07-02T11:14:00+08:00" pubdate data-updated="true">Jul 2<span>nd</span>, 2012</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -155,92 +155,53 @@
   </header>
 
 
-<div class="entry-content"><p>刚装好debian发现在debian下往windows盘下拷贝不过去资料，上网查了些资料发现是因为不知道ntfs的读写。 <br/>
-查看我的版本号6.0.5</p>
+<div class="entry-content"><p>octopress添加侧边栏： <br/>
+1.新建 <code>source/_includes/custom/asides/flickr.html</code>，代码如下：</p>
 
-<pre><code>#more /etc/debian_version   
-6.0.5   
-</code></pre>
+<div><script src='https://gist.github.com/1421792.js?file=flickr.html'></script>
+<noscript><pre><code>{% if site.flickr_user %}
+&lt;section class=&quot;flickr&quot;&gt;
+&lt;h1&gt;My Flickr&lt;/h1&gt;
+&lt;!-- Start of Flickr Badge --&gt;
+&lt;style type=&quot;text/css&quot;&gt;
+/*
+Images are wrapped in divs classed &quot;flickr_badge_image&quot; with ids &quot;flickr_badge_imageX&quot; where &quot;X&quot; is an integer specifying ordinal position. Below are some styles to get you started!
+*/
+#flickr_badge_wrapper {padding:10px 0 10px 0;}
+.flickr_badge_image {margin: 0 9px 8px 0px;display: inline-block;}
+&lt;/style&gt;
+&lt;div id=&quot;flickr_badge_uber_wrapper&quot;&gt;&lt;div id=&quot;flickr_badge_wrapper&quot;&gt;
+&lt;script type=&quot;text/javascript&quot; src=&quot;http://www.flickr.com/badge_code_v2.gne?count={{ site.flickr_count }}&amp;display=latest&amp;size=s&amp;layout=x&amp;source=user&amp;user={{ site.flickr_user }}&quot;&gt;&lt;/script&gt;
+&lt;/div&gt;&lt;/div&gt;
+&lt;!-- End of Flickr Badge --&gt;
+&lt;/section&gt;
+{% endif %}</code></pre></noscript></div>
 
-<p>我的Debian系统: 6.0.5 <br/>
-要是用的软件使用软件:ntfs-3g <br/>
-1.修改默认源 <br/>
-因为我们学校有自己的源，故而修改成我们学校的源，而后进行更新</p>
 
-<pre><code>apt-get update   
-</code></pre>
+
 
 <!--more-->
 
 
-<p>2.执行安装 <br/>
-执行命令:</p>
-
-<pre><code>apt-get install ntfs-3g   
-</code></pre>
-
-<p>3.使用 <br/>
-直接使用执行命令:</p>
-
-<pre><code>mount -t ntfs-3g /dev/hdax /mnt/windows   
-</code></pre>
-
-<p>这里的/dev/hdax 请改为你自己的windows磁盘分区，可利用fdisk -l 查看。  <br/>
-如下：</p>
+<p>
+2.在_config.yml添加</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>debian:/mnt# fdisk -l
-</span><span class='line'>Disk /dev/sda: 500.1 GB, 500107862016 bytes
-</span><span class='line'>255 heads, 63 sectors/track, 60801 cylinders
-</span><span class='line'>Units = cylinders of 16065 * 512 = 8225280 bytes
-</span><span class='line'>Sector size (logical/physical): 512 bytes / 512 bytes
-</span><span class='line'>I/O size (minimum/optimal): 512 bytes / 512 bytes
-</span><span class='line'>Disk identifier: 0x559ed1e5
-</span><span class='line'>
-</span><span class='line'>  Device Boot      Start         End      Blocks   Id  System
-</span><span class='line'>/dev/sda1               1        6528    52436128+   7  HPFS/NTFS
-</span><span class='line'>/dev/sda2            6529       60802   435949345+   f  W95 Ext'd (LBA)
-</span><span class='line'>/dev/sda5            6529       24543   144705456    7  HPFS/NTFS
-</span><span class='line'>/dev/sda6           24544       42558   144705456    7  HPFS/NTFS
-</span><span class='line'>/dev/sda7           42559       53060    84357283+   7  HPFS/NTFS
-</span><span class='line'>/dev/sda8           53061       53321     2096451    b  W95 FAT32
-</span><span class='line'>/dev/sda9   *       53322       53346      194560   83  Linux
-</span><span class='line'>/dev/sda10          53346       53589     1951744   82  Linux swap / Solaris
-</span><span class='line'>/dev/sda11          53589       55413    14647296   83  Linux
-</span><span class='line'>/dev/sda12          55413       60802    43287552   83  Linux   </span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'># Flick Badges
+</span><span class='line'># Find your user id here: http://idgettr.com/ It should be something like "81221217@N08".
+</span><span class='line'>flickr_user: 81221217@N08
+</span><span class='line'>flickr_count: 6</span></code></pre></td></tr></table></div></figure>
 
 
-<p>如果是加入开机自动映射的话，编辑/etc/fstab,加入如下内容就可以了。</p>
-
-<pre><code>/dev/hdax /mnt/windows ntfs-3g defaults 0 0   
-</code></pre>
-
-<p>下面是我的系统加载NTFS文件系统的相关命令：</p>
-
-<pre><code>mount -t ntfs-3g /dev/sda6 /mnt/D
-mount -t ntfs-3g /dev/sda7 /mnt/E   
-</code></pre>
-
-<p>以上文章是对网上搜集的资料的整理。如需转载请注明出处，本文地址： <br/>
-<code>http://tinyxd.me/blog/2012/06/30/debian-ntfs-filesysterm/</code></p>
+<p> <br/>
+记住要把 flickr_user 换成你自己的 id。 <br/>
+ID在这个<a href="http://idgettr.com/">网址</a>获取，只需把username换成自己的，然后点find。 <br/>
+3.在<code>_config_yml</code>中<code>default_asides</code>添加<code>custom/asides/flickr.html</code>。 <br/>
+4.大功告成。
+本文参考了：<a href="http://lucifr.com/2011/12/02/add-flickr-aside-to-octopress/">Lucifr</a>和<a href="http://melandri.net/2012/01/10/octopress-flickr-aside/">melandri</a>。</p>
 </div>
 
 
@@ -263,12 +224,12 @@ mount -t ntfs-3g /dev/sda7 /mnt/E
   
 
 
-<time datetime="2012-06-30T15:45:00+08:00" pubdate data-updated="true">Jun 30<span>th</span>, 2012</time>
+<time datetime="2012-07-02T11:14:00+08:00" pubdate data-updated="true">Jul 2<span>nd</span>, 2012</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/linux/'>linux</a>
+    <a class='category' href='/blog/categories/octopress/'>octopress</a>
   
 </span>
 
@@ -277,7 +238,7 @@ mount -t ntfs-3g /dev/sda7 /mnt/E
 
 <span class="tags">
   
-     Tag: <a class='tag' href='/tags/debian/'>debian</a>, <a class='tag' href='/tags/linux/'>linux</a>, <a class='tag' href='/tags/ntfs/'>ntfs</a>
+     Tag: <a class='tag' href='/tags/flickr/'>flickr</a>, <a class='tag' href='/tags/octopress/'>octopress</a>
   
 </span>
 
@@ -301,10 +262,8 @@ mount -t ntfs-3g /dev/sda7 /mnt/E
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2012/06/29/radix-sort/" title="Previous Post: 排序算法总结（四）">&laquo; 排序算法总结（四）</a>
+        <a class="basic-alignment left" href="/blog/2012/07/01/merge-sort/" title="Previous Post: 排序算法总结（五）">&laquo; 排序算法总结（五）</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2012/07/01/merge-sort/" title="Next Post: 排序算法总结（五）">排序算法总结（五） &raquo;</a>
       
     </p>
   </footer>
@@ -329,11 +288,15 @@ mount -t ntfs-3g /dev/sda7 /mnt/E
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2012/07/02/add-flickr-aside-in-octopress/">octopress博客添加flickr侧边栏</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2012/07/01/merge-sort/">排序算法总结（五）</a>
       </li>
     
       <li class="post">
-        <a href="/blog/2012/06/30/dabian-ntfs-filesysterm/">让Debian支持ntfs文件系统读写</a>
+        <a href="/blog/2012/06/30/debian-ntfs-filesysterm/">让Debian支持ntfs文件系统读写</a>
       </li>
     
       <li class="post">
@@ -344,15 +307,11 @@ mount -t ntfs-3g /dev/sda7 /mnt/E
         <a href="/blog/2012/06/28/select-sort/">排序算法总结（三）</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2012/06/27/swap-sort/">排序算法总结（二）</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Category Cloud</h1>
-    <span id="tag-cloud"><a href='/blog/categories/davinci' style='font-size: 106.66666666666667%'>Davinci(1)</a> <a href='/blog/categories/embedded' style='font-size: 113.33333333333333%'>Embedded(2)</a> <a href='/blog/categories/java' style='font-size: 106.66666666666667%'>Java(1)</a> <a href='/blog/categories/linux' style='font-size: 133.33333333333334%'>Linux(5)</a> <a href='/blog/categories/octopress' style='font-size: 140.0%'>Octopress(6)</a> <a href='/blog/categories/php' style='font-size: 106.66666666666667%'>Php(1)</a> <a href='/blog/categories/ruby' style='font-size: 106.66666666666667%'>Ruby(1)</a> <a href='/blog/categories/software' style='font-size: 160.0%'>Software(9)</a> </span>
+    <span id="tag-cloud"><a href='/blog/categories/davinci' style='font-size: 106.66666666666667%'>Davinci(1)</a> <a href='/blog/categories/embedded' style='font-size: 113.33333333333333%'>Embedded(2)</a> <a href='/blog/categories/java' style='font-size: 106.66666666666667%'>Java(1)</a> <a href='/blog/categories/linux' style='font-size: 133.33333333333334%'>Linux(5)</a> <a href='/blog/categories/octopress' style='font-size: 146.66666666666666%'>Octopress(7)</a> <a href='/blog/categories/php' style='font-size: 106.66666666666667%'>Php(1)</a> <a href='/blog/categories/ruby' style='font-size: 106.66666666666667%'>Ruby(1)</a> <a href='/blog/categories/software' style='font-size: 160.0%'>Software(9)</a> </span>
 </section>
 <section>
   <h1>Blogroll</h1>
@@ -404,8 +363,8 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://tinyxd.me/blog/2012/06/30/dabian-ntfs-filesysterm/';
-        var disqus_url = 'http://tinyxd.me/blog/2012/06/30/dabian-ntfs-filesysterm/';
+        var disqus_identifier = 'http://tinyxd.me/blog/2012/07/02/add-flickr-aside-in-octopress/';
+        var disqus_url = 'http://tinyxd.me/blog/2012/07/02/add-flickr-aside-in-octopress/';
         var disqus_script = 'embed.js';
       
     (function () {
