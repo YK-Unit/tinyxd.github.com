@@ -4,7 +4,7 @@
   <title><![CDATA[Keen on Art of Tech]]></title>
   <link href="http://tinyxd.me/atom.xml" rel="self"/>
   <link href="http://tinyxd.me/"/>
-  <updated>2012-07-02T15:44:38+08:00</updated>
+  <updated>2012-07-03T12:36:15+08:00</updated>
   <id>http://tinyxd.me/</id>
   <author>
     <name><![CDATA[Tiny]]></name>
@@ -12,6 +12,69 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[vc debug 变 release]]></title>
+    <link href="http://tinyxd.me/blog/2012/07/03/vc-debug-release/"/>
+    <updated>2012-07-03T12:23:00+08:00</updated>
+    <id>http://tinyxd.me/blog/2012/07/03/vc-debug-release</id>
+    <content type="html"><![CDATA[<p>今天遇到将debug改为release版本出现好多问题，最后一一解决，现将方法贴到下面 <br/>
+生成release版的步骤： <br/>
+1.首先修改<code>project-setting-general-using mfc in a static libraryproject-setting</code>右键点击菜单空白处——选择“组建”——选择“Win32 Release“——重新编译链接。 <br/>
+2.然后<code>project-setting -c++ -precompiled Headers- not using</code> <br/>
+最后出现这个错误</p>
+
+<pre><code>nafxcwd.lib(afxmem.obj) : error LNK2005: "void __cdecl operator delete(void *)" (??3@YAXPAX@Z) already defined in LIBCMTD.lib(dbgdel.obj)   
+</code></pre>
+
+<p>关于静态库引发 nafxcw.lib LNK2005 错误的解决方法</p>
+
+<!--more-->
+
+
+<p>解决方法，进入vc6 选择菜单：</p>
+
+<pre><code>project -&gt; settings -&gt; link -&gt; Category : input   -&gt; Object/library modeules ,
+</code></pre>
+
+<p>输入：nafxcw.lib 即可。 <br/>
+原因：必须先编译这个库，才能避免函数名字重复引用。</p>
+
+<br />
+
+
+<p>Note：记住rebuiled</p>
+
+<br />
+
+
+<p>附：debug版本和release版本的区别： <br/>
+Debug 通常称为调试版本，它包含调试信息，并且不作任何优化，便于程序员调试程序。Release 称为发布版本，它往往是进行了各种优化，使得程序在代码大小和运行速度上都是最优的，以便用户很好地使用。Debug 和 Release 的真正秘密，在于一组编译选项。下面列出了分别针对二者的选项</p>
+
+<br />
+
+
+<p>Debug 版本：</p>
+
+<blockquote><p>/MDd /MLd 或 /MTd 使用 Debug runtime library(调试版本的运行时刻函数库)<br/>/Od 关闭优化开关<br/>/D &#8220;_DEBUG&#8221; 相当于 #define _DEBUG,打开编译调试代码开关(主要针对assert函数)<br/>/ZI 创建 Edit and continue(编辑继续)数据库，这样在调试过程中如果修改了源代码不需重新编译<br/>/GZ 可以帮助捕获内存错误<br/>/Gm 打开最小化重链接开关，减少链接时间</p></blockquote>
+
+
+<br />
+
+
+<p>Release 版本：</p>
+
+<blockquote><p>/MD /ML 或 /MT 使用发布版本的运行时刻函数库<br/>/O1 或 /O2 优化开关，使程序最小或最快<br/>/D &#8220;NDEBUG&#8221; 关闭条件编译调试代码开关(即不编译assert函数)<br/>/GF 合并重复的字符串，并将字符串常量放到只读内存，防止 被修改</p></blockquote>
+
+
+<p></p>
+
+<br />
+
+
+<p> 实际上，Debug 和 Release 并没有本质的界限，他们只是一组编译选项的集合，编译器只是按照预定的选项行动。事实上，我们甚至可以修改这些选项，从而得到优化过的调试版本或是带跟踪语句的发布版本。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[octopress博客添加flickr侧边栏]]></title>
@@ -2260,158 +2323,6 @@ Master包括Core、EDMA以及串行高速IO（sRIO），EMAC等外设。Master�
 没有重叠区域，DMA和Cache之间将相安无事。但是如果DMA的目的地址与Cache所缓冲的内存地址访问有重叠，经过DMA操作Cache缓冲所对应的内存数据已经被修改，
 而CPU本身并不知道，它仍然认为Cache中的数据就是内存中的数据，以后访问Cache映射的内存时，它仍然使用陈旧的Cache数据。这样就发生Cache与内存之间数据“
 不一致性”的错误。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[arch linux下java SDK的安装与配置]]></title>
-    <link href="http://tinyxd.me/blog/2012/05/27/arch-linuxxia-java-sdkde-an-zhuang-yu-pei-zhi/"/>
-    <updated>2012-05-27T19:58:00+08:00</updated>
-    <id>http://tinyxd.me/blog/2012/05/27/arch-linuxxia-java-sdkde-an-zhuang-yu-pei-zhi</id>
-    <content type="html"><![CDATA[<p>为了节省以后查资料的时间，故而转到自己的blog做个备份。
-转自：
-<a href="http://www.cnblogs.com/heart-runner/archive/2011/11/30/2269640.html">Arch Linux中Java SDK的安装与配置</a></p>
-
-<p>因为版权和公司对开源软件的态度，Oracle Java SDK已经不再包含于Arch Linux默认的Repository。</p>
-
-<p>不过对于有开发需要，又不得不使用Oracle公司的产品的民工们，还好有AUR中提供的相应支持，让我们能方便地用安装脚本来处理Oracle Java SDK的安装和配置。</p>
-
-<p>下面就简单地记录下的JDK的安装方法。</p>
-
-<p>安装环境如下：</p>
-
-<pre><code>archbang 3.3.6-1-ARCH
-Oracle Java SDK 7 update 1
-</code></pre>
-
-<h2><strong>安装</strong></h2>
-
-<ul>
-<li>jre <br/>
-这里先安装JDK，虽然据说openjdk的jre也能兼容Oracle Java SDK，但还是有点担心它们的兼容性。  <br/>
-先在<a href="https://aur.archlinux.org/">Arch Linux AUR</a>中找到<a href="https://aur.archlinux.org/packages.php?ID=51908">JRE</a>。<br/>
-<!--more-->
-制作安装包</li>
-</ul>
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ wget --no-check-certificate -c https://aur.archlinux.org/packages/jr/jre/jre.tar.gz   
-</span><span class='line'>$ tar -zxvf jre.tar.gz   
-</span><span class='line'>$ cd  jre   
-</span><span class='line'>$ makepkg    
-</span><span class='line'>   </span></code></pre></td></tr></table></div></figure>
-
-
-<p>处理依赖条件，开始安装</p>
-
-<pre><code>$ sudo pacman -S desktop-file-utils libxtst shared-mime-info xdg-utils
-[zzz@archbang jre]$ sudo pacman -U ./jre-7.4-1-i686.pkg.tar.xz 
-loading packages...
-resolving dependencies...
-looking for inter-conflicts...
-
-Targets (1): jre-7.4-1
-
-Total Installed Size:   92.30 MiB
-
-Proceed with installation? [Y/n] 
-(1/1) checking package integrity                   [----------------------] 100%
-(1/1) loading package files                        [----------------------] 100%
-(1/1) checking for file conflicts                  [----------------------] 100%
-(1/1) checking available disk space                [----------------------] 100%
-(1/1) installing jre                               [----------------------] 100%
-
-The jre package is licensed software.
-You MUST read and agree to the license stored in
-/usr/share/licenses/jre/LICENSE before using it.
-Please relogin to include jre in your PATH.
-
-Optional dependencies for jre
-    alsa-lib: sound support
-    ttf-dejavu: fonts
-</code></pre>
-
-<p>Arch Linux中，Java SDK默认的安装位置是/opt/java</p>
-
-<pre><code>$ pwd 
-/opt/java
-$ ls
-jre
-</code></pre>
-
-<h2>至此，JRE成功安装。</h2>
-
-<ul>
-<li><p>JDK
-JDK的安装过程与JRE类似。</p>
-
-<p>  \$ wget -c &#8211;no-check-certificate https://aur.archlinux.org/packages/jd/jdk/jdk.tar.gz <br/>
-  \$ tar -zxvf jdk.tar.gz <br/>
-  \$ cd jdk <br/>
-  \$ makepkg <br/>
-  \$ sudo pacman -U ./jdk-7.4-1-i686.pkg.tar.xz <br/>
-  loading packages&#8230; <br/>
-  resolving dependencies&#8230; <br/>
-  looking for inter-conflicts&#8230;</p>
-
-<p>  Targets (1): jdk-7.4-1</p>
-
-<p>  Total Installed Size:   86.05 MiB</p>
-
-<p>  Proceed with installation? [Y/n]  <br/>
-  (1/1) checking package integrity                   [&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;-] 100% <br/>
-  (1/1) loading package files                        [&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;-] 100% <br/>
-  (1/1) checking for file conflicts                  [&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;-] 100% <br/>
-  (1/1) checking available disk space                [&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;-] 100% <br/>
-  (1/1) installing jdk                               [&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;-] 100%</p>
-
-<p>  The jdk package is licensed software. <br/>
-  You MUST read and agree to the license stored in <br/>
-  /usr/share/licenses/jdk/LICENSE before using it. <br/>
-  Please relogin to include jdk in your PATH.</p></li>
-</ul>
-
-
-<p>配置
-安装之后打开/etc/environment文件编辑，添加如下内容：</p>
-
-<pre><code>#Java SDK 
-#
-CLASSPATH=.:/opt/java/lib
-JAVA_HOME=/opt/java
-</code></pre>
-
-<p>添加之后就可以使用java和javac命令了</p>
-
-<pre><code>$ java -version
-java version "1.7.0_01"
-Java(TM) SE Runtime Environment (build 1.7.0_01-b08)
-Java HotSpot(TM) Client VM (build 21.1-b02, mixed mode)
-$ javac -version
-javac 1.7.0_01   
-</code></pre>
-
-<p>更详细的内容可参考<a href="http://sillydong.com/myjava/arch-linux%E5%BF%AB%E9%80%9F%E9%85%8D%E7%BD%AEjava%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.html">傻东の学习笔记</a>
-3、解决中文乱码问题，还是用超级用户，进入/usr/share/fonts/wenquanyi，将wqy-zenhei文件夹复制到/opt/java/jre/lib/fonts下，改名为fallback，进入fallback文件夹，终端执行</p>
-
-<pre><code># mkfontdir
-和
-# mkfontscale
-</code></pre>
-
-<p>4、安装eclipse，只需要打开终端执行pacman -S eclipse就可以安装eclipse最新的英文版</p>
-
-<p>5、执行jar文件的办法。在Arch中，jar文件默认是使用归档文件管理器打开的，也就相当于解压缩，而我们需要的是执行这个jar程序，跟我做：在目标jar文件上右击，选择“属性”，找到“打开方式”的标签，选择“添加”，打开“使用自定义命令”，向其中加入下面的命令：</p>
-
-<pre><code>java -jar
-</code></pre>
-
-<p>输完之后选择“添加”，这时候在打开方式标签下有两个选择，一种就是原来就有的“归档文件管理器”，还有就是“java”，勾选上“java”，然后关闭，这时候双击jar文件就是执行它了。</p>
 ]]></content>
   </entry>
   
