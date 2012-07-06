@@ -4,7 +4,7 @@
   <title><![CDATA[Keen on Art of Tech]]></title>
   <link href="http://tinyxd.me/atom.xml" rel="self"/>
   <link href="http://tinyxd.me/"/>
-  <updated>2012-07-06T13:04:34+08:00</updated>
+  <updated>2012-07-06T23:55:48+08:00</updated>
   <id>http://tinyxd.me/</id>
   <author>
     <name><![CDATA[Tiny]]></name>
@@ -12,6 +12,58 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[ruby初学]]></title>
+    <link href="http://tinyxd.me/blog/2012/07/06/ruby-learning/"/>
+    <updated>2012-07-06T23:43:00+08:00</updated>
+    <id>http://tinyxd.me/blog/2012/07/06/ruby-learning</id>
+    <content type="html"><![CDATA[<p>这几天在学习Ruby，面对一个陌生的脚本语言，虽然陌生但是既然是脚本语言，自然也有与shell类似的地方，所以学习起来困难不是很大。 <br/>
+在感受到脚本语言的方便后，试了个例子，如下计算一个文件中单词的个数，以空格来区分。</p>
+
+<figure class='code'><figcaption><span>统计单词个数ruby脚本word.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1">#计算单词个数</span>
+</span><span class='line'><span class="n">count</span> <span class="o">=</span> <span class="no">Hash</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">##统计单字</span>
+</span><span class='line'><span class="k">while</span> <span class="n">line</span> <span class="o">=</span> <span class="nb">gets</span>
+</span><span class='line'><span class="n">words</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span>
+</span><span class='line'><span class="n">words</span><span class="o">.</span><span class="n">each</span><span class="p">{</span><span class="o">|</span><span class="n">word</span><span class="o">|</span>
+</span><span class='line'><span class="n">count</span><span class="o">[</span><span class="n">word</span><span class="o">]</span> <span class="o">+=</span> <span class="mi">1</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">##输出结果</span>
+</span><span class='line'><span class="n">count</span><span class="o">.</span><span class="n">sort</span><span class="p">{</span><span class="o">|</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="o">|</span>
+</span><span class='line'><span class="n">a</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span> <span class="o">&lt;=&gt;</span> <span class="n">b</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span>
+</span><span class='line'><span class="p">}</span><span class="o">.</span><span class="n">each</span><span class="p">{</span><span class="o">|</span><span class="n">key</span><span class="p">,</span><span class="n">value</span><span class="o">|</span>
+</span><span class='line'><span class="nb">print</span> <span class="s2">&quot;</span><span class="si">#{</span><span class="n">key</span><span class="si">}</span><span class="s2">: </span><span class="si">#{</span><span class="n">value</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<!--more-->
+
+
+<p>还有个问题以后可能会经常遇到，用p方法来输出包括日文或者中文的字符串的时候，会发生一般所谓的“乱码”的输出结果。所以在执行ruby程序时需要加上-Ks、-Ke之类的环境参数，这些参数用来指定文字编码。针对中文字符串，可以制定-Ku参数（UTF-8）来取得正常的显示效果。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[linux sleep 的用法]]></title>
@@ -2200,65 +2252,6 @@ Sales_item的引用计数器初始化为1
 <p>还有就是数据结构方面的堆和栈，这些都是不同的概念。这里的堆实际上指的就是（满足堆性质的）优先队列的一种数据结构，第1个元素有最高的优先权；栈实际上就是满足先进后出的性质的数学或数据结构。</p>
 
 <p>虽然堆栈，堆栈的说法是连起来叫，但是他们还是有很大区别的，连着叫只是由于历史的原因。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[解决pygments.rb (RubyPython) 找不到libpython的问题(archlinux下)]]></title>
-    <link href="http://tinyxd.me/blog/2012/06/05/cannot-find-libpython/"/>
-    <updated>2012-06-05T08:01:00+08:00</updated>
-    <id>http://tinyxd.me/blog/2012/06/05/cannot-find-libpython</id>
-    <content type="html"><![CDATA[<p>本文章转自：<a href="http://ruby-china.org/topics/289">Ruby China 论坛</a> <br/>
-如果找不到python，或者系统默认得python是3.x (比如Arch Linux)，手动制定下路径</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>RubyPython.configure python_exe: '/usr/bin/python2.7'</span></code></pre></td></tr></table></div></figure>
-
-
-<p>对于rails项目比如ruby-china，可以把这行代码丢到config/initializers下。</p>
-
-<p>不过RubyPython仍然可能找不到libpython而提示lib.so not found。这是由于RubyPython确定正确libpython的规则和你的系统不兼容，可以通过手动加些symbol links来解决 (目前RubyPython的git最新代码相对当前稳定版本0.5.3改动非常大，希望新版本能解决这个问题，就先不去提交fixing了)。</p>
-
-<p>可以参考 PythonExec initialize 方法中的规则来建symbol link.</p>
-
-<!--more-->
-
-
-<p>首先运行该python，得到版本号x.y，以python2.7为例</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ python2.7 -c "import sys;print '%d.%d' % sys.version_info[:2]"
-</span><span class='line'>
-</span><span class='line'>=&gt; 2.7</span></code></pre></td></tr></table></div></figure>
-
-
-<p>找到该python对应得libpython，可以用工具ldd:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ ldd /usr/lib/python2.7 | grep python
-</span><span class='line'>
-</span><span class='line'>=&gt; libpython2.7.so.1.0 =&gt; /usr/lib/libpython2.7.so.1.0</span></code></pre></td></tr></table></div></figure>
-
-
-<p>为找到的这个文件创建链接。下面用#{exe_base}表示通过RubyPython.configure指定的python可执行程序的文件名部分，#{x}和#{y}是通过运行这个python找到得版本号，#{libpython}是该python对应得libpython库文件路径。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>sudo ln -s #{libpython} /usr/lib/lib#{exe_base}#{x}#{y}.so
-</span><span class='line'>sudo ln -s #{libpython} /usr/lib/lib#{exe_base}#{x}.#{y}.so</span></code></pre></td></tr></table></div></figure>
-
-
-<p>以我的环境(Arch Linux)为例，exe_base是python2.7，版本号x.y是2.7，libpython是/usr/lib/libpython2.7.so.1.0，</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>sudo ln -s /usr/lib/libpython2.7.so.1.0 /usr/lib/libpython2.727.so
-</span><span class='line'>sudo ln -s /usr/lib/libpython2.7.so.1.0 /usr/lib/libpython2.72.7.so</span></code></pre></td></tr></table></div></figure>
-
 ]]></content>
   </entry>
   

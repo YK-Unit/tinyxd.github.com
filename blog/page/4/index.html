@@ -5,12 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>为已经存在的github Octopress配置本地环境 - Keen on Art of Tech</title>
+  <title>Keen on Art of Tech</title>
 <meta name="author" content="Tiny">
 
 
-<meta name="description" content="为已经存在的github Octopress配置本地环境。">
-<meta name="keywords" content="octopress, github">
+<meta name="description" content="专注嵌入式技术与软件编程,涉及linux·archlinux·debian·ubuntu·embedded等.">
+<meta name="keywords" content="octopress,嵌入式,Embedded,linux,software,archlinux,debian,ubuntu">
 
   <!-- http://t.co/dKP3o1e -->
   <meta name="HandheldFriendly" content="True">
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://tinyxd.me/blog/2012/05/23/wei-yi-jing-cun-zai-de-github-octopresspei-zhi-ben-di-huan-jing">
+  <link rel="canonical" href="http://tinyxd.me/blog/page/4">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -125,12 +125,15 @@
 </nav>
   <div id="main">
     <div id="content">
-      <div>
-<article class="hentry" role="article">
+      <div class="blog-index">
   
+  
+  
+    <article>
+      
   <header>
     
-      <h1 class="entry-title">为已经存在的github Octopress配置本地环境</h1>
+      <h1 class="entry-title"><a href="/blog/2012/05/23/octopressan-zhuang-bi-ji/">Octopress安装笔记</a></h1>
     
     
       <p class="meta">
@@ -146,155 +149,74 @@
   
 
 
-<time datetime="2012-05-23T20:59:00+08:00" pubdate data-updated="true">May 23<span>rd</span>, 2012</time>
+<time datetime="2012-05-23T07:16:00+08:00" pubdate data-updated="true">May 23<span>rd</span>, 2012</time>
         
-         | <a href="#disqus_thread">Comments</a>
+         | <a href="/blog/2012/05/23/octopressan-zhuang-bi-ji/#disqus_thread">Comments</a>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p><strong>转自：</strong><br/>
-http://www.360doc.com/content/12/0520/19/3565338_212362686.shtml</p>
+  <div class="entry-content"><p>在阅读此教程之前，先安装git和ruby环境。</p>
 
-<p>本文介绍如何为已经存在于github上的octopress配置本地环境。<br/>
-在本地安装RVM(Ruby Version Manager)和Ruby 1.9.2；</p>
+<p><strong>1.安装ruby环境</strong></p>
 
-<p>从你的github得到你的octopress内容：</p>
+<p>如果已经安装了ruby,就不用安装rvm 了。
+Archlinux用户建议用pacman 安装ruby,方便省事。</p>
 
-<pre><code>git clone -b source git@github.com:username/username.github.com.git octopress # get the source code from your "source" branch of your octopress on github
-＃ learn from: http://stackoverflow.com/questions/1911109/git-clone-a-specific-branch
-cd octopress
-git clone git@github.com:username/username.github.com.git _deploy # get your static pages content from your "master"branch of your cotopress on github
+<p>Archlinux安装RVM教程：
+<a href="https://wiki.archlinux.org/index.php/RVM">archlinux安装RVM教程</a></p>
+
+<pre><code>[tinyxd@archbang  ~]$ sudo bash &lt; &lt;(curl -s https://raw.github.com/wayneeseguin/rvm/master/binscripts/rvm-installer )
 </code></pre>
 
-<!--more-->
+<p>添加当前用户到rvm 组</p>
 
-
-<p>安装依赖gems:</p>
-
-<pre><code>gem install bundler # Install dependencies   
-bundle install   #如果出现bundle命令没找到，还需要修改～/.bashrc
-vim ~/.bashrc
-#for ruby gem
-PATH=$PATH:~/.gem/ruby/1.9.1/bin
-export PATH
-rake install # Install the default Octopress theme  不需要 因为我已经有了自己的主题   
-rake setup_github_pages #需要这个 要不然rake deploy会出错   
+<pre><code>[tinyxd@archbang  ~]$ sudo usermod -a -G rvm admin
 </code></pre>
 
-<p>这就基本结束了。</p>
+<p>查看下添加成功了没：</p>
 
-<p>编写文章，预览部署：</p>
-
-<pre><code>cd octopress
-rake new_post["Your Title of Your Article"]
-rake generate # generate your blog static pages content according to your input. 
-rake preview # start a web server on "http://localhost:4000", you can preview your blog content.
-rake deploy # push your static pages content to your github pages repo ("master" branch)
+<pre><code>[tinyxd@archbang ~]$ grep rvm /etc/group
+rvm:x:1004:admin
 </code></pre>
 
-<p>提交你的文本修改到github:</p>
+<p>再注销，登录。</p>
 
-<pre><code>cd your_local_octopress_directory
-git add .
-git commit -m 'your message'
-git push origin source
-</code></pre>
+<blockquote><p>To start using RVM you need to run <code>source /etc/profile.d/rvm.sh</code> in all your open shell windows, in rare cases you need to reopen all shell windows.</p></blockquote>
 
-<p>注意：如果要从github得到最新的source内容，请运行以下命令：</p>
+<p>已经安装了ruby的就可以从这里开始了。</p>
 
-<pre><code>cd your_local_octopress_directory
-cd _deploy
-git pull origin master
-cd ..
-git pull origin source
-</code></pre>
-
-<p>原则很简单，只要记住“your_local_octopress_directory”对应的的remote source branch，而”_deploy”对应的是remote master branch即可。</p>
 </div>
-
-
-  <footer>
-    <p class="meta">
-      
   
-
-<span class="byline author vcard">Posted by <span class="fn">Tiny</span></span>
-
-      
-
-
-
-
-
-
-
-
+  
+    <footer>
+      <a rel="full-article" href="/blog/2012/05/23/octopressan-zhuang-bi-ji/">Read on &rarr;</a>
+    </footer>
   
 
 
-<time datetime="2012-05-23T20:59:00+08:00" pubdate data-updated="true">May 23<span>rd</span>, 2012</time>
-      
-
-<span class="categories">
+    </article>
   
-    <a class='category' href='/blog/categories/octopress/'>octopress</a>
-  
-</span>
-
-
-      
-
-<span class="tags">
-  
-     Tag: <a class='tag' href='/tags/github/'>github</a>, <a class='tag' href='/tags/octopress/'>octopress</a>
-  
-</span>
-
-
-    </p>
+  <div class="pagination">
     
-      <div class="sharing">
-
-  
-
-  
-  <div class="g-plusone" data-size="medium"></div>
-  
-  
-  
-    <a class="bshareDiv" href="http://www.bshare.cn/share">Sharing</a><script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/buttonLite.js#uuid=5c055483-dee0-46ed-899f-06e078ca57ca&amp;style=999&amp;img=http%3A%2F%2Fstatic.bshare.cn%2Fimages%2Fbuttons%2Fbox-shareTo-zh.gif&amp;w=147&amp;h=21"></script>
-  
-</div>
-
+    <a href="/blog/archives">Blog Archives</a>
     
-    <p class="meta">
-      
-        <a class="basic-alignment left" href="/blog/2012/05/23/octopress-xin-shou-jiao-cheng/" title="Previous Post: Octopress:新手教程">&laquo; Octopress:新手教程</a>
-      
-      
-        <a class="basic-alignment right" href="/blog/2012/05/25/archbang-arch-linux-an-zhuang-inode/" title="Next Post: archbang arch linux 安装inode ">archbang arch linux 安装inode  &raquo;</a>
-      
-    </p>
-  </footer>
-</article>
-
-  <section>
-    <h1>Comments</h1>
-    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a class="next" href="/blog/page/3/">Newer &rarr;</a>
+    
+  </div>
 </div>
-  </section>
-
-</div>
-
 <aside class="sidebar">
   
-    
-<section>
-<iframe width="350" height="75" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=350&height=75&fansRow=1&ptype=0&speed=0&skin=1&isTitle=0&noborder=0&isWeibo=0&isFans=0&uid=2328532522&verifier=7efcfd6a&dpc=1"></iframe>
+    <section>
+  <h1>License</h1>
+  <p>
+   <img class="center" src="/images/cc-by-nc-sa.png" />
+  本站所有作品采用<a href="http://creativecommons.org/licenses/by-nc-sa/2.5/cn/">知识共享署名-非商业性使用-相同方式共享 2.5 中国大陆许可协议</a>进行许可。
+  </p>
 </section>
+
 <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
@@ -329,7 +251,7 @@ git pull origin source
   <h1>Blogroll</h1>
   <ul>
     <li>
-    <a href="http://tiny.blog.chinaunix.net"> Tiny's ChinaUnix blog </a>
+    <a href="http://tiny.blog.chinaunix.net"> Tiny&#8217;s ChinaUnix blog </a>
     </li>
     <li>
     <a href="http://www.lan-gui.com"> 小C驻留地 </a>
@@ -350,7 +272,7 @@ git pull origin source
 <!-- Start of Flickr Badge -->
 <style type="text/css">
 /*
-Images are wrapped in divs classed "flickr_badge_image" with ids "flickr_badge_imageX" where "X" is an integer specifying ordinal position. Below are some styles to get you started!
+Images are wrapped in divs classed &#8220;flickr_badge_image&#8221; with ids &#8220;flickr_badge_imageX&#8221; where &#8220;X&#8221; is an integer specifying ordinal position. Below are some styles to get you started!
 */
 #flickr_badge_wrapper {padding:10px 0 10px 0;}
 .flickr_badge_image {margin: 0 5px 4px 0px;display: inline-block;}
@@ -363,7 +285,6 @@ Images are wrapped in divs classed "flickr_badge_image" with ids "flickr_badge_i
 
   
 </aside>
-
 
     </div>
   </div>
@@ -393,10 +314,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
       var disqus_shortname = 'tinyxd';
       
         
-        // var disqus_developer = 1;
-        var disqus_identifier = 'http://tinyxd.me/blog/2012/05/23/wei-yi-jing-cun-zai-de-github-octopresspei-zhi-ben-di-huan-jing/';
-        var disqus_url = 'http://tinyxd.me/blog/2012/05/23/wei-yi-jing-cun-zai-de-github-octopresspei-zhi-ben-di-huan-jing/';
-        var disqus_script = 'embed.js';
+        var disqus_script = 'count.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

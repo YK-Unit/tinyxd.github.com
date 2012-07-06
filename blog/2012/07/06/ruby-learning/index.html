@@ -5,12 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>为已经存在的github Octopress配置本地环境 - Keen on Art of Tech</title>
+  <title>ruby初学 - Keen on Art of Tech</title>
 <meta name="author" content="Tiny">
 
 
-<meta name="description" content="为已经存在的github Octopress配置本地环境。">
-<meta name="keywords" content="octopress, github">
+<meta name="description" content="ruby初学总结">
+<meta name="keywords" content="ruby,脚本语言">
 
   <!-- http://t.co/dKP3o1e -->
   <meta name="HandheldFriendly" content="True">
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://tinyxd.me/blog/2012/05/23/wei-yi-jing-cun-zai-de-github-octopresspei-zhi-ben-di-huan-jing">
+  <link rel="canonical" href="http://tinyxd.me/blog/2012/07/06/ruby-learning">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -130,7 +130,7 @@
   
   <header>
     
-      <h1 class="entry-title">为已经存在的github Octopress配置本地环境</h1>
+      <h1 class="entry-title">Ruby初学</h1>
     
     
       <p class="meta">
@@ -146,7 +146,7 @@
   
 
 
-<time datetime="2012-05-23T20:59:00+08:00" pubdate data-updated="true">May 23<span>rd</span>, 2012</time>
+<time datetime="2012-07-06T23:43:00+08:00" pubdate data-updated="true">Jul 6<span>th</span>, 2012</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -155,64 +155,50 @@
   </header>
 
 
-<div class="entry-content"><p><strong>转自：</strong><br/>
-http://www.360doc.com/content/12/0520/19/3565338_212362686.shtml</p>
+<div class="entry-content"><p>这几天在学习Ruby，面对一个陌生的脚本语言，虽然陌生但是既然是脚本语言，自然也有与shell类似的地方，所以学习起来困难不是很大。 <br/>
+在感受到脚本语言的方便后，试了个例子，如下计算一个文件中单词的个数，以空格来区分。</p>
 
-<p>本文介绍如何为已经存在于github上的octopress配置本地环境。<br/>
-在本地安装RVM(Ruby Version Manager)和Ruby 1.9.2；</p>
+<figure class='code'><figcaption><span>统计单词个数ruby脚本word.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1">#计算单词个数</span>
+</span><span class='line'><span class="n">count</span> <span class="o">=</span> <span class="no">Hash</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">##统计单字</span>
+</span><span class='line'><span class="k">while</span> <span class="n">line</span> <span class="o">=</span> <span class="nb">gets</span>
+</span><span class='line'><span class="n">words</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span>
+</span><span class='line'><span class="n">words</span><span class="o">.</span><span class="n">each</span><span class="p">{</span><span class="o">|</span><span class="n">word</span><span class="o">|</span>
+</span><span class='line'><span class="n">count</span><span class="o">[</span><span class="n">word</span><span class="o">]</span> <span class="o">+=</span> <span class="mi">1</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">##输出结果</span>
+</span><span class='line'><span class="n">count</span><span class="o">.</span><span class="n">sort</span><span class="p">{</span><span class="o">|</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="o">|</span>
+</span><span class='line'><span class="n">a</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span> <span class="o">&lt;=&gt;</span> <span class="n">b</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span>
+</span><span class='line'><span class="p">}</span><span class="o">.</span><span class="n">each</span><span class="p">{</span><span class="o">|</span><span class="n">key</span><span class="p">,</span><span class="n">value</span><span class="o">|</span>
+</span><span class='line'><span class="nb">print</span> <span class="s2">&quot;</span><span class="si">#{</span><span class="n">key</span><span class="si">}</span><span class="s2">: </span><span class="si">#{</span><span class="n">value</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<p>从你的github得到你的octopress内容：</p>
-
-<pre><code>git clone -b source git@github.com:username/username.github.com.git octopress # get the source code from your "source" branch of your octopress on github
-＃ learn from: http://stackoverflow.com/questions/1911109/git-clone-a-specific-branch
-cd octopress
-git clone git@github.com:username/username.github.com.git _deploy # get your static pages content from your "master"branch of your cotopress on github
-</code></pre>
 
 <!--more-->
 
 
-<p>安装依赖gems:</p>
-
-<pre><code>gem install bundler # Install dependencies   
-bundle install   #如果出现bundle命令没找到，还需要修改～/.bashrc
-vim ~/.bashrc
-#for ruby gem
-PATH=$PATH:~/.gem/ruby/1.9.1/bin
-export PATH
-rake install # Install the default Octopress theme  不需要 因为我已经有了自己的主题   
-rake setup_github_pages #需要这个 要不然rake deploy会出错   
-</code></pre>
-
-<p>这就基本结束了。</p>
-
-<p>编写文章，预览部署：</p>
-
-<pre><code>cd octopress
-rake new_post["Your Title of Your Article"]
-rake generate # generate your blog static pages content according to your input. 
-rake preview # start a web server on "http://localhost:4000", you can preview your blog content.
-rake deploy # push your static pages content to your github pages repo ("master" branch)
-</code></pre>
-
-<p>提交你的文本修改到github:</p>
-
-<pre><code>cd your_local_octopress_directory
-git add .
-git commit -m 'your message'
-git push origin source
-</code></pre>
-
-<p>注意：如果要从github得到最新的source内容，请运行以下命令：</p>
-
-<pre><code>cd your_local_octopress_directory
-cd _deploy
-git pull origin master
-cd ..
-git pull origin source
-</code></pre>
-
-<p>原则很简单，只要记住“your_local_octopress_directory”对应的的remote source branch，而”_deploy”对应的是remote master branch即可。</p>
+<p>还有个问题以后可能会经常遇到，用p方法来输出包括日文或者中文的字符串的时候，会发生一般所谓的“乱码”的输出结果。所以在执行ruby程序时需要加上-Ks、-Ke之类的环境参数，这些参数用来指定文字编码。针对中文字符串，可以制定-Ku参数（UTF-8）来取得正常的显示效果。</p>
 </div>
 
 
@@ -235,12 +221,12 @@ git pull origin source
   
 
 
-<time datetime="2012-05-23T20:59:00+08:00" pubdate data-updated="true">May 23<span>rd</span>, 2012</time>
+<time datetime="2012-07-06T23:43:00+08:00" pubdate data-updated="true">Jul 6<span>th</span>, 2012</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/octopress/'>octopress</a>
+    <a class='category' href='/blog/categories/ruby/'>ruby</a>
   
 </span>
 
@@ -249,7 +235,7 @@ git pull origin source
 
 <span class="tags">
   
-     Tag: <a class='tag' href='/tags/github/'>github</a>, <a class='tag' href='/tags/octopress/'>octopress</a>
+     Tag: <a class='tag' href='/tags/ruby/'>ruby</a>
   
 </span>
 
@@ -272,10 +258,8 @@ git pull origin source
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2012/05/23/octopress-xin-shou-jiao-cheng/" title="Previous Post: Octopress:新手教程">&laquo; Octopress:新手教程</a>
+        <a class="basic-alignment left" href="/blog/2012/07/06/linux-sleep-usage/" title="Previous Post: linux sleep 的用法">&laquo; linux sleep 的用法</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2012/05/25/archbang-arch-linux-an-zhuang-inode/" title="Next Post: archbang arch linux 安装inode ">archbang arch linux 安装inode  &raquo;</a>
       
     </p>
   </footer>
@@ -394,8 +378,8 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://tinyxd.me/blog/2012/05/23/wei-yi-jing-cun-zai-de-github-octopresspei-zhi-ben-di-huan-jing/';
-        var disqus_url = 'http://tinyxd.me/blog/2012/05/23/wei-yi-jing-cun-zai-de-github-octopresspei-zhi-ben-di-huan-jing/';
+        var disqus_identifier = 'http://tinyxd.me/blog/2012/07/06/ruby-learning/';
+        var disqus_url = 'http://tinyxd.me/blog/2012/07/06/ruby-learning/';
         var disqus_script = 'embed.js';
       
     (function () {
