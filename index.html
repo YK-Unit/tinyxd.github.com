@@ -116,6 +116,7 @@
 <ul class="main-navigation">
   <li><a href="/">Home</a></li>
   <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/blog/categories/essay">Essay</a></li>
   <li><a href="/tags">Tag Cloud</a></li>
   <li><a href="/reading-list">Reading List</a></li>
   <li><a href="/about">About Me</a></li>
@@ -127,6 +128,58 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/07/08/degrading-for-success/">互联网创业降级论</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-07-08T00:46:00+08:00" pubdate data-updated="true">Jul 8<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/07/08/degrading-for-success/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>本文来自：<a href="http://meditic.com/degrading-for-success/">meditic</a>  <br/>
+几乎一年没有写博客了，说没时间那是借口，唯一的原因是，年纪越大越发觉自己肤浅。有些想法还没提笔，就发现很幼稚，就不敢发出来贻笑大方了。这次先给大家说个小故事：</p>
+
+<p>从前有三个屌丝，聚在一起做网络，提供免费的网络服务，砸锅卖铁，通宵达旦，除了卖肾啥都做了。3年后终于做到了五百万用户，对于年轻人来说，能把五百万人玩弄于鼓掌之间，已经是很牛逼轰轰的事了，不过用户越多，成本越高，每年服务器、带宽租金、房租水电、广告运营等成本，已经达到了十七八万，屌丝们不得不面对一个终极问题：如何盈利？</p>
+
+<p>屌丝们定了三盘沙县水饺，围着一箱子的冰啤酒开始计算：按照最近一月的登陆情况来看，四百万个账号已经不活跃了，真正有商业价值的只有一百万人，如 果开通xx功能，收点高级会员费，让其中1%的人升级为高级会员，每年付30块钱年费，那么每年收入就是100万x1%x30元=30万元！不错嘛， 扣除十七八万的运营成本，还剩毛利润12万，每个屌丝年底能分到4万大洋，如果按照打工者的算法，这三个人每人月薪3333元，木有奖金，木有津贴、木有任何福利，上班还得带自家的电脑。</p>
+
+<p>尽管如此，屌丝们还是激动得热泪盈眶：老子有钱啦！老子有钱啦！！！那一夜，人们看到三个发疯的屌丝在屋顶翩翩起舞。</p>
+
+<p>韩寒说，中国人民是最有忍耐力的族群，一点好处就感激涕零。他一定不知道，IT创业界里的屌丝，才是这群傻逼中的战斗机。他们可以平静地忍受每年都持续亏钱，而且还能信心十足的对所有人说公司的状态非常好，如果有一天居然收支平衡了，他们会激动的趁夜难眠，比北朝鲜倒掉还开心。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2012/07/08/degrading-for-success/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -648,96 +701,6 @@ Images are wrapped in divs classed &quot;flickr_badge_image&quot; with ids &quot
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/06/28/select-sort/">排序算法总结（三）</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-06-28T12:38:00+08:00" pubdate data-updated="true">Jun 28<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/06/28/select-sort/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>选择排序是指在每次排序时，选择最大或者最小项，将其放入适当的位置上，反复操作，直到所有数据排序完成为止。选择排序是一类比较常见的排序，现实生活中也比较常见，比如一个班级的学生排队，先将最高的学生排到队首，然后在其他学生中再挑出最高的一个，排在第二的位置，以此类推，直到全部排完。</p>
-
-<p>选择排序的交换操作介于 0 和 ( n - 1 ) 次之间。选择排序的比较操作为 n ( n - 1 ) / 2 次之间。选择排序的赋值操作介于 0 和 3 ( n - 1 ) 次之间。 比较次数O（  n<sup>2</sup> ）,比较次数与关键字的初始状态无关，总的比较次数N=(n-1)+(n-2)+&#8230;+1=n*(n-1)/2。 交换次数O(n),最好情况是，已经有序，交换0次；最坏情况是，逆序，交换n-1次。 交换次数比冒泡排序少多了，由于交换所需CPU时间比比较所需的CPU时间多，n值较小时，选择排序比冒泡排序快。</p>
-
-<h2>直接选择排序（不稳定）</h2>
-
-<figure class='code'><figcaption><span>直接选择排序</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-</pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="kt">void</span> <span class="n">SelectSort</span><span class="p">(</span><span class="n">elemtype</span> <span class="n">R</span><span class="p">[],</span> <span class="kt">int</span> <span class="n">n</span><span class="p">)</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>  <span class="kt">int</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">m</span><span class="p">;</span>
-</span><span class='line'>  <span class="n">elemtype</span> <span class="n">t</span><span class="p">;</span>
-</span><span class='line'>  <span class="k">for</span><span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
-</span><span class='line'>  <span class="p">{</span>
-</span><span class='line'>      <span class="n">m</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
-</span><span class='line'>      <span class="k">for</span><span class="p">(</span><span class="n">j</span> <span class="o">=</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span>
-</span><span class='line'>      <span class="p">{</span>
-</span><span class='line'>          <span class="k">if</span><span class="p">(</span><span class="n">R</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">R</span><span class="p">[</span><span class="n">m</span><span class="p">])</span>
-</span><span class='line'>          <span class="n">m</span> <span class="o">=</span> <span class="n">j</span><span class="p">;</span>
-</span><span class='line'>      <span class="p">}</span>
-</span><span class='line'>      <span class="k">if</span><span class="p">(</span><span class="n">m</span> <span class="o">!=</span> <span class="n">i</span><span class="p">)</span>
-</span><span class='line'>      <span class="p">{</span>
-</span><span class='line'>          <span class="n">t</span> <span class="o">=</span> <span class="n">R</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
-</span><span class='line'>          <span class="n">R</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">R</span><span class="p">[</span><span class="n">m</span><span class="p">];</span>
-</span><span class='line'>          <span class="n">R</span><span class="p">[</span><span class="n">m</span><span class="p">]</span> <span class="o">=</span> <span class="n">t</span><span class="p">;</span>
-</span><span class='line'>      <span class="p">}</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2012/06/28/select-sort/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -761,6 +724,10 @@ Images are wrapped in divs classed &quot;flickr_badge_image&quot; with ids &quot
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2012/07/08/degrading-for-success/">互联网创业降级论</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2012/07/07/regular-expressions-in-ruby/">正则表达式</a>
       </li>
     
@@ -776,15 +743,11 @@ Images are wrapped in divs classed &quot;flickr_badge_image&quot; with ids &quot
         <a href="/blog/2012/07/05/linux-mirrors-china/">中国大陆linux源镜像地址</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2012/07/03/vc-debug-release/">vc debug 变 release</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Category Cloud</h1>
-    <span id="tag-cloud"><a href='/blog/categories/davinci' style='font-size: 106.0%'>Davinci(1)</a> <a href='/blog/categories/embedded' style='font-size: 112.0%'>Embedded(2)</a> <a href='/blog/categories/java' style='font-size: 106.0%'>Java(1)</a> <a href='/blog/categories/linux' style='font-size: 142.0%'>Linux(7)</a> <a href='/blog/categories/octopress' style='font-size: 142.0%'>Octopress(7)</a> <a href='/blog/categories/php' style='font-size: 106.0%'>Php(1)</a> <a href='/blog/categories/ruby' style='font-size: 118.0%'>Ruby(3)</a> <a href='/blog/categories/software' style='font-size: 160.0%'>Software(10)</a> </span>
+    <span id="tag-cloud"><a href='/blog/categories/davinci' style='font-size: 106.0%'>Davinci(1)</a> <a href='/blog/categories/embedded' style='font-size: 112.0%'>Embedded(2)</a> <a href='/blog/categories/essay' style='font-size: 106.0%'>Essay(1)</a> <a href='/blog/categories/java' style='font-size: 106.0%'>Java(1)</a> <a href='/blog/categories/linux' style='font-size: 142.0%'>Linux(7)</a> <a href='/blog/categories/octopress' style='font-size: 142.0%'>Octopress(7)</a> <a href='/blog/categories/php' style='font-size: 106.0%'>Php(1)</a> <a href='/blog/categories/ruby' style='font-size: 118.0%'>Ruby(3)</a> <a href='/blog/categories/software' style='font-size: 160.0%'>Software(10)</a> </span>
 </section>
 <section>
   <h1>Blogroll</h1>

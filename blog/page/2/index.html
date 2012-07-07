@@ -116,6 +116,7 @@
 <ul class="main-navigation">
   <li><a href="/">Home</a></li>
   <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/blog/categories/essay">Essay</a></li>
   <li><a href="/tags">Tag Cloud</a></li>
   <li><a href="/reading-list">Reading List</a></li>
   <li><a href="/about">About Me</a></li>
@@ -127,6 +128,96 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/06/28/select-sort/">排序算法总结（三）</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-06-28T12:38:00+08:00" pubdate data-updated="true">Jun 28<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/06/28/select-sort/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>选择排序是指在每次排序时，选择最大或者最小项，将其放入适当的位置上，反复操作，直到所有数据排序完成为止。选择排序是一类比较常见的排序，现实生活中也比较常见，比如一个班级的学生排队，先将最高的学生排到队首，然后在其他学生中再挑出最高的一个，排在第二的位置，以此类推，直到全部排完。</p>
+
+<p>选择排序的交换操作介于 0 和 ( n - 1 ) 次之间。选择排序的比较操作为 n ( n - 1 ) / 2 次之间。选择排序的赋值操作介于 0 和 3 ( n - 1 ) 次之间。 比较次数O（  n<sup>2</sup> ）,比较次数与关键字的初始状态无关，总的比较次数N=(n-1)+(n-2)+&#8230;+1=n*(n-1)/2。 交换次数O(n),最好情况是，已经有序，交换0次；最坏情况是，逆序，交换n-1次。 交换次数比冒泡排序少多了，由于交换所需CPU时间比比较所需的CPU时间多，n值较小时，选择排序比冒泡排序快。</p>
+
+<h2>直接选择排序（不稳定）</h2>
+
+<figure class='code'><figcaption><span>直接选择排序</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+</pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="kt">void</span> <span class="n">SelectSort</span><span class="p">(</span><span class="n">elemtype</span> <span class="n">R</span><span class="p">[],</span> <span class="kt">int</span> <span class="n">n</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="kt">int</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">m</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">elemtype</span> <span class="n">t</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">for</span><span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">{</span>
+</span><span class='line'>      <span class="n">m</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
+</span><span class='line'>      <span class="k">for</span><span class="p">(</span><span class="n">j</span> <span class="o">=</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span>
+</span><span class='line'>      <span class="p">{</span>
+</span><span class='line'>          <span class="k">if</span><span class="p">(</span><span class="n">R</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">R</span><span class="p">[</span><span class="n">m</span><span class="p">])</span>
+</span><span class='line'>          <span class="n">m</span> <span class="o">=</span> <span class="n">j</span><span class="p">;</span>
+</span><span class='line'>      <span class="p">}</span>
+</span><span class='line'>      <span class="k">if</span><span class="p">(</span><span class="n">m</span> <span class="o">!=</span> <span class="n">i</span><span class="p">)</span>
+</span><span class='line'>      <span class="p">{</span>
+</span><span class='line'>          <span class="n">t</span> <span class="o">=</span> <span class="n">R</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+</span><span class='line'>          <span class="n">R</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">R</span><span class="p">[</span><span class="n">m</span><span class="p">];</span>
+</span><span class='line'>          <span class="n">R</span><span class="p">[</span><span class="n">m</span><span class="p">]</span> <span class="o">=</span> <span class="n">t</span><span class="p">;</span>
+</span><span class='line'>      <span class="p">}</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2012/06/28/select-sort/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -603,55 +694,6 @@ int   (*p)[3][3]   =   new   int[1][3][3];     删除时请调用delete[]   p;</
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/06/08/c-plus-plus-ju-bing-lei/">读C++ Primer 之句柄类</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-06-08T20:28:00+08:00" pubdate data-updated="true">Jun 8<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/06/08/c-plus-plus-ju-bing-lei/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>转自Linux社区 作者：xizero00：http://www.linuxidc.com/Linux/2011-08/40175.htm</p>
-
-<p>我们知道C++中最令人头疼的当属指针，如果您申请了对象却没有释放它，时间一长就会造成系统崩溃，大量的内存溢出使得您的程序的健壮性出现问题</p>
-
-<p>而句柄类就是为了能够解决这一问题而出现的，句柄类有点类似于智能指针。</p>
-
-<p>好了，废话不多说，我们来看代码</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2012/06/08/c-plus-plus-ju-bing-lei/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/3/">&larr; Older</a>
@@ -677,6 +719,10 @@ int   (*p)[3][3]   =   new   int[1][3][3];     删除时请调用delete[]   p;</
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2012/07/08/degrading-for-success/">互联网创业降级论</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2012/07/07/regular-expressions-in-ruby/">正则表达式</a>
       </li>
     
@@ -692,15 +738,11 @@ int   (*p)[3][3]   =   new   int[1][3][3];     删除时请调用delete[]   p;</
         <a href="/blog/2012/07/05/linux-mirrors-china/">中国大陆linux源镜像地址</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2012/07/03/vc-debug-release/">vc debug 变 release</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Category Cloud</h1>
-    <span id="tag-cloud"><a href='/blog/categories/davinci' style='font-size: 106.0%'>Davinci(1)</a> <a href='/blog/categories/embedded' style='font-size: 112.0%'>Embedded(2)</a> <a href='/blog/categories/java' style='font-size: 106.0%'>Java(1)</a> <a href='/blog/categories/linux' style='font-size: 142.0%'>Linux(7)</a> <a href='/blog/categories/octopress' style='font-size: 142.0%'>Octopress(7)</a> <a href='/blog/categories/php' style='font-size: 106.0%'>Php(1)</a> <a href='/blog/categories/ruby' style='font-size: 118.0%'>Ruby(3)</a> <a href='/blog/categories/software' style='font-size: 160.0%'>Software(10)</a> </span>
+    <span id="tag-cloud"><a href='/blog/categories/davinci' style='font-size: 106.0%'>Davinci(1)</a> <a href='/blog/categories/embedded' style='font-size: 112.0%'>Embedded(2)</a> <a href='/blog/categories/essay' style='font-size: 106.0%'>Essay(1)</a> <a href='/blog/categories/java' style='font-size: 106.0%'>Java(1)</a> <a href='/blog/categories/linux' style='font-size: 142.0%'>Linux(7)</a> <a href='/blog/categories/octopress' style='font-size: 142.0%'>Octopress(7)</a> <a href='/blog/categories/php' style='font-size: 106.0%'>Php(1)</a> <a href='/blog/categories/ruby' style='font-size: 118.0%'>Ruby(3)</a> <a href='/blog/categories/software' style='font-size: 160.0%'>Software(10)</a> </span>
 </section>
 <section>
   <h1>Blogroll</h1>
