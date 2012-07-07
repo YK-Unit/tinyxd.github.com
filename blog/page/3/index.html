@@ -133,6 +133,62 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2012/06/08/dui-he-zhan-de-qu-bie/">堆和栈的区别</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-06-08T06:59:00+08:00" pubdate data-updated="true">Jun 8<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/06/08/dui-he-zhan-de-qu-bie/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>出自: http://www.cnitexam.com <br/>
+一、预备知识—程序的内存分配</p>
+
+<p>一个由c/C++编译的程序占用的内存分为以下几个部分</p>
+
+<p>1、栈区（stack）— 由编译器自动分配释放 ，存放函数的参数值，局部变量的值等。其操作方式类似于数据结构中的栈。</p>
+
+<p>2、堆区（heap） — 一般由程序员分配释放， 若程序员不释放，程序结束时可能由OS回收 。注意它与数据结构中的堆是两回事，分配方式倒是类似于链表，呵呵。</p>
+
+<p>3、全局区（静态区）（static）—，全局变量和静态变量的存储是放在一块的，初始化的全局变量和静态变量在一块区域， 未初始化的全局变量和未初始化的静态变量在相邻的另一块区域。 – 程序结束后有系统释放</p>
+
+<p>4、文字常量区 —常量字符串就是放在这里的。 程序结束后由系统释放</p>
+
+<p>5、程序代码区—存放函数体的二进制代码。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2012/06/08/dui-he-zhan-de-qu-bie/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2012/06/05/cannot-find-libpython/">解决pygments.rb (RubyPython) 找不到libpython的问题(archlinux下)</a></h1>
     
     
@@ -673,55 +729,6 @@ remotes/octopress/thor
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/05/23/octopresstian-jia-tu-pian/">Octopress添加图片</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-05-23T20:49:00+08:00" pubdate data-updated="true">May 23<span>rd</span>, 2012</time>
-        
-         | <a href="/blog/2012/05/23/octopresstian-jia-tu-pian/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>If you like Markdown’s syntax for images, you’ll love the simplicity of the Octopress image tag.</p>
-
-<p>Syntax</p>
-
-<blockquote><p>img [class names] /path/to/image [width] [height] [title text [alt text]]</p></blockquote>
-
-<p>Don’t forget brace and percent couple.</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2012/05/23/octopresstian-jia-tu-pian/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/4/">&larr; Older</a>
@@ -747,6 +754,10 @@ remotes/octopress/thor
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2012/07/07/regular-expressions-in-ruby/">正则表达式</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2012/07/06/ruby-learning/">ruby初学</a>
       </li>
     
@@ -762,15 +773,11 @@ remotes/octopress/thor
         <a href="/blog/2012/07/03/vc-debug-release/">vc debug 变 release</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2012/07/02/add-flickr-aside-in-octopress/">octopress博客添加flickr侧边栏</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Category Cloud</h1>
-    <span id="tag-cloud"><a href='/blog/categories/davinci' style='font-size: 106.0%'>Davinci(1)</a> <a href='/blog/categories/embedded' style='font-size: 112.0%'>Embedded(2)</a> <a href='/blog/categories/java' style='font-size: 106.0%'>Java(1)</a> <a href='/blog/categories/linux' style='font-size: 142.0%'>Linux(7)</a> <a href='/blog/categories/octopress' style='font-size: 142.0%'>Octopress(7)</a> <a href='/blog/categories/php' style='font-size: 106.0%'>Php(1)</a> <a href='/blog/categories/ruby' style='font-size: 112.0%'>Ruby(2)</a> <a href='/blog/categories/software' style='font-size: 160.0%'>Software(10)</a> </span>
+    <span id="tag-cloud"><a href='/blog/categories/davinci' style='font-size: 106.0%'>Davinci(1)</a> <a href='/blog/categories/embedded' style='font-size: 112.0%'>Embedded(2)</a> <a href='/blog/categories/java' style='font-size: 106.0%'>Java(1)</a> <a href='/blog/categories/linux' style='font-size: 142.0%'>Linux(7)</a> <a href='/blog/categories/octopress' style='font-size: 142.0%'>Octopress(7)</a> <a href='/blog/categories/php' style='font-size: 106.0%'>Php(1)</a> <a href='/blog/categories/ruby' style='font-size: 118.0%'>Ruby(3)</a> <a href='/blog/categories/software' style='font-size: 160.0%'>Software(10)</a> </span>
 </section>
 <section>
   <h1>Blogroll</h1>
