@@ -134,6 +134,255 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2012/05/26/arch-linux-xia-lxrde-an-zhuang/">Arch Linux 下lxr的安装</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-05-26T23:14:00+08:00" pubdate data-updated="true">May 26<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/05/26/arch-linux-xia-lxrde-an-zhuang/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>经过自己两天的折腾，参考了好几个资料终于搞定。
+参考资料见文章末尾。
+LXR是使用WEB方式下的源代码整理浏览工具，最大的用途在于清理出了代码中函数、变量的定义、说明、应用的关系，并用链接的形式表现在网页上。LXR整理出代码的结构和调用关系，存在数据库中，并在显示时与源代码树结合，从功能上说，包括代码浏览、标识符搜索、文本搜索和文件搜索，其中的文本搜索和文件搜索利用的是第三方工具（即glimpse或swish-e）（我使用的glimpse）。它的主要组成部分包括三个：Perl编写的网页/CGI部分，基于MySQL的索引数据管理（新版本才有）和通用的文本搜索工具。目前的版本，采用Glimpse或者Swish-e中的一种作为通用文本搜索工具。在安装上，基本上也按照这三个部分来配置。</p>
+
+<p>1.下载安装所需的工具。 <br/>
+a。glimpse（http://webglimpse.net/download.php）</p>
+
+<p>安装glimpse:（其中会用到flex 安装下就行了）</p>
+
+<pre><code>$ ./configure
+
+$ make
+
+$ sudo make install
+</code></pre>
+
+<p>b。pacman -S apache php php-apache mysql</p>
+
+<p>c。pacman -s ctags perl-dbi perl-dbd-mysql</p>
+
+<p>d。安装完mysql 以root用户身份运行设置脚本</p>
+
+<pre><code># rc.d start mysqld &amp;&amp; mysql_secure_installation
+</code></pre>
+
+<p>然后重启 Mysql</p>
+
+<pre><code># rc.d restart mysqld
+</code></pre>
+
+<p>本文需要设置密码为空（后面有说明）</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2012/05/26/arch-linux-xia-lxrde-an-zhuang/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/05/26/bang-nin-kuai-su-ru-men-tide-codec-engine-zhuan-zai/">帮您快速入门TI的Codec Engine</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-05-26T06:18:00+08:00" pubdate data-updated="true">May 26<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/05/26/bang-nin-kuai-su-ru-men-tide-codec-engine-zhuan-zai/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>转自TI官网：  <br/>
+德州仪器半导体技术（上海）有限公司 通用DSP 技术应用工程师 崔晶</p>
+
+<p>德州仪器（TI）的第一颗达芬奇（DaVinci）芯片（处理器）DM6446已经问世快三年了。继DM644x之后，TI又陆续推出了DM643x，DM35x，DM6467，OMAP353x等一系列ARM＋DSP或ARM＋视频协处理器的多媒体处理器平台。很多有很强DSP开发经验或ARM开发经验的工程师都转到达芬奇或通用OMAP（OMAP353x）平台上开发视频监控、视频会议及便携式多媒体终端等产品。大家都面临着同一个问题，那就是如何实现ARM和DSP或协处理器的通信和协同工作？TI的数字视频软件开发包（DVSDK）提供了Codec Engine这样一个软件模块来实现ARM和DSP或协处理器的协同工作。有很多工程师反馈这个软件模块非常好用，节省了很多开发时间，也有工程师认为TI提供的资料太多，不知如何快速上手。本文将从一个第一次接触Codec Engine的工程师角度出发，归纳TI提供的相关资源（文档，例程和网络资源）并介绍相关开发调试方法帮您快速入门Codec Engine。 <br/>
+1．Codec Engine概述 <br/>
+Codec Engine是连接ARM和DSP或协处理器的桥梁，是介于应用层（ARM侧的应用程序）和信号处理层（DSP侧的算法）之间的软件模块。ARM应用程序调用Codec Engine的VISA （Video, Image, Speech, Audio）API，如图1中VIDENC_process(a, b, c )。Codec Engine的stub （ARM侧）会把参数a, b, c以及要调用DSP侧process这个信息打包，通过消息队列（message queue）传递到DSP。Codec Engine的skeleton（DSP侧）会解开这个参数包，把参数a, b, c转换成DSP侧对应的参数x, y, z（比如ARM侧传递的是虚拟地址，而DSP只能认物理地址），DSP侧的server（优先级较低，负责和ARM通信的任务）会根据process这一信息创建一个DSP侧的process(x, y, x)任务最终实现VIDENC_process(a, b, c)的操作。 <br/>
+2．Codec Engine入门第一步，从Codec Engine发布说明文档(release notes)开始 <br/>
+3．Codec Engine入门第二步，了解Codec Engine的运行环境及依赖的软件模块和工具</p>
+
+<p>点击Codec Engine的发布说明文档 的Validation Info，我们可以知道Codec Engine 1.20需要和以下软件模块和工具配合使用：</p>
+
+<pre><code>Framework Components 1.20.02   
+xDAIS 5.21   
+XDC Tools 2.93.01   
+DSP/BIOS Link 1.40.05, configured for the DM6446 EVM   
+C6x Code Generation Tools version 6.0.8   
+DSP/BIOS 5.31.05   
+MontaVista Linux v4.0   
+Red Hat Enterprise Linux 3 (SMP)    
+</code></pre>
+
+<p>因此，我们需要在该Codec Engine安装的DVSDK文件包下面检查上面提到的软件模块和工具是否安装，版本是否正确。否则，可能会编译不过 Codec Engine的例子。那么，什么是 Framework Components，什么是xDAIS，什么又是XDC Tools呢？你可以分别到它们的根目录下浏览它们各自的发布说明文档，做一个总体的了解。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2012/05/26/bang-nin-kuai-su-ru-men-tide-codec-engine-zhuan-zai/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/05/25/archbang-arch-linux-an-zhuang-inode/">Archbang Arch Linux 安装inode</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-05-25T14:34:00+08:00" pubdate data-updated="true">May 25<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/05/25/archbang-arch-linux-an-zhuang-inode/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>第一步：cp iNodeClient.tar.gz 到 /home/***** 目录下。进入~目录下  <br/>
+第二步：终端运行 tar -xvf iNodeClient.tar.gz。<br/>
+第三步：修改/home//iNodeClient/下install.sh，把 OS_UBUNTU=`cat /etc/issue | grep &#8216;Ubuntu&#8217;`那一行及以下的脚本都删除，然后保存，执行sudo ./install.sh。<br/>
+第四步：cp  home/*****/iNodeClient/ 目录下的iNodeAuthService到/etc/rc.d/目录下，并修改权限chmod 755 /etc/rc.d/iNodeAuthService。<br/>
+第五步：打开/etc/rc.conf ，在DAEMONS处添加@iNodeAuthService。（让iNode认证服务开机自启动） <br/>
+第六步：现在执行sudo /etc/rc.d/iNodeAuthService start，发现出错了。错误出现在enablecards.ps这个文件里，打开看，你会发现这个文件的作用只是用来up网卡。一般来说你的网卡都已经up了的啦。你可以把里面的内容改成： <br/>
+#!/bin/sh<br/>
+x=eth0（你所使用的网卡） <br/>
+ifconfig $x up  <br/>
+再运行一次sudo /etc/rc.d/iNodeAuthService start，你应该会发现服务启动成功了。  <br/>
+第七步：命令行里面执行一下sudo ./iNodeClient 然后楼主发现出现了一些库的依赖问题。iNode需要一些比较旧的库，对于jpeg tiff等库 你可以用ln -s 来用新版本的库代替旧版本。而其中有一个是libpng12.so.0是必须需要旧版本的。见附件 或者可以去官网自己下载ftp://ftp.simplesystems.org/pub/libpng/png/src/  <br/>
+需要下载的文件是libpng-1.2.49.tar.bz2 <br/>
+安装方法如下： <br/>
+1.解压，然后执行./configure &#8211;prefix=/usr/ <br/>
+2.编译及安装 <br/>
+#make  <br/>
+#make install <br/>
+安装之前可以make check 以下 看看有没有什么错误，如果没错误 make install 那么libpng就安装好了。</p>
+
+<p>参考：http://ecnc.sysu.edu.cn/viewthread.php?tid=18558</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/05/23/wei-yi-jing-cun-zai-de-github-octopresspei-zhi-ben-di-huan-jing/">为已经存在的github Octopress配置本地环境</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-05-23T20:59:00+08:00" pubdate data-updated="true">May 23<span>rd</span>, 2012</time>
+        
+         | <a href="/blog/2012/05/23/wei-yi-jing-cun-zai-de-github-octopresspei-zhi-ben-di-huan-jing/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><strong>转自：</strong><br/>
+http://www.360doc.com/content/12/0520/19/3565338_212362686.shtml</p>
+
+<p>本文介绍如何为已经存在于github上的octopress配置本地环境。<br/>
+在本地安装RVM(Ruby Version Manager)和Ruby 1.9.2；</p>
+
+<p>从你的github得到你的octopress内容：</p>
+
+<pre><code>git clone -b source git@github.com:username/username.github.com.git octopress # get the source code from your "source" branch of your octopress on github
+＃ learn from: http://stackoverflow.com/questions/1911109/git-clone-a-specific-branch
+cd octopress
+git clone git@github.com:username/username.github.com.git _deploy # get your static pages content from your "master"branch of your cotopress on github
+</code></pre>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2012/05/23/wei-yi-jing-cun-zai-de-github-octopresspei-zhi-ben-di-huan-jing/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2012/05/23/octopress-xin-shou-jiao-cheng/">Octopress:新手教程</a></h1>
     
     
@@ -351,30 +600,30 @@ rvm:x:1004:admin
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2012/07/09/reasons-to-stay-in-it/">IT生活：10个继续干IT的理由</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/07/09/reasons-for-quitting-it/">IT生活：10个不干IT的理由</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/07/08/git-branch-management-strategy/">git分支管理策略</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/07/08/blog-one-month/">写在开博一个月</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2012/07/08/degrading-for-success/">互联网创业降级论</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/07/07/regular-expressions-in-ruby/">正则表达式</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/07/06/ruby-learning/">ruby初学</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/07/06/linux-sleep-usage/">linux sleep 的用法</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/07/05/linux-mirrors-china/">中国大陆linux源镜像地址</a>
       </li>
     
   </ul>
 </section>
 <section>
   <h1>Category Cloud</h1>
-    <span id="tag-cloud"><a href='/blog/categories/davinci' style='font-size: 106.0%'>Davinci(1)</a> <a href='/blog/categories/embedded' style='font-size: 112.0%'>Embedded(2)</a> <a href='/blog/categories/essay' style='font-size: 106.0%'>Essay(1)</a> <a href='/blog/categories/java' style='font-size: 106.0%'>Java(1)</a> <a href='/blog/categories/linux' style='font-size: 142.0%'>Linux(7)</a> <a href='/blog/categories/octopress' style='font-size: 142.0%'>Octopress(7)</a> <a href='/blog/categories/php' style='font-size: 106.0%'>Php(1)</a> <a href='/blog/categories/ruby' style='font-size: 118.0%'>Ruby(3)</a> <a href='/blog/categories/software' style='font-size: 160.0%'>Software(10)</a> </span>
+    <span id="tag-cloud"><a href='/blog/categories/davinci' style='font-size: 106.0%'>Davinci(1)</a> <a href='/blog/categories/embedded' style='font-size: 112.0%'>Embedded(2)</a> <a href='/blog/categories/essay' style='font-size: 112.0%'>Essay(2)</a> <a href='/blog/categories/git' style='font-size: 106.0%'>Git(1)</a> <a href='/blog/categories/it' style='font-size: 112.0%'>It(2)</a> <a href='/blog/categories/java' style='font-size: 106.0%'>Java(1)</a> <a href='/blog/categories/linux' style='font-size: 142.0%'>Linux(7)</a> <a href='/blog/categories/octopress' style='font-size: 142.0%'>Octopress(7)</a> <a href='/blog/categories/php' style='font-size: 106.0%'>Php(1)</a> <a href='/blog/categories/ruby' style='font-size: 118.0%'>Ruby(3)</a> <a href='/blog/categories/software' style='font-size: 160.0%'>Software(10)</a> </span>
 </section>
 <section>
   <h1>Blogroll</h1>

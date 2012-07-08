@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Tag: blog | Keen on Art of Tech]]></title>
+  <link href="http://tinyxd.me/tags/blog/atom.xml" rel="self"/>
+  <link href="http://tinyxd.me/"/>
+  <updated>2012-07-09T00:38:19+08:00</updated>
+  <id>http://tinyxd.me/</id>
+  <author>
+    <name><![CDATA[Tiny]]></name>
+    <email><![CDATA[admin@tinyxd.me]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[写在开博一个月]]></title>
+    <link href="http://tinyxd.me/blog/2012/07/08/blog-one-month/"/>
+    <updated>2012-07-08T23:31:00+08:00</updated>
+    <id>http://tinyxd.me/blog/2012/07/08/blog-one-month</id>
+    <content type="html"><![CDATA[<p>其实说开博一个月，不太妥当。用octopress搭建博客是在5月底，域名是在6月9号申请的。Anyway，在这一个月中，深切体会到了“隔行如隔山”。从刚开始一点不懂，到现在知道了“SEO”、“sitemap”、"PR"、还有各种博客工具，学习了ruby、html，css等等。
+到现在google PR值仍然为0（站长真是不容易啊），不过bing、yahoo、sogou等搜索引擎已经开始收录了，只是baidu还没有动静（伤感中），只好继续等待了。
+先写到这吧，有啥体会了再继续。。。</p>
+]]></content>
+  </entry>
+  
+</feed>

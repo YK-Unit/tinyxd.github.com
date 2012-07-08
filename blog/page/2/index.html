@@ -134,6 +134,218 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2012/07/02/add-flickr-aside-in-octopress/">Octopress博客添加flickr侧边栏</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-07-02T11:14:00+08:00" pubdate data-updated="true">Jul 2<span>nd</span>, 2012</time>
+        
+         | <a href="/blog/2012/07/02/add-flickr-aside-in-octopress/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>octopress添加侧边栏： <br/>
+1.新建 <code>source/_includes/custom/asides/flickr.html</code>，代码如下：</p>
+
+<div><script src='https://gist.github.com/1421792.js?file=flickr.html'></script>
+<noscript><pre><code>{% if site.flickr_user %}
+&lt;section class=&quot;flickr&quot;&gt;
+&lt;h1&gt;My Flickr&lt;/h1&gt;
+&lt;!-- Start of Flickr Badge --&gt;
+&lt;style type=&quot;text/css&quot;&gt;
+/*
+Images are wrapped in divs classed &quot;flickr_badge_image&quot; with ids &quot;flickr_badge_imageX&quot; where &quot;X&quot; is an integer specifying ordinal position. Below are some styles to get you started!
+*/
+#flickr_badge_wrapper {padding:10px 0 10px 0;}
+.flickr_badge_image {margin: 0 9px 8px 0px;display: inline-block;}
+&lt;/style&gt;
+&lt;div id=&quot;flickr_badge_uber_wrapper&quot;&gt;&lt;div id=&quot;flickr_badge_wrapper&quot;&gt;
+&lt;script type=&quot;text/javascript&quot; src=&quot;http://www.flickr.com/badge_code_v2.gne?count={{ site.flickr_count }}&amp;display=latest&amp;size=s&amp;layout=x&amp;source=user&amp;user={{ site.flickr_user }}&quot;&gt;&lt;/script&gt;
+&lt;/div&gt;&lt;/div&gt;
+&lt;!-- End of Flickr Badge --&gt;
+&lt;/section&gt;
+{% endif %}</code></pre></noscript></div>
+
+
+
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2012/07/02/add-flickr-aside-in-octopress/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/07/01/merge-sort/">排序算法总结（五）</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-07-01T23:45:00+08:00" pubdate data-updated="true">Jul 1<span>st</span>, 2012</time>
+        
+         | <a href="/blog/2012/07/01/merge-sort/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>归并（Merge）排序法是将两个（或两个以上）有序表合并成一个新的有序表，即把待排序序列分为若干个子序列，每个子序列是有序的。然后再把有序子序列合并为整体有序序列。 <br/>
+归并排序是建立在归并操作上的一种有效的排序算法。该算法是采用分治法（Divide and Conquer）的一个非常典型的应用。 <br/>
+将已有序的子序列合并，得到完全有序的序列；即先使每个子序列有序，再使子序列段间有序。若将两个有序表合并成一个有序表，称为2-路归并。 <br/>
+与快速排序比较：归并排序是稳定的排序.即相等的元素的顺序不会改变。如输入记录 1(1) 3(2) 2(3) 2(4) 5(5) (括号中是记录的关键字)时输出的 1(1) 2(3) 2(4) 3(2) 5(5) 中的2 和 2 是按输入的顺序。这对要排序数据包含多个信息而要按其中的某一个信息排序，要求其它信息尽量按输入的顺序排列时很重要。这也是它比快速排序优势的地方.。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2012/07/01/merge-sort/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/06/30/debian-ntfs-filesysterm/">让Debian支持ntfs文件系统读写</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-06-30T15:45:00+08:00" pubdate data-updated="true">Jun 30<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/06/30/debian-ntfs-filesysterm/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>刚装好debian发现在debian下往windows盘下拷贝不过去资料，上网查了些资料发现是因为不知道ntfs的读写。 <br/>
+查看我的版本号6.0.5</p>
+
+<pre><code>#more /etc/debian_version   
+6.0.5   
+</code></pre>
+
+<p>我的Debian系统: 6.0.5 <br/>
+要是用的软件使用软件:ntfs-3g <br/>
+1.修改默认源 <br/>
+因为我们学校有自己的源，故而修改成我们学校的源，而后进行更新</p>
+
+<pre><code>apt-get update   
+</code></pre>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2012/06/30/debian-ntfs-filesysterm/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/06/29/radix-sort/">排序算法总结（四）</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-06-29T23:28:00+08:00" pubdate data-updated="true">Jun 29<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/06/29/radix-sort/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>“基数排序法”属于“分配式排序”（distribution sort），基数排序法又称“桶子法”（bucket sort）或bin sort ，它是通过键值的部分资讯，将要排序的元素分配至某些“桶”中，借以达到排序的作用。基数排序法是属于稳定性的排序，其时间复杂度为O（nlog(r)m），其中r为所采用的基数，而m为堆数。在某些时候，基数排序法的效率高于其他的比较性排序。 <br/>
+什么是基数排序： 基数排序也称桶排序，是一种当关键字为整数类型时的一种非常高效的排序方法。基数排序算法进出桶中的数据元素序列满足先进先出的原则（桶实际就是队列）。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2012/06/29/radix-sort/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2012/06/28/select-sort/">排序算法总结（三）</a></h1>
     
     
@@ -495,205 +707,6 @@ http://www.phpchina.com/resource/manual/phpnew/</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/06/18/debianan-zhuang-nvidiaxian-qia-qu-dong/">Debian安装nvidia显卡驱动</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-06-18T20:31:00+08:00" pubdate data-updated="true">Jun 18<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/06/18/debianan-zhuang-nvidiaxian-qia-qu-dong/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>在自己的电脑上硬盘安装了Debian.下面介绍一下我是如何安装显卡驱动的.我的显卡是GForce 7100GS的.</p>
-
-<p>1>下载显卡驱动.</p>
-
-<p>这个可以到Nvidia的官网上去找,找到自己对应的版本就可以了。</p>
-
-<p>2>安装gcc并设置版本.</p>
-
-<p>#apt-get install gcc 这样安装的是gcc-4.4,如果在安装过程中提示您安装的gcc版本有问题,你可以再安装一下gcc-4.3并将gcc版本设置为4.3,具体做法:</p>
-
-<p>#apt-get install gcc-4.3</p>
-
-<p>#ln -sf /usr/bin/gcc-4.3 /usr/bin/gcc 这一句用来将gcc的版本设置为4.3</p>
-
-<p>#ls -l /usr/bin/gcc* 这一句用来查看当前使用的gcc版本</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2012/06/18/debianan-zhuang-nvidiaxian-qia-qu-dong/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/06/14/yong-newshen-qing-dong-tai-kong-jian-de-wen-ti/">用new申请动态空间的问题</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-06-14T07:27:00+08:00" pubdate data-updated="true">Jun 14<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/06/14/yong-newshen-qing-dong-tai-kong-jian-de-wen-ti/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>先分析一下new的分配：</p>
-
-<p>1.T*   p   =   new   T;  ···   delete   p;
-等价于
-T*   p   =   new   T[1]; ··· delete[]   p;</p>
-
-<p>2.int   (*p)[n]   =   new   int[m][n];这种方式是可行的</p>
-
-<p>3.所以new一个3x3的数组，也就是T   =   int[3][3] ，  那么可以这样写：
-int   (*p)[3][3]   =   new   int[1][3][3];     删除时请调用delete[]   p;</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2012/06/14/yong-newshen-qing-dong-tai-kong-jian-de-wen-ti/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/06/13/han-shu-ya-zhan/">函数压栈的一些思考</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-06-13T07:22:00+08:00" pubdate data-updated="true">Jun 13<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/06/13/han-shu-ya-zhan/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>今天，有个同学跑过来问我一个问题fun（i，i++，++i），我立马想到这个是跟函数压栈的顺序有关的，随后去网上查找资料，并开始写了一些测试实验。</p>
-
-<p>先把cu上的一个解释先贴上来：</p>
-
-<p>函数调用约定（Calling Convention）</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2012/06/13/han-shu-ya-zhan/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/06/10/qian-ru-shi-linuxying-yong-cheng-xu-zi-qi-dong/">嵌入式linux应用程序自启动</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-06-10T19:46:00+08:00" pubdate data-updated="true">Jun 10<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/06/10/qian-ru-shi-linuxying-yong-cheng-xu-zi-qi-dong/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>在很多嵌入式系统中，由于可用资源较少，常常在系统启动后就直接让应用程序自动启动，以减少用户操作和节省资源。如何让自己的应用程序自动启动呢？    在Linux系统中，配置应用程序自动启动的方法有以下三种：</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2012/06/10/qian-ru-shi-linuxying-yong-cheng-xu-zi-qi-dong/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/3/">&larr; Older</a>
@@ -719,30 +732,30 @@ int   (*p)[3][3]   =   new   int[1][3][3];     删除时请调用delete[]   p;</
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2012/07/09/reasons-to-stay-in-it/">IT生活：10个继续干IT的理由</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/07/09/reasons-for-quitting-it/">IT生活：10个不干IT的理由</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/07/08/git-branch-management-strategy/">git分支管理策略</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/07/08/blog-one-month/">写在开博一个月</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2012/07/08/degrading-for-success/">互联网创业降级论</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/07/07/regular-expressions-in-ruby/">正则表达式</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/07/06/ruby-learning/">ruby初学</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/07/06/linux-sleep-usage/">linux sleep 的用法</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/07/05/linux-mirrors-china/">中国大陆linux源镜像地址</a>
       </li>
     
   </ul>
 </section>
 <section>
   <h1>Category Cloud</h1>
-    <span id="tag-cloud"><a href='/blog/categories/davinci' style='font-size: 106.0%'>Davinci(1)</a> <a href='/blog/categories/embedded' style='font-size: 112.0%'>Embedded(2)</a> <a href='/blog/categories/essay' style='font-size: 106.0%'>Essay(1)</a> <a href='/blog/categories/java' style='font-size: 106.0%'>Java(1)</a> <a href='/blog/categories/linux' style='font-size: 142.0%'>Linux(7)</a> <a href='/blog/categories/octopress' style='font-size: 142.0%'>Octopress(7)</a> <a href='/blog/categories/php' style='font-size: 106.0%'>Php(1)</a> <a href='/blog/categories/ruby' style='font-size: 118.0%'>Ruby(3)</a> <a href='/blog/categories/software' style='font-size: 160.0%'>Software(10)</a> </span>
+    <span id="tag-cloud"><a href='/blog/categories/davinci' style='font-size: 106.0%'>Davinci(1)</a> <a href='/blog/categories/embedded' style='font-size: 112.0%'>Embedded(2)</a> <a href='/blog/categories/essay' style='font-size: 112.0%'>Essay(2)</a> <a href='/blog/categories/git' style='font-size: 106.0%'>Git(1)</a> <a href='/blog/categories/it' style='font-size: 112.0%'>It(2)</a> <a href='/blog/categories/java' style='font-size: 106.0%'>Java(1)</a> <a href='/blog/categories/linux' style='font-size: 142.0%'>Linux(7)</a> <a href='/blog/categories/octopress' style='font-size: 142.0%'>Octopress(7)</a> <a href='/blog/categories/php' style='font-size: 106.0%'>Php(1)</a> <a href='/blog/categories/ruby' style='font-size: 118.0%'>Ruby(3)</a> <a href='/blog/categories/software' style='font-size: 160.0%'>Software(10)</a> </span>
 </section>
 <section>
   <h1>Blogroll</h1>
