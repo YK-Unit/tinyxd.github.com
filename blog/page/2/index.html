@@ -134,6 +134,58 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2012/07/03/vc-debug-release/">Vc Debug 变 Release</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-07-03T12:23:00+08:00" pubdate data-updated="true">Jul 3<span>rd</span>, 2012</time>
+        
+         | <a href="/blog/2012/07/03/vc-debug-release/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>今天遇到将debug改为release版本出现好多问题，最后一一解决，现将方法贴到下面 <br/>
+生成release版的步骤： <br/>
+1.首先修改<code>project-setting-general-using mfc in a static libraryproject-setting</code>右键点击菜单空白处——选择“组建”——选择“Win32 Release“——重新编译链接。 <br/>
+2.然后<code>project-setting -c++ -precompiled Headers- not using</code> <br/>
+最后出现这个错误</p>
+
+<pre><code>nafxcwd.lib(afxmem.obj) : error LNK2005: "void __cdecl operator delete(void *)" (??3@YAXPAX@Z) already defined in LIBCMTD.lib(dbgdel.obj)   
+</code></pre>
+
+<p>关于静态库引发 nafxcw.lib LNK2005 错误的解决方法</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2012/07/03/vc-debug-release/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2012/07/02/add-flickr-aside-in-octopress/">Octopress博客添加flickr侧边栏</a></h1>
     
     
@@ -660,53 +712,6 @@ C/C++代码实现直接插入排序：</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/06/19/learn-php/">Php初学</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-06-19T20:28:00+08:00" pubdate data-updated="true">Jun 19<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/06/19/learn-php/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>1.搭建学习环境 采用简单的打包好的：lamp. <br/>
-<a href="https://help.ubuntu.com/community/ApacheMySQLPHP#Run.2C_Stop.2C_Test.2C_And_Restart_Apache">help web sites</a></p>
-
-<p>2.PHP中文手册 <br/>
-http://www.phpchina.com/resource/manual/phpnew/</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2012/06/19/learn-php/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/3/">&larr; Older</a>
@@ -732,6 +737,10 @@ http://www.phpchina.com/resource/manual/phpnew/</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2012/07/09/add-douban-aside/">给octopress博客添加豆瓣侧边栏</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2012/07/09/reasons-to-stay-in-it/">IT生活：10个继续干IT的理由</a>
       </li>
     
@@ -747,15 +756,11 @@ http://www.phpchina.com/resource/manual/phpnew/</p>
         <a href="/blog/2012/07/08/blog-one-month/">写在开博一个月</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2012/07/08/degrading-for-success/">互联网创业降级论</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Category Cloud</h1>
-    <span id="tag-cloud"><a href='/blog/categories/davinci' style='font-size: 106.0%'>Davinci(1)</a> <a href='/blog/categories/embedded' style='font-size: 112.0%'>Embedded(2)</a> <a href='/blog/categories/essay' style='font-size: 112.0%'>Essay(2)</a> <a href='/blog/categories/git' style='font-size: 106.0%'>Git(1)</a> <a href='/blog/categories/it' style='font-size: 112.0%'>It(2)</a> <a href='/blog/categories/java' style='font-size: 106.0%'>Java(1)</a> <a href='/blog/categories/linux' style='font-size: 142.0%'>Linux(7)</a> <a href='/blog/categories/octopress' style='font-size: 142.0%'>Octopress(7)</a> <a href='/blog/categories/php' style='font-size: 106.0%'>Php(1)</a> <a href='/blog/categories/ruby' style='font-size: 118.0%'>Ruby(3)</a> <a href='/blog/categories/software' style='font-size: 160.0%'>Software(10)</a> </span>
+    <span id="tag-cloud"><a href='/blog/categories/davinci' style='font-size: 106.0%'>Davinci(1)</a> <a href='/blog/categories/embedded' style='font-size: 112.0%'>Embedded(2)</a> <a href='/blog/categories/essay' style='font-size: 112.0%'>Essay(2)</a> <a href='/blog/categories/git' style='font-size: 106.0%'>Git(1)</a> <a href='/blog/categories/it' style='font-size: 112.0%'>It(2)</a> <a href='/blog/categories/java' style='font-size: 106.0%'>Java(1)</a> <a href='/blog/categories/linux' style='font-size: 142.0%'>Linux(7)</a> <a href='/blog/categories/octopress' style='font-size: 148.0%'>Octopress(8)</a> <a href='/blog/categories/php' style='font-size: 106.0%'>Php(1)</a> <a href='/blog/categories/ruby' style='font-size: 118.0%'>Ruby(3)</a> <a href='/blog/categories/software' style='font-size: 160.0%'>Software(10)</a> </span>
 </section>
 <section>
   <h1>Blogroll</h1>
@@ -774,6 +779,14 @@ http://www.phpchina.com/resource/manual/phpnew/</p>
     </li>
   </ul>
 </section>
+<section>
+<h2>Reading List</h2>
+<div>
+<script type="text/javascript" src="http://www.douban.com/service/badge/tinyxd/?show=dolist&amp;select=random&amp;n=6&amp;columns=3&amp;hidelogo=yes&amp;hideself=yes" ></script>
+</div>
+</section>
+
+
 <section class="flickr">
 <h1>Flickr</h1>
 <!-- Start of Flickr Badge -->
