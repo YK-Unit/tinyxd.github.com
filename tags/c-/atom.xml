@@ -4,7 +4,7 @@
   <title><![CDATA[Tag: c++ | Keen on Art of Tech]]></title>
   <link href="http://tinyxd.me/tags/c-/atom.xml" rel="self"/>
   <link href="http://tinyxd.me/"/>
-  <updated>2012-07-09T23:54:10+08:00</updated>
+  <updated>2012-07-10T00:28:13+08:00</updated>
   <id>http://tinyxd.me/</id>
   <author>
     <name><![CDATA[Tiny]]></name>
@@ -55,25 +55,13 @@ Debug 通常称为调试版本，它包含调试信息，并且不作任何优�
 
 
 <p>Debug 版本：
-{% blockquote %}
-/MDd /MLd 或 /MTd 使用 Debug runtime library(调试版本的运行时刻函数库)
-/Od 关闭优化开关
-/D "<em>DEBUG" 相当于 #define </em>DEBUG,打开编译调试代码开关(主要针对assert函数)
-/ZI 创建 Edit and continue(编辑继续)数据库，这样在调试过程中如果修改了源代码不需重新编译
-/GZ 可以帮助捕获内存错误
-/Gm 打开最小化重链接开关，减少链接时间
- {% endblockquote %}</p>
+<blockquote><p>/MDd /MLd 或 /MTd 使用 Debug runtime library(调试版本的运行时刻函数库)<br/>/Od 关闭优化开关<br/>/D "<em>DEBUG" 相当于 #define </em>DEBUG,打开编译调试代码开关(主要针对assert函数)<br/>/ZI 创建 Edit and continue(编辑继续)数据库，这样在调试过程中如果修改了源代码不需重新编译<br/>/GZ 可以帮助捕获内存错误<br/>/Gm 打开最小化重链接开关，减少链接时间</p></blockquote></p>
 
 <br />
 
 
 <p>Release 版本： <br/>
-{% blockquote %}
-/MD /ML 或 /MT 使用发布版本的运行时刻函数库
-/O1 或 /O2 优化开关，使程序最小或最快
-/D "NDEBUG" 关闭条件编译调试代码开关(即不编译assert函数)
-/GF 合并重复的字符串，并将字符串常量放到只读内存，防止 被修改
-{% endblockquote %}</p>
+<blockquote><p>/MD /ML 或 /MT 使用发布版本的运行时刻函数库<br/>/O1 或 /O2 优化开关，使程序最小或最快<br/>/D "NDEBUG" 关闭条件编译调试代码开关(即不编译assert函数)<br/>/GF 合并重复的字符串，并将字符串常量放到只读内存，防止 被修改</p></blockquote></p>
 
 <br />
 
