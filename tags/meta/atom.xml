@@ -4,7 +4,7 @@
   <title><![CDATA[Tag: meta | Keen on Art of Tech]]></title>
   <link href="http://tinyxd.me/tags/meta/atom.xml" rel="self"/>
   <link href="http://tinyxd.me/"/>
-  <updated>2012-07-09T23:45:31+08:00</updated>
+  <updated>2012-07-09T23:54:10+08:00</updated>
   <id>http://tinyxd.me/</id>
   <author>
     <name><![CDATA[Tiny]]></name>
@@ -21,13 +21,7 @@
     <content type="html"><![CDATA[<p>给octopress添加keywords和description。</p>
 
 <p>1.修改source/<em>includes/head.html <br/>
-<div><script src='https://gist.github.com/2460469.js?file=head.html'></script>
-<noscript><pre><code>&lt;meta name=&quot;author&quot; content=&quot;{{ site.author }}&quot;&gt;
-{% capture description %}{% if page.description %}{{ page.description }}{% elsif site.description %}{{ site.description }}{%else%}{{ content | raw_content }}{% endif %}{% endcapture %}
-&lt;meta name=&quot;description&quot; content=&quot;{{ description | strip_html | condense_spaces | truncate:150 }}&quot;&gt;
-{% if page.keywords %}&lt;meta name=&quot;keywords&quot; content=&quot;{{ page.keywords }}&quot;&gt;{%else%}&lt;meta name=&quot;keywords&quot; content=&quot;{{ site.keywords }}&quot;&gt;{% endif %}
-</code></pre></noscript></div>
- <br/>
+{% gist 2460469  head.html %} <br/>
 2.在</em>config.yml中添加如下内容
 <code>
 description: Keen on the software programming and Embedded development.（专注软件编程及嵌入式技术。）
