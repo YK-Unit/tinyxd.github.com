@@ -134,6 +134,65 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2012/07/10/linux-filesysterm/">Linux文件系统</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-07-10T23:26:00+08:00" pubdate data-updated="true">Jul 10<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/07/10/linux-filesysterm/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>linux文件操作：文件操作系统调用（create、open、read、write、lseek、close）、c库文件操作（fopen、fscanf、fprintf、fread、fwrite、fseek、fclose等）。</p>
+
+<p>linux文件系统：在设备驱动程序的设计中，一般会关心file和inode这两个结构体。</p>
+
+<h2>devfs、udev、sysfs的区别：</h2>
+
+<p>以下内容来自<a href="http://blog.csdn.net/yeqishi/article/details/5491413">devfs, sysfs, udev文件系统区别</a> 和 linux设备驱动开发详解（第二版）</p>
+
+<h3>一.devfs设备文件简略介绍(2.6版本以后内核都采用udev设备文件系统)</h3>
+
+<p>devfs(设备文件系统)是由2.4内核引入的，具有如下优点：</p>
+
+<p>1.可以通过程序在设备初始化时在/dev目录下创建设备文件，卸载时将它删除。</p>
+
+<p>2.设备驱动程序可以指定设备号,所有者,和权限位,用户空间可以修改所有者和权限位。</p>
+
+<p>3.不再需要为设备驱动程序分配主设备号以及处理的次设备号，在程序可以直接给register_chrdev()传递0主设备号以动态获得可用的主设备号，并在devfs_register() 中指定次设备号。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2012/07/10/linux-filesysterm/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2012/07/09/add-douban-aside/">给octopress博客添加豆瓣侧边栏</a></h1>
     
     
@@ -639,72 +698,6 @@ sleep（n）//n秒
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/07/05/linux-mirrors-china/">中国大陆linux源镜像地址</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-07-05T09:39:00+08:00" pubdate data-updated="true">Jul 5<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/07/05/linux-mirrors-china/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>1.企业 <br/>
-搜狐开源镜像站：</p>
-
-<pre><code>http://mirrors.sohu.com/
-</code></pre>
-
-<p>网易开源镜像站：</p>
-
-<pre><code>http://mirrors.163.com/
-</code></pre>
-
-<p>2.大学 <br/>
-西安电子科技大学：</p>
-
-<pre><code>http://ftp.xdlinux.info/  (IPv4+IPv6)
-ftp://linux.xidian.edu.cn/
-</code></pre>
-
-<p>中国科学技术大学：</p>
-
-<pre><code>http://mirrors.ustc.edu.cn/ (IPv4+IPv6)
-http://mirrors4.ustc.edu.cn/
-http://mirrors6.ustc.edu.cn/
-</code></pre>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2012/07/05/linux-mirrors-china/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -728,6 +721,10 @@ http://mirrors6.ustc.edu.cn/
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2012/07/10/linux-filesysterm/">linux文件系统</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2012/07/09/add-douban-aside/">给octopress博客添加豆瓣侧边栏</a>
       </li>
     
@@ -743,15 +740,11 @@ http://mirrors6.ustc.edu.cn/
         <a href="/blog/2012/07/08/git-branch-management-strategy/">git分支管理策略</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2012/07/08/blog-one-month/">写在开博一个月</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Category Cloud</h1>
-    <span id="tag-cloud"><a href='/blog/categories/davinci' style='font-size: 106.0%'>Davinci(1)</a> <a href='/blog/categories/embedded' style='font-size: 112.0%'>Embedded(2)</a> <a href='/blog/categories/essay' style='font-size: 112.0%'>Essay(2)</a> <a href='/blog/categories/git' style='font-size: 106.0%'>Git(1)</a> <a href='/blog/categories/it' style='font-size: 112.0%'>It(2)</a> <a href='/blog/categories/java' style='font-size: 106.0%'>Java(1)</a> <a href='/blog/categories/linux' style='font-size: 142.0%'>Linux(7)</a> <a href='/blog/categories/octopress' style='font-size: 148.0%'>Octopress(8)</a> <a href='/blog/categories/php' style='font-size: 106.0%'>Php(1)</a> <a href='/blog/categories/ruby' style='font-size: 118.0%'>Ruby(3)</a> <a href='/blog/categories/software' style='font-size: 160.0%'>Software(10)</a> </span>
+    <span id="tag-cloud"><a href='/blog/categories/davinci' style='font-size: 106.0%'>Davinci(1)</a> <a href='/blog/categories/embedded' style='font-size: 112.0%'>Embedded(2)</a> <a href='/blog/categories/essay' style='font-size: 112.0%'>Essay(2)</a> <a href='/blog/categories/git' style='font-size: 106.0%'>Git(1)</a> <a href='/blog/categories/it' style='font-size: 112.0%'>It(2)</a> <a href='/blog/categories/java' style='font-size: 106.0%'>Java(1)</a> <a href='/blog/categories/linux' style='font-size: 148.0%'>Linux(8)</a> <a href='/blog/categories/octopress' style='font-size: 148.0%'>Octopress(8)</a> <a href='/blog/categories/php' style='font-size: 106.0%'>Php(1)</a> <a href='/blog/categories/ruby' style='font-size: 118.0%'>Ruby(3)</a> <a href='/blog/categories/software' style='font-size: 160.0%'>Software(10)</a> </span>
 </section>
 <section>
   <h1>Blogroll</h1>

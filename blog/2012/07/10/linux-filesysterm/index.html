@@ -1,24 +1,162 @@
-<?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: linux | Keen on Art of Tech]]></title>
-  <link href="http://tinyxd.me/blog/categories/linux/atom.xml" rel="self"/>
-  <link href="http://tinyxd.me/"/>
-  <updated>2012-07-10T23:47:00+08:00</updated>
-  <id>http://tinyxd.me/</id>
-  <author>
-    <name><![CDATA[Tiny]]></name>
-    <email><![CDATA[admin@tinyxd.me]]></email>
-  </author>
-  <generator uri="http://octopress.org/">Octopress</generator>
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>linux文件系统 - Keen on Art of Tech</title>
+<meta name="author" content="Tiny">
+
+
+<meta name="description" content="在文件系统方面，Linux可以算得上操作系统中的 “瑞士军刀”。Linux 支持许多种文件系统，从日志型文件系统到集群文件系统和加密文件系统。对于使用标准的和比较奇特的文件系统以及开发文件系统来说，Linux 是极好的平台。">
+<meta name="keywords" content="linux,kernel,linux内核,文件系统,filesysterm">
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <entry>
-    <title type="html"><![CDATA[linux文件系统]]></title>
-    <link href="http://tinyxd.me/blog/2012/07/10/linux-filesysterm/"/>
-    <updated>2012-07-10T23:26:00+08:00</updated>
-    <id>http://tinyxd.me/blog/2012/07/10/linux-filesysterm</id>
-    <content type="html"><![CDATA[<p>linux文件操作：文件操作系统调用（create、open、read、write、lseek、close）、c库文件操作（fopen、fscanf、fprintf、fread、fwrite、fseek、fclose等）。</p>
+  <link rel="canonical" href="http://tinyxd.me/blog/2012/07/10/linux-filesysterm">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Keen on Art of Tech" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+
+<!-- Add jQuery library -->
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
+<!-- Add fancyBox -->
+<link rel="stylesheet" href="/stylesheets/jquery.fancybox.css?v=2.0.6" type="text/css" media="screen" />
+<script type="text/javascript" src="/javascripts/jquery.fancybox.pack.js?v=2.0.6"></script>
+<!-- Add fancyBox jQuery -->
+<script type="text/javascript">
+  jQuery.noConflict();    // prevents conflicts with Ender.js, use jQuery instead of $
+  jQuery(document).ready(function() {
+      jQuery(".fancybox").fancybox();
+  });
+</script>
+<!-- End fancyBox insert -->
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript"
+   src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-32291601-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+<meta name="baidu-site-verification" content="fZnhm9XDDuXJU54V" />
+  <h1><a href="/">Keen on Art of Tech</a></h1>
+  
+    <h2>Stay Hungry,Stay Foolish,Stay Patient.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:tinyxd.me" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Home</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/blog/categories/essay">Essay</a></li>
+  <li><a href="/tags">Tag Cloud</a></li>
+  <li><a href="/reading-list">Reading List</a></li>
+  <li><a href="/about">About Me</a></li>
+  <li><a href="/message-board">Message Board</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Linux文件系统</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-07-10T23:26:00+08:00" pubdate data-updated="true">Jul 10<span>th</span>, 2012</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>linux文件操作：文件操作系统调用（create、open、read、write、lseek、close）、c库文件操作（fopen、fscanf、fprintf、fread、fwrite、fseek、fclose等）。</p>
 
 <p>linux文件系统：在设备驱动程序的设计中，一般会关心file和inode这两个结构体。</p>
 
@@ -56,7 +194,7 @@
 
 <p>/bus/ 目录这个目录包括了 /ccw/ 和 /ccwgroup/ 两个子目录。CCW 设备可以通过使用通道命令来存取。在 /ccw/ 目录中的设备只使用一个子通道。CCW 组设备也可以通过使用通道命令来存取，但是它们的每个设备使用多于一个的子通道。比如：一个3390-3 DASD 设备使用一个子通道，但是一个 OSA 适配器的 QDIO 网络连接使用三个子通道。/ccw/ 和 /ccwgroup/ 目录都包括设备目录和驱动器目录：</p>
 
-<p>/devices/ 目录包括了到 /sys/devices/css0/ 目录的设备目录的符号链接。/drivers 目录包括了所有由代表当前被系统加载的设备的驱动程序的目录。zFCP 驱动程序有一个目录在这里。/driver/ 目录包括了设备驱动程序的设置和它使用的符号链接 (/sys/devices/css0/ 目录)/class/ 目录/class/ 目录包括了代表由相似功能的设备组成的组 (ttys，SCSI 磁带驱动器，网络设备...)的目录。</p>
+<p>/devices/ 目录包括了到 /sys/devices/css0/ 目录的设备目录的符号链接。/drivers 目录包括了所有由代表当前被系统加载的设备的驱动程序的目录。zFCP 驱动程序有一个目录在这里。/driver/ 目录包括了设备驱动程序的设置和它使用的符号链接 (/sys/devices/css0/ 目录)/class/ 目录/class/ 目录包括了代表由相似功能的设备组成的组 (ttys，SCSI 磁带驱动器，网络设备&#8230;)的目录。</p>
 
 <p>/block/ 目录这个目录包括了系统中的每一个块设备的目录。块设备主要是磁盘类的设备，例如 DASD，回送设备，以及软件磁盘冗余阵列设备。一个与老版本 Linux 不同的是，使用 sysfs 系统的 Linux 需要使用设备在 sysfs 中的名字来指定设备。在一个 2.4 版本的内核映像中，zFCP 驱动程序是由它的设备地址来指定的。但是在 2.6 版本的内核映像中，它的驱动程序是由 0.0.1600 来指定的。</p>
 
@@ -69,11 +207,11 @@
 
 <p>   上篇文章简单介绍sysfs文件系统，您可能想知道 sysfs 是怎么认出系统中存在的设备以及应该使用什么设备号。对于已经编入内核的驱动程序，当被内核检测到的时候，会直接在 sysfs 中注册其对象；对于编译成模块的驱动程序，当模块载入的时候才会这样做。一旦挂载了 sysfs 文件系统(挂载到 /sys)，内建的驱动程序在 sysfs 注册的数据就可以被用户空间的进程使用，并提供给 udev 以创建设备节点。</p>
 
-<p>   udev 初始化脚本负责在 Linux 启动的时候创建设备节点，该脚本首先将 /sbin/udevsend 注册为热插拔事件处理程序。热插拔事件(随后将讨论)本不应该在这个阶段发生，注册 udev 只是为了以防万一。然后 udevstart 遍历 /sys 文件系统，并在 /dev 目录下创建符合描述的设备。例如，/sys/class/tty/vcs/dev 里含有"7:0"字符串，udevstart 就根据这个字符串创建主设备号为 7 、次设备号为0 的 /dev/vcs 设备。udevstart 创建的每个设备的名字和权限由 /etc/udev/rules.d/ 目录下的文件指定的规则来设置。如果 udev 找不到所创建设备的权限文件，就将其权限设置为缺省的 660 ，所有者为 root:root 。</p>
+<p>   udev 初始化脚本负责在 Linux 启动的时候创建设备节点，该脚本首先将 /sbin/udevsend 注册为热插拔事件处理程序。热插拔事件(随后将讨论)本不应该在这个阶段发生，注册 udev 只是为了以防万一。然后 udevstart 遍历 /sys 文件系统，并在 /dev 目录下创建符合描述的设备。例如，/sys/class/tty/vcs/dev 里含有&#8221;7:0&#8221;字符串，udevstart 就根据这个字符串创建主设备号为 7 、次设备号为0 的 /dev/vcs 设备。udevstart 创建的每个设备的名字和权限由 /etc/udev/rules.d/ 目录下的文件指定的规则来设置。如果 udev 找不到所创建设备的权限文件，就将其权限设置为缺省的 660 ，所有者为 root:root 。</p>
 
 <p>   上面的步骤完成后，那些已经存在并且已经内建驱动的设备就可以使用了，那么以模块驱动的设备呢？</p>
 
-<p>   前面我们提到了"热插拔事件处理程序"的概念，当内核检测到一个新设备连接时，内核会产生一个热插拔事件，</p>
+<p>   前面我们提到了&#8221;热插拔事件处理程序&#8221;的概念，当内核检测到一个新设备连接时，内核会产生一个热插拔事件，</p>
 
 <p>   并在 /proc/sys/kernel/hotplug 文件里查找处理设备连接的用户空间程序。udev 初始化脚本将 udevsend 注册为该处理程序。</p>
 
@@ -149,294 +287,203 @@
 <p><strong>内核内存使用</strong>，devfs特有的另外一个问题是，作为内核驱动模块，devfs需要消耗大量的内存，特别当系统上有大量的设备时（比如上面我们提到的系统一个上有好几千磁盘时）</p>
 
 <p>udev的目标是想解决上面提到的这些问题，他通采用用户空间(user-space)工具来管理/dev/目录树，他和文件系统分开。知道如何改变缺省配置能让你如何定制自己的系统，比如创建设备字符连接，改变设备文件属组，权限等。</p>
-]]></content>
-  </entry>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
   
-  <entry>
-    <title type="html"><![CDATA[linux sleep 的用法]]></title>
-    <link href="http://tinyxd.me/blog/2012/07/06/linux-sleep-usage/"/>
-    <updated>2012-07-06T12:40:00+08:00</updated>
-    <id>http://tinyxd.me/blog/2012/07/06/linux-sleep-usage</id>
-    <content type="html"><![CDATA[<p><strong>应用程序</strong>：</p>
 
-<pre><code>#include &lt;syswait.h&gt;
-usleep(n) //n微秒
-Sleep（n）//n毫秒
-sleep（n）//n秒
-</code></pre>
+<span class="byline author vcard">Posted by <span class="fn">Tiny</span></span>
 
-<!--more-->
+      
 
 
-<p><strong>驱动程序</strong>：</p>
 
-<pre><code>#include &lt;linux/delay.h&gt;
-mdelay(n) //milliseconds 其实现
-</code></pre>
 
-<p>```</p>
 
-<h1>ifdef notdef</h1>
 
-<h1>define mdelay(n) (\</h1>
 
-<p>{unsigned long msec=(n); while (msec--) udelay(1000);})</p>
 
-<h1>else</h1>
-
-<h1>define mdelay(n) (\</h1>
-
-<p>(__builtin_constant_p(n) &amp;&amp; (n)&lt;=MAX_UDELAY_MS) ? udelay((n)*1000) : \
-({unsigned long msec=(n); while (msec--) udelay(1000);}))</p>
-
-<h1>endif</h1>
-
-<p>```
-调用asm/delay.h的udelay,udelay应该是纳秒级的延时</p>
-
-<p>dos:</p>
-
-<pre><code>sleep(1); //停留1秒 
-delay(100); //停留100毫秒   
-</code></pre>
-
-<p>Windows:</p>
-
-<pre><code>Sleep(100); //停留100毫秒 
-</code></pre>
-
-<p>Linux:</p>
-
-<pre><code>sleep(1); //停留1秒 
-usleep(1000); //停留1毫秒 
-</code></pre>
-
-<p>每一个平台不太一样,最好自己定义一套跨平台的宏进行控制   <br/>
-附：Linux下（使用的gcc的库），sleep()函数是以秒为单位的，sleep(1);就是休眠1秒。而MFC下的sleep()函数是以微秒为单位的，sleep(1000);才是休眠1秒。而如果在Linux下也用微妙为单位休眠，可以使用线程休眠函数:void usleep(unsigned long usec);当然，使用的时候别忘记#include &lt;system.h>哦。另外，linux下还有个delay()函数，原型为extern void delay(unsigned int msec);它可以延时msec*4毫秒，也就是如果想延时一秒钟的话，可以这么用 delay(250)。 <br/>
-转载请注明出处：<a href="http://tinyxd.me/blog/2012/07/06/linux-sleep-usage/">http://tinyxd.me/blog/2012/07/06/linux-sleep-usage/</a></p>
-]]></content>
-  </entry>
   
-  <entry>
-    <title type="html"><![CDATA[中国大陆linux源镜像地址]]></title>
-    <link href="http://tinyxd.me/blog/2012/07/05/linux-mirrors-china/"/>
-    <updated>2012-07-05T09:39:00+08:00</updated>
-    <id>http://tinyxd.me/blog/2012/07/05/linux-mirrors-china</id>
-    <content type="html"><![CDATA[<p>1.企业 <br/>
-搜狐开源镜像站：</p>
-
-<pre><code>http://mirrors.sohu.com/
-</code></pre>
-
-<p>网易开源镜像站：</p>
-
-<pre><code>http://mirrors.163.com/
-</code></pre>
-
-<p>2.大学 <br/>
-西安电子科技大学：</p>
-
-<pre><code>http://ftp.xdlinux.info/  (IPv4+IPv6)
-ftp://linux.xidian.edu.cn/
-</code></pre>
-
-<p>中国科学技术大学：</p>
-
-<pre><code>http://mirrors.ustc.edu.cn/ (IPv4+IPv6)
-http://mirrors4.ustc.edu.cn/
-http://mirrors6.ustc.edu.cn/
-</code></pre>
-
-<!--more-->
 
 
-<p>上海交通大学：</p>
+<time datetime="2012-07-10T23:26:00+08:00" pubdate data-updated="true">Jul 10<span>th</span>, 2012</time>
+      
 
-<pre><code>http://ftp.sjtu.edu.cn/ (IPv4 only)
-http://ftp6.sjtu.edu.cn (IPv6 only)
-</code></pre>
-
-<p>清华大学：</p>
-
-<pre><code>http://mirrors.tuna.tsinghua.edu.cn/ (IPv4+IPv6)
-http://mirrors.6.tuna.tsinghua.edu.cn/ (IPv6 only)
-http://mirrors.4.tuna.tsinghua.edu.cn/ (IPv4 only)
-</code></pre>
-
-<p>天津大学：</p>
-
-<pre><code>http://mirror.tju.edu.cn/
-</code></pre>
-
-<p>西南大学：</p>
-
-<pre><code>http://linux.swu.edu.cn/swudownload/Distributions/
-</code></pre>
-
-<p>东北大学：</p>
-
-<pre><code>http://mirror.neu.edu.cn/ (IPv4 only)
-http://mirror.neu6.edu.cn/ (IPv6 only)
-</code></pre>
-
-<p>电子科技大学：</p>
-
-<pre><code>http://ubuntu.uestc.edu.cn/
-</code></pre>
-
-<p>青岛大学：</p>
-
-<pre><code>http://mirror.qdu.edu.cn/
-</code></pre>
-
-<p>兰州大学：</p>
-
-<pre><code>http://mirror.lzu.edu.cn/
-</code></pre>
-
-<p>厦门大学：</p>
-
-<pre><code>http://mirrors.xmu.edu.cn/
-</code></pre>
-
-<p>北京理工大学：</p>
-
-<pre><code>http://mirror.bit.edu.cn (IPv4 only)
-http://mirror.bit6.edu.cn (IPv6 only)
-</code></pre>
-
-<p>北京交通大学：</p>
-
-<pre><code>http://mirror.bjtu.edu.cn (IPv4 only)
-http://mirror6.bjtu.edu.cn (IPv6 only)
-http://debian.bjtu.edu.cn (IPv4+IPv6)
-</code></pre>
-]]></content>
-  </entry>
+<span class="categories">
   
-  <entry>
-    <title type="html"><![CDATA[让Debian支持ntfs文件系统读写]]></title>
-    <link href="http://tinyxd.me/blog/2012/06/30/debian-ntfs-filesysterm/"/>
-    <updated>2012-06-30T15:45:00+08:00</updated>
-    <id>http://tinyxd.me/blog/2012/06/30/debian-ntfs-filesysterm</id>
-    <content type="html"><![CDATA[<p>刚装好debian发现在debian下往windows盘下拷贝不过去资料，上网查了些资料发现是因为不知道ntfs的读写。 <br/>
-查看我的版本号6.0.5</p>
-
-<pre><code>#more /etc/debian_version   
-6.0.5   
-</code></pre>
-
-<p>我的Debian系统: 6.0.5 <br/>
-要是用的软件使用软件:ntfs-3g <br/>
-1.修改默认源 <br/>
-因为我们学校有自己的源，故而修改成我们学校的源，而后进行更新</p>
-
-<pre><code>apt-get update   
-</code></pre>
-
-<!--more-->
-
-
-<p>2.执行安装 <br/>
-执行命令:</p>
-
-<pre><code>apt-get install ntfs-3g   
-</code></pre>
-
-<p>3.使用 <br/>
-直接使用执行命令:</p>
-
-<pre><code>mount -t ntfs-3g /dev/hdax /mnt/windows   
-</code></pre>
-
-<p>这里的/dev/hdax 请改为你自己的windows磁盘分区，可利用fdisk -l 查看。  <br/>
-如下： <br/>
-``` <br/>
-debian:/mnt# fdisk -l
-Disk /dev/sda: 500.1 GB, 500107862016 bytes
-255 heads, 63 sectors/track, 60801 cylinders
-Units = cylinders of 16065 * 512 = 8225280 bytes
-Sector size (logical/physical): 512 bytes / 512 bytes
-I/O size (minimum/optimal): 512 bytes / 512 bytes
-Disk identifier: 0x559ed1e5</p>
-
-<p>  Device Boot      Start         End      Blocks   Id  System
-/dev/sda1               1        6528    52436128+   7  HPFS/NTFS
-/dev/sda2            6529       60802   435949345+   f  W95 Ext'd (LBA)
-/dev/sda5            6529       24543   144705456    7  HPFS/NTFS
-/dev/sda6           24544       42558   144705456    7  HPFS/NTFS
-/dev/sda7           42559       53060    84357283+   7  HPFS/NTFS
-/dev/sda8           53061       53321     2096451    b  W95 FAT32
-/dev/sda9   *       53322       53346      194560   83  Linux
-/dev/sda10          53346       53589     1951744   82  Linux swap / Solaris
-/dev/sda11          53589       55413    14647296   83  Linux
-/dev/sda12          55413       60802    43287552   83  Linux <br/>
-```</p>
-
-<p>如果是加入开机自动映射的话，编辑/etc/fstab,加入如下内容就可以了。</p>
-
-<pre><code>/dev/hdax /mnt/windows ntfs-3g defaults 0 0   
-</code></pre>
-
-<p>下面是我的系统加载NTFS文件系统的相关命令：</p>
-
-<pre><code>mount -t ntfs-3g /dev/sda6 /mnt/D
-mount -t ntfs-3g /dev/sda7 /mnt/E   
-</code></pre>
-
-<p>以上文章是对网上搜集的资料的整理。如需转载请注明出处，本文地址： <br/>
-<code>http://tinyxd.me/blog/2012/06/30/debian-ntfs-filesysterm/</code></p>
-]]></content>
-  </entry>
+    <a class='category' href='/blog/categories/linux/'>linux</a>
   
-  <entry>
-    <title type="html"><![CDATA[debian安装nvidia显卡驱动]]></title>
-    <link href="http://tinyxd.me/blog/2012/06/18/debianan-zhuang-nvidiaxian-qia-qu-dong/"/>
-    <updated>2012-06-18T20:31:00+08:00</updated>
-    <id>http://tinyxd.me/blog/2012/06/18/debianan-zhuang-nvidiaxian-qia-qu-dong</id>
-    <content type="html"><![CDATA[<p>在自己的电脑上硬盘安装了Debian.下面介绍一下我是如何安装显卡驱动的.我的显卡是GForce 7100GS的.</p>
-
-<p>1>下载显卡驱动.</p>
-
-<p>这个可以到Nvidia的官网上去找,找到自己对应的版本就可以了。</p>
-
-<p>2>安装gcc并设置版本.</p>
-
-<p>#apt-get install gcc 这样安装的是gcc-4.4,如果在安装过程中提示您安装的gcc版本有问题,你可以再安装一下gcc-4.3并将gcc版本设置为4.3,具体做法:</p>
-
-<p>#apt-get install gcc-4.3</p>
-
-<p>#ln -sf /usr/bin/gcc-4.3 /usr/bin/gcc 这一句用来将gcc的版本设置为4.3</p>
-
-<p>#ls -l /usr/bin/gcc* 这一句用来查看当前使用的gcc版本</p>
-
-<!--more-->
+</span>
 
 
-<p>3>安装make</p>
+      
 
-<p>#apt-get install make</p>
-
-<p>4>安装编译头文件</p>
-
-<p>#apt-get install build-essential linux-headers-$(uname -r)</p>
-
-<p>5>编辑 /boot/gurb/grub.cfg</p>
-
-<p>在linux /vmlinuz -2.6.32-5.........quite 后面加上 nomodeset  (作用是将原来普适的显卡驱动禁用)</p>
-
-<p>6>进入字符界面 Ctrl+Alt+F1</p>
-
-<p>7>停用X-Server:</p>
-
-<p>#/etc/init.d/gdm3 stop</p>
-
-<p>8>安装显卡驱动:</p>
-
-<p> # sh .... (省略号部分为你下载的显卡驱动的名称) 你将会看到安装的进度条.</p>
-
-<p>9>#startx</p>
-]]></content>
-  </entry>
+<span class="tags">
   
-</feed>
+     Tag: <a class='tag' href='/tags/linux/'>linux</a>, <a class='tag' href='/tags/内核/'>内核</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+
+  
+
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+  
+    <a class="bshareDiv" href="http://www.bshare.cn/share">Sharing</a><script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/buttonLite.js#uuid=5c055483-dee0-46ed-899f-06e078ca57ca&amp;style=999&amp;img=http%3A%2F%2Fstatic.bshare.cn%2Fimages%2Fbuttons%2Fbox-shareTo-zh.gif&amp;w=147&amp;h=21"></script>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2012/07/09/add-douban-aside/" title="Previous Post: 给octopress博客添加豆瓣侧边栏">&laquo; 给octopress博客添加豆瓣侧边栏</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    
+<section>
+<iframe width="350" height="75" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=350&height=75&fansRow=1&ptype=0&speed=0&skin=1&isTitle=0&noborder=0&isWeibo=0&isFans=0&uid=2328532522&verifier=7efcfd6a&dpc=1"></iframe>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2012/07/10/linux-filesysterm/">linux文件系统</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/07/09/add-douban-aside/">给octopress博客添加豆瓣侧边栏</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/07/09/reasons-to-stay-in-it/">IT生活：10个继续干IT的理由</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/07/09/reasons-for-quitting-it/">IT生活：10个不干IT的理由</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/07/08/git-branch-management-strategy/">git分支管理策略</a>
+      </li>
+    
+  </ul>
+</section>
+<section>
+  <h1>Category Cloud</h1>
+    <span id="tag-cloud"><a href='/blog/categories/davinci' style='font-size: 106.0%'>Davinci(1)</a> <a href='/blog/categories/embedded' style='font-size: 112.0%'>Embedded(2)</a> <a href='/blog/categories/essay' style='font-size: 112.0%'>Essay(2)</a> <a href='/blog/categories/git' style='font-size: 106.0%'>Git(1)</a> <a href='/blog/categories/it' style='font-size: 112.0%'>It(2)</a> <a href='/blog/categories/java' style='font-size: 106.0%'>Java(1)</a> <a href='/blog/categories/linux' style='font-size: 148.0%'>Linux(8)</a> <a href='/blog/categories/octopress' style='font-size: 148.0%'>Octopress(8)</a> <a href='/blog/categories/php' style='font-size: 106.0%'>Php(1)</a> <a href='/blog/categories/ruby' style='font-size: 118.0%'>Ruby(3)</a> <a href='/blog/categories/software' style='font-size: 160.0%'>Software(10)</a> </span>
+</section>
+<section>
+  <h1>Blogroll</h1>
+  <ul>
+    <li>
+    <a href="http://www.lan-gui.com"> 小C驻留地 </a>
+    </li>
+    <li>
+     <a href="http://likun.me/"> 独翼天使|互联网产品经理</a> 
+    </li>
+    <li>
+     <a href="http://www.medialu.com/"> 传媒路</a> 
+    </li>
+    <li>
+     <a href="http://www.dkjiaoyang.com"> 易冷天涯</a> 
+    </li>
+  </ul>
+</section>
+<section>
+<h2>Reading List</h2>
+<div>
+<script type="text/javascript" src="http://www.douban.com/service/badge/tinyxd/?show=dolist&amp;n=6&amp;columns=3&amp;hidelogo=yes&amp;hideself=yes&amp;cat=book" ></script> 
+</div>
+</section>
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - Tiny -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+
+-
+<a href="http://tinyxd.me/sitemap.xml">Google Sitemap</a>
+|
+<script src="http://s16.cnzz.com/stat.php?id=4219959&web_id=4219959" language="JavaScript"></script>
+ | 
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Ff5ccb6805fc752bf5385b72e8accad49' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+|
+<a href="http://www.prchecker.info/" title="Display Pagerank" target="_blank">
+<img src="http://pr.prchecker.info/getpr.php?codex=aHR0cDovL3Rpbnl4ZC5tZQ==&tag=3" alt="Display Pagerank" style="border:0;" /></a>
+
+</p>
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'tinyxd';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://tinyxd.me/blog/2012/07/10/linux-filesysterm/';
+        var disqus_url = 'http://tinyxd.me/blog/2012/07/10/linux-filesysterm/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+</body>
+</html>

@@ -134,6 +134,72 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2012/07/05/linux-mirrors-china/">中国大陆linux源镜像地址</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-07-05T09:39:00+08:00" pubdate data-updated="true">Jul 5<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/07/05/linux-mirrors-china/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>1.企业 <br/>
+搜狐开源镜像站：</p>
+
+<pre><code>http://mirrors.sohu.com/
+</code></pre>
+
+<p>网易开源镜像站：</p>
+
+<pre><code>http://mirrors.163.com/
+</code></pre>
+
+<p>2.大学 <br/>
+西安电子科技大学：</p>
+
+<pre><code>http://ftp.xdlinux.info/  (IPv4+IPv6)
+ftp://linux.xidian.edu.cn/
+</code></pre>
+
+<p>中国科学技术大学：</p>
+
+<pre><code>http://mirrors.ustc.edu.cn/ (IPv4+IPv6)
+http://mirrors4.ustc.edu.cn/
+http://mirrors6.ustc.edu.cn/
+</code></pre>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2012/07/05/linux-mirrors-china/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2012/07/03/vc-debug-release/">Vc Debug 变 Release</a></h1>
     
     
@@ -653,65 +719,6 @@ C/C++代码实现直接插入排序：</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/06/19/seo-meta-octopress/">给octopress添加关键字和网站描述</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-06-19T21:10:00+08:00" pubdate data-updated="true">Jun 19<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/06/19/seo-meta-octopress/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>给octopress添加keywords和description。</p>
-
-<p>1.修改source/_includes/head.html</p>
-
-<div><script src='https://gist.github.com/2460469.js?file=head.html'></script>
-<noscript><pre><code>&lt;meta name=&quot;author&quot; content=&quot;{{ site.author }}&quot;&gt;
-{% capture description %}{% if page.description %}{{ page.description }}{% elsif site.description %}{{ site.description }}{%else%}{{ content | raw_content }}{% endif %}{% endcapture %}
-&lt;meta name=&quot;description&quot; content=&quot;{{ description | strip_html | condense_spaces | truncate:150 }}&quot;&gt;
-{% if page.keywords %}&lt;meta name=&quot;keywords&quot; content=&quot;{{ page.keywords }}&quot;&gt;{%else%}&lt;meta name=&quot;keywords&quot; content=&quot;{{ site.keywords }}&quot;&gt;{% endif %}
-</code></pre></noscript></div>
-
-
-<p>2.在_config.yml中添加如下内容</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>description: Keen on the software programming and Embedded development.（专注软件编程及嵌入式技术。）
-</span><span class='line'>keywords: ruby , linux , archlinux , debian , software ,programming , embedded ,gem,web development ,ubuntu , java</span></code></pre></td></tr></table></div></figure>
-
-
-<p>3.这样在主页代码中也会出现keywords和description信息。每个post也会出现。方便被搜索网站索引。这个涉及到了SEO。
-以上文章参考自<a href="http://www.yatishmehta.in/seo-for-octopress">这里</a>。</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/3/">&larr; Older</a>
@@ -737,6 +744,10 @@ C/C++代码实现直接插入排序：</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2012/07/10/linux-filesysterm/">linux文件系统</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2012/07/09/add-douban-aside/">给octopress博客添加豆瓣侧边栏</a>
       </li>
     
@@ -752,15 +763,11 @@ C/C++代码实现直接插入排序：</p>
         <a href="/blog/2012/07/08/git-branch-management-strategy/">git分支管理策略</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2012/07/08/blog-one-month/">写在开博一个月</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Category Cloud</h1>
-    <span id="tag-cloud"><a href='/blog/categories/davinci' style='font-size: 106.0%'>Davinci(1)</a> <a href='/blog/categories/embedded' style='font-size: 112.0%'>Embedded(2)</a> <a href='/blog/categories/essay' style='font-size: 112.0%'>Essay(2)</a> <a href='/blog/categories/git' style='font-size: 106.0%'>Git(1)</a> <a href='/blog/categories/it' style='font-size: 112.0%'>It(2)</a> <a href='/blog/categories/java' style='font-size: 106.0%'>Java(1)</a> <a href='/blog/categories/linux' style='font-size: 142.0%'>Linux(7)</a> <a href='/blog/categories/octopress' style='font-size: 148.0%'>Octopress(8)</a> <a href='/blog/categories/php' style='font-size: 106.0%'>Php(1)</a> <a href='/blog/categories/ruby' style='font-size: 118.0%'>Ruby(3)</a> <a href='/blog/categories/software' style='font-size: 160.0%'>Software(10)</a> </span>
+    <span id="tag-cloud"><a href='/blog/categories/davinci' style='font-size: 106.0%'>Davinci(1)</a> <a href='/blog/categories/embedded' style='font-size: 112.0%'>Embedded(2)</a> <a href='/blog/categories/essay' style='font-size: 112.0%'>Essay(2)</a> <a href='/blog/categories/git' style='font-size: 106.0%'>Git(1)</a> <a href='/blog/categories/it' style='font-size: 112.0%'>It(2)</a> <a href='/blog/categories/java' style='font-size: 106.0%'>Java(1)</a> <a href='/blog/categories/linux' style='font-size: 148.0%'>Linux(8)</a> <a href='/blog/categories/octopress' style='font-size: 148.0%'>Octopress(8)</a> <a href='/blog/categories/php' style='font-size: 106.0%'>Php(1)</a> <a href='/blog/categories/ruby' style='font-size: 118.0%'>Ruby(3)</a> <a href='/blog/categories/software' style='font-size: 160.0%'>Software(10)</a> </span>
 </section>
 <section>
   <h1>Blogroll</h1>
