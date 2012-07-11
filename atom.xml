@@ -4,7 +4,7 @@
   <title><![CDATA[Keen on Art of Tech]]></title>
   <link href="http://tinyxd.me/atom.xml" rel="self"/>
   <link href="http://tinyxd.me/"/>
-  <updated>2012-07-10T23:57:50+08:00</updated>
+  <updated>2012-07-12T00:06:07+08:00</updated>
   <id>http://tinyxd.me/</id>
   <author>
     <name><![CDATA[Tiny]]></name>
@@ -12,6 +12,457 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[linux工作队列]]></title>
+    <link href="http://tinyxd.me/blog/2012/07/11/linux-workqueue/"/>
+    <updated>2012-07-11T23:08:00+08:00</updated>
+    <id>http://tinyxd.me/blog/2012/07/11/linux-workqueue</id>
+    <content type="html"><![CDATA[<h2>工作队列(workqueue)</h2>
+
+<p>Linux中的Workqueue机制就是为了简化内核线程的创建。通过调用workqueue的接口就能创建内核线程。并且可以根据当前系统CPU的个数创建线程的数量，使得线程处理的事务能够并行化。</p>
+
+<p>workqueue是内核中实现简单而有效的机制，他显然简化了内核daemon的创建，方便了用户的编程，</p>
+
+<p>尽管可延迟函数和工作队列非常相似，但是它们的区别还是很大的。主要区别在于：可延迟函数运行在中断上下文中，而工作队列中的函数运行在进程上下文中。执行可阻塞函数（例如：需要访问磁盘数据块的函数）的唯一方式是在进程上下文中运行。因为在中断上下文中不可能发生进程切换。可延迟函数和工作队列中的函数都不能访问进程的用户态地址空间。事实上，可延迟函数被执行时不可能有任何正在运行的进程。另一方面，工作队列中的函数是由内核线程来执行的，因此，根本不存在它要访问的用户态地址空间。</p>
+
+<h2>工作队列的数据结构</h2>
+
+<p style="text-indent:2em">与工作队列相关的主要数据结构有两个：cpu_workqueue_struct和work_struct。名为workqueue_struct的描述符，包括一个有NR_CPUS个元素的数组，NR_CPUS是系统中CPU的最大数量（双核是有两个工作队列）。每个元素都是cpu_workqueue_struct类型的描述符。 
+
+</p>
+
+
+<p></p>
+
+<!--more-->
+
+
+<p>work_struct结构是对任务的抽象。在该结构中需要维护具体的任务方法，需要处理的数据，以及任务处理的时间。该结构定义如下：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="k">struct</span> <span class="n">work_struct</span> <span class="p">{</span>
+</span><span class='line'>  <span class="kt">unsigned</span> <span class="kt">long</span> <span class="n">pending</span><span class="p">;</span>                <span class="cm">/*如果函数已经在工作队列链表中，该字段值设为1，否则设为0*/</span>
+</span><span class='line'>        <span class="k">struct</span> <span class="n">list_head</span> <span class="n">entry</span><span class="p">;</span>                  <span class="cm">/* 将任务挂载到queue的挂载点 */</span>
+</span><span class='line'>        <span class="kt">void</span> <span class="p">(</span><span class="o">*</span><span class="n">func</span><span class="p">)(</span><span class="kt">void</span> <span class="o">*</span><span class="p">);</span>                   <span class="cm">/* 任务方法 */</span>
+</span><span class='line'>        <span class="kt">void</span> <span class="o">*</span><span class="n">data</span><span class="p">;</span>                                  <span class="cm">/* 任务处理的数据*/</span>
+</span><span class='line'>       <span class="kt">void</span> <span class="o">*</span><span class="n">wq_data</span><span class="p">;</span>                           <span class="cm">/* work的属主（通常是指向cpu_workqueue_struct描述符的父结点的指针） */</span>
+</span><span class='line'>       <span class="n">strut</span> <span class="n">timer_list</span> <span class="n">timer</span><span class="p">;</span>                   <span class="cm">/* 任务延时处理定时器 */</span>
+</span><span class='line'><span class="p">};</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>工作队列函数</h2>
+
+<p>当用户调用workqueue的初始化接口create_workqueue或者create_singlethread_workqueue对workqueue队列进行初始化时，内核就开始为用户分配一个workqueue对象，并且将其链到一个全局的workqueue队列中。然后Linux根据当前CPU的情况，为workqueue对象分配与CPU个数相同的cpu_workqueue_struct对象，每个cpu_workqueue_struct对象都会存在一条任务队列。紧接着，Linux为每个cpu_workqueue_struct对象分配一个内核thread，即内核daemon去处理每个队列中的任务。至此，用户调用初始化接口将workqueue初始化完毕，返回workqueue的指针。</p>
+
+<p>在初始化workqueue过程中，内核需要初始化内核线程，注册的内核线程工作比较简单，就是不断的扫描对应cpu_workqueue_struct中的任务队列，从中获取一个有效任务，然后执行该任务。所以如果任务队列为空，那么内核daemon就在cpu_workqueue_struct中的等待队列上睡眠，直到有人唤醒daemon去处理任务队列.</p>
+
+<p>Workqueue初始化完毕之后，将任务运行的上下文环境构建起来了，但是具体还没有可执行的任务，所以，需要定义具体的work_struct对象。然后将work_struct加入到任务队列中，Linux会唤醒daemon去处理任务。</p>
+
+<p>queue_work()（封装在work_struct描述符中）把函数插入工作队列，它接收wq和work两个指针。wq指向workqueue_struct描述符，work指向work_struct描述符。queue_work（）主要执行下面的步骤：</p>
+
+<p>1.检查要插入的函数是否已经在工作队列中（work->pending字段等于1），如果是就结束。</p>
+
+<p>2.把work_struct描述符加到工作队列链表中，然后把work->pending置为1。</p>
+
+<p>3.如果工作者线程在本地CPU的cpu_workqueue_struct描述符的more_work等待队列上睡眠，该函数唤醒这个线程。</p>
+
+<h2>预定义工作队列</h2>
+
+<p>在绝大多数情况下，为了运行一个函数而创建整个工作者线程开销太大了。因此，内核引入叫做events的预定义工作队列，所有的内核开发者都可以随便使用它。预定义工作队列只是一个包含不同内核层函数和IO驱动程序的标准工作队列，它的workququq_struct描述符存放在keventd_wq数组中。</p>
+
+<p>工作队列编程接口：</p>
+
+<table border="1"> 
+<tr> 
+    <th>序号</th> 
+    <th>接口函数</th>  
+    <th>函数说明</th> 
+</tr>  
+<tr>  
+    <td>1</td>  
+    <td>create_workqueue</td> 
+    <td>用于创建一个workqueue队列，为系统中的每个CPU都创建一个内核线程。输入参数：@name：workqueue的名称</td> 
+</tr>  
+<tr>  
+    <td>2</td>  
+    <td>create_singlethread_workqueue</td>  
+    <td>用于创建一个workqueue队列，为系统中的每个CPU都创建一个内核线程。输入参数：@name：workqueue的名称</td> 
+</tr> 
+<tr> 
+    <td>3</td> 
+    <td>destroy_workqueue</td> 
+    <td>释放workqueue队列。输入参数：@ workqueue_struct：需要释放的workqueue队列指针</td> 
+</tr>  
+<tr> 
+    <td>4</td> 
+    <td>schedule_work</td> 
+    <td>调度执行一个具体的任务，执行的任务将会被挂入Linux系统提供的workqueue——keventd_wq输入参数：@ work_struct：具体任务对象指针 
+</td> 
+</tr>  
+<tr> 
+    <td>5</td> 
+    <td>schedule_delayed_work</td> 
+    <td>延迟一定时间去执行一个具体的任务，功能与schedule_work类似，多了一个延迟时间，输入参数：@work_struct：具体任务对象指针@delay：延迟时间</td> 
+</tr>  
+<tr> 
+    <td>6</td> 
+    <td>queue_work</td> 
+    <td>调度执行一个指定workqueue中的任务。输入参数：@ workqueue_struct：指定的workqueue指针@work_struct：具体任务对象指针</td> 
+</tr>  
+<tr> 
+    <td>7</td> 
+    <td>queue_delayed_work</td> 
+    <td>延迟调度执行一个指定workqueue中的任务，功能与queue_work类似，输入参数多了一个delay</td> 
+</tr>  
+</table>
+
+
+<p></p>
+
+<p>预定义工作队列支持函数:</p>
+
+<table > 
+<tr> 
+    <td>预定义工作队列函数</td> 
+    <td>等价的标准工作队列函数</td> 
+</tr> 
+<tr> 
+    <td>schedule_work(w)</td>     
+    <td>queue_work( keventd_wq,w)</td> 
+</tr> 
+<tr> 
+    <td>schedule_delayed_work(w,d)</td>     
+    <td>queue_delayed_work(keventd_wq,w,d)在任何CPU上</td> 
+</tr> 
+<tr> 
+    <td>schedule_delayed_work_on(cpu,w,d)</td>     
+    <td>queue_delayed_work(keventd_wq,w,d)（在某个指定的CPU上）</td> 
+</tr> 
+<tr> 
+    <td>flush_scheduled_work</td>     
+    <td>flush_workqueue(keventd_wq)</td> 
+</tr> 
+</table>
+
+
+<p></p>
+
+<p>除了一般的events队列，在linux2.6中你还会发现一些专用的工作队列。其中最重要的是快设备层使用的kblockd工作队列。</p>
+
+<p>本文章整理自网络和《深入理解linux内核》。  <br/>
+本站文章如果没有特别说明，均为<strong>原创</strong>，转载请以<strong>链接</strong>方式注明本文地址：<a href="http://tinyxd.me/blog/2012/07/11/linux-workqueue/">http://tinyxd.me/blog/2012/07/11/linux-workqueue/</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[软中断和tasklet]]></title>
+    <link href="http://tinyxd.me/blog/2012/07/11/soft-interrupt-and-tasklet/"/>
+    <updated>2012-07-11T22:57:00+08:00</updated>
+    <id>http://tinyxd.me/blog/2012/07/11/soft-interrupt-and-tasklet</id>
+    <content type="html"><![CDATA[<h2>软中断：</h2>
+
+<p>Linux中的软中断机制用于系统中对时间要求最严格以及最重要的中断下半部进行使用。在系统设计过程中，大家都清楚中断上下文不能处理太多的事情，需要快速的返回，否则很容易导致中断事件的丢失，所以这就产生了一个问题：中断发生之后的事务处理由谁来完成？在前后台程序中，由于只有中断上下文和一个任务上下文，所以中断上下文触发事件，设置标记位，任务上下文循环扫描标记位，执行相应的动作，也就是中断发生之后的事情由任务来完成了，只不过任务上下文采用扫描的方式，实时性不能得到保证。在Linux系统和Windows系统中，这个不断循环的任务就是本文所要讲述的软中断daemon。在Windows中处理耗时的中断事务称之为中断延迟处理，在Linux中称之为中断下半部，显然中断上半部处理清中断之类十分清闲的动作，然后在退出中断服务程序时触发中断下半部，完成具体的功能。</p>
+
+<p>在Linux中，中断下半部的实现基于软中断机制。所以理清楚软中断机制的原理，那么中断下半部的实现也就非常简单了。通过上述的描述，大家也应该清楚为什么要定义软中断机制了，一句话就是为了要处理对时间要求苛刻的任务，恰好中断下半部就有这样的需求，所以其实现采用了软中断机制。</p>
+
+<p>linux2.6中使用的软中断：</p>
+
+<figure class='code'><figcaption><span>interrupt.h</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="k">enum</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="n">HI_SOFTIRQ</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="cm">/*用于高优先级的tasklet(下标(优先级0))*/</span>
+</span><span class='line'>  <span class="n">TIMER_SOFTIRQ</span><span class="p">,</span> <span class="cm">/*用于定时器的下半部(下标(优先级1))*/</span>
+</span><span class='line'>  <span class="n">NET_TX_SOFTIRQ</span><span class="p">,</span><span class="cm">/*用于网络层发包(下标(优先级2))*/</span>
+</span><span class='line'>  <span class="n">NET_RX_SOFTIRQ</span><span class="p">,</span> <span class="cm">/*用于网络层收报(下标(优先级3))*/</span>
+</span><span class='line'>  <span class="n">SCSI_SOFTIRQ</span><span class="p">,</span> <span class="cm">/*用于scsi设备(下标(优先级4))*/</span>
+</span><span class='line'>  <span class="n">TASKLET_SOFTIRQ</span> <span class="cm">/*用于低优先级的tasklet(下标(优先级5))*/</span>
+</span><span class='line'><span class="p">};</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<!--more-->
+
+
+<p>一个软中断的下标决定了它的优先级；低下标意味着高优先级，因为软中断函数将从下标0开始执行。</p>
+
+<h2>tasklet:</h2>
+
+<p>Tasklet为一个软中断，考虑到优先级问题，分别占用了向量表中的0号和5号软中断。</p>
+
+<p>tasklet是IO驱动程序中实现可延迟函数的首选方法。其建立在两个叫HI_SOFTIRQ和TASKLET_SOFTIRQ的软中断之上。</p>
+
+<h2>软中断和tasklet</h2>
+
+<p>软中断和tasklet有密切的关系，tasklet是在软中断之上实现。事实上，出现在内核代码中的术语“软中断（softirq）” 常常表示可延迟函数的所有种类。另外一种被广泛使用的术语是“中断上下文”：表示内核当前正在执行一个中断处理程序或一个可延迟的函数。</p>
+
+<p>软中断的分配是静态的（即在编译时定义），而tasklet的分配和初始化可以在运行时进行（例如：安装一个内核模块时）。软中断（即便是同一种类型的软中断）可以并发地运行在多个CPU上。因此，软中断是可重入函数而且必须明确地使用自旋锁保护其数据结构。tasklet不必担心这些问题，因为内核对tasklet的执行进行了更加严格的控制。相同类型的tasklet总是被串行地执行，换句话说就是：不能在两个CPU上同时运行相同类型的tasklet。但是，类型不同的tasklet可以在几个CPU上并发执行。tasklet的串行化使tasklet函数不必是可重入的，因此简化了设备驱动程序开发者的工作。</p>
+
+<p>一般而言，可延迟函数上可以执行四种函数：初始化、激活、屏蔽和执行。</p>
+
+<h2>软中断的主要数据结构</h2>
+
+<p>软中断的主要数据结构是softirq_vec数组，该数组包含类型为softirq_action的32个元素。一个软中断的优先级是相应的softirq_action元素在数组内的下标，只有前六个被有效使用。</p>
+
+<p>/*表示softirq最多可以有32种类型，实际上linux只使用了六种，见文件interrupt.h*/</p>
+
+<p>static struct softirq_action softirq_vec[32] __cacheline_aligned_in_smp;</p>
+
+<p>softirq_action数据结构包括两个字段：指向软中断函数的一个action指针和指向软中断函数需要的通用数据结构的data指针。</p>
+
+<p>还有一个关键的字段是32位的preempt_cout字段，用它来跟踪内核抢占和内核控制路径的嵌套，该字段存放在每个进程描述符的thread_info字段中。</p>
+
+<p>对于softirq，linux kernel中是在中断处理程序执行的，具体的路径为：</p>
+
+<pre><code>do_IRQ() --&gt; irq_exit() --&gt; invoke_softirq() --&gt; do_softirq() --&gt; __do_softirq() 
+</code></pre>
+
+<p>在__do_softirq()中有这么一段代码：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'>    <span class="k">do</span> <span class="p">{</span>
+</span><span class='line'>
+</span><span class='line'>            <span class="k">if</span> <span class="p">(</span><span class="n">pending</span> <span class="o">&amp;</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>
+</span><span class='line'>                    <span class="n">h</span><span class="o">-&gt;</span><span class="n">action</span><span class="p">(</span><span class="n">h</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>                    <span class="n">rcu_bh_qsctr_inc</span><span class="p">(</span><span class="n">cpu</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>            <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>            <span class="n">h</span><span class="o">++</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>            <span class="n">pending</span> <span class="o">&gt;&gt;=</span> <span class="mi">1</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="p">}</span> <span class="k">while</span> <span class="p">(</span><span class="n">pending</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
+
+<p>你看，这里就是对softirq进行处理了，因为pengding是一个__u32的类型，所以每一位都对应了一种softirq，正好是32种（linux kernel中实际上只使用了前6种 ）. h->action(h),就是运行softirq的处理函数。</p>
+
+<p>对于tasklet，前面已经说了，是一种特殊的softirq，具体就是第0和第5种softirq，所以说tasklet是基于softirq来实现的。</p>
+
+<p>tasklet既然对应第0和第5种softirq，那么就应该有对应的处理函数，以便h->action()会运行tasklet的处理函数。</p>
+
+<p>我们看代码：</p>
+
+<figure class='code'><figcaption><span>softirq.c </span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="kt">void</span> <span class="n">__init</span> <span class="nf">softirq_init</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="n">open_softirq</span><span class="p">(</span><span class="n">TASKLET_SOFTIRQ</span><span class="p">,</span> <span class="n">tasklet_action</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="n">open_softirq</span><span class="p">(</span><span class="n">HI_SOFTIRQ</span><span class="p">,</span> <span class="n">tasklet_hi_action</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>这里注册了两种tasklet所在的softirq的处理函数，分别对应高优先级的tasklet和低优先级的tasklet。</p>
+
+<p>我们看低优先级的吧（高优先级的也一样）。</p>
+
+<figure class='code'><figcaption><span>tasklet_action</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="k">static</span> <span class="kt">void</span> <span class="nf">tasklet_action</span><span class="p">(</span><span class="k">struct</span> <span class="n">softirq_action</span> <span class="o">*</span><span class="n">a</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="k">struct</span> <span class="n">tasklet_struct</span> <span class="o">*</span><span class="n">list</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="n">local_irq_disable</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="n">list</span> <span class="o">=</span> <span class="n">__get_cpu_var</span><span class="p">(</span><span class="n">tasklet_vec</span><span class="p">).</span><span class="n">list</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="n">__get_cpu_var</span><span class="p">(</span><span class="n">tasklet_vec</span><span class="p">).</span><span class="n">list</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="n">local_irq_enable</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="k">while</span> <span class="p">(</span><span class="n">list</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>
+</span><span class='line'>                <span class="k">struct</span> <span class="n">tasklet_struct</span> <span class="o">*</span><span class="n">t</span> <span class="o">=</span> <span class="n">list</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>                <span class="n">list</span> <span class="o">=</span> <span class="n">list</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>                <span class="k">if</span> <span class="p">(</span><span class="n">tasklet_trylock</span><span class="p">(</span><span class="n">t</span><span class="p">))</span> <span class="p">{</span>
+</span><span class='line'>
+</span><span class='line'>                        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">atomic_read</span><span class="p">(</span><span class="o">&amp;</span><span class="n">t</span><span class="o">-&gt;</span><span class="n">count</span><span class="p">))</span> <span class="p">{</span>
+</span><span class='line'>
+</span><span class='line'>                                <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">test_and_clear_bit</span><span class="p">(</span><span class="n">TASKLET_STATE_SCHED</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">t</span><span class="o">-&gt;</span><span class="n">state</span><span class="p">))</span>
+</span><span class='line'>
+</span><span class='line'>                                        <span class="n">BUG</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'>                                <span class="n">t</span><span class="o">-&gt;</span><span class="n">func</span><span class="p">(</span><span class="n">t</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>                                <span class="n">tasklet_unlock</span><span class="p">(</span><span class="n">t</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>                                <span class="k">continue</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>                        <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>                        <span class="n">tasklet_unlock</span><span class="p">(</span><span class="n">t</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>                <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>                <span class="n">local_irq_disable</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'>                <span class="n">t</span><span class="o">-&gt;</span><span class="n">next</span> <span class="o">=</span> <span class="n">__get_cpu_var</span><span class="p">(</span><span class="n">tasklet_vec</span><span class="p">).</span><span class="n">list</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>                <span class="n">__get_cpu_var</span><span class="p">(</span><span class="n">tasklet_vec</span><span class="p">).</span><span class="n">list</span> <span class="o">=</span> <span class="n">t</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>                <span class="n">__raise_softirq_irqoff</span><span class="p">(</span><span class="n">TASKLET_SOFTIRQ</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>                <span class="n">local_irq_enable</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>你看，在运行softirq的处理时（__do_softirq），对于</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'>    <span class="k">do</span> <span class="p">{</span>
+</span><span class='line'>
+</span><span class='line'>            <span class="k">if</span> <span class="p">(</span><span class="n">pending</span> <span class="o">&amp;</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>
+</span><span class='line'>                    <span class="n">h</span><span class="o">-&gt;</span><span class="n">action</span><span class="p">(</span><span class="n">h</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>                    <span class="n">rcu_bh_qsctr_inc</span><span class="p">(</span><span class="n">cpu</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>            <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>            <span class="n">h</span><span class="o">++</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>            <span class="n">pending</span> <span class="o">&gt;&gt;=</span> <span class="mi">1</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="p">}</span> <span class="k">while</span> <span class="p">(</span><span class="n">pending</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>如果tasklet有任务需要处理，会运行到h->action()，这个函数指针就会指向tasklet_action()，然后在tasklet_action()里再去执行tasklet对应的各个任务，这些任务都是挂在一个全局链表里面的，具体的代码这里就不分析了。</p>
+
+<p>另外， softirq在smp中是可能被同时运行的，所以softirq的处理函数必须被编写成可重入的函数。</p>
+
+<p>但tasklet是不会在多个cpu之中同时运行的，所以tasklet的处理函数可以编写成不可重入的函数，这样就减轻了编程人员的负担。</p>
+
+<h2>ksoftirqd内核线程</h2>
+
+<p>在最近的内核版本中，每个CPU都有自己的ksoftirqd/n内核线程（这里，n为CPU的逻辑号）。每个ksoftirqd/n内核线程都运行ksoftirqd()函数。在预期的时间内处理挂起的软中断。</p>
+
+<br />
+
+
+<p>本站文章如果没有特别说明，均为<strong>原创</strong>，转载请以<strong>链接</strong>方式注明本文地址：<a href="http://tinyxd.me/blog/2012/07/11/soft-interrupt-and-tasklet/">http://tinyxd.me/blog/2012/07/11/soft-interrupt-and-tasklet/</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[linux文件系统]]></title>
@@ -272,7 +723,7 @@ Jack在他的文章中提到，IT专业人士得不到大众的尊重。我从�
 
 <p>有谁起码有那么一两次快想不干了的？请举手。来吧，不要不好意思。IT的压力，没有最大，只有更大，路人皆知。更为不幸的是，大学并没有教你度过并坚守这些岁月的应对机制。我们来看看有哪些原因会导致你决意离开所挚爱的IT行业。</p>
 
-<p>注：本文有<a href="http://downloads.techrepublic.com.com/abstract.aspx?docid=2568617">PDF版</a>可供下载。</p>
+<p>注：本文有<a href="http://www.techrepublic.com/downloads/10-reasons-for-quitting-it/2568617">PDF版</a>可供下载。</p>
 
 <p>1: 压力</p>
 
@@ -336,7 +787,7 @@ Jack在他的文章中提到，IT专业人士得不到大众的尊重。我从�
     <id>http://tinyxd.me/blog/2012/07/08/git-branch-management-strategy</id>
     <content type="html"><![CDATA[<p>如果你严肃对待编程，就必定会使用&#8221;<a href="http://www.ruanyifeng.com/blog/2008/12/a_visual_guide_to_version_control.html">版本管理系统</a>&#8220;（Version Control System）。</p>
 
-<p>眼下最流行的&#8221;版本管理系统&#8221;，非<a href="http://git-scm.com/">Git</a>莫属。</p>
+<p>眼下最流行的&#8221;版本管理系统&#8221;，非<a href="https://github.com/">Git</a>莫属。</p>
 
 <iframe src="https://skydrive.live.com/embed?cid=1F260DE1061FCF3E&resid=1F260DE1061FCF3E%21131&authkey=AAPFgWVBfiUqHeo" width="320" height="134" frameborder="0" scrolling="no"></iframe>
 
@@ -1729,178 +2180,6 @@ mount -t ntfs-3g /dev/sda7 /mnt/E
 <p>本文是查阅书籍和网络资料整理而来，转载请注明出处。并以超链接的形式注明本文地址： <br/>
 <code>http://tinyxd.me/blog/2012/06/27/swap-sort/</code> <br/>
 下一节更新选择排序。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[排序算法总结（一）]]></title>
-    <link href="http://tinyxd.me/blog/2012/06/27/straight-insertion-sort/"/>
-    <updated>2012-06-27T08:00:00+08:00</updated>
-    <id>http://tinyxd.me/blog/2012/06/27/straight-insertion-sort</id>
-    <content type="html"><![CDATA[<p>排序算法是在学习数据结构的过程中，必须熟练掌握的。而由于其算法种类比较多，所以总结一下还是有必要的。今天先把插入排序总结下。 <br/>
-插入排序的基本操作就是将一个数据插入到已经排好序的有序数据中，从而得到一个新的、个数加一的有序数据，算法适用于少量数据的排序，时间复杂度为O(n<sup>2)。是稳定的排序方法。</sup></p>
-
-<h2>直接插入排序(straight insertion sort)</h2>
-
-<p>每次从无序表中取出第一个元素，把它插入到有序表的合适位置，使有序表仍然有序。 <br/>
-C/C++代码实现直接插入排序：</p>
-
-<figure class='code'><figcaption><span>插入排序代码(straight insertion sort)</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-</pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="kt">void</span> <span class="n">insert_sort</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">[],</span> <span class="kt">int</span> <span class="n">n</span><span class="p">)</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>  <span class="kt">int</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">temp</span><span class="p">;</span>
-</span><span class='line'>  <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
-</span><span class='line'>  <span class="p">{</span>
-</span><span class='line'>      <span class="n">temp</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
-</span><span class='line'>      <span class="k">for</span> <span class="p">(</span><span class="n">j</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span> <span class="n">j</span><span class="o">&gt;</span><span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">temp</span> <span class="o">&lt;</span> <span class="n">a</span><span class="p">[</span><span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="p">];</span> <span class="o">--</span><span class="n">j</span><span class="p">)</span>
-</span><span class='line'>      <span class="p">{</span>
-</span><span class='line'>          <span class="n">a</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="p">];</span>
-</span><span class='line'>      <span class="p">}</span>
-</span><span class='line'>      <span class="n">a</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">temp</span><span class="p">;</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<!--more-->
-
-
-<h2>希尔排序 (shell sort)</h2>
-
-<p>概念：先取一个小于n（待排序的数据个数）的整数d1作为第一个增量，把文件的全部记录分成d1个组。把所有距离为d1的倍数的记录放在同一个组中。先在各组内进行直接插入排序，然后，取第二个增量d2&lt;d1重复上述的分组和排序，直至所取的增量dt=1（dt&lt;dt-1&lt;…&lt;d2&lt;d1），即所有记录放在同一组中进行直接插入排序为止。该方法实质上是一种分组直接插入方法。</p>
-
-<figure class='code'><figcaption><span>希尔排序(shell sort)</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-</pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="c1">//希尔排序</span>
-</span><span class='line'><span class="cp">#include &lt;stdio.h&gt;</span>
-</span><span class='line'><span class="cp">#define LEN 8</span>
-</span><span class='line'><span class="kt">void</span> <span class="n">main</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>  <span class="kt">int</span> <span class="n">d</span><span class="o">=</span><span class="n">LEN</span><span class="p">;</span>
-</span><span class='line'>  <span class="kt">int</span> <span class="n">R</span><span class="p">[</span><span class="n">LEN</span><span class="p">]</span><span class="o">=</span><span class="p">{</span><span class="mi">76</span><span class="p">,</span><span class="mi">81</span><span class="p">,</span><span class="mi">50</span><span class="p">,</span><span class="mi">22</span><span class="p">,</span><span class="mi">98</span><span class="p">,</span><span class="mi">33</span><span class="p">,</span><span class="mi">12</span><span class="p">,</span><span class="mi">79</span><span class="p">};</span>
-</span><span class='line'>  <span class="kt">int</span> <span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">t</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">temp</span><span class="p">;</span>
-</span><span class='line'>  <span class="k">while</span><span class="p">(</span><span class="n">d</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">)</span>
-</span><span class='line'>  <span class="p">{</span>
-</span><span class='line'>  <span class="n">d</span><span class="o">/=</span><span class="mi">2</span><span class="p">;</span>
-</span><span class='line'>  <span class="k">if</span><span class="p">(</span><span class="n">d</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">)</span>
-</span><span class='line'>  <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">y</span><span class="o">&lt;</span><span class="n">d</span> <span class="p">;</span><span class="n">y</span><span class="o">++</span><span class="p">)</span>
-</span><span class='line'>  <span class="p">{</span>
-</span><span class='line'>      <span class="k">for</span><span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="p">(</span><span class="n">d</span><span class="o">+</span><span class="n">y</span><span class="p">);</span><span class="n">i</span><span class="o">&lt;</span><span class="n">LEN</span><span class="p">;</span><span class="n">i</span><span class="o">=</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="n">d</span><span class="p">))</span>
-</span><span class='line'>      <span class="p">{</span>
-</span><span class='line'>          <span class="k">if</span><span class="p">(</span><span class="n">R</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">&lt;</span><span class="n">R</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="n">d</span><span class="p">])</span>
-</span><span class='line'>          <span class="p">{</span>
-</span><span class='line'>              <span class="n">temp</span><span class="o">=</span><span class="n">R</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
-</span><span class='line'>              <span class="n">j</span><span class="o">=</span><span class="n">i</span><span class="o">-</span><span class="n">d</span><span class="p">;</span>
-</span><span class='line'>              <span class="k">do</span><span class="p">{</span>
-</span><span class='line'>                  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d -&gt; %d,&quot;</span><span class="p">,</span><span class="n">R</span><span class="p">[</span><span class="n">j</span><span class="p">],</span><span class="n">R</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="n">d</span><span class="p">]);</span>
-</span><span class='line'>                  <span class="n">R</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="n">d</span><span class="p">]</span><span class="o">=</span><span class="n">R</span><span class="p">[</span><span class="n">j</span><span class="p">];</span>
-</span><span class='line'>                  <span class="n">j</span><span class="o">=</span><span class="n">j</span><span class="o">-</span><span class="n">d</span><span class="p">;</span>
-</span><span class='line'>              <span class="p">}</span><span class="k">while</span><span class="p">(</span><span class="n">j</span><span class="o">&gt;=</span><span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">temp</span> <span class="o">&lt;</span><span class="n">R</span><span class="p">[</span><span class="n">j</span><span class="p">]);</span>
-</span><span class='line'>              <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d -&gt; %d&quot;</span><span class="p">,</span><span class="n">temp</span><span class="p">,</span><span class="n">R</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="n">d</span><span class="p">]);</span>
-</span><span class='line'>              <span class="n">R</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="n">d</span><span class="p">]</span> <span class="o">=</span> <span class="n">temp</span><span class="p">;</span>
-</span><span class='line'>          <span class="p">}</span>
-</span><span class='line'>          <span class="n">printf</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
-</span><span class='line'>          <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">a</span><span class="o">&lt;</span><span class="n">LEN</span><span class="p">;</span><span class="n">a</span><span class="o">++</span><span class="p">)</span>
-</span><span class='line'>          <span class="p">{</span>
-</span><span class='line'>              <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d&quot;</span><span class="p">,</span><span class="n">R</span><span class="p">[</span><span class="n">a</span><span class="p">]);</span>
-</span><span class='line'>          <span class="p">}</span>
-</span><span class='line'>          <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="n">y</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span>
-</span><span class='line'>          <span class="n">printf</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
-</span><span class='line'>          <span class="p">}</span>
-</span><span class='line'>      <span class="n">printf</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
-</span><span class='line'>      <span class="p">}</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>本文是查阅书籍和网络资料整理而来，转载请注明出处。并以超链接的形式注明本文地址：<code>http://tinyxd.me/blog/2012/06/27/straight-insertion-sort/</code><br/>
-下一节更新交换排序。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[octopress博客添加标签云]]></title>
-    <link href="http://tinyxd.me/blog/2012/06/25/octopress-add-tag-cloud/"/>
-    <updated>2012-06-25T00:35:00+08:00</updated>
-    <id>http://tinyxd.me/blog/2012/06/25/octopress-add-tag-cloud</id>
-    <content type="html"><![CDATA[<p>折腾了好久，终于弄好了。我基本是follow这篇文章的：<a href="http://log4d.com/2012/05/tag-cloud/">给 Octopress 加上标签功能</a> <br/>
-官方只提供了category的云显示，和列表显示，这是其<a href="https://github.com/tokkonopapa/octopress-tagcloud">github地址</a>，其实官方提供的这个第三方插件并没有给文章加入tag的概念。（category和tag分别代表日志分类和标签）</p>
-
-<!--more-->
-
-
-<p>
-现在我还对ruby不是很熟悉，但是看到了<a href="http://log4d.com/2012/05/tag-cloud/">这篇文章</a>，找到了<a href="https://github.com/robbyedwards/octopress-tag-pages">robbyedwards / octopress-tag-pages</a>和<a href="https://github.com/robbyedwards/octopress-tag-cloud">robbyedwards / octopress-tag-cloud</a>。前者采集文章的tag，后者是标签云的显示。 <br/>
-这两个使用方法相同，把文件放到相应的目录即可。而第二个插件<code>octopress-tag-cloud</code> 会和官方的有冲突，直接用<a href="https://github.com/alswl/octopress-category-list">这个</a>就好。 <br/>
-还有最后一点非常重要，得修改两个地方： <br/>
-一个是sass/custom/_styles.scss</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>#content article .cloud li{
-</span><span class='line'>  display: inline;
-</span><span class='line'>  list-style: none outside none;
-</span><span class='line'>  padding: 0 4px;
-</span><span class='line'>}
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>然后把显示tagcloud的页面 class改为cloud(class=&#8221;cloud&#8221;)。 <br/>
-大功告成，tag cloud页面请点击<a href="http://tinyxd.me/tags/index.html">这里</a>。</p>
 ]]></content>
   </entry>
   

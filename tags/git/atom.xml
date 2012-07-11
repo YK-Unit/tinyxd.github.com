@@ -4,7 +4,7 @@
   <title><![CDATA[Tag: git | Keen on Art of Tech]]></title>
   <link href="http://tinyxd.me/tags/git/atom.xml" rel="self"/>
   <link href="http://tinyxd.me/"/>
-  <updated>2012-07-10T23:57:50+08:00</updated>
+  <updated>2012-07-12T00:06:07+08:00</updated>
   <id>http://tinyxd.me/</id>
   <author>
     <name><![CDATA[Tiny]]></name>
@@ -20,7 +20,7 @@
     <id>http://tinyxd.me/blog/2012/07/08/git-branch-management-strategy</id>
     <content type="html"><![CDATA[<p>如果你严肃对待编程，就必定会使用"<a href="http://www.ruanyifeng.com/blog/2008/12/a_visual_guide_to_version_control.html">版本管理系统</a>"（Version Control System）。</p>
 
-<p>眼下最流行的"版本管理系统"，非<a href="http://git-scm.com/">Git</a>莫属。</p>
+<p>眼下最流行的"版本管理系统"，非<a href="https://github.com/">Git</a>莫属。</p>
 
 <iframe src="https://skydrive.live.com/embed?cid=1F260DE1061FCF3E&resid=1F260DE1061FCF3E%21131&authkey=AAPFgWVBfiUqHeo" width="320" height="134" frameborder="0" scrolling="no"></iframe>
 
