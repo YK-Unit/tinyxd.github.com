@@ -4,7 +4,7 @@
   <title><![CDATA[Keen on Art of Tech]]></title>
   <link href="http://tinyxd.me/atom.xml" rel="self"/>
   <link href="http://tinyxd.me/"/>
-  <updated>2012-07-12T00:06:07+08:00</updated>
+  <updated>2012-07-12T22:56:40+08:00</updated>
   <id>http://tinyxd.me/</id>
   <author>
     <name><![CDATA[Tiny]]></name>
@@ -12,6 +12,101 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[本地备份octopress]]></title>
+    <link href="http://tinyxd.me/blog/2012/07/12/python-backup-octopress/"/>
+    <updated>2012-07-12T22:42:00+08:00</updated>
+    <id>http://tinyxd.me/blog/2012/07/12/python-backup-octopress</id>
+    <content type="html"><![CDATA[<p>用python脚本备份octopress，当然也可以备份其他的目录。只要修改对应路径就可以了。</p>
+
+<figure class='code'><figcaption><span>octopress_backup.py</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="c">#!/usr/bin/python2</span>
+</span><span class='line'><span class="c"># Filename: octopress_backup.py</span>
+</span><span class='line'>
+</span><span class='line'><span class="kn">import</span> <span class="nn">os</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">time</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># 1. 需要备份的目录(也可以将其他的文件夹一起打包)</span>
+</span><span class='line'><span class="n">source</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;/home/tiny/octopress&#39;</span><span class="p">,</span> <span class="s">&#39;/home/tiny/mytest&#39;</span><span class="p">]</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># 2. 备份的目标位置</span>
+</span><span class='line'><span class="n">target_dir</span> <span class="o">=</span> <span class="s">&#39;/home/tiny/backup/&#39;</span> <span class="c"># Remember to change this to what you will be using</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># 3. 本脚本备份成tar，当然也可以压缩gzip。</span>
+</span><span class='line'><span class="c"># 4. 日期是目录名</span>
+</span><span class='line'><span class="n">today</span> <span class="o">=</span> <span class="n">target_dir</span> <span class="o">+</span> <span class="n">time</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s">&#39;%Y%m</span><span class="si">%d</span><span class="s">&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="c"># 当前时间是备份文件的名称</span>
+</span><span class='line'><span class="n">now</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s">&#39;%H%M%S&#39;</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># 可以对备份的文件进行一些说明</span>
+</span><span class='line'><span class="n">comment</span> <span class="o">=</span> <span class="nb">raw_input</span><span class="p">(</span><span class="s">&#39;Enter a comment --&gt; &#39;</span><span class="p">)</span>
+</span><span class='line'><span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">comment</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="c"># check if a comment was entered</span>
+</span><span class='line'>    <span class="n">target</span> <span class="o">=</span> <span class="n">today</span> <span class="o">+</span> <span class="n">os</span><span class="o">.</span><span class="n">sep</span> <span class="o">+</span> <span class="n">now</span> <span class="o">+</span> <span class="s">&#39;.tar&#39;</span>
+</span><span class='line'><span class="k">else</span><span class="p">:</span>
+</span><span class='line'>    <span class="n">target</span> <span class="o">=</span> <span class="n">today</span> <span class="o">+</span> <span class="n">os</span><span class="o">.</span><span class="n">sep</span> <span class="o">+</span> <span class="n">now</span> <span class="o">+</span> <span class="s">&#39;_&#39;</span> <span class="o">+</span>\
+</span><span class='line'>        <span class="n">comment</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&#39; &#39;</span><span class="p">,</span> <span class="s">&#39;_&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="s">&#39;.tar&#39;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># 创建子文件夹</span>
+</span><span class='line'><span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">today</span><span class="p">):</span>
+</span><span class='line'>    <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">today</span><span class="p">)</span> <span class="c"># make directory</span>
+</span><span class='line'>    <span class="k">print</span> <span class="s">&#39;Successfully created directory&#39;</span><span class="p">,</span> <span class="n">today</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># 5. tar压缩命令（unix/linux）</span>
+</span><span class='line'><span class="n">tar_command</span> <span class="o">=</span> <span class="s">&quot;tar -cvf &#39;</span><span class="si">%s</span><span class="s">&#39; </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="s">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">source</span><span class="p">))</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># 运行备份命令</span>
+</span><span class='line'><span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="n">tar_command</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+</span><span class='line'>    <span class="k">print</span> <span class="s">&#39;Successful backup to&#39;</span><span class="p">,</span> <span class="n">target</span>
+</span><span class='line'><span class="k">else</span><span class="p">:</span>
+</span><span class='line'>    <span class="k">print</span> <span class="s">&#39;Backup FAILED&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<br />
+
+
+<p>本站文章如果没有特别说明，均为<strong>原创</strong>，转载请以<strong>链接</strong>方式注明本文地址：<a href="http://tinyxd.me/blog/2012/07/12/python-backup-octopress/">http://tinyxd.me/blog/2012/07/12/python-backup-octopress/</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[linux工作队列]]></title>
@@ -2108,78 +2203,6 @@ mount -t ntfs-3g /dev/sda7 /mnt/E
 <p>本文是查阅书籍和网络资料整理而来，转载请注明出处。并以超链接的形式注明本文地址： <br/>
 <code>http://tinyxd.me/blog/2012/06/28/select-sort/</code> <br/>
 下一节更新基数排序。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[排序算法总结（二）]]></title>
-    <link href="http://tinyxd.me/blog/2012/06/27/swap-sort/"/>
-    <updated>2012-06-27T20:50:00+08:00</updated>
-    <id>http://tinyxd.me/blog/2012/06/27/swap-sort</id>
-    <content type="html"><![CDATA[<p>昨天总结了插入排序，今天总结交换排序。 <br/>
-交换排序是一种主要以交换的方式对序列进行排序的方法。排序的基本方法或手段主要就是比较和交换，像选择法等都借助了交换的手段，但都不是主要以交换为手段，如在直接选择排序的时候，一轮比较就能确定最大元素的位置，最后再进行交换。交换排序被公认为“稳定”的排序方法。</p>
-
-<h2>冒泡排序</h2>
-
-<p>冒泡排序，是指计算机的一种排序方法，它的时间复杂度为O（ n<sup>2</sup> ），虽然不及堆排序、快速排序的O（nlog n，底数为2），但是有两个优点：</p>
-
-<!--more-->
-
-
-<p>
-1. “编程复杂度”很低，很容易写出代码； <br/>
-2. 具有稳定性，这里的稳定性是指原序列中相同元素的相对顺序仍然保持到排序后的序列，而堆排序、快速排序均不具有稳定性。不过，一路、二路归并排序、不平衡二叉树排序的速度均比冒泡排序快，且具有稳定性，但速度不及堆排序、快速排序。 <br/>
-冒泡排序（BubbleSort）的基本概念是：依次比较相邻的两个数，将小数放在前面，大数放在后面。即在第一趟：首先比较第1个和第2个数，将小数放前，大数放后。然后比较第2个数和第3个数，将小数放前，大数放后，如此继续，直至比较最后两个数，将小数放前，大数放后。至此第一趟结束，将最大的数放到了最后。在第二趟：仍从第一对数开始比较（因为可能由于第2个数和第3个数的交换，使得第1个数不再小于第2个数），将小数放前，大数放后，一直比较到倒数第二个数（倒数第一的位置上已经是
-最大的），第二趟结束，在倒数第二的位置上得到一个新的最大数（其实在整个数列中是第二大的数）。如此下去，重复以上过程，直至最终完成排序。 <br/>
-由于在排序过程中总是小数往前放，大数往后放，相当于气泡往上升，所以称作冒泡排序。 <br/>
-若记录序列的初始状态为&#8221;正序&#8221;，则冒泡排序过程只需进行一趟排序，在排序过程中只需进行n-1次比较，且不移动记录；反之，若记录序列的初始状态为&#8221;逆序&#8221;，则需进行n(n-1）/2次比较和记录移动。因此冒泡排序总的时间复杂度为O(n*n)。</p>
-
-<h2>快速排序（不稳定）</h2>
-
-<p>快速排序（Quicksort）是对冒泡排序的一种改进。由C. A. R. Hoare在1962年提出。它的基本思想是：通过一趟排序将要排序的数据分割成独立的两部分，其中一部分的所有数据都比另外一部分的所有数据都要小，然后再按此方法对这两部分数据分别进行快速排序，整个排序过程可以递归进行，以此达到整个数据变成有序序列。</p>
-
-<figure class='code'><figcaption><span>C++，快速排续</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-</pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="c1">//C++，快速排序</span>
-</span><span class='line'>
-</span><span class='line'><span class="kt">void</span> <span class="n">sort</span><span class="p">(</span><span class="kt">int</span> <span class="o">*</span><span class="n">a</span><span class="p">,</span><span class="kt">int</span> <span class="n">left</span><span class="p">,</span><span class="kt">int</span> <span class="n">right</span><span class="p">)</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>  <span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="n">left</span><span class="p">,</span><span class="n">j</span><span class="o">=</span><span class="n">right</span><span class="p">;</span>
-</span><span class='line'>  <span class="kt">int</span> <span class="n">k</span><span class="o">=</span><span class="n">a</span><span class="p">[</span><span class="n">left</span><span class="p">];</span>
-</span><span class='line'>  <span class="k">if</span><span class="p">(</span><span class="n">left</span><span class="o">&gt;=</span><span class="n">right</span><span class="p">)</span> <span class="k">return</span> <span class="p">;</span>
-</span><span class='line'>  <span class="k">while</span><span class="p">(</span><span class="n">i</span><span class="o">!=</span><span class="n">j</span><span class="p">)</span>
-</span><span class='line'>  <span class="p">{</span>
-</span><span class='line'>      <span class="k">while</span><span class="p">(</span><span class="n">i</span><span class="o">&lt;</span><span class="n">j</span><span class="o">&amp;&amp;</span> <span class="n">a</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">&gt;=</span><span class="n">k</span><span class="p">)</span> <span class="n">j</span><span class="o">--</span><span class="p">;</span>
-</span><span class='line'>      <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="n">a</span><span class="p">[</span><span class="n">j</span><span class="p">];</span>
-</span><span class='line'>      <span class="k">while</span><span class="p">(</span><span class="n">i</span><span class="o">&lt;</span><span class="n">j</span><span class="o">&amp;&amp;</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">&lt;=</span><span class="n">k</span><span class="p">)</span> <span class="n">i</span><span class="o">++</span><span class="p">;</span>
-</span><span class='line'>      <span class="n">a</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">=</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'>  <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="n">k</span><span class="p">;</span>
-</span><span class='line'>  <span class="n">sort</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">left</span><span class="p">,</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
-</span><span class='line'>  <span class="n">sort</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">right</span><span class="p">);</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>本文是查阅书籍和网络资料整理而来，转载请注明出处。并以超链接的形式注明本文地址： <br/>
-<code>http://tinyxd.me/blog/2012/06/27/swap-sort/</code> <br/>
-下一节更新选择排序。</p>
 ]]></content>
   </entry>
   

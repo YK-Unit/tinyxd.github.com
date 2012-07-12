@@ -134,6 +134,64 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2012/07/07/regular-expressions-in-ruby/">正则表达式</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-07-07T23:40:00+08:00" pubdate data-updated="true">Jul 7<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/07/07/regular-expressions-in-ruby/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Ruby语言是一种“万事万物皆对象”的程序语言，正则表达式也是一个对象。正则表达式所属的类，就是Regexp类。<br/>
+要建立正则表达式两种方法： <br/>
+1.用“//”括住。  <br/>
+2.当正则表达式内部用到“/”字符的时候，改用%r会比较方便。 示例%r(样式)
+下面介绍一些规则。 <br/>
+1.^ 行首匹配 $行尾匹配 \A 字符串头 \Z字符串尾 <br/>
+2.指定想要匹配成功的文字范围用[]</p>
+
+<pre><code>比如[A-Z]所有大写英文字母[A-Za-z]所有英文字母[0-9]所有阿拉伯数字[^ABC]A、B、C以外的字   
+</code></pre>
+
+<p>3.匹配任意字符用.</p>
+
+<pre><code>想要指定字数/^…$/ 刚好三个字的一行   
+配合“*”等转义字符使用   
+</code></pre>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2012/07/07/regular-expressions-in-ruby/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2012/07/06/ruby-learning/">Ruby初学</a></h1>
     
     
@@ -681,54 +739,6 @@ Images are wrapped in divs classed &quot;flickr_badge_image&quot; with ids &quot
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/06/27/swap-sort/">排序算法总结（二）</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-06-27T20:50:00+08:00" pubdate data-updated="true">Jun 27<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/06/27/swap-sort/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>昨天总结了插入排序，今天总结交换排序。 <br/>
-交换排序是一种主要以交换的方式对序列进行排序的方法。排序的基本方法或手段主要就是比较和交换，像选择法等都借助了交换的手段，但都不是主要以交换为手段，如在直接选择排序的时候，一轮比较就能确定最大元素的位置，最后再进行交换。交换排序被公认为“稳定”的排序方法。</p>
-
-<h2>冒泡排序</h2>
-
-<p>冒泡排序，是指计算机的一种排序方法，它的时间复杂度为O（ n<sup>2</sup> ），虽然不及堆排序、快速排序的O（nlog n，底数为2），但是有两个优点：</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2012/06/27/swap-sort/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/3/">&larr; Older</a>
@@ -754,6 +764,10 @@ Images are wrapped in divs classed &quot;flickr_badge_image&quot; with ids &quot
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2012/07/12/python-backup-octopress/">本地备份octopress</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2012/07/11/linux-workqueue/">linux工作队列</a>
       </li>
     
@@ -769,15 +783,11 @@ Images are wrapped in divs classed &quot;flickr_badge_image&quot; with ids &quot
         <a href="/blog/2012/07/09/add-douban-aside/">给octopress博客添加豆瓣侧边栏</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2012/07/09/reasons-to-stay-in-it/">IT生活：10个继续干IT的理由</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Category Cloud</h1>
-    <span id="tag-cloud"><a href='/blog/categories/davinci' style='font-size: 106.0%'>Davinci(1)</a> <a href='/blog/categories/embedded' style='font-size: 112.0%'>Embedded(2)</a> <a href='/blog/categories/essay' style='font-size: 112.0%'>Essay(2)</a> <a href='/blog/categories/git' style='font-size: 106.0%'>Git(1)</a> <a href='/blog/categories/it' style='font-size: 112.0%'>It(2)</a> <a href='/blog/categories/java' style='font-size: 106.0%'>Java(1)</a> <a href='/blog/categories/linux' style='font-size: 160.0%'>Linux(10)</a> <a href='/blog/categories/octopress' style='font-size: 148.0%'>Octopress(8)</a> <a href='/blog/categories/php' style='font-size: 106.0%'>Php(1)</a> <a href='/blog/categories/ruby' style='font-size: 118.0%'>Ruby(3)</a> <a href='/blog/categories/software' style='font-size: 160.0%'>Software(10)</a> </span>
+    <span id="tag-cloud"><a href='/blog/categories/davinci' style='font-size: 106.0%'>Davinci(1)</a> <a href='/blog/categories/embedded' style='font-size: 112.0%'>Embedded(2)</a> <a href='/blog/categories/essay' style='font-size: 112.0%'>Essay(2)</a> <a href='/blog/categories/git' style='font-size: 106.0%'>Git(1)</a> <a href='/blog/categories/it' style='font-size: 112.0%'>It(2)</a> <a href='/blog/categories/java' style='font-size: 106.0%'>Java(1)</a> <a href='/blog/categories/linux' style='font-size: 160.0%'>Linux(10)</a> <a href='/blog/categories/octopress' style='font-size: 148.0%'>Octopress(8)</a> <a href='/blog/categories/php' style='font-size: 106.0%'>Php(1)</a> <a href='/blog/categories/python' style='font-size: 106.0%'>Python(1)</a> <a href='/blog/categories/ruby' style='font-size: 118.0%'>Ruby(3)</a> <a href='/blog/categories/software' style='font-size: 160.0%'>Software(10)</a> </span>
 </section>
 <section>
   <h1>Blogroll</h1>
