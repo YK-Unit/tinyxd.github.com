@@ -4,7 +4,7 @@
   <title><![CDATA[Keen on Art of Tech]]></title>
   <link href="http://tinyxd.me/atom.xml" rel="self"/>
   <link href="http://tinyxd.me/"/>
-  <updated>2012-07-14T00:25:40+08:00</updated>
+  <updated>2012-07-15T00:18:11+08:00</updated>
   <id>http://tinyxd.me/</id>
   <author>
     <name><![CDATA[Tiny]]></name>
@@ -12,6 +12,109 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Archlinux下的时间时区设置]]></title>
+    <link href="http://tinyxd.me/blog/2012/07/14/archlinux-time-config/"/>
+    <updated>2012-07-14T23:56:00+08:00</updated>
+    <id>http://tinyxd.me/blog/2012/07/14/archlinux-time-config</id>
+    <content type="html"><![CDATA[<p>本文方法适合于archlinux，archbang等衍生版本。archbang亲测。 <br/>
+1.打开<code>/etc/rc.conf</code>，将<code>TIMEZONE</code>改为<code>"Asia/Shanghai"</code>。 <br/>
+2.打开<code>/etc/rc.conf</code>，将<code>HARDWARECLOCK</code>改为<code>"localtime"</code>。 <br/>
+下面是改完的rc.conf：</p>
+
+<!--more-->
+
+
+<p></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#
+</span><span class='line'># /etc/rc.conf - Main Configuration for Arch Linux
+</span><span class='line'>
+</span><span class='line'>LOCALE="en_US.UTF-8"
+</span><span class='line'>DAEMON_LOCALE="no"
+</span><span class='line'>HARDWARECLOCK="localtime"
+</span><span class='line'>TIMEZONE="Asia/Shanghai"
+</span><span class='line'>KEYMAP="us"
+</span><span class='line'>CONSOLEFONT=
+</span><span class='line'>CONSOLEMAP=
+</span><span class='line'>USECOLOR="yes"
+</span><span class='line'>
+</span><span class='line'>MODULES=()
+</span><span class='line'>
+</span><span class='line'>UDEV_TIMEOUT=30
+</span><span class='line'>USEDMRAID="no"
+</span><span class='line'>USEBTRFS="no"
+</span><span class='line'>USELVM="no"
+</span><span class='line'>
+</span><span class='line'>HOSTNAME="archbang"
+</span><span class='line'>
+</span><span class='line'>interface=eth0
+</span><span class='line'>address=
+</span><span class='line'>netmask=
+</span><span class='line'>broadcast=
+</span><span class='line'>gateway=
+</span><span class='line'>
+</span><span class='line'>DAEMONS=(dbus networkmanager !network !dhcdbd syslog-ng @alsa @iNodeAuthService @openntpd)</span></code></pre></td></tr></table></div></figure>
+
+
+<p>3.在<code>/etc/localtime</code>做个软链接给具体的<code>zoneinfo</code>：</p>
+
+<pre><code>sudo ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime     
+</code></pre>
+
+<p>4.这个时候时区应该算是正确设置好了，把硬件时钟再同步回系统来。</p>
+
+<pre><code>$ sudo hwclock --hctosys   
+</code></pre>
+
+<p>5.现在看时间正确了没，如果还有问题，参照archlinux的官方wiki（题外话：wiki是个好东西，可以找到你需要的）安装openNTPD，自动同步时间。</p>
+
+<pre><code>$ sudo pacman -S openntpd   
+</code></pre>
+
+<p>配置文件看了下，基本都不用修改，直接起服务：</p>
+
+<pre><code>$ sudo /etc/rc.d/openntpd start   
+</code></pre>
+
+<p>确保网络通畅，等一会，系统时间应该就会更新了，确实蛮方便 <br/>
+最后在<code>rc.conf</code>的DAEMONS里面加上<code>@openntpd</code>，确保开机后台运行。</p>
+
+<br />   
+
+
+<p>本站文章如果没有特别说明，均为<strong>原创</strong>，转载请以<strong>链接</strong>方式注明本文地址：<a href="http://tinyxd.me/blog/2012/07/14/archlinux-time-config/">http://tinyxd.me/blog/2012/07/14/archlinux-time-config/</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[debian硬盘安装笔记]]></title>
@@ -1796,202 +1899,6 @@ mount -t ntfs-3g /dev/sda7 /mnt/E
 
 <p>以上文章是对网上搜集的资料的整理。如需转载请注明出处，本文地址： <br/>
 <code>http://tinyxd.me/blog/2012/06/30/debian-ntfs-filesysterm/</code></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[排序算法总结（四）]]></title>
-    <link href="http://tinyxd.me/blog/2012/06/29/radix-sort/"/>
-    <updated>2012-06-29T23:28:00+08:00</updated>
-    <id>http://tinyxd.me/blog/2012/06/29/radix-sort</id>
-    <content type="html"><![CDATA[<p>“基数排序法”属于“分配式排序”（distribution sort），基数排序法又称“桶子法”（bucket sort）或bin sort ，它是通过键值的部分资讯，将要排序的元素分配至某些“桶”中，借以达到排序的作用。基数排序法是属于稳定性的排序，其时间复杂度为O（nlog(r)m），其中r为所采用的基数，而m为堆数。在某些时候，基数排序法的效率高于其他的比较性排序。 <br/>
-什么是基数排序： 基数排序也称桶排序，是一种当关键字为整数类型时的一种非常高效的排序方法。基数排序算法进出桶中的数据元素序列满足先进先出的原则（桶实际就是队列）。</p>
-
-<!--more-->
-
-
-<h3>c语言实现基数排序</h3>
-
-<figure class='code'><figcaption><span>c语言实现基数排序</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="cp">#include &lt;stdio.h&gt;</span>
-</span><span class='line'><span class="cp">#include &lt;stdlib.h&gt;</span>
-</span><span class='line'><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>  <span class="kt">int</span> <span class="n">data</span><span class="p">[</span><span class="mi">10</span><span class="p">]</span><span class="o">=</span><span class="p">{</span><span class="mi">73</span><span class="p">,</span><span class="mi">22</span><span class="p">,</span><span class="mi">93</span><span class="p">,</span><span class="mi">43</span><span class="p">,</span><span class="mi">55</span><span class="p">,</span><span class="mi">14</span><span class="p">,</span><span class="mi">28</span><span class="p">,</span><span class="mi">65</span><span class="p">,</span><span class="mi">39</span><span class="p">,</span><span class="mi">81</span><span class="p">};</span>
-</span><span class='line'>  <span class="kt">int</span> <span class="n">temp</span><span class="p">[</span><span class="mi">10</span><span class="p">][</span><span class="mi">10</span><span class="p">]</span><span class="o">=</span><span class="p">{</span><span class="mi">0</span><span class="p">};</span>
-</span><span class='line'>  <span class="kt">int</span> <span class="n">order</span><span class="p">[</span><span class="mi">10</span><span class="p">]</span><span class="o">=</span><span class="p">{</span><span class="mi">0</span><span class="p">};</span>
-</span><span class='line'>  <span class="kt">int</span> <span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="n">n</span><span class="p">,</span><span class="n">lsd</span><span class="p">;</span>
-</span><span class='line'>  <span class="n">k</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">n</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span>
-</span><span class='line'>  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">排序前: &quot;</span><span class="p">);</span>
-</span><span class='line'>  <span class="k">for</span> <span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="mi">10</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d &quot;</span><span class="p">,</span><span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
-</span><span class='line'>  <span class="n">putchar</span><span class="p">(</span><span class="sc">&#39;\n&#39;</span><span class="p">);</span>
-</span><span class='line'>  <span class="k">while</span> <span class="p">(</span><span class="n">n</span><span class="o">&lt;=</span><span class="mi">10</span><span class="p">)</span>
-</span><span class='line'>  <span class="p">{</span>
-</span><span class='line'>      <span class="k">for</span> <span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="mi">10</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
-</span><span class='line'>      <span class="n">lsd</span><span class="o">=</span><span class="p">((</span><span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">/</span><span class="n">n</span><span class="p">)</span><span class="o">%</span><span class="mi">10</span><span class="p">);</span>
-</span><span class='line'>      <span class="n">temp</span><span class="p">[</span><span class="n">lsd</span><span class="p">][</span><span class="n">order</span><span class="p">[</span><span class="n">lsd</span><span class="p">]]</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
-</span><span class='line'>      <span class="n">order</span><span class="p">[</span><span class="n">lsd</span><span class="p">]</span><span class="o">++</span><span class="p">;</span>
-</span><span class='line'>      <span class="p">}</span>
-</span><span class='line'>      <span class="n">printf</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">重新排列: &quot;</span><span class="p">);</span>
-</span><span class='line'>      <span class="k">for</span> <span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="mi">10</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
-</span><span class='line'>          <span class="k">if</span><span class="p">(</span><span class="n">order</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">!=</span><span class="mi">0</span><span class="p">)</span>
-</span><span class='line'>          <span class="k">for</span> <span class="p">(</span><span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">j</span><span class="o">&lt;</span><span class="n">order</span><span class="p">[</span><span class="n">i</span><span class="p">];</span><span class="n">j</span><span class="o">++</span><span class="p">){</span>
-</span><span class='line'>              <span class="n">data</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">=</span><span class="n">temp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">];</span>
-</span><span class='line'>              <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d &quot;</span><span class="p">,</span><span class="n">data</span><span class="p">[</span><span class="n">k</span><span class="p">]);</span>
-</span><span class='line'>              <span class="n">k</span><span class="o">++</span><span class="p">;</span>
-</span><span class='line'>          <span class="p">}</span>
-</span><span class='line'>          <span class="n">order</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
-</span><span class='line'>      <span class="p">}</span>
-</span><span class='line'>      <span class="n">n</span><span class="o">*=</span><span class="mi">10</span><span class="p">;</span>
-</span><span class='line'>      <span class="n">k</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'>  <span class="n">putchar</span><span class="p">(</span><span class="sc">&#39;\n&#39;</span><span class="p">);</span>
-</span><span class='line'>  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">排序后: &quot;</span><span class="p">);</span>
-</span><span class='line'>  <span class="k">for</span> <span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="mi">10</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d &quot;</span><span class="p">,</span><span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
-</span><span class='line'>  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p></p>
-
-<h3>c++实现基数排序</h3>
-
-<figure class='code'><figcaption><span>c++实现基数排序</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-<span class='line-number'>41</span>
-<span class='line-number'>42</span>
-<span class='line-number'>43</span>
-<span class='line-number'>44</span>
-<span class='line-number'>45</span>
-<span class='line-number'>46</span>
-</pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="kt">int</span> <span class="n">maxbit</span><span class="p">(</span><span class="kt">int</span> <span class="n">data</span><span class="p">[],</span><span class="kt">int</span> <span class="n">n</span><span class="p">)</span> <span class="c1">//辅助函数，求数据的最大位数</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>  <span class="kt">int</span> <span class="n">d</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="c1">//保存最大的位数</span>
-</span><span class='line'>  <span class="kt">int</span> <span class="n">p</span> <span class="o">=</span><span class="mi">10</span><span class="p">;</span>
-</span><span class='line'>  <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
-</span><span class='line'>  <span class="p">{</span>
-</span><span class='line'>      <span class="k">while</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">p</span><span class="p">)</span>
-</span><span class='line'>      <span class="p">{</span>
-</span><span class='line'>      <span class="n">p</span> <span class="o">*=</span> <span class="mi">10</span><span class="p">;</span>
-</span><span class='line'>      <span class="o">++</span><span class="n">d</span><span class="p">;</span>
-</span><span class='line'>      <span class="p">}</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'>  <span class="k">return</span> <span class="n">d</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="kt">void</span> <span class="n">radixsort</span><span class="p">(</span><span class="kt">int</span> <span class="n">data</span><span class="p">[],</span><span class="kt">int</span> <span class="n">n</span><span class="p">)</span> <span class="c1">//基数排序</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>  <span class="kt">int</span> <span class="n">d</span> <span class="o">=</span> <span class="n">maxbit</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="n">n</span><span class="p">);</span>
-</span><span class='line'>  <span class="kt">int</span> <span class="o">*</span> <span class="n">tmp</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="p">[</span><span class="n">n</span><span class="p">];</span>
-</span><span class='line'>  <span class="kt">int</span> <span class="o">*</span> <span class="n">count</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="p">[</span><span class="mi">10</span><span class="p">];</span> <span class="c1">//计数器</span>
-</span><span class='line'>  <span class="kt">int</span> <span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">k</span><span class="p">;</span>
-</span><span class='line'>  <span class="kt">int</span> <span class="n">radix</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
-</span><span class='line'>  <span class="k">for</span><span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;=</span> <span class="n">d</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="c1">//进行d次排序</span>
-</span><span class='line'>  <span class="p">{</span>
-</span><span class='line'>      <span class="k">for</span><span class="p">(</span><span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">j</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">;</span><span class="n">j</span><span class="o">++</span><span class="p">)</span>
-</span><span class='line'>      <span class="n">count</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">//每次分配前清空计数器</span>
-</span><span class='line'>      <span class="k">for</span><span class="p">(</span><span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">j</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span>
-</span><span class='line'>      <span class="p">{</span>
-</span><span class='line'>          <span class="n">k</span> <span class="o">=</span> <span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">/</span><span class="n">radix</span><span class="p">)</span><span class="o">%</span><span class="mi">10</span><span class="p">;</span> <span class="c1">//统计每个桶中的记录数</span>
-</span><span class='line'>          <span class="n">count</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">++</span><span class="p">;</span>
-</span><span class='line'>      <span class="p">}</span>
-</span><span class='line'>      <span class="k">for</span><span class="p">(</span><span class="n">j</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">j</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">;</span><span class="n">j</span><span class="o">++</span><span class="p">)</span>
-</span><span class='line'>          <span class="n">count</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">count</span><span class="p">[</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">count</span><span class="p">[</span><span class="n">j</span><span class="p">];</span> <span class="c1">//将tmp中的位置依次分配给每个桶</span>
-</span><span class='line'>      <span class="k">for</span><span class="p">(</span><span class="n">j</span> <span class="o">=</span> <span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span><span class="n">j</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">;</span><span class="n">j</span><span class="o">--</span><span class="p">)</span> <span class="c1">//将所有桶中记录依次收集到tmp中</span>
-</span><span class='line'>      <span class="p">{</span>
-</span><span class='line'>      <span class="n">k</span> <span class="o">=</span> <span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">/</span><span class="n">radix</span><span class="p">)</span><span class="o">%</span><span class="mi">10</span><span class="p">;</span>
-</span><span class='line'>      <span class="n">mp</span><span class="p">[</span><span class="n">count</span><span class="p">[</span><span class="n">k</span><span class="p">]]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">j</span><span class="p">];</span>
-</span><span class='line'>      <span class="n">tcount</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">--</span><span class="p">;</span>
-</span><span class='line'>      <span class="p">}</span>
-</span><span class='line'>      <span class="k">for</span><span class="p">(</span><span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">j</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span><span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="c1">//将临时数组的内容复制到data中</span>
-</span><span class='line'>          <span class="n">data</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">tmp</span><span class="p">[</span><span class="n">j</span><span class="p">];</span>
-</span><span class='line'>      <span class="n">radix</span> <span class="o">=</span> <span class="n">radix</span><span class="o">*</span><span class="mi">10</span><span class="p">;</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'>  <span class="k">delete</span> <span class="p">[]</span> <span class="n">tmp</span><span class="p">;</span>
-</span><span class='line'>  <span class="k">delete</span> <span class="p">[]</span> <span class="n">count</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>实现基数排序算法时，有基于顺序队列和基于链式队列两种不同的实现方法。基于链式队列的实现中可以把桶设计成一个队列数组QueueArray，数组的每个元素中有两个域，一个队首指针（front）和一个队尾指针（rear）。
-本文是查阅书籍和网络资料整理而来，转载请注明出处。并以超链接的形式注明本文地址： <br/>
-<code>http://tinyxd.me/blog/2012/06/29/radix-sort/</code> <br/>
-下一节更新归并排序。</p>
 ]]></content>
   </entry>
   

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: linux | Keen on Art of Tech]]></title>
   <link href="http://tinyxd.me/blog/categories/linux/atom.xml" rel="self"/>
   <link href="http://tinyxd.me/"/>
-  <updated>2012-07-14T00:26:45+08:00</updated>
+  <updated>2012-07-15T00:18:11+08:00</updated>
   <id>http://tinyxd.me/</id>
   <author>
     <name><![CDATA[Tiny]]></name>
@@ -12,6 +12,108 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Archlinux下的时间时区设置]]></title>
+    <link href="http://tinyxd.me/blog/2012/07/14/archlinux-time-config/"/>
+    <updated>2012-07-14T23:56:00+08:00</updated>
+    <id>http://tinyxd.me/blog/2012/07/14/archlinux-time-config</id>
+    <content type="html"><![CDATA[<p>本文方法适合于archlinux，archbang等衍生版本。archbang亲测。 <br/>
+1.打开<code>/etc/rc.conf</code>，将<code>TIMEZONE</code>改为<code>"Asia/Shanghai"</code>。 <br/>
+2.打开<code>/etc/rc.conf</code>，将<code>HARDWARECLOCK</code>改为<code>"localtime"</code>。 <br/>
+下面是改完的rc.conf：</p>
+
+<!--more-->
+
+
+<p> <br/>
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;h1>/etc/rc.conf - Main Configuration for Arch Linux&lt;/h1>
+</span><span class='line'>
+</span><span class='line'>&lt;p>LOCALE="en_US.UTF-8"
+</span><span class='line'>DAEMON_LOCALE="no"
+</span><span class='line'>HARDWARECLOCK="localtime"
+</span><span class='line'>TIMEZONE="Asia/Shanghai"
+</span><span class='line'>KEYMAP="us"
+</span><span class='line'>CONSOLEFONT=
+</span><span class='line'>CONSOLEMAP=
+</span><span class='line'>USECOLOR="yes"&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>MODULES=()&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>UDEV_TIMEOUT=30
+</span><span class='line'>USEDMRAID="no"
+</span><span class='line'>USEBTRFS="no"
+</span><span class='line'>USELVM="no"&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>HOSTNAME="archbang"&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>interface=eth0
+</span><span class='line'>address=
+</span><span class='line'>netmask=
+</span><span class='line'>broadcast=
+</span><span class='line'>gateway=&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>DAEMONS=(dbus networkmanager !network !dhcdbd syslog-ng @alsa @iNodeAuthService @openntpd)</span></code></pre></td></tr></table></div></figure></notextile></div> <br/>
+3.在<code>/etc/localtime</code>做个软链接给具体的<code>zoneinfo</code>：</p>
+
+<pre><code>sudo ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime     
+</code></pre>
+
+<p>4.这个时候时区应该算是正确设置好了，把硬件时钟再同步回系统来。</p>
+
+<pre><code>$ sudo hwclock --hctosys   
+</code></pre>
+
+<p>5.现在看时间正确了没，如果还有问题，参照archlinux的官方wiki（题外话：wiki是个好东西，可以找到你需要的）安装openNTPD，自动同步时间。</p>
+
+<pre><code>$ sudo pacman -S openntpd   
+</code></pre>
+
+<p>配置文件看了下，基本都不用修改，直接起服务：</p>
+
+<pre><code>$ sudo /etc/rc.d/openntpd start   
+</code></pre>
+
+<p>确保网络通畅，等一会，系统时间应该就会更新了，确实蛮方便 <br/>
+最后在<code>rc.conf</code>的DAEMONS里面加上<code>@openntpd</code>，确保开机后台运行。</p>
+
+<br />   
+
+
+<p>本站文章如果没有特别说明，均为<strong>原创</strong>，转载请以<strong>链接</strong>方式注明本文地址：<a href="http://tinyxd.me/blog/2012/07/14/archlinux-time-config/">http://tinyxd.me/blog/2012/07/14/archlinux-time-config/</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[debian硬盘安装笔记]]></title>
@@ -555,71 +657,6 @@ static void tasklet_action(struct softirq_action *a)</p>
 <p><strong>内核内存使用</strong>，devfs特有的另外一个问题是，作为内核驱动模块，devfs需要消耗大量的内存，特别当系统上有大量的设备时（比如上面我们提到的系统一个上有好几千磁盘时）</p>
 
 <p>udev的目标是想解决上面提到的这些问题，他通采用用户空间(user-space)工具来管理/dev/目录树，他和文件系统分开。知道如何改变缺省配置能让你如何定制自己的系统，比如创建设备字符连接，改变设备文件属组，权限等。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[linux sleep 的用法]]></title>
-    <link href="http://tinyxd.me/blog/2012/07/06/linux-sleep-usage/"/>
-    <updated>2012-07-06T12:40:00+08:00</updated>
-    <id>http://tinyxd.me/blog/2012/07/06/linux-sleep-usage</id>
-    <content type="html"><![CDATA[<p><strong>应用程序</strong>：</p>
-
-<pre><code>#include &lt;syswait.h&gt;
-usleep(n) //n微秒
-Sleep（n）//n毫秒
-sleep（n）//n秒
-</code></pre>
-
-<!--more-->
-
-
-<p><strong>驱动程序</strong>：</p>
-
-<pre><code>#include &lt;linux/delay.h&gt;
-mdelay(n) //milliseconds 其实现
-</code></pre>
-
-<p>```</p>
-
-<h1>ifdef notdef</h1>
-
-<h1>define mdelay(n) (\</h1>
-
-<p>{unsigned long msec=(n); while (msec--) udelay(1000);})</p>
-
-<h1>else</h1>
-
-<h1>define mdelay(n) (\</h1>
-
-<p>(__builtin_constant_p(n) &amp;&amp; (n)&lt;=MAX_UDELAY_MS) ? udelay((n)*1000) : \
-({unsigned long msec=(n); while (msec--) udelay(1000);}))</p>
-
-<h1>endif</h1>
-
-<p>```
-调用asm/delay.h的udelay,udelay应该是纳秒级的延时</p>
-
-<p>dos:</p>
-
-<pre><code>sleep(1); //停留1秒 
-delay(100); //停留100毫秒   
-</code></pre>
-
-<p>Windows:</p>
-
-<pre><code>Sleep(100); //停留100毫秒 
-</code></pre>
-
-<p>Linux:</p>
-
-<pre><code>sleep(1); //停留1秒 
-usleep(1000); //停留1毫秒 
-</code></pre>
-
-<p>每一个平台不太一样,最好自己定义一套跨平台的宏进行控制   <br/>
-附：Linux下（使用的gcc的库），sleep()函数是以秒为单位的，sleep(1);就是休眠1秒。而MFC下的sleep()函数是以微秒为单位的，sleep(1000);才是休眠1秒。而如果在Linux下也用微妙为单位休眠，可以使用线程休眠函数:void usleep(unsigned long usec);当然，使用的时候别忘记#include &lt;system.h>哦。另外，linux下还有个delay()函数，原型为extern void delay(unsigned int msec);它可以延时msec*4毫秒，也就是如果想延时一秒钟的话，可以这么用 delay(250)。 <br/>
-转载请注明出处：<a href="http://tinyxd.me/blog/2012/07/06/linux-sleep-usage/">http://tinyxd.me/blog/2012/07/06/linux-sleep-usage/</a></p>
 ]]></content>
   </entry>
   

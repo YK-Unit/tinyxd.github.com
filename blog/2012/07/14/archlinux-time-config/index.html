@@ -5,12 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>友情链接 - Keen on Art of Tech</title>
+  <title>Archlinux下的时间时区设置 - Keen on Art of Tech</title>
 <meta name="author" content="Tiny">
 
 
-<meta name="description" content="专注嵌入式技术与软件编程,涉及linux·archlinux·debian·ubuntu·embedded等.">
-<meta name="keywords" content="octopress,嵌入式,Embedded,linux,software,archlinux,debian,ubuntu">
+<meta name="description" content="众所周知,archlinux时间的设置比较麻烦，本文将提供几种方法解决此问题。">
+<meta name="keywords" content="archlinux,linux,time,timezone,config">
 
   <!-- http://t.co/dKP3o1e -->
   <meta name="HandheldFriendly" content="True">
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://tinyxd.me/links">
+  <link rel="canonical" href="http://tinyxd.me/blog/2012/07/14/archlinux-time-config">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -128,48 +128,15 @@
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">友情链接</h1>
-    <p class="meta">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-07-13T18:31:00+08:00" pubdate data-updated="true">Jul 13<span>th</span>, 2012</time></p>
-  </header>
-  
-  <p>小C驻留地：<a href="http://www.lan-gui.com" target="_blank" > http://www.lan-gui.com </a></p>
-
-<p>独翼天使|互联网产品经理：<a href="http://likun.me/" target="_blank"> http://likun.me/</a></p>
-
-<p>传媒路：<a href="http://www.medialu.com/" target="_blank"> http://www.medialu.com/</a></p>
-
-<p>易冷天涯：<a href="http://www.dkjiaoyang.com" target="_blank"> http://www.dkjiaoyang.com</a></p>
-
-<p>月光博客：<a href="http://www.williamlong.info/" target="_blank"> http://www.williamlong.info/ </a></p>
-
-<p>互联网一些事：<a href="http://www.yixieshi.com/" target="_blank"> http://www.yixieshi.com/ </a></p>
-
-<p>译言：<a href="http://www.yeeyan.org/" target="_blank"> http://www.yeeyan.org/ </a></p>
-
-<p>挨踢男的那点事：<a href="http://www.aitinan.com/" target="_blank"> http://www.aitinan.com/ </a></p>
-
-<p>申请<strong>友情链接</strong>，请发送Email到<a href="&#x6d;&#x61;&#105;&#108;&#116;&#x6f;&#58;&#97;&#x64;&#109;&#x69;&#x6e;&#x40;&#x74;&#105;&#110;&#121;&#120;&#x64;&#x2e;&#x6d;&#101;">&#97;&#x64;&#109;&#105;&#x6e;&#64;&#x74;&#105;&#110;&#x79;&#120;&#100;&#x2e;&#109;&#x65;</a>，或到本站<a href="http://tinyxd.me/message-board/">留言板</a>留言。</p>
-
-  
-    <footer>
+    
+      <h1 class="entry-title">Archlinux下的时间时区设置</h1>
+    
+    
       <p class="meta">
         
-        
 
 
 
@@ -181,24 +148,189 @@
   
 
 
-<time datetime="2012-07-13T18:31:00+08:00" pubdate data-updated="true">Jul 13<span>th</span>, 2012</time>
+<time datetime="2012-07-14T23:56:00+08:00" pubdate data-updated="true">Jul 14<span>th</span>, 2012</time>
         
+         | <a href="#disqus_thread">Comments</a>
         
       </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>本文方法适合于archlinux，archbang等衍生版本。archbang亲测。 <br/>
+1.打开<code>/etc/rc.conf</code>，将<code>TIMEZONE</code>改为<code>"Asia/Shanghai"</code>。 <br/>
+2.打开<code>/etc/rc.conf</code>，将<code>HARDWARECLOCK</code>改为<code>"localtime"</code>。 <br/>
+下面是改完的rc.conf：</p>
+
+<!--more-->
+
+
+<p></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#
+</span><span class='line'># /etc/rc.conf - Main Configuration for Arch Linux
+</span><span class='line'>
+</span><span class='line'>LOCALE="en_US.UTF-8"
+</span><span class='line'>DAEMON_LOCALE="no"
+</span><span class='line'>HARDWARECLOCK="localtime"
+</span><span class='line'>TIMEZONE="Asia/Shanghai"
+</span><span class='line'>KEYMAP="us"
+</span><span class='line'>CONSOLEFONT=
+</span><span class='line'>CONSOLEMAP=
+</span><span class='line'>USECOLOR="yes"
+</span><span class='line'>
+</span><span class='line'>MODULES=()
+</span><span class='line'>
+</span><span class='line'>UDEV_TIMEOUT=30
+</span><span class='line'>USEDMRAID="no"
+</span><span class='line'>USEBTRFS="no"
+</span><span class='line'>USELVM="no"
+</span><span class='line'>
+</span><span class='line'>HOSTNAME="archbang"
+</span><span class='line'>
+</span><span class='line'>interface=eth0
+</span><span class='line'>address=
+</span><span class='line'>netmask=
+</span><span class='line'>broadcast=
+</span><span class='line'>gateway=
+</span><span class='line'>
+</span><span class='line'>DAEMONS=(dbus networkmanager !network !dhcdbd syslog-ng @alsa @iNodeAuthService @openntpd)</span></code></pre></td></tr></table></div></figure>
+
+
+<p>3.在<code>/etc/localtime</code>做个软链接给具体的<code>zoneinfo</code>：</p>
+
+<pre><code>sudo ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime     
+</code></pre>
+
+<p>4.这个时候时区应该算是正确设置好了，把硬件时钟再同步回系统来。</p>
+
+<pre><code>$ sudo hwclock --hctosys   
+</code></pre>
+
+<p>5.现在看时间正确了没，如果还有问题，参照archlinux的官方wiki（题外话：wiki是个好东西，可以找到你需要的）安装openNTPD，自动同步时间。</p>
+
+<pre><code>$ sudo pacman -S openntpd   
+</code></pre>
+
+<p>配置文件看了下，基本都不用修改，直接起服务：</p>
+
+<pre><code>$ sudo /etc/rc.d/openntpd start   
+</code></pre>
+
+<p>确保网络通畅，等一会，系统时间应该就会更新了，确实蛮方便 <br/>
+最后在<code>rc.conf</code>的DAEMONS里面加上<code>@openntpd</code>，确保开机后台运行。</p>
+
+<br />   
+
+
+<p>本站文章如果没有特别说明，均为<strong>原创</strong>，转载请以<strong>链接</strong>方式注明本文地址：<a href="http://tinyxd.me/blog/2012/07/14/archlinux-time-config/">http://tinyxd.me/blog/2012/07/14/archlinux-time-config/</a></p>
+</div>
+
+
+  <footer>
+    <p class="meta">
       
-    </footer>
   
+
+<span class="byline author vcard">Posted by <span class="fn">Tiny</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-07-14T23:56:00+08:00" pubdate data-updated="true">Jul 14<span>th</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/linux/'>linux</a>
+  
+</span>
+
+
+      
+
+<span class="tags">
+  
+     Tag: <a class='tag' href='/tags/archlinux/'>archlinux</a>, <a class='tag' href='/tags/linux/'>linux</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+
+  
+
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+  
+    <a class="bshareDiv" href="http://www.bshare.cn/share">Sharing</a><script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/buttonLite.js#uuid=5c055483-dee0-46ed-899f-06e078ca57ca&amp;style=999&amp;img=http%3A%2F%2Fstatic.bshare.cn%2Fimages%2Fbuttons%2Fbox-shareTo-zh.gif&amp;w=147&amp;h=21"></script>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2012/07/13/debian-setup/" title="Previous Post: debian硬盘安装笔记">&laquo; debian硬盘安装笔记</a>
+      
+      
+    </p>
+  </footer>
 </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
 
 <aside class="sidebar">
   
-    <section>
-  <h1>Contact Me</h1>
-  <p>
-  <img src="/images/my_email.png"  alt="wguoxd@gmail.com" />
-  </p>
+    
+<section>
+<iframe width="350" height="75" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=350&height=75&fansRow=1&ptype=0&speed=0&skin=1&isTitle=0&noborder=0&isWeibo=0&isFans=0&uid=2328532522&verifier=7efcfd6a&dpc=1"></iframe>
 </section>
 <section>
   <h1>Recent Posts</h1>
@@ -285,6 +417,22 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 </p>
 </footer>
   
+
+<script type="text/javascript">
+      var disqus_shortname = 'tinyxd';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://tinyxd.me/blog/2012/07/14/archlinux-time-config/';
+        var disqus_url = 'http://tinyxd.me/blog/2012/07/14/archlinux-time-config/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
 
 
 
