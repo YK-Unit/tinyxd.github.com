@@ -4,7 +4,7 @@
   <title><![CDATA[Tag: archlinux | Keen on Art of Tech]]></title>
   <link href="http://tinyxd.me/tags/archlinux/atom.xml" rel="self"/>
   <link href="http://tinyxd.me/"/>
-  <updated>2012-07-15T02:26:22+08:00</updated>
+  <updated>2012-07-16T12:21:04+08:00</updated>
   <id>http://tinyxd.me/</id>
   <author>
     <name><![CDATA[Tiny]]></name>
@@ -14,7 +14,105 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Archlinux下的时间时区设置]]></title>
+    <title type="html"><![CDATA[archlinux 无线网络连接]]></title>
+    <link href="http://tinyxd.me/blog/2012/07/16/archlinux-wireless-network-connection/"/>
+    <updated>2012-07-16T11:24:00+08:00</updated>
+    <id>http://tinyxd.me/blog/2012/07/16/archlinux-wireless-network-connection</id>
+    <content type="html"><![CDATA[<p>今天，回家了。由于家里用的无线路由器，我的本是archlinux系统，所以这就涉及到archlinux的无线网络配置。 <br/>
+本文参考了<a href="https://wiki.archlinux.org/index.php/Wireless_Setup">archlinux官方wiki</a>。 <br/>
+配置无线网络一般分两步： <br/>
+第一步是识别硬件、安装正确的驱动程序并进行配置； <br/>
+第二步是选择一种管理无线连接的方式。 <br/>
+关于第一步，wiki中有详细的介绍，我就不多叙述。 <br/>
+第二步，有几个命令和无线网络的加密方法，需要说说。 <br/>
+大概有两种方法：一个是手动，一个是自动。</p>
+
+<!--more-->
+
+
+<h2>方法一：手动</h2>
+
+<p>不加密/WEP ：ifconfig + iwconfig + dhcpcd/ifconfig  <br/>
+WPA/WPA2 PSK：ifconfig + iwconfig + wpa_supplicant + dhcpcd/ifconfig  <br/>
+1.激活内核接口:</p>
+
+<pre><code># ifconfig wlan0 up    
+</code></pre>
+
+<p>2.查看可以的无线接入点信息：</p>
+
+<pre><code># iwlist wlan0 scan
+</code></pre>
+
+<p>3.根据加密方式不同，需要使用密码将无线设备关联到接入点。
+假设要使用的接入点 ESSID 为 MyEssid:  <br/>
+a.无加密</p>
+
+<pre><code># iwconfig wlan0 essid "MyEssid"   
+</code></pre>
+
+<p>b.WEP  <br/>
+使用十六进制密码：</p>
+
+<pre><code># iwconfig wlan0 essid "MyEssid" key 1234567890   
+</code></pre>
+
+<p>使用 ascii 密码：</p>
+
+<pre><code># iwconfig wlan0 essid "MyEssid" key s:asciikey   
+</code></pre>
+
+<p>c.WPA/WPA2   <br/>
+需要安装 WPA_Supplicant 编辑 /etc/wpa_supplicant.conf 文件。 <br/>
+a.先备份下 /etc/wpa_supplicant.conf：</p>
+
+<pre><code>mv /etc/wpa_supplicant.conf /etc/wpa_supplicant.conf.original   
+</code></pre>
+
+<p>b.修改此文件，适合你的无线网络环境。当然可以阅读系统自带的/etc/wpa_supplicant.conf ，然后根据自己的无线环境来手动编辑。也可以使用下面的命令。</p>
+
+<pre><code>wpa_passphrase linksys "my_secret_passkey" &gt; /etc/wpa_supplicant.conf   
+</code></pre>
+
+<p>这里，linksys代表的是要连接的无线网络的essid,而my_secret_passkey则是无线网络的密码。然后运行：</p>
+
+<pre><code># wpa_supplicant -i wlan0 -c /etc/wpa_supplicant.conf
+</code></pre>
+
+<p>假设设备使用 wext 驱动。如果无法工作，可能需要调整选项，参见 <a href="https://wiki.archlinux.org/index.php/WPA_Supplicant">WPA_Supplicant</a>。 <br/>
+4.获取IP地址。
+静态IP：</p>
+
+<pre><code># ifconfig wlan0 192.168.0.2
+# route add default gw 192.168.0.1
+</code></pre>
+
+<p>动态IP获取使用 DHCP：</p>
+
+<pre><code># dhcpcd wlan0
+</code></pre>
+
+<p>如果因为“waiting for carrier”出现超时错误，可以设置通道模式为 auto</p>
+
+<pre><code># iwconfig wlan0 channel auto 
+</code></pre>
+
+<p>注意: 尽管手动配置可以帮助解决无线问题，每次重启都需要执行这些步骤。</p>
+
+<h2>方法二：使用管理工具来管理</h2>
+
+<p>netcfg, newlan (AUR), wicd, NetworkManager, 等。
+我使用的是NetworkManager，地址在<a href="https://wiki.archlinux.org/index.php/NetworkManager">这里</a>。</p>
+
+<br />   
+
+
+<p>本站文章如果没有特别说明，均为<strong>原创</strong>，转载请以<strong>链接</strong>方式注明本文地址：<a href="http://tinyxd.me/blog/2012/07/16/archlinux-wireless-network-connection/">http://tinyxd.me/blog/2012/07/16/archlinux-wireless-network-connection/</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[archlinux下的时间时区设置]]></title>
     <link href="http://tinyxd.me/blog/2012/07/14/archlinux-time-config/"/>
     <updated>2012-07-14T23:56:00+08:00</updated>
     <id>http://tinyxd.me/blog/2012/07/14/archlinux-time-config</id>
@@ -27,64 +125,37 @@
 
 
 <p> <br/>
-<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>#&lt;/p>
-</span><span class='line'>
-</span><span class='line'>&lt;h1>/etc/rc.conf - Main Configuration for Arch Linux&lt;/h1>
-</span><span class='line'>
-</span><span class='line'>&lt;p>LOCALE="en_US.UTF-8"
-</span><span class='line'>DAEMON_LOCALE="no"
-</span><span class='line'>HARDWARECLOCK="localtime"
-</span><span class='line'>TIMEZONE="Asia/Shanghai"
-</span><span class='line'>KEYMAP="us"
-</span><span class='line'>CONSOLEFONT=
-</span><span class='line'>CONSOLEMAP=
-</span><span class='line'>USECOLOR="yes"&lt;/p>
-</span><span class='line'>
-</span><span class='line'>&lt;p>MODULES=()&lt;/p>
-</span><span class='line'>
-</span><span class='line'>&lt;p>UDEV_TIMEOUT=30
-</span><span class='line'>USEDMRAID="no"
-</span><span class='line'>USEBTRFS="no"
-</span><span class='line'>USELVM="no"&lt;/p>
-</span><span class='line'>
-</span><span class='line'>&lt;p>HOSTNAME="archbang"&lt;/p>
-</span><span class='line'>
-</span><span class='line'>&lt;p>interface=eth0
-</span><span class='line'>address=
-</span><span class='line'>netmask=
-</span><span class='line'>broadcast=
-</span><span class='line'>gateway=&lt;/p>
-</span><span class='line'>
-</span><span class='line'>&lt;p>DAEMONS=(dbus networkmanager !network !dhcdbd syslog-ng @alsa @iNodeAuthService @openntpd)</span></code></pre></td></tr></table></div></figure></notextile></div> <br/>
+{% codeblock  %}
+#</p>
+
+<h1>/etc/rc.conf - Main Configuration for Arch Linux</h1>
+
+<p>LOCALE="en_US.UTF-8"
+DAEMON_LOCALE="no"
+HARDWARECLOCK="localtime"
+TIMEZONE="Asia/Shanghai"
+KEYMAP="us"
+CONSOLEFONT=
+CONSOLEMAP=
+USECOLOR="yes"</p>
+
+<p>MODULES=()</p>
+
+<p>UDEV_TIMEOUT=30
+USEDMRAID="no"
+USEBTRFS="no"
+USELVM="no"</p>
+
+<p>HOSTNAME="archbang"</p>
+
+<p>interface=eth0
+address=
+netmask=
+broadcast=
+gateway=</p>
+
+<p>DAEMONS=(dbus networkmanager !network !dhcdbd syslog-ng @alsa @iNodeAuthService @openntpd)
+{% endcodeblock %} <br/>
 3.在<code>/etc/localtime</code>做个软链接给具体的<code>zoneinfo</code>：</p>
 
 <pre><code>sudo ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime     
@@ -516,34 +587,6 @@ PerlOptions +ParseHeaders
 <p>lxr-0.9.10.tgz</p>
 
 <p>glimpse-4.18.6</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[archbang arch linux 安装inode ]]></title>
-    <link href="http://tinyxd.me/blog/2012/05/25/archbang-arch-linux-an-zhuang-inode/"/>
-    <updated>2012-05-25T14:34:00+08:00</updated>
-    <id>http://tinyxd.me/blog/2012/05/25/archbang-arch-linux-an-zhuang-inode</id>
-    <content type="html"><![CDATA[<p>第一步：cp iNodeClient.tar.gz 到 /home/***** 目录下。进入~目录下  <br/>
-第二步：终端运行 tar -xvf iNodeClient.tar.gz。<br/>
-第三步：修改/home//iNodeClient/下install.sh，把 OS_UBUNTU=`cat /etc/issue | grep 'Ubuntu'`那一行及以下的脚本都删除，然后保存，执行sudo ./install.sh。<br/>
-第四步：cp  home/*****/iNodeClient/ 目录下的iNodeAuthService到/etc/rc.d/目录下，并修改权限chmod 755 /etc/rc.d/iNodeAuthService。<br/>
-第五步：打开/etc/rc.conf ，在DAEMONS处添加@iNodeAuthService。（让iNode认证服务开机自启动） <br/>
-第六步：现在执行sudo /etc/rc.d/iNodeAuthService start，发现出错了。错误出现在enablecards.ps这个文件里，打开看，你会发现这个文件的作用只是用来up网卡。一般来说你的网卡都已经up了的啦。你可以把里面的内容改成： <br/>
-#!/bin/sh<br/>
-x=eth0（你所使用的网卡） <br/>
-ifconfig $x up  <br/>
-再运行一次sudo /etc/rc.d/iNodeAuthService start，你应该会发现服务启动成功了。  <br/>
-第七步：命令行里面执行一下sudo ./iNodeClient 然后楼主发现出现了一些库的依赖问题。iNode需要一些比较旧的库，对于jpeg tiff等库 你可以用ln -s 来用新版本的库代替旧版本。而其中有一个是libpng12.so.0是必须需要旧版本的。见附件 或者可以去官网自己下载ftp://ftp.simplesystems.org/pub/libpng/png/src/  <br/>
-需要下载的文件是libpng-1.2.49.tar.bz2 <br/>
-安装方法如下： <br/>
-1.解压，然后执行./configure --prefix=/usr/ <br/>
-2.编译及安装 <br/>
-#make  <br/>
-#make install <br/>
-安装之前可以make check 以下 看看有没有什么错误，如果没错误 make install 那么libpng就安装好了。</p>
-
-<p>参考：http://ecnc.sysu.edu.cn/viewthread.php?tid=18558</p>
 ]]></content>
   </entry>
   

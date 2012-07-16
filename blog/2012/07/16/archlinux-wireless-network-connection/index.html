@@ -5,12 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>php初学 - Keen on Art of Tech</title>
+  <title>archlinux 无线网络连接 - Keen on Art of Tech</title>
 <meta name="author" content="Tiny">
 
 
-<meta name="description" content="php learning">
-<meta name="keywords" content="php">
+<meta name="description" content="archlinux下的无线网络连接">
+<meta name="keywords" content="archlinux,linux,network,无线网络连接">
 
   <!-- http://t.co/dKP3o1e -->
   <meta name="HandheldFriendly" content="True">
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://tinyxd.me/blog/2012/06/19/learn-php">
+  <link rel="canonical" href="http://tinyxd.me/blog/2012/07/16/archlinux-wireless-network-connection">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -132,7 +132,7 @@
   
   <header>
     
-      <h1 class="entry-title">Php初学</h1>
+      <h1 class="entry-title">Archlinux 无线网络连接</h1>
     
     
       <p class="meta">
@@ -148,7 +148,7 @@
   
 
 
-<time datetime="2012-06-19T20:28:00+08:00" pubdate data-updated="true">Jun 19<span>th</span>, 2012</time>
+<time datetime="2012-07-16T11:24:00+08:00" pubdate data-updated="true">Jul 16<span>th</span>, 2012</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -157,75 +157,96 @@
   </header>
 
 
-<div class="entry-content"><p>1.搭建学习环境 采用简单的打包好的：lamp. <br/>
-<a href="https://help.ubuntu.com/community/ApacheMySQLPHP#Run.2C_Stop.2C_Test.2C_And_Restart_Apache">help web sites</a></p>
-
-<p>2.PHP中文手册 <br/>
-http://www.phpchina.com/resource/manual/phpnew/</p>
+<div class="entry-content"><p>今天，回家了。由于家里用的无线路由器，我的本是archlinux系统，所以这就涉及到archlinux的无线网络配置。 <br/>
+本文参考了<a href="https://wiki.archlinux.org/index.php/Wireless_Setup">archlinux官方wiki</a>。 <br/>
+配置无线网络一般分两步： <br/>
+第一步是识别硬件、安装正确的驱动程序并进行配置； <br/>
+第二步是选择一种管理无线连接的方式。 <br/>
+关于第一步，wiki中有详细的介绍，我就不多叙述。 <br/>
+第二步，有几个命令和无线网络的加密方法，需要说说。 <br/>
+大概有两种方法：一个是手动，一个是自动。</p>
 
 <!--more-->
 
 
-<p>example： <br/>
-第一个 PHP 脚本：hello.php</p>
+<h2>方法一：手动</h2>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="x">&lt;html&gt;</span>
-</span><span class='line'><span class="x"> &lt;head&gt;</span>
-</span><span class='line'><span class="x">  &lt;title&gt;PHP 测试&lt;/title&gt;</span>
-</span><span class='line'><span class="x"> &lt;/head&gt;</span>
-</span><span class='line'><span class="x"> &lt;body&gt;</span>
-</span><span class='line'><span class="x"> </span><span class="cp">&lt;?php</span> <span class="k">echo</span> <span class="s1">&#39;&lt;p&gt;Hello World</span>
-</span><span class='line'><span class="s1">&#39;</span><span class="p">;</span> <span class="cp">?&gt;</span><span class="x"></span>
-</span><span class='line'><span class="x"> &lt;/body&gt;</span>
-</span><span class='line'><span class="x">&lt;/html&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
+<p>不加密/WEP ：ifconfig + iwconfig + dhcpcd/ifconfig  <br/>
+WPA/WPA2 PSK：ifconfig + iwconfig + wpa_supplicant + dhcpcd/ifconfig  <br/>
+1.激活内核接口:</p>
+
+<pre><code># ifconfig wlan0 up    
+</code></pre>
+
+<p>2.查看可以的无线接入点信息：</p>
+
+<pre><code># iwlist wlan0 scan
+</code></pre>
+
+<p>3.根据加密方式不同，需要使用密码将无线设备关联到接入点。
+假设要使用的接入点 ESSID 为 MyEssid:  <br/>
+a.无加密</p>
+
+<pre><code># iwconfig wlan0 essid "MyEssid"   
+</code></pre>
+
+<p>b.WEP  <br/>
+使用十六进制密码：</p>
+
+<pre><code># iwconfig wlan0 essid "MyEssid" key 1234567890   
+</code></pre>
+
+<p>使用 ascii 密码：</p>
+
+<pre><code># iwconfig wlan0 essid "MyEssid" key s:asciikey   
+</code></pre>
+
+<p>c.WPA/WPA2   <br/>
+需要安装 WPA_Supplicant 编辑 /etc/wpa_supplicant.conf 文件。 <br/>
+a.先备份下 /etc/wpa_supplicant.conf：</p>
+
+<pre><code>mv /etc/wpa_supplicant.conf /etc/wpa_supplicant.conf.original   
+</code></pre>
+
+<p>b.修改此文件，适合你的无线网络环境。当然可以阅读系统自带的/etc/wpa_supplicant.conf ，然后根据自己的无线环境来手动编辑。也可以使用下面的命令。</p>
+
+<pre><code>wpa_passphrase linksys "my_secret_passkey" &gt; /etc/wpa_supplicant.conf   
+</code></pre>
+
+<p>这里，linksys代表的是要连接的无线网络的essid,而my_secret_passkey则是无线网络的密码。然后运行：</p>
+
+<pre><code># wpa_supplicant -i wlan0 -c /etc/wpa_supplicant.conf
+</code></pre>
+
+<p>假设设备使用 wext 驱动。如果无法工作，可能需要调整选项，参见 <a href="https://wiki.archlinux.org/index.php/WPA_Supplicant">WPA_Supplicant</a>。 <br/>
+4.获取IP地址。
+静态IP：</p>
+
+<pre><code># ifconfig wlan0 192.168.0.2
+# route add default gw 192.168.0.1
+</code></pre>
+
+<p>动态IP获取使用 DHCP：</p>
+
+<pre><code># dhcpcd wlan0
+</code></pre>
+
+<p>如果因为“waiting for carrier”出现超时错误，可以设置通道模式为 auto</p>
+
+<pre><code># iwconfig wlan0 channel auto 
+</code></pre>
+
+<p>注意: 尽管手动配置可以帮助解决无线问题，每次重启都需要执行这些步骤。</p>
+
+<h2>方法二：使用管理工具来管理</h2>
+
+<p>netcfg, newlan (AUR), wicd, NetworkManager, 等。
+我使用的是NetworkManager，地址在<a href="https://wiki.archlinux.org/index.php/NetworkManager">这里</a>。</p>
+
+<br />   
 
 
-<p>PHP基本语法：</p>
-
-<p>四种标量类型：</p>
-
-<ul>
-<li> boolean （布尔型）</li>
-<li> integer （整型）</li>
-<li> float （浮点型, 也称作 double)</li>
-<li> string （字符串）</li>
-</ul>
-
-
-<p>两种复合类型：</p>
-
-<ul>
-<li> array （数组）</li>
-<li> object （对象）</li>
-</ul>
-
-
-<p>最后是两种特殊类型：</p>
-
-<ul>
-<li> resource　（资源）</li>
-<li> NULL　（NULL）</li>
-</ul>
-
-
-<p>为了确保代码的易读性，本手册还介绍了一些伪类型：</p>
-
-<ul>
-<li> mixed</li>
-<li> number</li>
-<li> callback</li>
-</ul>
-
+<p>本站文章如果没有特别说明，均为<strong>原创</strong>，转载请以<strong>链接</strong>方式注明本文地址：<a href="http://tinyxd.me/blog/2012/07/16/archlinux-wireless-network-connection/">http://tinyxd.me/blog/2012/07/16/archlinux-wireless-network-connection/</a></p>
 </div>
 
 
@@ -248,12 +269,12 @@ http://www.phpchina.com/resource/manual/phpnew/</p>
   
 
 
-<time datetime="2012-06-19T20:28:00+08:00" pubdate data-updated="true">Jun 19<span>th</span>, 2012</time>
+<time datetime="2012-07-16T11:24:00+08:00" pubdate data-updated="true">Jul 16<span>th</span>, 2012</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/php/'>php</a>
+    <a class='category' href='/blog/categories/linux/'>linux</a>
   
 </span>
 
@@ -262,7 +283,7 @@ http://www.phpchina.com/resource/manual/phpnew/</p>
 
 <span class="tags">
   
-     Tag: <a class='tag' href='/tags/php/'>php</a>
+     Tag: <a class='tag' href='/tags/archlinux/'>archlinux</a>, <a class='tag' href='/tags/linux/'>linux</a>
   
 </span>
 
@@ -285,10 +306,8 @@ http://www.phpchina.com/resource/manual/phpnew/</p>
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2012/06/18/debianan-zhuang-nvidiaxian-qia-qu-dong/" title="Previous Post: debian安装nvidia显卡驱动">&laquo; debian安装nvidia显卡驱动</a>
+        <a class="basic-alignment left" href="/blog/2012/07/14/archlinux-time-config/" title="Previous Post: archlinux下的时间时区设置">&laquo; archlinux下的时间时区设置</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2012/06/19/seo-meta-octopress/" title="Next Post: 给octopress添加关键字和网站描述">给octopress添加关键字和网站描述 &raquo;</a>
       
     </p>
   </footer>
@@ -399,8 +418,8 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://tinyxd.me/blog/2012/06/19/learn-php/';
-        var disqus_url = 'http://tinyxd.me/blog/2012/06/19/learn-php/';
+        var disqus_identifier = 'http://tinyxd.me/blog/2012/07/16/archlinux-wireless-network-connection/';
+        var disqus_url = 'http://tinyxd.me/blog/2012/07/16/archlinux-wireless-network-connection/';
         var disqus_script = 'embed.js';
       
     (function () {

@@ -4,7 +4,7 @@
   <title><![CDATA[Keen on Art of Tech]]></title>
   <link href="http://tinyxd.me/atom.xml" rel="self"/>
   <link href="http://tinyxd.me/"/>
-  <updated>2012-07-15T02:26:22+08:00</updated>
+  <updated>2012-07-16T12:20:34+08:00</updated>
   <id>http://tinyxd.me/</id>
   <author>
     <name><![CDATA[Tiny]]></name>
@@ -14,7 +14,105 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Archlinux下的时间时区设置]]></title>
+    <title type="html"><![CDATA[archlinux 无线网络连接]]></title>
+    <link href="http://tinyxd.me/blog/2012/07/16/archlinux-wireless-network-connection/"/>
+    <updated>2012-07-16T11:24:00+08:00</updated>
+    <id>http://tinyxd.me/blog/2012/07/16/archlinux-wireless-network-connection</id>
+    <content type="html"><![CDATA[<p>今天，回家了。由于家里用的无线路由器，我的本是archlinux系统，所以这就涉及到archlinux的无线网络配置。 <br/>
+本文参考了<a href="https://wiki.archlinux.org/index.php/Wireless_Setup">archlinux官方wiki</a>。 <br/>
+配置无线网络一般分两步： <br/>
+第一步是识别硬件、安装正确的驱动程序并进行配置； <br/>
+第二步是选择一种管理无线连接的方式。 <br/>
+关于第一步，wiki中有详细的介绍，我就不多叙述。 <br/>
+第二步，有几个命令和无线网络的加密方法，需要说说。 <br/>
+大概有两种方法：一个是手动，一个是自动。</p>
+
+<!--more-->
+
+
+<h2>方法一：手动</h2>
+
+<p>不加密/WEP ：ifconfig + iwconfig + dhcpcd/ifconfig  <br/>
+WPA/WPA2 PSK：ifconfig + iwconfig + wpa_supplicant + dhcpcd/ifconfig  <br/>
+1.激活内核接口:</p>
+
+<pre><code># ifconfig wlan0 up    
+</code></pre>
+
+<p>2.查看可以的无线接入点信息：</p>
+
+<pre><code># iwlist wlan0 scan
+</code></pre>
+
+<p>3.根据加密方式不同，需要使用密码将无线设备关联到接入点。
+假设要使用的接入点 ESSID 为 MyEssid:  <br/>
+a.无加密</p>
+
+<pre><code># iwconfig wlan0 essid "MyEssid"   
+</code></pre>
+
+<p>b.WEP  <br/>
+使用十六进制密码：</p>
+
+<pre><code># iwconfig wlan0 essid "MyEssid" key 1234567890   
+</code></pre>
+
+<p>使用 ascii 密码：</p>
+
+<pre><code># iwconfig wlan0 essid "MyEssid" key s:asciikey   
+</code></pre>
+
+<p>c.WPA/WPA2   <br/>
+需要安装 WPA_Supplicant 编辑 /etc/wpa_supplicant.conf 文件。 <br/>
+a.先备份下 /etc/wpa_supplicant.conf：</p>
+
+<pre><code>mv /etc/wpa_supplicant.conf /etc/wpa_supplicant.conf.original   
+</code></pre>
+
+<p>b.修改此文件，适合你的无线网络环境。当然可以阅读系统自带的/etc/wpa_supplicant.conf ，然后根据自己的无线环境来手动编辑。也可以使用下面的命令。</p>
+
+<pre><code>wpa_passphrase linksys "my_secret_passkey" &gt; /etc/wpa_supplicant.conf   
+</code></pre>
+
+<p>这里，linksys代表的是要连接的无线网络的essid,而my_secret_passkey则是无线网络的密码。然后运行：</p>
+
+<pre><code># wpa_supplicant -i wlan0 -c /etc/wpa_supplicant.conf
+</code></pre>
+
+<p>假设设备使用 wext 驱动。如果无法工作，可能需要调整选项，参见 <a href="https://wiki.archlinux.org/index.php/WPA_Supplicant">WPA_Supplicant</a>。 <br/>
+4.获取IP地址。
+静态IP：</p>
+
+<pre><code># ifconfig wlan0 192.168.0.2
+# route add default gw 192.168.0.1
+</code></pre>
+
+<p>动态IP获取使用 DHCP：</p>
+
+<pre><code># dhcpcd wlan0
+</code></pre>
+
+<p>如果因为“waiting for carrier”出现超时错误，可以设置通道模式为 auto</p>
+
+<pre><code># iwconfig wlan0 channel auto 
+</code></pre>
+
+<p>注意: 尽管手动配置可以帮助解决无线问题，每次重启都需要执行这些步骤。</p>
+
+<h2>方法二：使用管理工具来管理</h2>
+
+<p>netcfg, newlan (AUR), wicd, NetworkManager, 等。
+我使用的是NetworkManager，地址在<a href="https://wiki.archlinux.org/index.php/NetworkManager">这里</a>。</p>
+
+<br />   
+
+
+<p>本站文章如果没有特别说明，均为<strong>原创</strong>，转载请以<strong>链接</strong>方式注明本文地址：<a href="http://tinyxd.me/blog/2012/07/16/archlinux-wireless-network-connection/">http://tinyxd.me/blog/2012/07/16/archlinux-wireless-network-connection/</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[archlinux下的时间时区设置]]></title>
     <link href="http://tinyxd.me/blog/2012/07/14/archlinux-time-config/"/>
     <updated>2012-07-14T23:56:00+08:00</updated>
     <id>http://tinyxd.me/blog/2012/07/14/archlinux-time-config</id>
@@ -1805,100 +1903,6 @@ c语言实现  <br/>
 
 <p>本文是查阅书籍和网络资料整理而来，转载请注明出处。并以超链接的形式注明本文地址： <br/>
 <code>http://tinyxd.me/blog/2012/07/01/merge-sort/</code></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[让Debian支持ntfs文件系统读写]]></title>
-    <link href="http://tinyxd.me/blog/2012/06/30/debian-ntfs-filesysterm/"/>
-    <updated>2012-06-30T15:45:00+08:00</updated>
-    <id>http://tinyxd.me/blog/2012/06/30/debian-ntfs-filesysterm</id>
-    <content type="html"><![CDATA[<p>刚装好debian发现在debian下往windows盘下拷贝不过去资料，上网查了些资料发现是因为不知道ntfs的读写。 <br/>
-查看我的版本号6.0.5</p>
-
-<pre><code>#more /etc/debian_version   
-6.0.5   
-</code></pre>
-
-<p>我的Debian系统: 6.0.5 <br/>
-要是用的软件使用软件:ntfs-3g <br/>
-1.修改默认源 <br/>
-因为我们学校有自己的源，故而修改成我们学校的源，而后进行更新</p>
-
-<pre><code>apt-get update   
-</code></pre>
-
-<!--more-->
-
-
-<p>2.执行安装 <br/>
-执行命令:</p>
-
-<pre><code>apt-get install ntfs-3g   
-</code></pre>
-
-<p>3.使用 <br/>
-直接使用执行命令:</p>
-
-<pre><code>mount -t ntfs-3g /dev/hdax /mnt/windows   
-</code></pre>
-
-<p>这里的/dev/hdax 请改为你自己的windows磁盘分区，可利用fdisk -l 查看。  <br/>
-如下：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>debian:/mnt# fdisk -l
-</span><span class='line'>Disk /dev/sda: 500.1 GB, 500107862016 bytes
-</span><span class='line'>255 heads, 63 sectors/track, 60801 cylinders
-</span><span class='line'>Units = cylinders of 16065 * 512 = 8225280 bytes
-</span><span class='line'>Sector size (logical/physical): 512 bytes / 512 bytes
-</span><span class='line'>I/O size (minimum/optimal): 512 bytes / 512 bytes
-</span><span class='line'>Disk identifier: 0x559ed1e5
-</span><span class='line'>
-</span><span class='line'>  Device Boot      Start         End      Blocks   Id  System
-</span><span class='line'>/dev/sda1               1        6528    52436128+   7  HPFS/NTFS
-</span><span class='line'>/dev/sda2            6529       60802   435949345+   f  W95 Ext'd (LBA)
-</span><span class='line'>/dev/sda5            6529       24543   144705456    7  HPFS/NTFS
-</span><span class='line'>/dev/sda6           24544       42558   144705456    7  HPFS/NTFS
-</span><span class='line'>/dev/sda7           42559       53060    84357283+   7  HPFS/NTFS
-</span><span class='line'>/dev/sda8           53061       53321     2096451    b  W95 FAT32
-</span><span class='line'>/dev/sda9   *       53322       53346      194560   83  Linux
-</span><span class='line'>/dev/sda10          53346       53589     1951744   82  Linux swap / Solaris
-</span><span class='line'>/dev/sda11          53589       55413    14647296   83  Linux
-</span><span class='line'>/dev/sda12          55413       60802    43287552   83  Linux   </span></code></pre></td></tr></table></div></figure>
-
-
-<p>如果是加入开机自动映射的话，编辑/etc/fstab,加入如下内容就可以了。</p>
-
-<pre><code>/dev/hdax /mnt/windows ntfs-3g defaults 0 0   
-</code></pre>
-
-<p>下面是我的系统加载NTFS文件系统的相关命令：</p>
-
-<pre><code>mount -t ntfs-3g /dev/sda6 /mnt/D
-mount -t ntfs-3g /dev/sda7 /mnt/E   
-</code></pre>
-
-<p>以上文章是对网上搜集的资料的整理。如需转载请注明出处，本文地址： <br/>
-<code>http://tinyxd.me/blog/2012/06/30/debian-ntfs-filesysterm/</code></p>
 ]]></content>
   </entry>
   
