@@ -4,7 +4,7 @@
   <title><![CDATA[Category: linux | Keen on Art of Tech]]></title>
   <link href="http://tinyxd.me/blog/categories/linux/atom.xml" rel="self"/>
   <link href="http://tinyxd.me/"/>
-  <updated>2012-07-17T10:39:51+08:00</updated>
+  <updated>2012-07-18T16:14:26+08:00</updated>
   <id>http://tinyxd.me/</id>
   <author>
     <name><![CDATA[Tiny]]></name>
@@ -12,6 +12,86 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[linux内核同步]]></title>
+    <link href="http://tinyxd.me/blog/2012/07/18/linux-kernel-synchronization/"/>
+    <updated>2012-07-18T15:57:00+08:00</updated>
+    <id>http://tinyxd.me/blog/2012/07/18/linux-kernel-synchronization</id>
+    <content type="html"><![CDATA[<h2>内核抢占</h2>
+
+<p>抢占内核的主要特点是：一个在内核态运行的进程，可能在执行内核函数期间被另外一个进程取代。 <br/>
+只有当内核正在执行异常处理程序（尤其是系统调用），而且内核抢占没有被显式地禁用时，才可能抢占内核。 <br/>
+内核使用的各种同步技术：每CPU变量、原子操作、内存屏障、自旋锁、信号量、顺序锁、本地中断的禁止、本地软中断的禁止、读-拷贝-更新（RCU）。</p>
+
+<h2>每CPU变量</h2>
+
+<p>主要是数据结构的数组，系统的每个CPU对应数组的一个元素。 <br/>
+一个CPU不应该访问与其他CPU对应的数组元素。另外，它可以随意读或修改它自己的元素而不用担心出现竞争条件，因为它是唯一有资格这么做的CPU。在单处理器和多处理器系统中，内核抢占都可能使每CPU变量产生竞争条件。总的原则是内核控制路径应该在禁用抢占的情况下访问每CPU变量。</p>
+
+<!--more-->
+
+
+<h2>原子操作</h2>
+
+<p>若干汇编语言指令具有“读-修改-写”类型----也就是说，它们访问存储器单元两次，第一次读原值，第二次写新值。 <br/>
+Linux内核提供了一个专门的atomic_t类型（一个原子计数器）和一些专门的函数和宏。在多处理器系统中，每条这样的指令都有一个lock字节（“锁定内存总线，直到这条指令执行完成”）的前缀。</p>
+
+<h2>优化和内存屏障</h2>
+
+<p>当使用优化的编译器时，编译器为了优化可能会重新安排汇编语言指令以便寄存器以最优的方式使用。 <br/>
+内存屏障（memory barrier）原语确保，在原语之后的操作开始执行之前，原语之前的操作已经完成。</p>
+
+<h2>自旋锁</h2>
+
+<p>自旋锁（spin lock）是用来在多处理器环境中工作的一种特殊的锁。如果内核控制路径发现自旋锁“开着”，就获取锁并继续自己的执行。相反，如果内核控制路径发现锁由运行在另一个CPU上的内核控制路径“锁着”，就在周围“旋转”。反复执行一条紧凑的循环指令，直到锁被释放。   <br/>
+一般来说，由自旋锁所保护的每个临界区都是禁止内核抢占的。在单处理器系统上，这种锁本身并不起锁的作用，自旋锁原语仅仅是禁止或启用内核抢占。  <br/>
+在linux中，每个自旋锁都用spinlock_t结构表示，其中包含两个字段：</p>
+
+<p>1.slock----表示自旋锁的状态。（1--未加锁  负数和0--加锁） <br/>
+2.break_lock----表示进程正在忙等自旋锁（只在内核支持SMP和内核抢占的情况下使用该标志）</p>
+
+<p>读写自旋锁的引入是为了增加内核的并发能力。只要没有内核控制路径堆数据结构进行修改，读写自旋锁就允许多个内核控制路径读同一数据结构。允许对数据结构并发度可以提高系统性能。 <br/>
+顺序锁：与读写自旋锁非常相似，只是它为写者赋予了较高的优先级；事实上，即使在读者正在读的时候也允许写者继续运行。这种策略的好处是写者永远不会等待（除非另外一个写者正在写），缺点是有些时候读者不得不反复多次读相同的数据直到获得有效的副本。 <br/>
+当读者进入临界区时，不必禁用内核抢占；另一方面，由于写者获取自旋锁，所以它进入临界区时自动禁用内核抢占。 <br/>
+一般来说，在满足以下条件时才能使用顺序锁：</p>
+
+<p>1.被保护的数据结构不包括被写者修改和被读者间接引用的指针（否则，写者可能在读者的眼鼻下就修改指针）。 <br/>
+2.读者的临界区代码没有副作用（否则，多个读者的操作会与单独的读操作有不同的结果）。</p>
+
+<h2>读-拷贝-更新（RCU）</h2>
+
+<p>读-拷贝-更新（RCU）是为了保护在多数情况下被多个CPU读的数据结构而设计的另一种同步技术。RCU允许多个读者和写者并发执行，RCU不使用锁，就是说它不使用被所有CPU共享的锁或计数器。  <br/>
+RCU同步的关键思想是：</p>
+
+<p>1.RCU只保护被动态分配并通过指针引用的数据结构。 <br/>
+2.在被RCU保护的临界区中，任何内核控制路径都不能睡眠。</p>
+
+<p>使用RCU技术的真正困难在于：写者修改指针时不能立即释放数据结构的旧副本。实际上，写着开始修改时，正在访问数据结构的读者可能还在读旧副本。只有在CPU上的所有（潜在的）读者都执行完宏rcu_read_unlock()之后，才可以释放旧副本。 <br/>
+RCU是Linux2.6中新加的功能，用在网络层和虚拟文件系统中。</p>
+
+<h2>信号量</h2>
+
+<p>Linux提供两种信号量：</p>
+
+<p>1.内核信号量，由内核控制路径使用 <br/>
+2.Systerm V IPC 信号量，由用户态进程使用</p>
+
+<p>内核信号量：类似于自旋锁，因为当锁关闭着时，它不允许内核控制路径继续进行。只有可以睡眠的函数才能获取内核信号量；中断处理程序和可延迟函数都不能使用内核控制量。 <br/>
+内核信号量是struct semaphore类型的对象。 <br/>
+TASK_INTERRUPTIBLE是可以被信号和wake_up()唤醒的，当信号到来时，进程会被设置为可运行。 <br/>
+而TASK_UNINTERRUPTIBLE只能被wake_up()唤醒。 <br/>
+读/写信号量：类似于前面的“读写自旋锁”，有一点不同的是，在信号量再次变为打开之前，等待进程挂起而不是自旋。内核以严格的FIFO顺序处理等待读写信号量的所有进程。 <br/>
+每个读写信号量都是有rw_semaphore结构描述的。 <br/>
+补充原语（completion）：其和信号量之间的真正区别在于如何使用等待队列中包含的自旋锁。在补充原语中，自旋锁用来确保complete()和wait_for_completion()不会并发执行。在信号量中，自旋锁用于避免并发执行的down()函数弄乱信号量的数据结构。</p>
+
+<br />
+
+
+<p>本文章参考自《深入理解linux内核》。 <br/>
+本站文章如果没有特别说明，均为<strong>原创</strong>，转载请以<strong>链接</strong>方式注明本文地址：<a href="http://tinyxd.me/blog/2012/07/18/linux-kernel-synchronization/">http://tinyxd.me/blog/2012/07/18/linux-kernel-synchronization/</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[archlinux 无线网络连接]]></title>
@@ -125,37 +205,64 @@ a.先备份下 /etc/wpa_supplicant.conf：</p>
 
 
 <p> <br/>
-{% codeblock  %}
-#</p>
-
-<h1>/etc/rc.conf - Main Configuration for Arch Linux</h1>
-
-<p>LOCALE="en_US.UTF-8"
-DAEMON_LOCALE="no"
-HARDWARECLOCK="localtime"
-TIMEZONE="Asia/Shanghai"
-KEYMAP="us"
-CONSOLEFONT=
-CONSOLEMAP=
-USECOLOR="yes"</p>
-
-<p>MODULES=()</p>
-
-<p>UDEV_TIMEOUT=30
-USEDMRAID="no"
-USEBTRFS="no"
-USELVM="no"</p>
-
-<p>HOSTNAME="archbang"</p>
-
-<p>interface=eth0
-address=
-netmask=
-broadcast=
-gateway=</p>
-
-<p>DAEMONS=(dbus networkmanager !network !dhcdbd syslog-ng @alsa @iNodeAuthService @openntpd)
-{% endcodeblock %} <br/>
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;h1>/etc/rc.conf - Main Configuration for Arch Linux&lt;/h1>
+</span><span class='line'>
+</span><span class='line'>&lt;p>LOCALE="en_US.UTF-8"
+</span><span class='line'>DAEMON_LOCALE="no"
+</span><span class='line'>HARDWARECLOCK="localtime"
+</span><span class='line'>TIMEZONE="Asia/Shanghai"
+</span><span class='line'>KEYMAP="us"
+</span><span class='line'>CONSOLEFONT=
+</span><span class='line'>CONSOLEMAP=
+</span><span class='line'>USECOLOR="yes"&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>MODULES=()&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>UDEV_TIMEOUT=30
+</span><span class='line'>USEDMRAID="no"
+</span><span class='line'>USEBTRFS="no"
+</span><span class='line'>USELVM="no"&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>HOSTNAME="archbang"&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>interface=eth0
+</span><span class='line'>address=
+</span><span class='line'>netmask=
+</span><span class='line'>broadcast=
+</span><span class='line'>gateway=&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>DAEMONS=(dbus networkmanager !network !dhcdbd syslog-ng @alsa @iNodeAuthService @openntpd)</span></code></pre></td></tr></table></div></figure></notextile></div> <br/>
 3.在<code>/etc/localtime</code>做个软链接给具体的<code>zoneinfo</code>：</p>
 
 <pre><code>sudo ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime     
@@ -385,210 +492,6 @@ struct work_struct {</p>
 
 <p>本文章整理自网络和《深入理解linux内核》。  <br/>
 本站文章如果没有特别说明，均为<strong>原创</strong>，转载请以<strong>链接</strong>方式注明本文地址：<a href="http://tinyxd.me/blog/2012/07/11/linux-workqueue/">http://tinyxd.me/blog/2012/07/11/linux-workqueue/</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[软中断和tasklet]]></title>
-    <link href="http://tinyxd.me/blog/2012/07/11/soft-interrupt-and-tasklet/"/>
-    <updated>2012-07-11T22:57:00+08:00</updated>
-    <id>http://tinyxd.me/blog/2012/07/11/soft-interrupt-and-tasklet</id>
-    <content type="html"><![CDATA[<h2>软中断：</h2>
-
-<p>Linux中的软中断机制用于系统中对时间要求最严格以及最重要的中断下半部进行使用。在系统设计过程中，大家都清楚中断上下文不能处理太多的事情，需要快速的返回，否则很容易导致中断事件的丢失，所以这就产生了一个问题：中断发生之后的事务处理由谁来完成？在前后台程序中，由于只有中断上下文和一个任务上下文，所以中断上下文触发事件，设置标记位，任务上下文循环扫描标记位，执行相应的动作，也就是中断发生之后的事情由任务来完成了，只不过任务上下文采用扫描的方式，实时性不能得到保证。在Linux系统和Windows系统中，这个不断循环的任务就是本文所要讲述的软中断daemon。在Windows中处理耗时的中断事务称之为中断延迟处理，在Linux中称之为中断下半部，显然中断上半部处理清中断之类十分清闲的动作，然后在退出中断服务程序时触发中断下半部，完成具体的功能。</p>
-
-<p>在Linux中，中断下半部的实现基于软中断机制。所以理清楚软中断机制的原理，那么中断下半部的实现也就非常简单了。通过上述的描述，大家也应该清楚为什么要定义软中断机制了，一句话就是为了要处理对时间要求苛刻的任务，恰好中断下半部就有这样的需求，所以其实现采用了软中断机制。</p>
-
-<p>linux2.6中使用的软中断：</p>
-
-<p>``` c interrupt.h
-enum
-{</p>
-
-<pre><code>HI_SOFTIRQ=0, /*用于高优先级的tasklet(下标(优先级0))*/
-TIMER_SOFTIRQ, /*用于定时器的下半部(下标(优先级1))*/
-NET_TX_SOFTIRQ,/*用于网络层发包(下标(优先级2))*/
-NET_RX_SOFTIRQ, /*用于网络层收报(下标(优先级3))*/
-SCSI_SOFTIRQ, /*用于scsi设备(下标(优先级4))*/
-TASKLET_SOFTIRQ /*用于低优先级的tasklet(下标(优先级5))*/
-</code></pre>
-
-<p>};
-```</p>
-
-<!--more-->
-
-
-<p>一个软中断的下标决定了它的优先级；低下标意味着高优先级，因为软中断函数将从下标0开始执行。</p>
-
-<h2>tasklet:</h2>
-
-<p>Tasklet为一个软中断，考虑到优先级问题，分别占用了向量表中的0号和5号软中断。</p>
-
-<p>tasklet是IO驱动程序中实现可延迟函数的首选方法。其建立在两个叫HI_SOFTIRQ和TASKLET_SOFTIRQ的软中断之上。</p>
-
-<h2>软中断和tasklet</h2>
-
-<p>软中断和tasklet有密切的关系，tasklet是在软中断之上实现。事实上，出现在内核代码中的术语“软中断（softirq）” 常常表示可延迟函数的所有种类。另外一种被广泛使用的术语是“中断上下文”：表示内核当前正在执行一个中断处理程序或一个可延迟的函数。</p>
-
-<p>软中断的分配是静态的（即在编译时定义），而tasklet的分配和初始化可以在运行时进行（例如：安装一个内核模块时）。软中断（即便是同一种类型的软中断）可以并发地运行在多个CPU上。因此，软中断是可重入函数而且必须明确地使用自旋锁保护其数据结构。tasklet不必担心这些问题，因为内核对tasklet的执行进行了更加严格的控制。相同类型的tasklet总是被串行地执行，换句话说就是：不能在两个CPU上同时运行相同类型的tasklet。但是，类型不同的tasklet可以在几个CPU上并发执行。tasklet的串行化使tasklet函数不必是可重入的，因此简化了设备驱动程序开发者的工作。</p>
-
-<p>一般而言，可延迟函数上可以执行四种函数：初始化、激活、屏蔽和执行。</p>
-
-<h2>软中断的主要数据结构</h2>
-
-<p>软中断的主要数据结构是softirq_vec数组，该数组包含类型为softirq_action的32个元素。一个软中断的优先级是相应的softirq_action元素在数组内的下标，只有前六个被有效使用。</p>
-
-<p>/*表示softirq最多可以有32种类型，实际上linux只使用了六种，见文件interrupt.h*/</p>
-
-<p>static struct softirq_action softirq_vec[32] __cacheline_aligned_in_smp;</p>
-
-<p>softirq_action数据结构包括两个字段：指向软中断函数的一个action指针和指向软中断函数需要的通用数据结构的data指针。</p>
-
-<p>还有一个关键的字段是32位的preempt_cout字段，用它来跟踪内核抢占和内核控制路径的嵌套，该字段存放在每个进程描述符的thread_info字段中。</p>
-
-<p>对于softirq，linux kernel中是在中断处理程序执行的，具体的路径为：</p>
-
-<pre><code>do_IRQ() --&gt; irq_exit() --&gt; invoke_softirq() --&gt; do_softirq() --&gt; __do_softirq() 
-</code></pre>
-
-<p>在__do_softirq()中有这么一段代码：  <br/>
-``` c</p>
-
-<pre><code>    do { 
-
-            if (pending &amp; 1) { 
-
-                    h-&gt;action(h); 
-
-                    rcu_bh_qsctr_inc(cpu); 
-
-            } 
-
-            h++; 
-
-            pending &gt;&gt;= 1; 
-
-    } while (pending); 
-</code></pre>
-
-<p>```</p>
-
-<p>你看，这里就是对softirq进行处理了，因为pengding是一个__u32的类型，所以每一位都对应了一种softirq，正好是32种（linux kernel中实际上只使用了前6种 ）. h->action(h),就是运行softirq的处理函数。</p>
-
-<p>对于tasklet，前面已经说了，是一种特殊的softirq，具体就是第0和第5种softirq，所以说tasklet是基于softirq来实现的。</p>
-
-<p>tasklet既然对应第0和第5种softirq，那么就应该有对应的处理函数，以便h->action()会运行tasklet的处理函数。</p>
-
-<p>我们看代码：
-``` c softirq.c</p>
-
-<p>void __init softirq_init(void)</p>
-
-<p>{</p>
-
-<pre><code>    open_softirq(TASKLET_SOFTIRQ, tasklet_action, NULL); 
-
-    open_softirq(HI_SOFTIRQ, tasklet_hi_action, NULL); 
-</code></pre>
-
-<p>}
-```</p>
-
-<p>这里注册了两种tasklet所在的softirq的处理函数，分别对应高优先级的tasklet和低优先级的tasklet。</p>
-
-<p>我们看低优先级的吧（高优先级的也一样）。
-``` c tasklet_action
-static void tasklet_action(struct softirq_action *a)</p>
-
-<p>{</p>
-
-<pre><code>    struct tasklet_struct *list; 
-
-    local_irq_disable(); 
-
-    list = __get_cpu_var(tasklet_vec).list; 
-
-    __get_cpu_var(tasklet_vec).list = NULL; 
-
-    local_irq_enable(); 
-
-    while (list) { 
-
-            struct tasklet_struct *t = list; 
-
-            list = list-&gt;next; 
-
-            if (tasklet_trylock(t)) { 
-
-                    if (!atomic_read(&amp;t-&gt;count)) { 
-
-                            if (!test_and_clear_bit(TASKLET_STATE_SCHED, &amp;t-&gt;state)) 
-
-                                    BUG(); 
-
-                            t-&gt;func(t-&gt;data); 
-
-                            tasklet_unlock(t); 
-
-                            continue; 
-
-                    } 
-
-                    tasklet_unlock(t); 
-
-            } 
-
-            local_irq_disable(); 
-
-            t-&gt;next = __get_cpu_var(tasklet_vec).list; 
-
-            __get_cpu_var(tasklet_vec).list = t; 
-
-            __raise_softirq_irqoff(TASKLET_SOFTIRQ);   
-
-            local_irq_enable(); 
-
-    } 
-</code></pre>
-
-<p>}
-<code>
-你看，在运行softirq的处理时（__do_softirq），对于
-</code> c</p>
-
-<pre><code>    do { 
-
-            if (pending &amp; 1) { 
-
-                    h-&gt;action(h); 
-
-                    rcu_bh_qsctr_inc(cpu); 
-
-            } 
-
-            h++; 
-
-            pending &gt;&gt;= 1; 
-
-    } while (pending); 
-</code></pre>
-
-<p>```
-如果tasklet有任务需要处理，会运行到h->action()，这个函数指针就会指向tasklet_action()，然后在tasklet_action()里再去执行tasklet对应的各个任务，这些任务都是挂在一个全局链表里面的，具体的代码这里就不分析了。</p>
-
-<p>另外， softirq在smp中是可能被同时运行的，所以softirq的处理函数必须被编写成可重入的函数。</p>
-
-<p>但tasklet是不会在多个cpu之中同时运行的，所以tasklet的处理函数可以编写成不可重入的函数，这样就减轻了编程人员的负担。</p>
-
-<h2>ksoftirqd内核线程</h2>
-
-<p>在最近的内核版本中，每个CPU都有自己的ksoftirqd/n内核线程（这里，n为CPU的逻辑号）。每个ksoftirqd/n内核线程都运行ksoftirqd()函数。在预期的时间内处理挂起的软中断。</p>
-
-<br />
-
-
-<p>本站文章如果没有特别说明，均为<strong>原创</strong>，转载请以<strong>链接</strong>方式注明本文地址：<a href="http://tinyxd.me/blog/2012/07/11/soft-interrupt-and-tasklet/">http://tinyxd.me/blog/2012/07/11/soft-interrupt-and-tasklet/</a></p>
 ]]></content>
   </entry>
   
