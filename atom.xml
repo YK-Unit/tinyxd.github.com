@@ -4,7 +4,7 @@
   <title><![CDATA[Keen on Art of Tech]]></title>
   <link href="http://tinyxd.me/atom.xml" rel="self"/>
   <link href="http://tinyxd.me/"/>
-  <updated>2012-07-19T19:42:59+08:00</updated>
+  <updated>2012-07-25T19:43:52+08:00</updated>
   <id>http://tinyxd.me/</id>
   <author>
     <name><![CDATA[Tiny]]></name>
@@ -12,6 +12,85 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[archlinux升级出现关于glibc的问题解决办法]]></title>
+    <link href="http://tinyxd.me/blog/2012/07/25/archlinux-update-about-glibc/"/>
+    <updated>2012-07-25T18:44:00+08:00</updated>
+    <id>http://tinyxd.me/blog/2012/07/25/archlinux-update-about-glibc</id>
+    <content type="html"><![CDATA[<p>好久没更新archlinux，今天更新，发现由于archlinux系统根目录结构的改变，导致好多人遇到问题，不错，笔者必然也遇到了。由于有前人的探索，再加上查阅archlinux官网论坛，得以顺利解决问题。
+运行<code>pacman -Syu</code>时会出现</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>error: failed to commit transaction (conflicting files)
+</span><span class='line'>glibc: /lib exists in filesystem
+</span><span class='line'>Errors occurred, no packages were upgraded.</span></code></pre></td></tr></table></div></figure>
+
+
+<p> <br/>
+由于这次是glibc的升级，绝对不可以用<code>--force</code>，而之前是filesysterm的升级，必须用<code>--force</code>。 <br/>
+那么接下来该怎么办呢？ <br/>
+查阅了archlinux论坛地址：<a href="https://bbs.archlinux.org/viewforum.php?id=44">https://bbs.archlinux.org/viewforum.php?id=44</a>，并参考了<a href="http://www.j927.net/arch/archlinux%E5%8D%87%E7%BA%A7%E5%A4%B1%E8%B4%A5%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E8%AE%B0%E5%BD%95.html">这篇文章</a>。    <br/>
+发现这个<a href="https://bbs.archlinux.org/viewtopic.php?id=145186">帖子</a>，其中提到这两篇文章：<a href="http://allanmcrae.com/2012/07/updating-arch-linux-from-a-core-install/">updating-arch-linux-from-a-core-install</a> 和<a href="https://wiki.archlinux.org/index.php/DeveloperWiki:usrlib">DeveloperWiki:usrlib</a>，总结以下命令：</p>
+
+<!--more-->
+
+
+<p></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>shell &gt; pacman -Sy
+</span><span class='line'>shell &gt; rm -rf /var/run /var/lock && pacman -Sf filesystem
+</span><span class='line'>shell &gt; pacman -S tzdata
+</span><span class='line'>shell &gt; pacman -U http://pkgbuild.com/~allan/glibc-2.16.0-1-i686.pkg.tar.xz #32位的用这个包(和下面的一条命令二选一)
+</span><span class='line'>shell &gt; pacman -U http://pkgbuild.com/~allan/glibc-2.16.0-1-x86_64.pkg.tar.xz #64位的用这个包 具体的包名称可以打开http://pkgbuild.com/~allan/看一下
+</span><span class='line'>shell &gt; rm /etc/profile.d/locale.sh
+</span><span class='line'>shell &gt; pacman -Su --ignore glibc #因为pacman也升级了，新版本开启了软件包签名验证，故还需要运行下面2条命令
+</span><span class='line'>shell &gt; pacman-key --init #该命令运行后不要什么都不做，随机敲键盘或者切换到其它终端(Alt+F2)运行些命令或做些其它操作
+</span><span class='line'>shell &gt; pacman-key --populate archlinux
+</span><span class='line'>shell &gt; pacman -Su #再更新被忽略的glibc</span></code></pre></td></tr></table></div></figure>
+
+
+<p>执行完上述命令后，系统顺利更新好了，但是依然出现下述问题：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>error: failed to commit transaction (conflicting files)
+</span><span class='line'>glibc: /lib exists in filesystem
+</span><span class='line'>Errors occurred, no packages were upgraded.</span></code></pre></td></tr></table></div></figure>
+
+
+<p> <br/>
+我就去论坛中寻找，果不其然也有类似于我的情况，原帖<a href="http://bbs.archbang.org/viewtopic.php?pid=16509">在此</a>。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>shell &gt; pacman -R broadcom-wl
+</span><span class='line'>shell &gt; pacman -Su
+</span><span class='line'>shell &gt; pacman -S broadcom-wl #如果需要的话，再次安装即可</span></code></pre></td></tr></table></div></figure>
+
+
+<p>至此，升级结束。</p>
+
+<br />
+
+
+<p>本站文章如果没有特别说明，均为<strong>原创</strong>，转载请以<strong>链接</strong>方式注明本文地址：<a href="http://tinyxd.me/blog/2012/07/25/archlinux-update-about-glibc/">http://tinyxd.me/blog/2012/07/25/archlinux-update-about-glibc/</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[linux内核同步]]></title>
@@ -1877,61 +1956,6 @@ Debug 通常称为调试版本，它包含调试信息，并且不作任何优�
 
 
 <p> 实际上，Debug 和 Release 并没有本质的界限，他们只是一组编译选项的集合，编译器只是按照预定的选项行动。事实上，我们甚至可以修改这些选项，从而得到优化过的调试版本或是带跟踪语句的发布版本。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[octopress博客添加flickr侧边栏]]></title>
-    <link href="http://tinyxd.me/blog/2012/07/02/add-flickr-aside-in-octopress/"/>
-    <updated>2012-07-02T11:14:00+08:00</updated>
-    <id>http://tinyxd.me/blog/2012/07/02/add-flickr-aside-in-octopress</id>
-    <content type="html"><![CDATA[<p>octopress添加侧边栏： <br/>
-1.新建 <code>source/_includes/custom/asides/flickr.html</code>，代码如下：</p>
-
-<div><script src='https://gist.github.com/1421792.js?file=flickr.html'></script>
-<noscript><pre><code>{% if site.flickr_user %}
-&lt;section class=&quot;flickr&quot;&gt;
-&lt;h1&gt;My Flickr&lt;/h1&gt;
-&lt;!-- Start of Flickr Badge --&gt;
-&lt;style type=&quot;text/css&quot;&gt;
-/*
-Images are wrapped in divs classed &quot;flickr_badge_image&quot; with ids &quot;flickr_badge_imageX&quot; where &quot;X&quot; is an integer specifying ordinal position. Below are some styles to get you started!
-*/
-#flickr_badge_wrapper {padding:10px 0 10px 0;}
-.flickr_badge_image {margin: 0 9px 8px 0px;display: inline-block;}
-&lt;/style&gt;
-&lt;div id=&quot;flickr_badge_uber_wrapper&quot;&gt;&lt;div id=&quot;flickr_badge_wrapper&quot;&gt;
-&lt;script type=&quot;text/javascript&quot; src=&quot;http://www.flickr.com/badge_code_v2.gne?count={{ site.flickr_count }}&amp;display=latest&amp;size=s&amp;layout=x&amp;source=user&amp;user={{ site.flickr_user }}&quot;&gt;&lt;/script&gt;
-&lt;/div&gt;&lt;/div&gt;
-&lt;!-- End of Flickr Badge --&gt;
-&lt;/section&gt;
-{% endif %}</code></pre></noscript></div>
-
-
-
-
-<!--more-->
-
-
-<p>
-2.在_config.yml添加</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'># Flick Badges
-</span><span class='line'># Find your user id here: http://idgettr.com/ It should be something like "81221217@N08".
-</span><span class='line'>flickr_user: 81221217@N08
-</span><span class='line'>flickr_count: 6</span></code></pre></td></tr></table></div></figure>
-
-
-<p> <br/>
-记住要把 flickr_user 换成你自己的 id。 <br/>
-ID在这个<a href="http://idgettr.com/">网址</a>获取，只需把username换成自己的，然后点find。 <br/>
-3.在<code>_config_yml</code>中<code>default_asides</code>添加<code>custom/asides/flickr.html</code>。 <br/>
-4.大功告成。
-本文参考了：<a href="http://lucifr.com/2011/12/02/add-flickr-aside-to-octopress/">Lucifr</a>和<a href="http://melandri.net/2012/01/10/octopress-flickr-aside/">melandri</a>。</p>
 ]]></content>
   </entry>
   

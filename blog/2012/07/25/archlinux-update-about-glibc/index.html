@@ -5,12 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>arch linux下java SDK的安装与配置 - Keen on Art of Tech</title>
+  <title>archlinux升级出现关于glibc的问题解决办法 - Keen on Art of Tech</title>
 <meta name="author" content="Tiny">
 
 
-<meta name="description" content="arch linux下java SDK的安装与配置。">
-<meta name="keywords" content="arch linux, java ,SDK">
+<meta name="description" content="由于arlinux目录更新，glibc更新，升级archlinux出现错误。本文讲述了此次升级出现问题的解决方法。">
+<meta name="keywords" content="archlinux,update,glibc">
 
   <!-- http://t.co/dKP3o1e -->
   <meta name="HandheldFriendly" content="True">
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://tinyxd.me/blog/2012/05/27/arch-linuxxia-java-sdkde-an-zhuang-yu-pei-zhi">
+  <link rel="canonical" href="http://tinyxd.me/blog/2012/07/25/archlinux-update-about-glibc">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -102,7 +102,7 @@
   
   <header>
     
-      <h1 class="entry-title">Arch Linux下java SDK的安装与配置</h1>
+      <h1 class="entry-title">Archlinux升级出现关于glibc的问题解决办法</h1>
     
     
       <p class="meta">
@@ -118,7 +118,7 @@
   
 
 
-<time datetime="2012-05-27T19:58:00+08:00" pubdate data-updated="true">May 27<span>th</span>, 2012</time>
+<time datetime="2012-07-25T18:44:00+08:00" pubdate data-updated="true">Jul 25<span>th</span>, 2012</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -127,150 +127,77 @@
   </header>
 
 
-<div class="entry-content"><p>为了节省以后查资料的时间，故而转到自己的blog做个备份。
-转自：
-<a href="http://www.cnblogs.com/heart-runner/archive/2011/11/30/2269640.html">Arch Linux中Java SDK的安装与配置</a></p>
+<div class="entry-content"><p>好久没更新archlinux，今天更新，发现由于archlinux系统根目录结构的改变，导致好多人遇到问题，不错，笔者必然也遇到了。由于有前人的探索，再加上查阅archlinux官网论坛，得以顺利解决问题。
+运行<code>pacman -Syu</code>时会出现</p>
 
-<p>因为版权和公司对开源软件的态度，Oracle Java SDK已经不再包含于Arch Linux默认的Repository。</p>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>error: failed to commit transaction (conflicting files)
+</span><span class='line'>glibc: /lib exists in filesystem
+</span><span class='line'>Errors occurred, no packages were upgraded.</span></code></pre></td></tr></table></div></figure>
 
-<p>不过对于有开发需要，又不得不使用Oracle公司的产品的民工们，还好有AUR中提供的相应支持，让我们能方便地用安装脚本来处理Oracle Java SDK的安装和配置。</p>
 
-<p>下面就简单地记录下的JDK的安装方法。</p>
+<p> <br/>
+由于这次是glibc的升级，绝对不可以用<code>--force</code>，而之前是filesysterm的升级，必须用<code>--force</code>。 <br/>
+那么接下来该怎么办呢？ <br/>
+查阅了archlinux论坛地址：<a href="https://bbs.archlinux.org/viewforum.php?id=44">https://bbs.archlinux.org/viewforum.php?id=44</a>，并参考了<a href="http://www.j927.net/arch/archlinux%E5%8D%87%E7%BA%A7%E5%A4%B1%E8%B4%A5%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E8%AE%B0%E5%BD%95.html">这篇文章</a>。    <br/>
+发现这个<a href="https://bbs.archlinux.org/viewtopic.php?id=145186">帖子</a>，其中提到这两篇文章：<a href="http://allanmcrae.com/2012/07/updating-arch-linux-from-a-core-install/">updating-arch-linux-from-a-core-install</a> 和<a href="https://wiki.archlinux.org/index.php/DeveloperWiki:usrlib">DeveloperWiki:usrlib</a>，总结以下命令：</p>
 
-<p>安装环境如下：</p>
-
-<pre><code>archbang 3.3.6-1-ARCH
-Oracle Java SDK 7 update 1
-</code></pre>
-
-<h2><strong>安装</strong></h2>
-
-<ul>
-<li>jre <br/>
-这里先安装JDK，虽然据说openjdk的jre也能兼容Oracle Java SDK，但还是有点担心它们的兼容性。  <br/>
-先在<a href="https://aur.archlinux.org/">Arch Linux AUR</a>中找到<a href="https://aur.archlinux.org/packages.php?ID=51908">JRE</a>。<br/>
 <!--more-->
-制作安装包</li>
-</ul>
 
+
+<p></p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
 <span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ wget --no-check-certificate -c https://aur.archlinux.org/packages/jr/jre/jre.tar.gz   
-</span><span class='line'>$ tar -zxvf jre.tar.gz   
-</span><span class='line'>$ cd  jre   
-</span><span class='line'>$ makepkg    
-</span><span class='line'>   </span></code></pre></td></tr></table></div></figure>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>shell &gt; pacman -Sy
+</span><span class='line'>shell &gt; rm -rf /var/run /var/lock && pacman -Sf filesystem
+</span><span class='line'>shell &gt; pacman -S tzdata
+</span><span class='line'>shell &gt; pacman -U http://pkgbuild.com/~allan/glibc-2.16.0-1-i686.pkg.tar.xz #32位的用这个包(和下面的一条命令二选一)
+</span><span class='line'>shell &gt; pacman -U http://pkgbuild.com/~allan/glibc-2.16.0-1-x86_64.pkg.tar.xz #64位的用这个包 具体的包名称可以打开http://pkgbuild.com/~allan/看一下
+</span><span class='line'>shell &gt; rm /etc/profile.d/locale.sh
+</span><span class='line'>shell &gt; pacman -Su --ignore glibc #因为pacman也升级了，新版本开启了软件包签名验证，故还需要运行下面2条命令
+</span><span class='line'>shell &gt; pacman-key --init #该命令运行后不要什么都不做，随机敲键盘或者切换到其它终端(Alt+F2)运行些命令或做些其它操作
+</span><span class='line'>shell &gt; pacman-key --populate archlinux
+</span><span class='line'>shell &gt; pacman -Su #再更新被忽略的glibc</span></code></pre></td></tr></table></div></figure>
 
 
-<p>处理依赖条件，开始安装</p>
+<p>执行完上述命令后，系统顺利更新好了，但是依然出现下述问题：</p>
 
-<pre><code>$ sudo pacman -S desktop-file-utils libxtst shared-mime-info xdg-utils
-[zzz@archbang jre]$ sudo pacman -U ./jre-7.4-1-i686.pkg.tar.xz 
-loading packages...
-resolving dependencies...
-looking for inter-conflicts...
-
-Targets (1): jre-7.4-1
-
-Total Installed Size:   92.30 MiB
-
-Proceed with installation? [Y/n] 
-(1/1) checking package integrity                   [----------------------] 100%
-(1/1) loading package files                        [----------------------] 100%
-(1/1) checking for file conflicts                  [----------------------] 100%
-(1/1) checking available disk space                [----------------------] 100%
-(1/1) installing jre                               [----------------------] 100%
-
-The jre package is licensed software.
-You MUST read and agree to the license stored in
-/usr/share/licenses/jre/LICENSE before using it.
-Please relogin to include jre in your PATH.
-
-Optional dependencies for jre
-    alsa-lib: sound support
-    ttf-dejavu: fonts
-</code></pre>
-
-<p>Arch Linux中，Java SDK默认的安装位置是/opt/java</p>
-
-<pre><code>$ pwd 
-/opt/java
-$ ls
-jre
-</code></pre>
-
-<h2>至此，JRE成功安装。</h2>
-
-<ul>
-<li><p>JDK
-JDK的安装过程与JRE类似。</p>
-
-<p>  \$ wget -c &#8211;no-check-certificate https://aur.archlinux.org/packages/jd/jdk/jdk.tar.gz <br/>
-  \$ tar -zxvf jdk.tar.gz <br/>
-  \$ cd jdk <br/>
-  \$ makepkg <br/>
-  \$ sudo pacman -U ./jdk-7.4-1-i686.pkg.tar.xz <br/>
-  loading packages&#8230; <br/>
-  resolving dependencies&#8230; <br/>
-  looking for inter-conflicts&#8230;</p>
-
-<p>  Targets (1): jdk-7.4-1</p>
-
-<p>  Total Installed Size:   86.05 MiB</p>
-
-<p>  Proceed with installation? [Y/n]  <br/>
-  (1/1) checking package integrity                   [&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;-] 100% <br/>
-  (1/1) loading package files                        [&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;-] 100% <br/>
-  (1/1) checking for file conflicts                  [&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;-] 100% <br/>
-  (1/1) checking available disk space                [&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;-] 100% <br/>
-  (1/1) installing jdk                               [&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;-] 100%</p>
-
-<p>  The jdk package is licensed software. <br/>
-  You MUST read and agree to the license stored in <br/>
-  /usr/share/licenses/jdk/LICENSE before using it. <br/>
-  Please relogin to include jdk in your PATH.</p></li>
-</ul>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>error: failed to commit transaction (conflicting files)
+</span><span class='line'>glibc: /lib exists in filesystem
+</span><span class='line'>Errors occurred, no packages were upgraded.</span></code></pre></td></tr></table></div></figure>
 
 
-<p>配置
-安装之后打开/etc/environment文件编辑，添加如下内容：</p>
+<p> <br/>
+我就去论坛中寻找，果不其然也有类似于我的情况，原帖<a href="http://bbs.archbang.org/viewtopic.php?pid=16509">在此</a>。</p>
 
-<pre><code>#Java SDK 
-#
-CLASSPATH=.:/opt/java/lib
-JAVA_HOME=/opt/java
-</code></pre>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>shell &gt; pacman -R broadcom-wl
+</span><span class='line'>shell &gt; pacman -Su
+</span><span class='line'>shell &gt; pacman -S broadcom-wl #如果需要的话，再次安装即可</span></code></pre></td></tr></table></div></figure>
 
-<p>添加之后就可以使用java和javac命令了</p>
 
-<pre><code>$ java -version
-java version "1.7.0_01"
-Java(TM) SE Runtime Environment (build 1.7.0_01-b08)
-Java HotSpot(TM) Client VM (build 21.1-b02, mixed mode)
-$ javac -version
-javac 1.7.0_01   
-</code></pre>
+<p>至此，升级结束。</p>
 
-<p>更详细的内容可参考<a href="http://sillydong.com/myjava/arch-linux%E5%BF%AB%E9%80%9F%E9%85%8D%E7%BD%AEjava%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.html">傻东の学习笔记</a>
-3、解决中文乱码问题，还是用超级用户，进入/usr/share/fonts/wenquanyi，将wqy-zenhei文件夹复制到/opt/java/jre/lib/fonts下，改名为fallback，进入fallback文件夹，终端执行</p>
+<br />
 
-<pre><code># mkfontdir
-和
-# mkfontscale
-</code></pre>
 
-<p>4、安装eclipse，只需要打开终端执行pacman -S eclipse就可以安装eclipse最新的英文版</p>
-
-<p>5、执行jar文件的办法。在Arch中，jar文件默认是使用归档文件管理器打开的，也就相当于解压缩，而我们需要的是执行这个jar程序，跟我做：在目标jar文件上右击，选择“属性”，找到“打开方式”的标签，选择“添加”，打开“使用自定义命令”，向其中加入下面的命令：</p>
-
-<pre><code>java -jar
-</code></pre>
-
-<p>输完之后选择“添加”，这时候在打开方式标签下有两个选择，一种就是原来就有的“归档文件管理器”，还有就是“java”，勾选上“java”，然后关闭，这时候双击jar文件就是执行它了。</p>
+<p>本站文章如果没有特别说明，均为<strong>原创</strong>，转载请以<strong>链接</strong>方式注明本文地址：<a href="http://tinyxd.me/blog/2012/07/25/archlinux-update-about-glibc/">http://tinyxd.me/blog/2012/07/25/archlinux-update-about-glibc/</a></p>
 </div>
 
 
@@ -293,12 +220,12 @@ javac 1.7.0_01
   
 
 
-<time datetime="2012-05-27T19:58:00+08:00" pubdate data-updated="true">May 27<span>th</span>, 2012</time>
+<time datetime="2012-07-25T18:44:00+08:00" pubdate data-updated="true">Jul 25<span>th</span>, 2012</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/java/'>java</a>
+    <a class='category' href='/blog/categories/linux/'>linux</a>
   
 </span>
 
@@ -307,7 +234,7 @@ javac 1.7.0_01
 
 <span class="tags">
   
-     Tag: <a class='tag' href='/tags/sdk/'>SDK</a>, <a class='tag' href='/tags/archlinux/'>archlinux</a>, <a class='tag' href='/tags/java/'>java</a>
+     Tag: <a class='tag' href='/tags/archlinux/'>archlinux</a>, <a class='tag' href='/tags/linux/'>linux</a>
   
 </span>
 
@@ -330,10 +257,8 @@ javac 1.7.0_01
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2012/05/26/arch-linux-xia-lxrde-an-zhuang/" title="Previous Post: arch linux 下lxr的安装">&laquo; arch linux 下lxr的安装</a>
+        <a class="basic-alignment left" href="/blog/2012/07/18/linux-kernel-synchronization/" title="Previous Post: linux内核同步">&laquo; linux内核同步</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2012/05/31/cache--zhi-xing-wen-ti-zong-jie/" title="Next Post: cache一致性问题总结">cache一致性问题总结 &raquo;</a>
       
     </p>
   </footer>
@@ -444,8 +369,8 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://tinyxd.me/blog/2012/05/27/arch-linuxxia-java-sdkde-an-zhuang-yu-pei-zhi/';
-        var disqus_url = 'http://tinyxd.me/blog/2012/05/27/arch-linuxxia-java-sdkde-an-zhuang-yu-pei-zhi/';
+        var disqus_identifier = 'http://tinyxd.me/blog/2012/07/25/archlinux-update-about-glibc/';
+        var disqus_url = 'http://tinyxd.me/blog/2012/07/25/archlinux-update-about-glibc/';
         var disqus_script = 'embed.js';
       
     (function () {

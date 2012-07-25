@@ -4,7 +4,7 @@
   <title><![CDATA[Tag: linux | Keen on Art of Tech]]></title>
   <link href="http://tinyxd.me/tags/linux/atom.xml" rel="self"/>
   <link href="http://tinyxd.me/"/>
-  <updated>2012-07-19T19:43:22+08:00</updated>
+  <updated>2012-07-25T19:43:52+08:00</updated>
   <id>http://tinyxd.me/</id>
   <author>
     <name><![CDATA[Tiny]]></name>
@@ -12,6 +12,60 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[archlinux升级出现关于glibc的问题解决办法]]></title>
+    <link href="http://tinyxd.me/blog/2012/07/25/archlinux-update-about-glibc/"/>
+    <updated>2012-07-25T18:44:00+08:00</updated>
+    <id>http://tinyxd.me/blog/2012/07/25/archlinux-update-about-glibc</id>
+    <content type="html"><![CDATA[<p>好久没更新archlinux，今天更新，发现由于archlinux系统根目录结构的改变，导致好多人遇到问题，不错，笔者必然也遇到了。由于有前人的探索，再加上查阅archlinux官网论坛，得以顺利解决问题。
+运行<code>pacman -Syu</code>时会出现 <br/>
+<code>
+error: failed to commit transaction (conflicting files)
+glibc: /lib exists in filesystem
+Errors occurred, no packages were upgraded.
+</code> <br/>
+由于这次是glibc的升级，绝对不可以用<code>--force</code>，而之前是filesysterm的升级，必须用<code>--force</code>。 <br/>
+那么接下来该怎么办呢？ <br/>
+查阅了archlinux论坛地址：<a href="https://bbs.archlinux.org/viewforum.php?id=44">https://bbs.archlinux.org/viewforum.php?id=44</a>，并参考了<a href="http://www.j927.net/arch/archlinux%E5%8D%87%E7%BA%A7%E5%A4%B1%E8%B4%A5%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E8%AE%B0%E5%BD%95.html">这篇文章</a>。    <br/>
+发现这个<a href="https://bbs.archlinux.org/viewtopic.php?id=145186">帖子</a>，其中提到这两篇文章：<a href="http://allanmcrae.com/2012/07/updating-arch-linux-from-a-core-install/">updating-arch-linux-from-a-core-install</a> 和<a href="https://wiki.archlinux.org/index.php/DeveloperWiki:usrlib">DeveloperWiki:usrlib</a>，总结以下命令：</p>
+
+<!--more-->
+
+
+<p> <br/>
+<code>
+shell &gt; pacman -Sy
+shell &gt; rm -rf /var/run /var/lock &amp;&amp; pacman -Sf filesystem
+shell &gt; pacman -S tzdata
+shell &gt; pacman -U http://pkgbuild.com/~allan/glibc-2.16.0-1-i686.pkg.tar.xz #32位的用这个包(和下面的一条命令二选一)
+shell &gt; pacman -U http://pkgbuild.com/~allan/glibc-2.16.0-1-x86_64.pkg.tar.xz #64位的用这个包 具体的包名称可以打开http://pkgbuild.com/~allan/看一下
+shell &gt; rm /etc/profile.d/locale.sh
+shell &gt; pacman -Su --ignore glibc #因为pacman也升级了，新版本开启了软件包签名验证，故还需要运行下面2条命令
+shell &gt; pacman-key --init #该命令运行后不要什么都不做，随机敲键盘或者切换到其它终端(Alt+F2)运行些命令或做些其它操作
+shell &gt; pacman-key --populate archlinux
+shell &gt; pacman -Su #再更新被忽略的glibc
+</code>
+执行完上述命令后，系统顺利更新好了，但是依然出现下述问题： <br/>
+<code>
+error: failed to commit transaction (conflicting files)
+glibc: /lib exists in filesystem
+Errors occurred, no packages were upgraded.
+</code> <br/>
+我就去论坛中寻找，果不其然也有类似于我的情况，原帖<a href="http://bbs.archbang.org/viewtopic.php?pid=16509">在此</a>。
+<code>
+shell &gt; pacman -R broadcom-wl
+shell &gt; pacman -Su
+shell &gt; pacman -S broadcom-wl #如果需要的话，再次安装即可
+</code>
+至此，升级结束。</p>
+
+<br />
+
+
+<p>本站文章如果没有特别说明，均为<strong>原创</strong>，转载请以<strong>链接</strong>方式注明本文地址：<a href="http://tinyxd.me/blog/2012/07/25/archlinux-update-about-glibc/">http://tinyxd.me/blog/2012/07/25/archlinux-update-about-glibc/</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[linux内核同步]]></title>
@@ -205,37 +259,64 @@ a.先备份下 /etc/wpa_supplicant.conf：</p>
 
 
 <p> <br/>
-{% codeblock  %}
-#</p>
-
-<h1>/etc/rc.conf - Main Configuration for Arch Linux</h1>
-
-<p>LOCALE="en_US.UTF-8"
-DAEMON_LOCALE="no"
-HARDWARECLOCK="localtime"
-TIMEZONE="Asia/Shanghai"
-KEYMAP="us"
-CONSOLEFONT=
-CONSOLEMAP=
-USECOLOR="yes"</p>
-
-<p>MODULES=()</p>
-
-<p>UDEV_TIMEOUT=30
-USEDMRAID="no"
-USEBTRFS="no"
-USELVM="no"</p>
-
-<p>HOSTNAME="archbang"</p>
-
-<p>interface=eth0
-address=
-netmask=
-broadcast=
-gateway=</p>
-
-<p>DAEMONS=(dbus networkmanager !network !dhcdbd syslog-ng @alsa @iNodeAuthService @openntpd)
-{% endcodeblock %} <br/>
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;h1>/etc/rc.conf - Main Configuration for Arch Linux&lt;/h1>
+</span><span class='line'>
+</span><span class='line'>&lt;p>LOCALE="en_US.UTF-8"
+</span><span class='line'>DAEMON_LOCALE="no"
+</span><span class='line'>HARDWARECLOCK="localtime"
+</span><span class='line'>TIMEZONE="Asia/Shanghai"
+</span><span class='line'>KEYMAP="us"
+</span><span class='line'>CONSOLEFONT=
+</span><span class='line'>CONSOLEMAP=
+</span><span class='line'>USECOLOR="yes"&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>MODULES=()&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>UDEV_TIMEOUT=30
+</span><span class='line'>USEDMRAID="no"
+</span><span class='line'>USEBTRFS="no"
+</span><span class='line'>USELVM="no"&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>HOSTNAME="archbang"&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>interface=eth0
+</span><span class='line'>address=
+</span><span class='line'>netmask=
+</span><span class='line'>broadcast=
+</span><span class='line'>gateway=&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>DAEMONS=(dbus networkmanager !network !dhcdbd syslog-ng @alsa @iNodeAuthService @openntpd)</span></code></pre></td></tr></table></div></figure></notextile></div> <br/>
 3.在<code>/etc/localtime</code>做个软链接给具体的<code>zoneinfo</code>：</p>
 
 <pre><code>sudo ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime     
@@ -320,86 +401,6 @@ boot
 
 <p>本文章来自本人<strong><a href="http://blog.chinaunix.net/uid/26053577.html">ChinaUnix</a></strong>博客。  <br/>
 本站文章如果没有特别说明，均为<strong>原创</strong>，转载请以<strong>链接</strong>方式注明本文地址：<a href="http://tinyxd.me/blog/2012/07/13/debian-setup/">http://tinyxd.me/blog/2012/07/13/debian-setup/</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[本地备份octopress]]></title>
-    <link href="http://tinyxd.me/blog/2012/07/12/python-backup-octopress/"/>
-    <updated>2012-07-12T22:42:00+08:00</updated>
-    <id>http://tinyxd.me/blog/2012/07/12/python-backup-octopress</id>
-    <content type="html"><![CDATA[<p>用python脚本备份octopress，当然也可以备份其他的目录。只要修改对应路径就可以了。
-``` python octopress_backup.py</p>
-
-<h1>!/usr/bin/python2</h1>
-
-<h1>Filename: octopress_backup.py</h1>
-
-<p>import os
-import time</p>
-
-<h1>1. 需要备份的目录(也可以将其他的文件夹一起打包)</h1>
-
-<p>source = ['/home/tiny/octopress', '/home/tiny/mytest']</p>
-
-<h1>2. 备份的目标位置</h1>
-
-<p>target_dir = '/home/tiny/backup/' # Remember to change this to what you will be using</p>
-
-<h1>3. 本脚本备份成tar，当然也可以压缩gzip。</h1>
-
-<h1>4. 日期是目录名</h1>
-
-<p>today = target_dir + time.strftime('%Y%m%d')</p>
-
-<h1>当前时间是备份文件的名称</h1>
-
-<p>now = time.strftime('%H%M%S')</p>
-
-<h1>可以对备份的文件进行一些说明</h1>
-
-<p>comment = raw_input('Enter a comment --> ')
-if len(comment) == 0: # check if a comment was entered</p>
-
-<pre><code>target = today + os.sep + now + '.tar'
-</code></pre>
-
-<p>else:</p>
-
-<pre><code>target = today + os.sep + now + '_' +\
-    comment.replace(' ', '_') + '.tar'
-</code></pre>
-
-<h1>创建子文件夹</h1>
-
-<p>if not os.path.exists(today):</p>
-
-<pre><code>os.mkdir(today) # make directory
-print 'Successfully created directory', today
-</code></pre>
-
-<h1>5. tar压缩命令（unix/linux）</h1>
-
-<p>tar_command = "tar -cvf '%s' %s" % (target, ' '.join(source))</p>
-
-<h1>运行备份命令</h1>
-
-<p>if os.system(tar_command) == 0:</p>
-
-<pre><code>print 'Successful backup to', target
-</code></pre>
-
-<p>else:</p>
-
-<pre><code>print 'Backup FAILED'
-</code></pre>
-
-<p>```</p>
-
-<br />
-
-
-<p>本站文章如果没有特别说明，均为<strong>原创</strong>，转载请以<strong>链接</strong>方式注明本文地址：<a href="http://tinyxd.me/blog/2012/07/12/python-backup-octopress/">http://tinyxd.me/blog/2012/07/12/python-backup-octopress/</a></p>
 ]]></content>
   </entry>
   
