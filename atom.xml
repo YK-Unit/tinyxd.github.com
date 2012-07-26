@@ -4,7 +4,7 @@
   <title><![CDATA[Keen on Art of Tech]]></title>
   <link href="http://tinyxd.me/atom.xml" rel="self"/>
   <link href="http://tinyxd.me/"/>
-  <updated>2012-07-25T19:46:39+08:00</updated>
+  <updated>2012-07-26T12:54:00+08:00</updated>
   <id>http://tinyxd.me/</id>
   <author>
     <name><![CDATA[Tiny]]></name>
@@ -12,6 +12,72 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[linux系统定时测量]]></title>
+    <link href="http://tinyxd.me/blog/2012/07/26/linux-timing-measurements/"/>
+    <updated>2012-07-26T12:48:00+08:00</updated>
+    <id>http://tinyxd.me/blog/2012/07/26/linux-timing-measurements</id>
+    <content type="html"><![CDATA[<p>Linux内核必须完成的两种主要定时测量：</p>
+
+<p>保存当前的时间和日期，以便通过time()、ftime()、gettimeofday()系统调用把它们返回给用户程序，也可以由内核本身把当前时间作为文件和网络包的时间戳。</p>
+
+<p>维持定时器，这种机制能够告诉内核或用户程序某一时间间隔已经过去了。</p>
+
+<p>一般会遇到的几种时钟和定时器电路：实时时钟（Real Time Clock RTC）、时间戳计数器（Time Stamp Counter TSC）、可编程间隔定时器（Programmable Interval Timer PIT）、CPU本地定时器（APIC中）、高精度事件定时器（HPET）、ACPI电源管理定时器。</p>
+
+<p>Linux的计时体系结构是一组与时间流相关的内核数据结构和函数。实际上，基于80x86多处理器机器所具有的计时体系结构与单处理器机器所具有的稍有不同：</p>
+
+<p>在三处理器系统上，所有的计时活动都是由全局定时器（可以是可编程间隔定时器也可以是高精度事件定时器）产生的中断触发的。</p>
+
+<!--more-->
+
+
+<p>在多处理器系统上，所有普通的活动（像软定时器处理）都是由全局定时器产生的中断触发的，而具体的CPU的活动（像监控当前运行进程的执行时间）是由本地APIC定时器产生的中断触发的。</p>
+
+<p>jiffies</p>
+
+<p>jiffies是一个计数器，用来记录自系统启动依赖产生的节拍总数。启动时，内核将该变量初始化为0，此后，每次时钟中断处理程序都会增加该变量的值。因为一秒内时钟中断的次数等于Hz，所以jiffies一秒内增加的值也就为Hz。系统运行时间以秒为单位计算，就等于jiffies/Hz。</p>
+
+<p>xtime</p>
+
+<p>xtime变量存放当前时间和日期；它是一个timespec类型的数据结构，该结构有两个字段：</p>
+
+<p>1.tv_sec 存放自1970年1月1日（UTC）午夜以来经过的秒数。</p>
+
+<p>2.tv_nsec存放自上一秒开始经过的纳秒数（它的值域范围在0-999999999之间）</p>
+
+<p>在单处理器系统上，所有与定时有关的活动都是由IRQ线0上的可编程间隔定时器产生的中断触发的。</p>
+
+<p>多处理器系统可以依赖两种不同的时钟中断源：可编程间隔定时器或高精度事件定时器产生的中断，以及CPU本地定时器产生的中断(监管内核代码并检测当前进程在特定CPU上已经运行了多长时间)。</p>
+
+<p>内核在于定时相关的其他任务中必须周期性地收集若干数据用于：</p>
+
+<pre><code>检查运行进程的CPU资源限制  
+
+更新与本地CPU工作负载有关的统计数  
+
+计算平均系统负载  
+
+监管内核代码  
+</code></pre>
+
+<p>软定时器和延迟函数</p>
+
+<p>定时器是一种软件功能，即允许在将来的某个时期，函数在给定的时间间隔用完时被调用。超时（time-out）表示与定时器相关的时间间隔已经用完的那个时刻。</p>
+
+<p>Linux考虑两种类型的定时器，即动态定时器（dynamic timer）和间隔定时器（interval timer）。第一种类型由内核使用，而间隔定时器可以由进程在用户态创建。</p>
+
+<p>延迟函数</p>
+
+<p>当内核需要等待一个较短的时间间隔（比方说，不超过几毫秒）时，就不需要使用软定时器。</p>
+
+<p>开发驱动，需要较短的时间间隔，在以上情况下，内核使用udelay()和ndelay()函数：前者接收一个微妙级的时间间隔作为它的参数，并在指定的延迟结束后返回；后者与前者类似，但是指定的延迟参数是纳秒级的。</p>
+
+<p>本文章参考自《深入理解linux内核》。 <br/>
+本站文章如果没有特别说明，均为<strong>原创</strong>，转载请以<strong>链接</strong>方式注明本文地址：<a href="http://tinyxd.me/blog/2012/07/26/linux-timing-measurements/">http://tinyxd.me/blog/2012/07/26/linux-timing-measurements/</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[archlinux升级出现关于glibc的问题解决办法]]></title>
@@ -1893,69 +1959,6 @@ http://mirror.bit6.edu.cn (IPv6 only)
 http://mirror6.bjtu.edu.cn (IPv6 only)
 http://debian.bjtu.edu.cn (IPv4+IPv6)
 </code></pre>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[vc debug 变 release]]></title>
-    <link href="http://tinyxd.me/blog/2012/07/03/vc-debug-release/"/>
-    <updated>2012-07-03T12:23:00+08:00</updated>
-    <id>http://tinyxd.me/blog/2012/07/03/vc-debug-release</id>
-    <content type="html"><![CDATA[<p>今天遇到将debug改为release版本出现好多问题，最后一一解决，现将方法贴到下面 <br/>
-生成release版的步骤： <br/>
-1.首先修改<code>project-setting-general-using mfc in a static libraryproject-setting</code>右键点击菜单空白处——选择“组建”——选择“Win32 Release“——重新编译链接。 <br/>
-2.然后<code>project-setting -c++ -precompiled Headers- not using</code> <br/>
-最后出现这个错误</p>
-
-<pre><code>nafxcwd.lib(afxmem.obj) : error LNK2005: "void __cdecl operator delete(void *)" (??3@YAXPAX@Z) already defined in LIBCMTD.lib(dbgdel.obj)   
-</code></pre>
-
-<p>关于静态库引发 nafxcw.lib LNK2005 错误的解决方法</p>
-
-<!--more-->
-
-
-<p>解决方法，进入vc6 选择菜单：</p>
-
-<pre><code>project -&gt; settings -&gt; link -&gt; Category : input   -&gt; Object/library modeules ,
-</code></pre>
-
-<p>输入：nafxcw.lib 即可。 <br/>
-原因：必须先编译这个库，才能避免函数名字重复引用。</p>
-
-<br />
-
-
-<p>Note：记住rebuiled</p>
-
-<br />
-
-
-<p>附：debug版本和release版本的区别： <br/>
-Debug 通常称为调试版本，它包含调试信息，并且不作任何优化，便于程序员调试程序。Release 称为发布版本，它往往是进行了各种优化，使得程序在代码大小和运行速度上都是最优的，以便用户很好地使用。Debug 和 Release 的真正秘密，在于一组编译选项。下面列出了分别针对二者的选项</p>
-
-<br />
-
-
-<p>Debug 版本：</p>
-
-<blockquote><p>/MDd /MLd 或 /MTd 使用 Debug runtime library(调试版本的运行时刻函数库)<br/>/Od 关闭优化开关<br/>/D &#8220;_DEBUG&#8221; 相当于 #define _DEBUG,打开编译调试代码开关(主要针对assert函数)<br/>/ZI 创建 Edit and continue(编辑继续)数据库，这样在调试过程中如果修改了源代码不需重新编译<br/>/GZ 可以帮助捕获内存错误<br/>/Gm 打开最小化重链接开关，减少链接时间</p></blockquote>
-
-
-<br />
-
-
-<p>Release 版本：</p>
-
-<blockquote><p>/MD /ML 或 /MT 使用发布版本的运行时刻函数库<br/>/O1 或 /O2 优化开关，使程序最小或最快<br/>/D &#8220;NDEBUG&#8221; 关闭条件编译调试代码开关(即不编译assert函数)<br/>/GF 合并重复的字符串，并将字符串常量放到只读内存，防止 被修改</p></blockquote>
-
-
-<p></p>
-
-<br />
-
-
-<p> 实际上，Debug 和 Release 并没有本质的界限，他们只是一组编译选项的集合，编译器只是按照预定的选项行动。事实上，我们甚至可以修改这些选项，从而得到优化过的调试版本或是带跟踪语句的发布版本。</p>
 ]]></content>
   </entry>
   

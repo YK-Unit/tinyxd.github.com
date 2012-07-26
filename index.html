@@ -105,6 +105,59 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2012/07/26/linux-timing-measurements/">Linux系统定时测量</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-07-26T12:48:00+08:00" pubdate data-updated="true">Jul 26<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/07/26/linux-timing-measurements/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Linux内核必须完成的两种主要定时测量：</p>
+
+<p>保存当前的时间和日期，以便通过time()、ftime()、gettimeofday()系统调用把它们返回给用户程序，也可以由内核本身把当前时间作为文件和网络包的时间戳。</p>
+
+<p>维持定时器，这种机制能够告诉内核或用户程序某一时间间隔已经过去了。</p>
+
+<p>一般会遇到的几种时钟和定时器电路：实时时钟（Real Time Clock RTC）、时间戳计数器（Time Stamp Counter TSC）、可编程间隔定时器（Programmable Interval Timer PIT）、CPU本地定时器（APIC中）、高精度事件定时器（HPET）、ACPI电源管理定时器。</p>
+
+<p>Linux的计时体系结构是一组与时间流相关的内核数据结构和函数。实际上，基于80x86多处理器机器所具有的计时体系结构与单处理器机器所具有的稍有不同：</p>
+
+<p>在三处理器系统上，所有的计时活动都是由全局定时器（可以是可编程间隔定时器也可以是高精度事件定时器）产生的中断触发的。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2012/07/26/linux-timing-measurements/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2012/07/25/archlinux-update-about-glibc/">Archlinux升级出现关于glibc的问题解决办法</a></h1>
     
     
@@ -671,68 +724,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/07/09/add-douban-aside/">给octopress博客添加豆瓣侧边栏</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-07-09T22:38:00+08:00" pubdate data-updated="true">Jul 9<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/07/09/add-douban-aside/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>1.添加<code>source/_includes/custom/asides/douban.html</code></p>
-
-<div><script src='https://gist.github.com/3076932.js?file=douban.html'></script>
-<noscript><pre><code>{% if site.douban_user %}
-&lt;section&gt;
-&lt;h2&gt;Reading List&lt;/h2&gt;
-&lt;div&gt;
-&lt;script type=&quot;text/javascript&quot; src=&quot;http://www.douban.com/service/badge/tinyxd/?show=dolist&amp;amp;select=random&amp;amp;n=6&amp;amp;columns=3&amp;amp;hidelogo=yes&amp;amp;hideself=yes&quot; &gt;&lt;/script&gt;
-&lt;/div&gt;
-&lt;/section&gt;
-{% endif %}</code></pre></noscript></div>
-
-
-<p>其中<code>&lt;div&gt; &lt;/div&gt;</code>中间的代码从<a href="http://www.douban.com/service/badgemakerjs">这里</a>获取，记得改成自己的哦！ <br/>
-2.在<code>_config.yml</code>中添加：     <br/>
-douban_user: XXX<br/>
-(XXX为你的豆瓣用户名) <br/>
-3.记得把这里（default_asides: ）加上douban.html的位置
-然后，<code>rake generate</code> 和<code>rake preview</code>看看效果吧  <br/>
-类似微薄侧边浪也是这么弄的。</p>
-
-<br />
-
-
-<p>本站文章如果没有特别说明，均为<strong>原创</strong>，转载请以<strong>链接</strong>方式注明本文地址：<a href="http://tinyxd.me/blog/2012/07/09/add-douban-aside/">http://tinyxd.me/blog/2012/07/09/add-douban-aside/</a></p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -756,6 +747,10 @@ douban_user: XXX<br/>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2012/07/26/linux-timing-measurements/">linux系统定时测量</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2012/07/25/archlinux-update-about-glibc/">archlinux升级出现关于glibc的问题解决办法</a>
       </li>
     
@@ -771,24 +766,20 @@ douban_user: XXX<br/>
         <a href="/blog/2012/07/14/archlinux-time-config/">archlinux下的时间时区设置</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2012/07/13/debian-setup/">debian硬盘安装笔记</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Category Cloud</h1>
-    <span id="tag-cloud"><a href='/blog/categories/davinci' style='font-size: 104.0%'>Davinci(1)</a> <a href='/blog/categories/embedded' style='font-size: 108.0%'>Embedded(2)</a> <a href='/blog/categories/essay' style='font-size: 108.0%'>Essay(2)</a> <a href='/blog/categories/git' style='font-size: 104.0%'>Git(1)</a> <a href='/blog/categories/it' style='font-size: 108.0%'>It(2)</a> <a href='/blog/categories/java' style='font-size: 104.0%'>Java(1)</a> <a href='/blog/categories/linux' style='font-size: 160.0%'>Linux(15)</a> <a href='/blog/categories/octopress' style='font-size: 132.0%'>Octopress(8)</a> <a href='/blog/categories/php' style='font-size: 104.0%'>Php(1)</a> <a href='/blog/categories/python' style='font-size: 104.0%'>Python(1)</a> <a href='/blog/categories/ruby' style='font-size: 112.0%'>Ruby(3)</a> <a href='/blog/categories/software' style='font-size: 140.0%'>Software(10)</a> </span>
+    <span id="tag-cloud"><a href='/blog/categories/davinci' style='font-size: 103.75%'>Davinci(1)</a> <a href='/blog/categories/embedded' style='font-size: 107.5%'>Embedded(2)</a> <a href='/blog/categories/essay' style='font-size: 107.5%'>Essay(2)</a> <a href='/blog/categories/git' style='font-size: 103.75%'>Git(1)</a> <a href='/blog/categories/it' style='font-size: 107.5%'>It(2)</a> <a href='/blog/categories/java' style='font-size: 103.75%'>Java(1)</a> <a href='/blog/categories/linux' style='font-size: 160.0%'>Linux(16)</a> <a href='/blog/categories/octopress' style='font-size: 130.0%'>Octopress(8)</a> <a href='/blog/categories/php' style='font-size: 103.75%'>Php(1)</a> <a href='/blog/categories/python' style='font-size: 103.75%'>Python(1)</a> <a href='/blog/categories/ruby' style='font-size: 111.25%'>Ruby(3)</a> <a href='/blog/categories/software' style='font-size: 137.5%'>Software(10)</a> </span>
 </section>
 <section>
   <h1>Blogroll</h1>
   <ul>
     <li>
-    <a href="http://tinyxd.me" target="_blank"> 西电小新 </a>
+    <a href="http://tinyxd.me/" target="_blank"> 西电小新 </a>
     </li>
     <li>
-    <a href="http://www.lan-gui.com" target="_blank"> 小C驻留地 </a>
+    <a href="http://www.lan-gui.com/" target="_blank"> 小C驻留地 </a>
     </li>
     <li>
      <a href="http://likun.me/" target="_blank"> 独翼天使|互联网产品经理</a> 
@@ -797,7 +788,10 @@ douban_user: XXX<br/>
      <a href="http://www.medialu.com/" target="_blank"> 传媒路</a> 
     </li>
     <li>
-     <a href="http://www.dkjiaoyang.com" target="_blank"> 易冷天涯</a> 
+     <a href="http://www.dkjiaoyang.com/" target="_blank"> 易冷天涯</a> 
+    </li>
+    <li>
+     <a href="http://www.j927.net/" target="_blank"> 正北偏南J927</a> 
     </li>
   </ul>
 </section>
