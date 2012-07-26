@@ -105,6 +105,55 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2012/05/31/cache--zhi-xing-wen-ti-zong-jie/">Cache一致性问题总结</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-05-31T20:59:00+08:00" pubdate data-updated="true">May 31<span>st</span>, 2012</time>
+        
+         | <a href="/blog/2012/05/31/cache--zhi-xing-wen-ti-zong-jie/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>1.现代并行机中，为了提高处理器的速度，处理器往往带有Cache。</h2>
+
+<p>一个数据在整个系统内可能有多份拷贝，这就引发了Cache一致性问题。
+例如下图中的2个处理器和共享内存构成的系统。初始时刻，处理机P1和P2都将变量X从共享内存装入了私有Cache。
+这时，两个Cache中和共享内存中的变量X的值是一样的。在程序运行的某一时刻，处理机P1把X的值修改为X&#8217;，并更新了私有Cache中 的值。
+此时无论P1采用写直达（write-through），还是写回（write-back）策略，都不会修改P2私有Cache中X的值。这时如果P2需要读取X，则它得到的是过时的值。 <br/>
+<img src="/images/cache.gif"></p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2012/05/31/cache--zhi-xing-wen-ti-zong-jie/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2012/05/27/arch-linuxxia-java-sdkde-an-zhuang-yu-pei-zhi/">Arch Linux下java SDK的安装与配置</a></h1>
     
     
@@ -634,6 +683,10 @@ rvm:x:1004:admin
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2012/07/26/linux-process-scheduling/">linux进程调度</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2012/07/26/linux-timing-measurements/">linux系统定时测量</a>
       </li>
     
@@ -649,15 +702,11 @@ rvm:x:1004:admin
         <a href="/blog/2012/07/16/archlinux-wireless-network-connection/">archlinux 无线网络连接</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2012/07/14/archlinux-time-config/">archlinux下的时间时区设置</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Category Cloud</h1>
-    <span id="tag-cloud"><a href='/blog/categories/davinci' style='font-size: 103.75%'>Davinci(1)</a> <a href='/blog/categories/embedded' style='font-size: 107.5%'>Embedded(2)</a> <a href='/blog/categories/essay' style='font-size: 107.5%'>Essay(2)</a> <a href='/blog/categories/git' style='font-size: 103.75%'>Git(1)</a> <a href='/blog/categories/it' style='font-size: 107.5%'>It(2)</a> <a href='/blog/categories/java' style='font-size: 103.75%'>Java(1)</a> <a href='/blog/categories/linux' style='font-size: 160.0%'>Linux(16)</a> <a href='/blog/categories/octopress' style='font-size: 130.0%'>Octopress(8)</a> <a href='/blog/categories/php' style='font-size: 103.75%'>Php(1)</a> <a href='/blog/categories/python' style='font-size: 103.75%'>Python(1)</a> <a href='/blog/categories/ruby' style='font-size: 111.25%'>Ruby(3)</a> <a href='/blog/categories/software' style='font-size: 137.5%'>Software(10)</a> </span>
+    <span id="tag-cloud"><a href='/blog/categories/davinci' style='font-size: 103.52941176470588%'>Davinci(1)</a> <a href='/blog/categories/embedded' style='font-size: 107.05882352941177%'>Embedded(2)</a> <a href='/blog/categories/essay' style='font-size: 107.05882352941177%'>Essay(2)</a> <a href='/blog/categories/git' style='font-size: 103.52941176470588%'>Git(1)</a> <a href='/blog/categories/it' style='font-size: 107.05882352941177%'>It(2)</a> <a href='/blog/categories/java' style='font-size: 103.52941176470588%'>Java(1)</a> <a href='/blog/categories/linux' style='font-size: 160.0%'>Linux(17)</a> <a href='/blog/categories/octopress' style='font-size: 128.23529411764707%'>Octopress(8)</a> <a href='/blog/categories/php' style='font-size: 103.52941176470588%'>Php(1)</a> <a href='/blog/categories/python' style='font-size: 103.52941176470588%'>Python(1)</a> <a href='/blog/categories/ruby' style='font-size: 110.58823529411765%'>Ruby(3)</a> <a href='/blog/categories/software' style='font-size: 135.29411764705884%'>Software(10)</a> </span>
 </section>
 <section>
   <h1>Blogroll</h1>
