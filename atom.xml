@@ -4,7 +4,7 @@
   <title><![CDATA[Keen on Art of Tech]]></title>
   <link href="http://tinyxd.me/atom.xml" rel="self"/>
   <link href="http://tinyxd.me/"/>
-  <updated>2012-07-29T12:00:39+08:00</updated>
+  <updated>2012-07-29T23:41:10+08:00</updated>
   <id>http://tinyxd.me/</id>
   <author>
     <name><![CDATA[Tiny]]></name>
@@ -12,6 +12,61 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[linux内存管理（上）]]></title>
+    <link href="http://tinyxd.me/blog/2012/07/29/linux-memory-management-1/"/>
+    <updated>2012-07-29T23:33:00+08:00</updated>
+    <id>http://tinyxd.me/blog/2012/07/29/linux-memory-management-1</id>
+    <content type="html"><![CDATA[<p><strong><em>摘要</em></strong>：内核如何给自己分配动态内存呢？</p>
+
+<p>“页框管理”和“内存区管理”是对连续物理内存区处理的两种不同技术。</p>
+
+<p>“非连续内存区管理”是处理非连续内存区的第三种技术。</p>
+
+<h2>页框管理  </h2>
+
+<p>intel的Pentium处理器可以采用两种不同的页框大小：4KB和4MB。Linux采用4KB页框大小作为标准的内存分配单元。物理页在系统中由页框结构struct paga描述，系统中所有的页框存储在数组mem_map[]中，可以通过该数组找到系统中的每一页（空闲或非空闲）。</p>
+
+<!--more-->
+
+
+<h2>内存管理区  </h2>
+
+<p>Linux2.6把每个内存节点的物理内存划分为3个管理区（zone）。在80X86UMA体系结构中的管理区为：</p>
+
+<p>ZONE_DMA：包含低于16MB的内存页框</p>
+
+<p>ZONE_NORMAL：包含高于16MB且低于896MB的内存页框</p>
+
+<p>ZONE_HIGHMEM：包含从896MB开始高于896MB的内存页框（并不映射在内核线性地址空间的第4个GB）</p>
+
+<p>注意：ZONE_DMA和ZONE_NORMAL区包含内存的“常规”页框，通过把它们线性映射到线性地址空间的第4个GB，内核就可以直接进行访问。相反，ZONE_HIGHMEM区包含的内存页不能由内核直接访问，尽管它们也线性地映射到了线性地址空间的第4个GB。在64位体系结构上ZONE_HIGHMEM区总是空的。</p>
+
+<p>Linux内核管理物理内存是通过分页机制实现的，它将整个内存划分成无数4k(在i386体系结构中)大小页，从而分配和回收内存的基本单位便是内存页了。利用分页管理有助于灵活分配内存地址，因为分配时不必要求必须有大块的连续内存，系统可以东一页、西一页的凑出所需要的内存供进程使用。虽然如此，但是实际上系统使用内存还是倾向于分配连续的内存块，因为分配连续内存时，页表不需要更改，因此能降低TLB的刷新率（频繁刷新会很大增加访问速度）。</p>
+
+<p>鉴于上述需求，内核分配物理页为了尽量减少不连续情况，采用了“伙伴”关系来管理空闲页框。伙伴关系分配算法大家不应陌生——几乎所有操作系统书都会提到,我们不去详细说它了，如果不明白可以参看有关资料。这里只需要大家明白Linux中空闲页面的组织和管理利用了伙伴关系，因此空闲页面分配时也需要遵循伙伴关系，最小单位只能是2的幂倍页面大小。内核中分配空闲页框的基本函数是get_free_page/get_free_pages，它们或是分配单页或是分配指定的页框（2、4、8…512页）。</p>
+
+<p>注意：get_free_page是在内核中分配内存，不同于malloc在用户空间中分配，malloc利用堆动态分配，实际上是调用brk()系统调用，该调用的作用是扩大或缩小进程堆空间（它会修改进程的brk域）。如果现有的内存区域不够容纳堆空间，则会以页面大小的倍数位单位，扩张或收缩对应的内存区域，但brk值并非以页面大小为倍数修改，而是按实际请求修改。因此Malloc在用户空间分配内存可以以字节为单位分配,但内核在内部仍然会是以页为单位分配的。</p>
+
+<h2>高端内存页框的内核映射  </h2>
+
+<p>内核可以采用三种不同的机制将页框映射到高端内存；分别叫做永久内核映射、临时内核映射及非连续内存分配。</p>
+
+<p>永久内核映射可能阻塞当前进程，不能用于中断处理程序和可延迟函数。</p>
+
+<p>临时内核映射比永久内核映射的实现要简单，可以用在中断处理程序和可延迟函数的内部，因为它们从不阻塞当前进程。</p>
+
+<h2>伙伴系统算法（buddy systerm）  </h2>
+
+<p>内核要分配一组连续的页框，必须建立一种健壮、高效的分配策略。为此，必须解决著名的外部碎片（external fragmentation）问题。频繁地请求和释放不同大小的一组连续页框，必然导致在已分配页框的块内分散了许多小块的空闲页框。由此带来的问题是，即使有足够的空闲页框可以满足请求，但要分配一个大块的连续页框就可能无法满足。</p>
+
+<p>Linux 采用伙伴系统（buddy system）算法来解决外碎片问题。把所有的空闲页框分组为11个块链表，每个块链表分别包含大小为1, 2, 4, 8, 16, 32, 64, 128, 256，512和1024 个连续的页框。对1024 个页框的最大请求对应着4MB 大小的连续RAM块。每个块的第一个页框的物理地址是该块大小的整数倍。例如，大小为16 个页框的块，其起始地址是16 × 212（212 ＝ 4096，这是一个常规页的大小）的倍数。</p>
+
+<p>本文章参考自《深入理解linux内核》及 <a href="http://www.cnblogs.com/hoys/archive/2011/09/08/2171606.html">Linux内存管理(上)</a> 。 <br/>
+本站文章如果没有特别说明，均为<strong>原创</strong>，转载请以<strong>链接</strong>方式注明本文地址：<a href="http://tinyxd.me/blog/2012/07/29/linux-memory-management-1/">http://tinyxd.me/blog/2012/07/29/linux-memory-management-1/</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[linux进程调度]]></title>
@@ -1959,71 +2014,6 @@ server address: www.ruby-lang.org
 
 
 <p>本站文章如果没有特别说明，均为<strong>原创</strong>，转载请以<strong>链接</strong>方式注明本文地址：<code>http://tinyxd.me/blog/2012/07/06/ruby-learning/</code></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[linux sleep 的用法]]></title>
-    <link href="http://tinyxd.me/blog/2012/07/06/linux-sleep-usage/"/>
-    <updated>2012-07-06T12:40:00+08:00</updated>
-    <id>http://tinyxd.me/blog/2012/07/06/linux-sleep-usage</id>
-    <content type="html"><![CDATA[<p><strong>应用程序</strong>：</p>
-
-<pre><code>#include &lt;syswait.h&gt;
-usleep(n) //n微秒
-Sleep（n）//n毫秒
-sleep（n）//n秒
-</code></pre>
-
-<!--more-->
-
-
-<p><strong>驱动程序</strong>：</p>
-
-<pre><code>#include &lt;linux/delay.h&gt;
-mdelay(n) //milliseconds 其实现
-</code></pre>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>#ifdef notdef
-</span><span class='line'>#define mdelay(n) (\
-</span><span class='line'>{unsigned long msec=(n); while (msec--) udelay(1000);})
-</span><span class='line'>#else
-</span><span class='line'>#define mdelay(n) (\
-</span><span class='line'>(__builtin_constant_p(n) && (n)&lt;=MAX_UDELAY_MS) ? udelay((n)*1000) : \
-</span><span class='line'>({unsigned long msec=(n); while (msec--) udelay(1000);}))
-</span><span class='line'>#endif</span></code></pre></td></tr></table></div></figure>
-
-
-<p>调用asm/delay.h的udelay,udelay应该是纳秒级的延时</p>
-
-<p>dos:</p>
-
-<pre><code>sleep(1); //停留1秒 
-delay(100); //停留100毫秒   
-</code></pre>
-
-<p>Windows:</p>
-
-<pre><code>Sleep(100); //停留100毫秒 
-</code></pre>
-
-<p>Linux:</p>
-
-<pre><code>sleep(1); //停留1秒 
-usleep(1000); //停留1毫秒 
-</code></pre>
-
-<p>每一个平台不太一样,最好自己定义一套跨平台的宏进行控制   <br/>
-附：Linux下（使用的gcc的库），sleep()函数是以秒为单位的，sleep(1);就是休眠1秒。而MFC下的sleep()函数是以微秒为单位的，sleep(1000);才是休眠1秒。而如果在Linux下也用微妙为单位休眠，可以使用线程休眠函数:void usleep(unsigned long usec);当然，使用的时候别忘记#include &lt;system.h>哦。另外，linux下还有个delay()函数，原型为extern void delay(unsigned int msec);它可以延时msec*4毫秒，也就是如果想延时一秒钟的话，可以这么用 delay(250)。 <br/>
-转载请注明出处：<a href="http://tinyxd.me/blog/2012/07/06/linux-sleep-usage/">http://tinyxd.me/blog/2012/07/06/linux-sleep-usage/</a></p>
 ]]></content>
   </entry>
   

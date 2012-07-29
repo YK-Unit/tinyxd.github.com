@@ -5,12 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>archlinux升级出现关于glibc的问题解决办法 - Keen on Art of Tech</title>
+  <title>linux内存管理（上） - Keen on Art of Tech</title>
 <meta name="author" content="Tiny">
 
 
-<meta name="description" content="由于archlinux目录更新，glibc更新，升级archlinux出现错误。本文讲述了此次升级出现问题的解决方法。">
-<meta name="keywords" content="archlinux,update,glibc">
+<meta name="description" content="linux内存管理上介绍了页框管理，及其重要的伙伴算法。">
+<meta name="keywords" content="linux,kernel,内核,内存管理">
 
   <!-- http://t.co/dKP3o1e -->
   <meta name="HandheldFriendly" content="True">
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://tinyxd.me/blog/2012/07/25/archlinux-update-about-glibc">
+  <link rel="canonical" href="http://tinyxd.me/blog/2012/07/29/linux-memory-management-1">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -90,7 +90,7 @@
   
   <header>
     
-      <h1 class="entry-title">Archlinux升级出现关于glibc的问题解决办法</h1>
+      <h1 class="entry-title">Linux内存管理（上）</h1>
     
     
       <p class="meta">
@@ -106,7 +106,7 @@
   
 
 
-<time datetime="2012-07-25T18:44:00+08:00" pubdate data-updated="true">Jul 25<span>th</span>, 2012</time>
+<time datetime="2012-07-29T23:33:00+08:00" pubdate data-updated="true">Jul 29<span>th</span>, 2012</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -115,77 +115,53 @@
   </header>
 
 
-<div class="entry-content"><p>好久没更新archlinux，今天更新，发现由于archlinux系统根目录结构的改变，导致好多人遇到问题，不错，笔者必然也遇到了。由于有前人的探索，再加上查阅archlinux官网论坛，得以顺利解决问题。
-运行<code>pacman -Syu</code>时会出现</p>
+<div class="entry-content"><p><strong><em>摘要</em></strong>：内核如何给自己分配动态内存呢？</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>error: failed to commit transaction (conflicting files)
-</span><span class='line'>glibc: /lib exists in filesystem
-</span><span class='line'>Errors occurred, no packages were upgraded.</span></code></pre></td></tr></table></div></figure>
+<p>“页框管理”和“内存区管理”是对连续物理内存区处理的两种不同技术。</p>
 
+<p>“非连续内存区管理”是处理非连续内存区的第三种技术。</p>
 
-<p> <br/>
-由于这次是glibc的升级，绝对不可以用<code>--force</code>，而之前是filesysterm的升级，必须用<code>--force</code>。 <br/>
-那么接下来该怎么办呢？ <br/>
-查阅了archlinux论坛地址：<a href="https://bbs.archlinux.org/viewforum.php?id=44">https://bbs.archlinux.org/viewforum.php?id=44</a>，并参考了<a href="http://www.j927.net/arch/archlinux%E5%8D%87%E7%BA%A7%E5%A4%B1%E8%B4%A5%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E8%AE%B0%E5%BD%95.html">这篇文章</a>。    <br/>
-发现这个<a href="https://bbs.archlinux.org/viewtopic.php?id=145186">帖子</a>，其中提到这两篇文章：<a href="http://allanmcrae.com/2012/07/updating-arch-linux-from-a-core-install/">updating-arch-linux-from-a-core-install</a> 和<a href="https://wiki.archlinux.org/index.php/DeveloperWiki:usrlib">DeveloperWiki:usrlib</a>，总结以下命令：</p>
+<h2>页框管理  </h2>
+
+<p>intel的Pentium处理器可以采用两种不同的页框大小：4KB和4MB。Linux采用4KB页框大小作为标准的内存分配单元。物理页在系统中由页框结构struct paga描述，系统中所有的页框存储在数组mem_map[]中，可以通过该数组找到系统中的每一页（空闲或非空闲）。</p>
 
 <!--more-->
 
 
-<p></p>
+<h2>内存管理区  </h2>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>shell &gt; pacman -Sy
-</span><span class='line'>shell &gt; rm -rf /var/run /var/lock && pacman -Sf filesystem
-</span><span class='line'>shell &gt; pacman -S tzdata
-</span><span class='line'>shell &gt; pacman -U http://pkgbuild.com/~allan/glibc-2.16.0-1-i686.pkg.tar.xz #32位的用这个包(和下面的一条命令二选一)
-</span><span class='line'>shell &gt; pacman -U http://pkgbuild.com/~allan/glibc-2.16.0-1-x86_64.pkg.tar.xz #64位的用这个包 具体的包名称可以打开http://pkgbuild.com/~allan/看一下
-</span><span class='line'>shell &gt; rm /etc/profile.d/locale.sh
-</span><span class='line'>shell &gt; pacman -Su --ignore glibc #因为pacman也升级了，新版本开启了软件包签名验证，故还需要运行下面2条命令
-</span><span class='line'>shell &gt; pacman-key --init #该命令运行后不要什么都不做，随机敲键盘或者切换到其它终端(Alt+F2)运行些命令或做些其它操作
-</span><span class='line'>shell &gt; pacman-key --populate archlinux
-</span><span class='line'>shell &gt; pacman -Su #再更新被忽略的glibc</span></code></pre></td></tr></table></div></figure>
+<p>Linux2.6把每个内存节点的物理内存划分为3个管理区（zone）。在80X86UMA体系结构中的管理区为：</p>
 
+<p>ZONE_DMA：包含低于16MB的内存页框</p>
 
-<p>执行完上述命令后，系统顺利更新好了，但是依然出现下述问题：</p>
+<p>ZONE_NORMAL：包含高于16MB且低于896MB的内存页框</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>error: failed to commit transaction (conflicting files)
-</span><span class='line'>glibc: /lib exists in filesystem
-</span><span class='line'>Errors occurred, no packages were upgraded.</span></code></pre></td></tr></table></div></figure>
+<p>ZONE_HIGHMEM：包含从896MB开始高于896MB的内存页框（并不映射在内核线性地址空间的第4个GB）</p>
 
+<p>注意：ZONE_DMA和ZONE_NORMAL区包含内存的“常规”页框，通过把它们线性映射到线性地址空间的第4个GB，内核就可以直接进行访问。相反，ZONE_HIGHMEM区包含的内存页不能由内核直接访问，尽管它们也线性地映射到了线性地址空间的第4个GB。在64位体系结构上ZONE_HIGHMEM区总是空的。</p>
 
-<p> <br/>
-我就去论坛中寻找，果不其然也有类似于我的情况，原帖<a href="http://bbs.archbang.org/viewtopic.php?pid=16509">在此</a>。</p>
+<p>Linux内核管理物理内存是通过分页机制实现的，它将整个内存划分成无数4k(在i386体系结构中)大小页，从而分配和回收内存的基本单位便是内存页了。利用分页管理有助于灵活分配内存地址，因为分配时不必要求必须有大块的连续内存，系统可以东一页、西一页的凑出所需要的内存供进程使用。虽然如此，但是实际上系统使用内存还是倾向于分配连续的内存块，因为分配连续内存时，页表不需要更改，因此能降低TLB的刷新率（频繁刷新会很大增加访问速度）。</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>shell &gt; pacman -R broadcom-wl
-</span><span class='line'>shell &gt; pacman -Su
-</span><span class='line'>shell &gt; pacman -S broadcom-wl #如果需要的话，再次安装即可</span></code></pre></td></tr></table></div></figure>
+<p>鉴于上述需求，内核分配物理页为了尽量减少不连续情况，采用了“伙伴”关系来管理空闲页框。伙伴关系分配算法大家不应陌生——几乎所有操作系统书都会提到,我们不去详细说它了，如果不明白可以参看有关资料。这里只需要大家明白Linux中空闲页面的组织和管理利用了伙伴关系，因此空闲页面分配时也需要遵循伙伴关系，最小单位只能是2的幂倍页面大小。内核中分配空闲页框的基本函数是get_free_page/get_free_pages，它们或是分配单页或是分配指定的页框（2、4、8…512页）。</p>
 
+<p>注意：get_free_page是在内核中分配内存，不同于malloc在用户空间中分配，malloc利用堆动态分配，实际上是调用brk()系统调用，该调用的作用是扩大或缩小进程堆空间（它会修改进程的brk域）。如果现有的内存区域不够容纳堆空间，则会以页面大小的倍数位单位，扩张或收缩对应的内存区域，但brk值并非以页面大小为倍数修改，而是按实际请求修改。因此Malloc在用户空间分配内存可以以字节为单位分配,但内核在内部仍然会是以页为单位分配的。</p>
 
-<p>至此，升级结束。</p>
+<h2>高端内存页框的内核映射  </h2>
 
-<br />
+<p>内核可以采用三种不同的机制将页框映射到高端内存；分别叫做永久内核映射、临时内核映射及非连续内存分配。</p>
 
+<p>永久内核映射可能阻塞当前进程，不能用于中断处理程序和可延迟函数。</p>
 
-<p>本站文章如果没有特别说明，均为<strong>原创</strong>，转载请以<strong>链接</strong>方式注明本文地址：<a href="http://tinyxd.me/blog/2012/07/25/archlinux-update-about-glibc/">http://tinyxd.me/blog/2012/07/25/archlinux-update-about-glibc/</a></p>
+<p>临时内核映射比永久内核映射的实现要简单，可以用在中断处理程序和可延迟函数的内部，因为它们从不阻塞当前进程。</p>
+
+<h2>伙伴系统算法（buddy systerm）  </h2>
+
+<p>内核要分配一组连续的页框，必须建立一种健壮、高效的分配策略。为此，必须解决著名的外部碎片（external fragmentation）问题。频繁地请求和释放不同大小的一组连续页框，必然导致在已分配页框的块内分散了许多小块的空闲页框。由此带来的问题是，即使有足够的空闲页框可以满足请求，但要分配一个大块的连续页框就可能无法满足。</p>
+
+<p>Linux 采用伙伴系统（buddy system）算法来解决外碎片问题。把所有的空闲页框分组为11个块链表，每个块链表分别包含大小为1, 2, 4, 8, 16, 32, 64, 128, 256，512和1024 个连续的页框。对1024 个页框的最大请求对应着4MB 大小的连续RAM块。每个块的第一个页框的物理地址是该块大小的整数倍。例如，大小为16 个页框的块，其起始地址是16 × 212（212 ＝ 4096，这是一个常规页的大小）的倍数。</p>
+
+<p>本文章参考自《深入理解linux内核》及 <a href="http://www.cnblogs.com/hoys/archive/2011/09/08/2171606.html">Linux内存管理(上)</a> 。 <br/>
+本站文章如果没有特别说明，均为<strong>原创</strong>，转载请以<strong>链接</strong>方式注明本文地址：<a href="http://tinyxd.me/blog/2012/07/29/linux-memory-management-1/">http://tinyxd.me/blog/2012/07/29/linux-memory-management-1/</a></p>
 </div>
 
 
@@ -208,7 +184,7 @@
   
 
 
-<time datetime="2012-07-25T18:44:00+08:00" pubdate data-updated="true">Jul 25<span>th</span>, 2012</time>
+<time datetime="2012-07-29T23:33:00+08:00" pubdate data-updated="true">Jul 29<span>th</span>, 2012</time>
       
 
 <span class="categories">
@@ -222,7 +198,7 @@
 
 <span class="tags">
   
-     Tag: <a class='tag' href='/tags/archlinux/'>archlinux</a>, <a class='tag' href='/tags/linux/'>linux</a>
+     Tag: <a class='tag' href='/tags/kernel/'>kernel</a>, <a class='tag' href='/tags/linux/'>linux</a>, <a class='tag' href='/tags/内核/'>内核</a>
   
 </span>
 
@@ -245,10 +221,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2012/07/18/linux-kernel-synchronization/" title="Previous Post: linux内核同步">&laquo; linux内核同步</a>
+        <a class="basic-alignment left" href="/blog/2012/07/26/linux-process-scheduling/" title="Previous Post: linux进程调度">&laquo; linux进程调度</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2012/07/26/linux-timing-measurements/" title="Next Post: linux系统定时测量">linux系统定时测量 &raquo;</a>
       
     </p>
   </footer>
@@ -362,8 +336,8 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://tinyxd.me/blog/2012/07/25/archlinux-update-about-glibc/';
-        var disqus_url = 'http://tinyxd.me/blog/2012/07/25/archlinux-update-about-glibc/';
+        var disqus_identifier = 'http://tinyxd.me/blog/2012/07/29/linux-memory-management-1/';
+        var disqus_url = 'http://tinyxd.me/blog/2012/07/29/linux-memory-management-1/';
         var disqus_script = 'embed.js';
       
     (function () {

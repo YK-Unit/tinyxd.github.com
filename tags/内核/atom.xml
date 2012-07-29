@@ -4,7 +4,7 @@
   <title><![CDATA[Tag: 内核 | Keen on Art of Tech]]></title>
   <link href="http://tinyxd.me/tags/内核/atom.xml" rel="self"/>
   <link href="http://tinyxd.me/"/>
-  <updated>2012-07-29T12:00:39+08:00</updated>
+  <updated>2012-07-29T23:41:10+08:00</updated>
   <id>http://tinyxd.me/</id>
   <author>
     <name><![CDATA[Tiny]]></name>
@@ -12,6 +12,61 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[linux内存管理（上）]]></title>
+    <link href="http://tinyxd.me/blog/2012/07/29/linux-memory-management-1/"/>
+    <updated>2012-07-29T23:33:00+08:00</updated>
+    <id>http://tinyxd.me/blog/2012/07/29/linux-memory-management-1</id>
+    <content type="html"><![CDATA[<p><strong><em>摘要</em></strong>：内核如何给自己分配动态内存呢？</p>
+
+<p>“页框管理”和“内存区管理”是对连续物理内存区处理的两种不同技术。</p>
+
+<p>“非连续内存区管理”是处理非连续内存区的第三种技术。</p>
+
+<h2>页框管理  </h2>
+
+<p>intel的Pentium处理器可以采用两种不同的页框大小：4KB和4MB。Linux采用4KB页框大小作为标准的内存分配单元。物理页在系统中由页框结构struct paga描述，系统中所有的页框存储在数组mem_map[]中，可以通过该数组找到系统中的每一页（空闲或非空闲）。</p>
+
+<!--more-->
+
+
+<h2>内存管理区  </h2>
+
+<p>Linux2.6把每个内存节点的物理内存划分为3个管理区（zone）。在80X86UMA体系结构中的管理区为：</p>
+
+<p>ZONE_DMA：包含低于16MB的内存页框</p>
+
+<p>ZONE_NORMAL：包含高于16MB且低于896MB的内存页框</p>
+
+<p>ZONE_HIGHMEM：包含从896MB开始高于896MB的内存页框（并不映射在内核线性地址空间的第4个GB）</p>
+
+<p>注意：ZONE_DMA和ZONE_NORMAL区包含内存的“常规”页框，通过把它们线性映射到线性地址空间的第4个GB，内核就可以直接进行访问。相反，ZONE_HIGHMEM区包含的内存页不能由内核直接访问，尽管它们也线性地映射到了线性地址空间的第4个GB。在64位体系结构上ZONE_HIGHMEM区总是空的。</p>
+
+<p>Linux内核管理物理内存是通过分页机制实现的，它将整个内存划分成无数4k(在i386体系结构中)大小页，从而分配和回收内存的基本单位便是内存页了。利用分页管理有助于灵活分配内存地址，因为分配时不必要求必须有大块的连续内存，系统可以东一页、西一页的凑出所需要的内存供进程使用。虽然如此，但是实际上系统使用内存还是倾向于分配连续的内存块，因为分配连续内存时，页表不需要更改，因此能降低TLB的刷新率（频繁刷新会很大增加访问速度）。</p>
+
+<p>鉴于上述需求，内核分配物理页为了尽量减少不连续情况，采用了“伙伴”关系来管理空闲页框。伙伴关系分配算法大家不应陌生——几乎所有操作系统书都会提到,我们不去详细说它了，如果不明白可以参看有关资料。这里只需要大家明白Linux中空闲页面的组织和管理利用了伙伴关系，因此空闲页面分配时也需要遵循伙伴关系，最小单位只能是2的幂倍页面大小。内核中分配空闲页框的基本函数是get_free_page/get_free_pages，它们或是分配单页或是分配指定的页框（2、4、8…512页）。</p>
+
+<p>注意：get_free_page是在内核中分配内存，不同于malloc在用户空间中分配，malloc利用堆动态分配，实际上是调用brk()系统调用，该调用的作用是扩大或缩小进程堆空间（它会修改进程的brk域）。如果现有的内存区域不够容纳堆空间，则会以页面大小的倍数位单位，扩张或收缩对应的内存区域，但brk值并非以页面大小为倍数修改，而是按实际请求修改。因此Malloc在用户空间分配内存可以以字节为单位分配,但内核在内部仍然会是以页为单位分配的。</p>
+
+<h2>高端内存页框的内核映射  </h2>
+
+<p>内核可以采用三种不同的机制将页框映射到高端内存；分别叫做永久内核映射、临时内核映射及非连续内存分配。</p>
+
+<p>永久内核映射可能阻塞当前进程，不能用于中断处理程序和可延迟函数。</p>
+
+<p>临时内核映射比永久内核映射的实现要简单，可以用在中断处理程序和可延迟函数的内部，因为它们从不阻塞当前进程。</p>
+
+<h2>伙伴系统算法（buddy systerm）  </h2>
+
+<p>内核要分配一组连续的页框，必须建立一种健壮、高效的分配策略。为此，必须解决著名的外部碎片（external fragmentation）问题。频繁地请求和释放不同大小的一组连续页框，必然导致在已分配页框的块内分散了许多小块的空闲页框。由此带来的问题是，即使有足够的空闲页框可以满足请求，但要分配一个大块的连续页框就可能无法满足。</p>
+
+<p>Linux 采用伙伴系统（buddy system）算法来解决外碎片问题。把所有的空闲页框分组为11个块链表，每个块链表分别包含大小为1, 2, 4, 8, 16, 32, 64, 128, 256，512和1024 个连续的页框。对1024 个页框的最大请求对应着4MB 大小的连续RAM块。每个块的第一个页框的物理地址是该块大小的整数倍。例如，大小为16 个页框的块，其起始地址是16 × 212（212 ＝ 4096，这是一个常规页的大小）的倍数。</p>
+
+<p>本文章参考自《深入理解linux内核》及 <a href="http://www.cnblogs.com/hoys/archive/2011/09/08/2171606.html">Linux内存管理(上)</a> 。 <br/>
+本站文章如果没有特别说明，均为<strong>原创</strong>，转载请以<strong>链接</strong>方式注明本文地址：<a href="http://tinyxd.me/blog/2012/07/29/linux-memory-management-1/">http://tinyxd.me/blog/2012/07/29/linux-memory-management-1/</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[linux进程调度]]></title>
@@ -463,210 +518,6 @@ struct work_struct {</p>
 
 <p>本文章整理自网络和《深入理解linux内核》。  <br/>
 本站文章如果没有特别说明，均为<strong>原创</strong>，转载请以<strong>链接</strong>方式注明本文地址：<a href="http://tinyxd.me/blog/2012/07/11/linux-workqueue/">http://tinyxd.me/blog/2012/07/11/linux-workqueue/</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[软中断和tasklet]]></title>
-    <link href="http://tinyxd.me/blog/2012/07/11/soft-interrupt-and-tasklet/"/>
-    <updated>2012-07-11T22:57:00+08:00</updated>
-    <id>http://tinyxd.me/blog/2012/07/11/soft-interrupt-and-tasklet</id>
-    <content type="html"><![CDATA[<h2>软中断：</h2>
-
-<p>Linux中的软中断机制用于系统中对时间要求最严格以及最重要的中断下半部进行使用。在系统设计过程中，大家都清楚中断上下文不能处理太多的事情，需要快速的返回，否则很容易导致中断事件的丢失，所以这就产生了一个问题：中断发生之后的事务处理由谁来完成？在前后台程序中，由于只有中断上下文和一个任务上下文，所以中断上下文触发事件，设置标记位，任务上下文循环扫描标记位，执行相应的动作，也就是中断发生之后的事情由任务来完成了，只不过任务上下文采用扫描的方式，实时性不能得到保证。在Linux系统和Windows系统中，这个不断循环的任务就是本文所要讲述的软中断daemon。在Windows中处理耗时的中断事务称之为中断延迟处理，在Linux中称之为中断下半部，显然中断上半部处理清中断之类十分清闲的动作，然后在退出中断服务程序时触发中断下半部，完成具体的功能。</p>
-
-<p>在Linux中，中断下半部的实现基于软中断机制。所以理清楚软中断机制的原理，那么中断下半部的实现也就非常简单了。通过上述的描述，大家也应该清楚为什么要定义软中断机制了，一句话就是为了要处理对时间要求苛刻的任务，恰好中断下半部就有这样的需求，所以其实现采用了软中断机制。</p>
-
-<p>linux2.6中使用的软中断：</p>
-
-<p>``` c interrupt.h
-enum
-{</p>
-
-<pre><code>HI_SOFTIRQ=0, /*用于高优先级的tasklet(下标(优先级0))*/
-TIMER_SOFTIRQ, /*用于定时器的下半部(下标(优先级1))*/
-NET_TX_SOFTIRQ,/*用于网络层发包(下标(优先级2))*/
-NET_RX_SOFTIRQ, /*用于网络层收报(下标(优先级3))*/
-SCSI_SOFTIRQ, /*用于scsi设备(下标(优先级4))*/
-TASKLET_SOFTIRQ /*用于低优先级的tasklet(下标(优先级5))*/
-</code></pre>
-
-<p>};
-```</p>
-
-<!--more-->
-
-
-<p>一个软中断的下标决定了它的优先级；低下标意味着高优先级，因为软中断函数将从下标0开始执行。</p>
-
-<h2>tasklet:</h2>
-
-<p>Tasklet为一个软中断，考虑到优先级问题，分别占用了向量表中的0号和5号软中断。</p>
-
-<p>tasklet是IO驱动程序中实现可延迟函数的首选方法。其建立在两个叫HI_SOFTIRQ和TASKLET_SOFTIRQ的软中断之上。</p>
-
-<h2>软中断和tasklet</h2>
-
-<p>软中断和tasklet有密切的关系，tasklet是在软中断之上实现。事实上，出现在内核代码中的术语“软中断（softirq）” 常常表示可延迟函数的所有种类。另外一种被广泛使用的术语是“中断上下文”：表示内核当前正在执行一个中断处理程序或一个可延迟的函数。</p>
-
-<p>软中断的分配是静态的（即在编译时定义），而tasklet的分配和初始化可以在运行时进行（例如：安装一个内核模块时）。软中断（即便是同一种类型的软中断）可以并发地运行在多个CPU上。因此，软中断是可重入函数而且必须明确地使用自旋锁保护其数据结构。tasklet不必担心这些问题，因为内核对tasklet的执行进行了更加严格的控制。相同类型的tasklet总是被串行地执行，换句话说就是：不能在两个CPU上同时运行相同类型的tasklet。但是，类型不同的tasklet可以在几个CPU上并发执行。tasklet的串行化使tasklet函数不必是可重入的，因此简化了设备驱动程序开发者的工作。</p>
-
-<p>一般而言，可延迟函数上可以执行四种函数：初始化、激活、屏蔽和执行。</p>
-
-<h2>软中断的主要数据结构</h2>
-
-<p>软中断的主要数据结构是softirq_vec数组，该数组包含类型为softirq_action的32个元素。一个软中断的优先级是相应的softirq_action元素在数组内的下标，只有前六个被有效使用。</p>
-
-<p>/*表示softirq最多可以有32种类型，实际上linux只使用了六种，见文件interrupt.h*/</p>
-
-<p>static struct softirq_action softirq_vec[32] __cacheline_aligned_in_smp;</p>
-
-<p>softirq_action数据结构包括两个字段：指向软中断函数的一个action指针和指向软中断函数需要的通用数据结构的data指针。</p>
-
-<p>还有一个关键的字段是32位的preempt_cout字段，用它来跟踪内核抢占和内核控制路径的嵌套，该字段存放在每个进程描述符的thread_info字段中。</p>
-
-<p>对于softirq，linux kernel中是在中断处理程序执行的，具体的路径为：</p>
-
-<pre><code>do_IRQ() --&gt; irq_exit() --&gt; invoke_softirq() --&gt; do_softirq() --&gt; __do_softirq() 
-</code></pre>
-
-<p>在__do_softirq()中有这么一段代码：  <br/>
-``` c</p>
-
-<pre><code>    do { 
-
-            if (pending &amp; 1) { 
-
-                    h-&gt;action(h); 
-
-                    rcu_bh_qsctr_inc(cpu); 
-
-            } 
-
-            h++; 
-
-            pending &gt;&gt;= 1; 
-
-    } while (pending); 
-</code></pre>
-
-<p>```</p>
-
-<p>你看，这里就是对softirq进行处理了，因为pengding是一个__u32的类型，所以每一位都对应了一种softirq，正好是32种（linux kernel中实际上只使用了前6种 ）. h->action(h),就是运行softirq的处理函数。</p>
-
-<p>对于tasklet，前面已经说了，是一种特殊的softirq，具体就是第0和第5种softirq，所以说tasklet是基于softirq来实现的。</p>
-
-<p>tasklet既然对应第0和第5种softirq，那么就应该有对应的处理函数，以便h->action()会运行tasklet的处理函数。</p>
-
-<p>我们看代码：
-``` c softirq.c</p>
-
-<p>void __init softirq_init(void)</p>
-
-<p>{</p>
-
-<pre><code>    open_softirq(TASKLET_SOFTIRQ, tasklet_action, NULL); 
-
-    open_softirq(HI_SOFTIRQ, tasklet_hi_action, NULL); 
-</code></pre>
-
-<p>}
-```</p>
-
-<p>这里注册了两种tasklet所在的softirq的处理函数，分别对应高优先级的tasklet和低优先级的tasklet。</p>
-
-<p>我们看低优先级的吧（高优先级的也一样）。
-``` c tasklet_action
-static void tasklet_action(struct softirq_action *a)</p>
-
-<p>{</p>
-
-<pre><code>    struct tasklet_struct *list; 
-
-    local_irq_disable(); 
-
-    list = __get_cpu_var(tasklet_vec).list; 
-
-    __get_cpu_var(tasklet_vec).list = NULL; 
-
-    local_irq_enable(); 
-
-    while (list) { 
-
-            struct tasklet_struct *t = list; 
-
-            list = list-&gt;next; 
-
-            if (tasklet_trylock(t)) { 
-
-                    if (!atomic_read(&amp;t-&gt;count)) { 
-
-                            if (!test_and_clear_bit(TASKLET_STATE_SCHED, &amp;t-&gt;state)) 
-
-                                    BUG(); 
-
-                            t-&gt;func(t-&gt;data); 
-
-                            tasklet_unlock(t); 
-
-                            continue; 
-
-                    } 
-
-                    tasklet_unlock(t); 
-
-            } 
-
-            local_irq_disable(); 
-
-            t-&gt;next = __get_cpu_var(tasklet_vec).list; 
-
-            __get_cpu_var(tasklet_vec).list = t; 
-
-            __raise_softirq_irqoff(TASKLET_SOFTIRQ);   
-
-            local_irq_enable(); 
-
-    } 
-</code></pre>
-
-<p>}
-<code>
-你看，在运行softirq的处理时（__do_softirq），对于
-</code> c</p>
-
-<pre><code>    do { 
-
-            if (pending &amp; 1) { 
-
-                    h-&gt;action(h); 
-
-                    rcu_bh_qsctr_inc(cpu); 
-
-            } 
-
-            h++; 
-
-            pending &gt;&gt;= 1; 
-
-    } while (pending); 
-</code></pre>
-
-<p>```
-如果tasklet有任务需要处理，会运行到h->action()，这个函数指针就会指向tasklet_action()，然后在tasklet_action()里再去执行tasklet对应的各个任务，这些任务都是挂在一个全局链表里面的，具体的代码这里就不分析了。</p>
-
-<p>另外， softirq在smp中是可能被同时运行的，所以softirq的处理函数必须被编写成可重入的函数。</p>
-
-<p>但tasklet是不会在多个cpu之中同时运行的，所以tasklet的处理函数可以编写成不可重入的函数，这样就减轻了编程人员的负担。</p>
-
-<h2>ksoftirqd内核线程</h2>
-
-<p>在最近的内核版本中，每个CPU都有自己的ksoftirqd/n内核线程（这里，n为CPU的逻辑号）。每个ksoftirqd/n内核线程都运行ksoftirqd()函数。在预期的时间内处理挂起的软中断。</p>
-
-<br />
-
-
-<p>本站文章如果没有特别说明，均为<strong>原创</strong>，转载请以<strong>链接</strong>方式注明本文地址：<a href="http://tinyxd.me/blog/2012/07/11/soft-interrupt-and-tasklet/">http://tinyxd.me/blog/2012/07/11/soft-interrupt-and-tasklet/</a></p>
 ]]></content>
   </entry>
   
