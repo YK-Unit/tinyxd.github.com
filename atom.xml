@@ -4,7 +4,7 @@
   <title><![CDATA[Keen on Art of Tech]]></title>
   <link href="http://tinyxd.me/atom.xml" rel="self"/>
   <link href="http://tinyxd.me/"/>
-  <updated>2012-07-30T18:48:31+08:00</updated>
+  <updated>2012-08-01T00:30:58+08:00</updated>
   <id>http://tinyxd.me/</id>
   <author>
     <name><![CDATA[Tiny]]></name>
@@ -12,6 +12,474 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[awk 学习]]></title>
+    <link href="http://tinyxd.me/blog/2012/08/01/awk-study/"/>
+    <updated>2012-08-01T00:15:00+08:00</updated>
+    <id>http://tinyxd.me/blog/2012/08/01/awk-study</id>
+    <content type="html"><![CDATA[<p>AWK是一种优良的文本处理工具。它不仅是 Linux 中也是任何环境中现有的功能最强大的数据处理引擎之一。这种编程及数据操作语言（其名称得自于它的创始人 Alfred Aho 、Peter Weinberger 和 Brian Kernighan 姓氏的首个字母）的最大功能取决于一个人所拥有的知识。AWK 提供了极其强大的功能：可以进行样式装入、流控制、数学运算符、进程控制语句甚至于内置的变量和函数。它具备了一个完整的语言所应具有的几乎所有精美特性。</p>
+
+<h2>一、awk调用方式 </h2>
+
+<p>1、awk [-F field-separator] &#8216;commands&#8217; input-file(s)</p>
+
+<p>commands 是真正的awk命令</p>
+
+<p>-F 为域分隔符</p>
+
+<!--more-->
+
+
+<p>2、第二种方法是将所有a w k命令插入一个文件，并使a w k程序可执行，然后用a w k命令解释</p>
+
+<p>器作为脚本的首行，以便通过键入脚本名称来调用它。</p>
+
+<p>3、第三种方式是将所有的a w k命令插入一个单独文件，然后调用：</p>
+
+<p>awk -f awk-script-file input-files(s)</p>
+
+<p><code>-f</code>选项指明在文件awkscriptfile中的awk脚本， inputfile(s)是使用awk进行浏览的文件</p>
+
+<p>名。</p>
+
+<h2>二、awk脚本 </h2>
+
+<p>1、awk由模式和动作组成，模式部分决定动作语句何时触发及触发事件</p>
+
+<p>模式可以是任何条件语句或复合语句或正则表达式。 模式包括两个特殊字段BEGIN和END</p>
+
+<p>如：</p>
+
+<p>awk &#8216;BEGIN{print &#8220;Name\n&#8212;&#8211;&#8221;}{print $1}END{&#8220;end-of-report&#8221;}&#8217;</p>
+
+<p>2、域和记录</p>
+
+<p>awk执行时，其浏览域标记为$1、$2&#8230;$n</p>
+
+<p>$0指所有域</p>
+
+<p>保存awk输出</p>
+
+<p>(1)、awk &#8216;{print $0}&#8217; grade.txt >wow 即内容重定向</p>
+
+<p>(2)、使用tee命令 awk &#8216;{print $0}&#8217; grade.txt | tee wow 既显示有写入文件</p>
+
+<p>3、元字符</p>
+
+<p>\ ^ $ . [] | () * + ?</p>
+
+<p>其中：</p>
+
+<p><code>+</code>使用+匹配一个或多个字符</p>
+
+<p>？ 匹配模式出现频率。例如使用/XY?Z/匹配XYZ或YZ</p>
+
+<p>4、条件操作符</p>
+
+<p>&lt; 小于</p>
+
+<p><code>&gt;= 大于等于</code></p>
+
+<p>&lt;= 小于等于</p>
+
+<p>~ 匹配正则表达式</p>
+
+<p>== 等于</p>
+
+<p>!~ 不匹配正则表达式</p>
+
+<p>!= 不等于</p>
+
+<p>(1)、awk &#8216;{if($4~/Brown/) print $0}&#8217; grade.txt</p>
+
+<p>其中if后面的条件用()括起来</p>
+
+<p>(2)、设置大小写 awk &#8216;/[Gg]reen/&#8217; grade.txt</p>
+
+<p>(3)、任意字符<code>awk '$1~/^...a/' grade.txt</code></p>
+
+<p>(4)、或关系匹配 awk &#8216;$0~/(Yellow)|(Brown)/&#8217; grade.txt</p>
+
+<p>各表达式互相结合起来的表达式：</p>
+
+<p>&amp;&amp; AND : 语句两边必须同时匹配为真。</p>
+
+<p>|| OR：语句两边同时或其中一边匹配为真。</p>
+
+<p>! 非求逆</p>
+
+<p>5、内置变量</p>
+
+<p>ARGC 命令行参数个数</p>
+
+<p>ARGV 命令行参数排列</p>
+
+<p>ENVIRON 支持队列中系统环境变量的使用</p>
+
+<p>FILENAME awk浏览的文件名</p>
+
+<p>FNR 浏览文件的记录数</p>
+
+<p>FS 设置输入域分隔符，等价于命令行- F选项</p>
+
+<p>NF 浏览记录的域个数</p>
+
+<p>NR 已读的记录数</p>
+
+<p>OFS 输出域分隔符</p>
+
+<p>ORS 输出记录分隔符</p>
+
+<p>RS 控制记录分隔符</p>
+
+<h2>三、awk操作符 </h2>
+
+<p>= += *= / = %= ^ = 赋值操作符</p>
+
+<p>？   条件表达操作符</p>
+
+<p>|| &amp;&amp; !   或、与、非（上一节已讲到）</p>
+
+<p>~!~   匹配操作符，包括匹配和不匹配</p>
+
+<p>&lt; &lt;= == != >>  关系操作符</p>
+
+<p><code>+ - * / % ^  算术操作符</code></p>
+
+<p><code>+ + --   前缀和后缀</code></p>
+
+<p>1、设置输入域到域变量名</p>
+
+<p>cat crontab.bak  | awk &#8216;BEGIN{numall=20}{if($1~/[0-9]*/ &amp;&amp; $i>numall &amp;&amp; NR &lt; 10) num+=$1} END{print num}&#8217;</p>
+
+<h2>四、内置的字符串函数 </h2>
+
+<p>gsub(r,s) 在整个$ 0中用s替代r</p>
+
+<p>gsub(r,s,t) 在整个t中用s替代r</p>
+
+<p>index(s,t) 返回s中字符串t的第一位置</p>
+
+<p>length(s) 返回s长度</p>
+
+<p>match(s,r) 测试s是否包含匹配r的字符串</p>
+
+<p>split( s,a,fs) 在fs上将s分成序列a</p>
+
+<p>sprint(fmt,exp) 返回经fmt格式化后的exp</p>
+
+<p>sub(r,s) 用$ 0中最左边最长的子串代替s</p>
+
+<p>substr(s,p) 返回字符串s中从p开始的后缀部分</p>
+
+<p>substr(s,p,n) 返回字符串s中从p开始长度为n的后缀部分</p>
+
+<p>实例：</p>
+
+<p>1、awk &#8217; BEGIN{numall=10}{gsub(12,20);if($1~/[0-9]*/  &amp;&amp; NR &lt; 10) num+=length($0);print substr($0,1,index($0,&#8221;=&#8221;));} END{print num}&#8217;</p>
+
+<p>2、awk &#8216;BEGIN {print split(&#8220;123#456#678&#8221;,myarray,&#8221;#&#8221;)}&#8217;</p>
+
+<p>   awk &#8216;BEGIN { split(&#8220;123#456#678&#8221;,myarray,&#8221;#&#8221;);print myarray[2]}&#8217;</p>
+
+<h2>五、字符串屏蔽序列 </h2>
+
+<p>\b 退格键 \t tab键</p>
+
+<p>\f 走纸换页 \ddd 八进制值</p>
+
+<p>\n 新行 \c 任意其他特殊字符，例如\为反斜线符号</p>
+
+<p>\r 回车键</p>
+
+<p>1、printf修饰符</p>
+
+<p><code>- 左对齐</code></p>
+
+<p>Width 域的步长，用0表示0步长</p>
+
+<p>.prec 最大字符串长度，或小数点右边的位数</p>
+
+<p>%c ASCII字符</p>
+
+<p>%d 整数</p>
+
+<p>%e 浮点数，科学记数法</p>
+
+<p>%f 浮点数，例如（123.44）</p>
+
+<p>%g awk决定使用哪种浮点数转换e或者f</p>
+
+<p>%o 八进制数</p>
+
+<p>%s 字符串</p>
+
+<p>%x 十六进制数</p>
+
+<p>如：awk &#8216;{printf &#8220;%-15s %s&#8221;,$1,$3}&#8217;</p>
+
+<br /> 
+
+
+<p>本文<strong>转载</strong>自<a href="http://www.xuephp.com/main/detail.php?cid=22838">awk学习整理和使用实例</a>。  <br/>
+本文地址：<a href="http://tinyxd.me/blog/2012/08/01/awk-study/">http://tinyxd.me/blog/2012/08/01/awk-study/</a>。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[linux内存管理（下）]]></title>
+    <link href="http://tinyxd.me/blog/2012/07/31/linux-memory-management-3/"/>
+    <updated>2012-07-31T23:51:00+08:00</updated>
+    <id>http://tinyxd.me/blog/2012/07/31/linux-memory-management-3</id>
+    <content type="html"><![CDATA[<p><strong><em>摘要</em></strong>：把一块存放slab结构的内存区映射到一组连续的页框是最好的选择，这样会充分利用高速缓存并获得较低的平均访问时间。不过，上面的方式主要是针对那些使用非常频繁的内核数据结构——如task_struct、inode来设计的。如果对内存区的请求不是很频繁，那么，通过连续的线性地址，而不是物理地址来访问非连续的物理页框这样一种分配模式就会很有意义了。这种模式的主要优点是避免了外碎片，而缺点是必须打乱内核页表。此外，非连续内存区的大小必须是4096 的倍数。Linux 在几个方面使用非连续内存区：为活动的交换区分配数据结构，为模块分配空间，或者给某些I/O 驱动程序分配缓冲区等。此外，非连续内存区还提供了另一种使用高端内存页框的方法。</p>
+
+<h2>非连续内存区的线性地址    </h2>
+
+<p>要查找线性地址的一个空闲区，我们可以从PAGE_OFFSET开始查找（通常为0xc0000000，即第4 个GB 的起始地址）。下图让我们回忆了如何使用第4个GB 的线性地址：</p>
+
+<!--more-->
+
+
+<p>回忆一下：</p>
+
+<iframe src="https://skydrive.live.com/embed?cid=1F260DE1061FCF3E&resid=1F260DE1061FCF3E%21156&authkey=ABbb5MTrh96mmAU" width="317" height="94" frameborder="0" scrolling="no"></iframe>
+
+
+<p>（1）内存区的开始部分包含的是对前896MB RAM 进行映射的线性地址。直接映射的物理内存末尾所对应的线性地址保存在high_memory全局变量中。当物理内存小于896MB，则线性地址0xc0000000以后的896MB与其一一对应；当物理内存大于896MB而小于4GB时，只直接映射前896MB的地址到0xc0000000以后的线性空间，然后把线性空间的其他部分与896MB和4GB物理空间映射起来，称为动态重映射，这是本博的重点；当物理内存大于4GB，则需要考虑PAE的情况，其他的东东没什么区别，我们不做过多的回忆了。</p>
+
+<p>（2）内核的页表由内核页全局目录变量swapper_pg_dir维护；pagetable_init()建立内核页表项。</p>
+
+<p>（3）内存区的结尾部分包含的是固定映射的线性地址，主要用于存放一些常量线性地址，具体查看“高端内存映射”博文。</p>
+
+<p>（4）从PKMAP_BASE 开始，我们查找用于高端内存页框的永久内核映射的线性地址，具体查看“高端内存映射 ”博文。</p>
+
+<p>（5）其余的线性地址可以用于非连续内存区。在物理内存映射的末尾与第一个内存区之间插入一个大小为8MB（宏VMALLOC_OFFSET）的安全区，目的是为了“捕获”对内存的越界访问。出于同样的理由，插入其他4KB 大小的安全区来隔离非连续的内存区。</p>
+
+<h2>非连续内存区的描述符 </h2>
+
+<p>每个非连续内存区都对应着一个类型为vm_struct 的描述符：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>struct vm_struct { 
+</span><span class='line'>
+</span><span class='line'>    void            *addr; 
+</span><span class='line'>
+</span><span class='line'>    unsigned long        size; 
+</span><span class='line'>
+</span><span class='line'>    unsigned long        flags; 
+</span><span class='line'>
+</span><span class='line'>    struct page        **pages; 
+</span><span class='line'>
+</span><span class='line'>    unsigned int        nr_pages; 
+</span><span class='line'>
+</span><span class='line'>    unsigned long        phys_addr; 
+</span><span class='line'>
+</span><span class='line'>    struct vm_struct    *next; 
+</span><span class='line'>
+</span><span class='line'>}; </span></code></pre></td></tr></table></div></figure>
+
+
+<p>介绍下它的字段：</p>
+
+<p>void *    addr    内存区内第一个内存单元的线性地址（首址）</p>
+
+<p>unsigned long    size    内存区的大小加4096（内存区之间的安全区间的大小）</p>
+
+<p>unsigned long    flags    非连续内存区映射的内存的类型</p>
+
+<p>struct page **    pages    指向nr_pages数组的指针，该数组由指向页描述符的指针组成</p>
+
+<p>unsigned int    nr_pages    内存区填充的页的个数</p>
+
+<p>unsigned long    phys_addr    该字段设为0，除非内存已被创建来映射一个硬件设备的I/O 共享内存</p>
+
+<p>struct vm_struct *    next    指向下一个vm_struct结构的指针</p>
+
+<h2>分配非连续内存区 </h2>
+
+<p>vmalloc()函数给内核分配一个非连续内存区。参数size表示所请求内存区的大小。如果这个函数能够满足请求，就返回新内存区的起始地址；否则，返回一个NULL 指针（mm/ vmalloc.c）</p>
+
+<p>其工作方式类似于kmalloc()，只不过vmalloc()分配的内存虚拟地址是连续的，而物理地址则无需连续。这也是用户空间分配函数的工作方式：由malloc()返回的页在进程的虚拟地址空间内是连续的，但是，这并不保证它们在物理RAM中也连续。kmalloc()函数确保页在物理地址上是连续的（虚拟地址自然也是连续的）。vmalloc()函数只确保页在虚拟地址空间内是连续的。vmalloc()仅在不得已时才会使用——一般是在为了获得大块内存时，例如，当模块被动态插入到内核中时，就把模块装载到由vmalloc()分配的内存上。</p>
+
+<p>伙伴关系也好、slab技术也好，从内存管理理论角度而言目的基本是一致的，它们都是为了防止“分片”，不过分片又分为外部分片和内部分片之说，所谓内部分片是说系统为了满足一小段内存区（连续）的需要，不得不分配了一大区域连续内存给它，从而造成了空间浪费；外部分片是指系统虽有足够的内存，但却是分散的碎片，无法满足对大块“连续内存”的需求。无论何种分片都是系统有效利用内存的障碍。slab分配器使得一个页面内包含的众多小块内存可独立被分配使用，避免了内部分片，节约了空闲内存。伙伴关系把内存块按大小分组管理，一定程度上减轻了外部分片的危害，因为页框分配不在盲目，而是按照大小依次有序进行，不过伙伴关系只是减轻了外部分片，但并未彻底消除。你自己比划一下多次分配页面后，空闲内存的剩余情况吧。</p>
+
+<p>所以避免外部分片的最终思路还是落到了如何利用不连续的内存块组合成“看起来很大的内存块”——这里的情况很类似于用户空间分配虚拟内存，内存逻辑上连续，其实映射到并不一定连续的物理内存上。Linux内核借用了这个技术，允许内核程序在内核地址空间中分配虚拟地址，同样也利用页表（内核页表）将虚拟地址映射到分散的内存页上。以此完美地解决了内核内存使用中的外部分片问题。内核提供vmalloc函数分配内核虚拟内存，该函数不同于kmalloc，它可以分配较Kmalloc大得多的内存空间（可远大于128K，但必须是页大小的倍数），但相比Kmalloc来说,Vmalloc需要对内核虚拟地址进行重映射，必须更新内核页表，因此分配效率上要低一些（用空间换时间）。</p>
+
+<h2>释放函数   </h2>
+
+<p>vfree()函数释放vmalloc()或vmalloc_32()创建的非连续内存区，而vunmap()函数释放vmap()创建的内存区。两个函数都使用同一个参数 —— 将要释放的内存区的起始线性地址address；它们都依赖于<code>__vunmap()</code>函数来做实质性的工作。</p>
+
+<p><code>__vunmap()</code>函数接收两个参数：将要释放的内存区的起始地址的地址addr，以及标志deallocate_pages，如果被映射到内存区内的页框应当被释放到分区页框分配器（调用vfree()）中，那么这个标志被置位，否则被清除（vunmap()被调用）。该函数执行以下操作：</p>
+
+<ol>
+<li><p>调用remove_vm_area()函数得到vm_struct 描述符的地址area，并清除非连续内存区中的线性地址对应的内核的页表项。</p></li>
+<li><p>如果deallocate_pages 被置位，函数扫描指向页描述符的area->pages指针数组；对于数组的每一个元素，调用<code>__free_page()</code>函数释放页框到分区页框分配器。此外，执行kfree(area->pages)来释放数组本身。</p></li>
+<li><p>调用kfree(area)来释放vm_struct 描述符。</p></li>
+</ol>
+
+
+<br />
+
+
+<p>本文章参考自《linux内核设计与实现》、<a href="http://blog.csdn.net/jiangyuping_fyl/article/details/7268287">slab分配器</a> 及 <a href="http://blog.csdn.net/yunsongice/article/details/5536197">非连续内存区</a> 。 <br/>
+本站文章如果没有特别说明，均为<strong>原创</strong>，转载请以<strong>链接</strong>方式注明本文地址：<a href="http://tinyxd.me/blog/2012/07/31/linux-memory-management-3/">http://tinyxd.me/blog/2012/07/31/linux-memory-management-3/</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[linux内存管理（中）]]></title>
+    <link href="http://tinyxd.me/blog/2012/07/31/linux-memory-management-2/"/>
+    <updated>2012-07-31T23:16:00+08:00</updated>
+    <id>http://tinyxd.me/blog/2012/07/31/linux-memory-management-2</id>
+    <content type="html"><![CDATA[<p><strong><em>摘要</em></strong>：slab分配器是Linux内存管理中非常重要和复杂的一部分，其工作是针对一些经常分配并释放的对象，如进程描述符等，这些对象的大小一般比较小，如果直接采用伙伴系统来进行分配和释放，不仅会造成大量的内碎片，而且处理速度也太慢。而slab分配器是基于对象进行管理的，相同类型的对象归为一类(如进程描述符就是一类)，每当要申请这样一个对象，slab分配器就从一个slab列表中分配一个这样大小的单元出去，而当要释放时，将其重新保存在该列表中，而不是直接返回给伙伴系统。slab分配对象时，会使用最近释放的对象内存块，因此其驻留在CPU高速缓存的概率较高。</p>
+
+<h2>简介</h2>
+
+<!--more-->
+
+
+<p>内存管理的目标是提供一种方法，为实现各种目的而在各个用户之间实现内存共享。内存管理方法应该实现以下两个功能：</p>
+
+<ul>
+<li><p>最小化管理内存所需的时间</p></li>
+<li><p>最大化用于一般应用的可用内存（最小化管理开销）</p></li>
+</ul>
+
+
+<p>内存管理实际上是一种关于权衡的零和游戏。您可以开发一种使用少量内存进行管理的算法，但是要花费更多时间来管理可用内存。也可以开发一个算法来有效地管理内存，但却要使用更多的内存。最终，特定应用程序的需求将促使对这种权衡作出选择。</p>
+
+<p>每个内存管理器都使用了一种基于堆的分配策略。在这种方法中，大块内存（称为 堆）用来为用户定义的目的提供内存。当用户需要一块内存时，就请求给自己分配一定大小的内存。堆管理器会查看可用内存的情况（使用特定算法）并返回一块内存。搜索过程中使用的一些算法有 first-fit（在堆中搜索到的第一个满足请求的内存块 ）和 best-fit（使用堆中满足请求的最合适的内存块）。当用户使用完内存后，就将内存返回给堆。</p>
+
+<p>这种基于堆的分配策略的根本问题是碎片（fragmentation）。当内存块被分配后，它们会以不同的顺序在不同的时间返回。这样会在堆中留下一些洞，需要花一些时间才能有效地管理空闲内存。这种算法通常具有较高的内存使用效率（分配需要的内存），但是却需要花费更多时间来对堆进行管理。</p>
+
+<p>另外一种方法称为 buddy memory allocation，是一种更快的内存分配技术，它将内存划分为 2 的幂次方个分区，并使用 best-fit 方法来分配内存请求。当用户释放内存时，就会检查 buddy 块，查看其相邻的内存块是否也已经被释放。如果是的话，将合并内存块以最小化内存碎片。这个算法的时间效率更高，但是由于使用 best-fit 方法的缘故，会产生内存浪费。</p>
+
+<p>伙伴系统算法采用页框作为基本内存区，适合对大块内存的请求，为了解决外碎片的问题。而小内存的分配，会产生内碎片（internal fragmentation），这需要新的数据结构来描述在同一页框中 如何分配小内存区。</p>
+
+<p>为了满足内核对这种小内存块的需要，Linux系统采用了一种被称为slab分配器的技术。Slab分配器的实现相当复杂，但原理不难，其核心思想就是“存储池[2]”的运用。内存片段（小块内存）被看作对象，当被使用完后，并不直接释放而是被缓存到“存储池”里，留做下次使用，这无疑避免了频繁创建与销毁对象所带来的额外负载。</p>
+
+<p>Slab技术不但避免了内存内部分片（下文将解释）带来的不便（引入Slab分配器的主要目的是为了减少对伙伴系统分配算法的调用次数——频繁分配和回收必然会导致内存碎片——难以找到大块连续的可用内存），而且可以很好利用硬件缓存提高访问速度。</p>
+
+<p>Slab并非是脱离伙伴关系而独立存在的一种内存分配方式，slab仍然是建立在页面基础之上，换句话说，Slab将页面（来自于伙伴关系管理的空闲页框链）撕碎成众多小内存块以供分配，slab中的对象分配和销毁使用kmem_cache_alloc与kmem_cache_free。每个高速缓存都是由kmem_cache_t(等价于struct kmem_cache)</p>
+
+<p>slab分配器把对象分组放进高速缓存。包含高速缓存的主内存区被划分为多个slab，每个slab由一个或多个连续的页框组成，这些页框既包含已分配的对象，也包含空闲的对象。内核周期性地扫描高速缓存并释放空slab对应的页框。</p>
+
+<p>普通高速缓存在系统初始化期间调用kmem_cache_init()和kmem_cache_sizes_init()来建立普通高速缓存。专用高速缓存由kmem_cache_create()函数创建。所有普通和专用高速缓存的名字都可以在运行期间通过读取/proc/slabinfo文件得到。这个文件也指明每个高速缓存中空闲对象的个数和已分配对象的个数。</p>
+
+<p>slab的对象描述符与slab描述符本身类似，也可以用两种可能的方式来存放：外部对象描述符（存放在slab的外部）、内部对象描述符（存放在slab的内部）。每个对象都有类型为kmem_bufctl_t的一个描述符。</p>
+
+<h2>API 函数 </h2>
+
+<p>现在来看一下能够创建新 slab 缓存、向缓存中增加内存、销毁缓存的应用程序接口（API）以及 slab 中对对象进行分配和释放操作的函数。</p>
+
+<p>第一个步骤是创建 slab 缓存结构，您可以将其静态创建为：</p>
+
+<p>struct struct kmem_cache *my_cachep;</p>
+
+<p>然后其他 slab 缓存函数将使用该引用进行创建、删除、分配等操作。kmem_cache 结构包含了每个中央处理器单元（CPU）的数据、一组可调整的（可以通过 proc 文件系统访问）参数、统计信息和管理 slab 缓存所必须的元素。</p>
+
+<p>kmem_cache_create</p>
+
+<p>内核函数 kmem_cache_create 用来创建一个新缓存。这通常是在内核初始化时执行的，或者在首次加载内核模块时执行。其原型定义如下：</p>
+
+<p>struct kmem_cache * kmem_cache_create( const char <em>name, size_t size, size_t align,                        unsigned long flags;                        void (</em>ctor)(void<em>, struct kmem_cache </em>, unsigned long),                        void (<em>dtor)(void</em>, struct kmem_cache *, unsigned long));</p>
+
+<p>name 参数定义了缓存名称，proc 文件系统（在 /proc/slabinfo 中）使用它标识这个缓存。 size 参数指定了为这个缓存创建的对象的大小， align 参数定义了每个对象必需的对齐。 flags 参数指定了为缓存启用的选项。这些标志如表 1 所示。</p>
+
+<p>表 1. kmem_cache_create 的部分选项（在 flags 参数中指定）</p>
+
+<p>选项                  说明</p>
+
+<p>SLAB_RED_ZONE      在对象头、尾插入标志，用来支持对缓冲区溢出的检查。</p>
+
+<p>SLAB_POISON            使用一种己知模式填充 slab，允许对缓存中的对象进行监视（对象属对象所有，不过可以在外部进行修改）。</p>
+
+<p>SLAB_HWCACHE_ALIGN             指定缓存对象必须与硬件缓存行对齐。</p>
+
+<p>ctor 和 dtor 参数定义了一个可选的对象构造器和析构器。构造器和析构器是用户提供的回调函数。当从缓存中分配新对象时，可以通过构造器进行初始化。</p>
+
+<p>在创建缓存之后， kmem_cache_create 函数会返回对它的引用。注意这个函数并没有向缓存分配任何内存。相反，在试图从缓存（最初为空）分配对象时，refill 操作将内存分配给它。当所有对象都被使用掉时，也可以通过相同的操作向缓存添加内存。</p>
+
+<p>kmem_cache_destroy</p>
+
+<p>内核函数 kmem_cache_destroy 用来销毁缓存。这个调用是由内核模块在被卸载时执行的。在调用这个函数时，缓存必须为空。</p>
+
+<p>void kmem_cache_destroy( struct kmem_cache *cachep );</p>
+
+<p>kmem_cache_alloc</p>
+
+<p>要从一个命名的缓存中分配一个对象，可以使用 kmem_cache_alloc 函数。调用者提供了从中分配对象的缓存以及一组标志：</p>
+
+<p>void kmem_cache_alloc( struct kmem_cache *cachep, gfp_t flags );</p>
+
+<p>这个函数从缓存中返回一个对象。注意如果缓存目前为空，那么这个函数就会调用 cache_alloc_refill 向缓存中增加内存。kmem_cache_alloc 的 flags 选项与 kmalloc 的 flags 选项相同。表 2 给出了标志选项的部分列表。</p>
+
+<p>表 2. kmem_cache_alloc 和 kmalloc 内核函数的标志选项</p>
+
+<p>标志    说明</p>
+
+<p>GFP_USER 为用户分配内存（这个调用可能会睡眠）。</p>
+
+<p>GFP_KERNEL       从内核 RAM 中分配内存（这个调用可能会睡眠）。</p>
+
+<p>GFP_ATOMIC         使该调用强制处于非睡眠状态（对中断处理程序非常有用）。</p>
+
+<p>GFP_HIGHUSER       从高端内存中分配内存。</p>
+
+<p>kmem_cache_zalloc</p>
+
+<p>内核函数 kmem_cache_zalloc 与 kmem_cache_alloc 类似，只不过它对对象执行 memset 操作，用来在将对象返回调用者之前对其进行清除操作。</p>
+
+<p>kmem_cache_free</p>
+
+<p>要将一个对象释放回 slab，可以使用 kmem_cache_free。调用者提供了缓存引用和要释放的对象。</p>
+
+<p>void kmem_cache_free( struct kmem_cache <em>cachep, void </em>objp );</p>
+
+<p>kmalloc 和 kfree</p>
+
+<p>内核中最常用的内存管理函数是 kmalloc 和 kfree 函数。这两个函数的原型如下：</p>
+
+<p>void <em>kmalloc( size_t size, int flags ); void kfree( const void </em>objp );</p>
+
+<p>注意在 kmalloc 中，惟一两个参数是要分配的对象的大小和一组标志（请参看 表 2 中的部分列表）。但是 kmalloc 和 kfree 使用了类似于前面定义的函数的 slab 缓存。kmalloc 没有为要从中分配对象的某个 slab 缓存命名，而是循环遍历可用缓存来查找可以满足大小限制的缓存。找到之后，就（使用 <code>__kmem_cache_alloc</code>）分配一个对象。要使用 kfree 释放对象，从中分配对象的缓存可以通过调用 virt_to_cache 确定。这个函数会返回一个缓存引用，然后在 __cache_free 调用中使用该引用释放对象。</p>
+
+<h2>其他函数 </h2>
+
+<p>slab 缓存 API 还提供了其他一些非常有用的函数。 kmem_cache_size 函数会返回这个缓存所管理的对象的大小。您也可以通过调用kmem_cache_name 来检索给定缓存的名称（在创建缓存时定义）。缓存可以通过释放其中的空闲 slab 进行收缩。这可以通过调用kmem_cache_shrink 实现。注意这个操作（称为回收）是由内核定期自动执行的（通过 kswapd）。</p>
+
+<p>unsigned int kmem_cache_size( struct kmem_cache <em>cachep ); const char </em>kmem_cache_name( struct kmem_cache <em>cachep ); int kmem_cache_shrink( struct kmem_cache </em>cachep );</p>
+
+<h2>补充： </h2>
+
+<p>如果对存储区的请求不频繁，就用一组普通高速缓存来处理，普通高速缓存中的对象具有几何分布的大小，范围为32~131072字节。</p>
+
+<p>使用kmalloc()函数申请，kfree()释放。</p>
+
+<br />
+
+
+<p>本文章参考自《深入理解linux内核》及 <a href="https://www.ibm.com/developerworks/cn/linux/l-linux-slab-allocator/">动态内存管理</a>。 <br/>
+本站文章如果没有特别说明，均为<strong>原创</strong>，转载请以<strong>链接</strong>方式注明本文地址：<a href="http://tinyxd.me/blog/2012/07/31/linux-memory-management-2/">http://tinyxd.me/blog/2012/07/31/linux-memory-management-2/</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[linux内存管理（上）]]></title>
@@ -1775,245 +2243,6 @@ Git主分支的名字，默认叫做Master。它是自动建立的，版本库�
     <content type="html"><![CDATA[<p>其实说开博一个月，不太妥当。用octopress搭建博客是在5月底，域名是在6月9号申请的。Anyway，在这一个月中，深切体会到了“隔行如隔山”。从刚开始一点不懂，到现在知道了“SEO”、“sitemap”、&#8221;PR&#8221;、还有各种博客工具，学习了ruby、html，css等等。
 到现在google PR值仍然为0（站长真是不容易啊），不过bing、yahoo、sogou等搜索引擎已经开始收录了，只是baidu还没有动静（伤感中），只好继续等待了。
 先写到这吧，有啥体会了再继续。。。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[互联网创业降级论]]></title>
-    <link href="http://tinyxd.me/blog/2012/07/08/degrading-for-success/"/>
-    <updated>2012-07-08T00:46:00+08:00</updated>
-    <id>http://tinyxd.me/blog/2012/07/08/degrading-for-success</id>
-    <content type="html"><![CDATA[<p>本文来自：<a href="http://meditic.com/degrading-for-success/">meditic</a>  <br/>
-几乎一年没有写博客了，说没时间那是借口，唯一的原因是，年纪越大越发觉自己肤浅。有些想法还没提笔，就发现很幼稚，就不敢发出来贻笑大方了。这次先给大家说个小故事：</p>
-
-<p>从前有三个屌丝，聚在一起做网络，提供免费的网络服务，砸锅卖铁，通宵达旦，除了卖肾啥都做了。3年后终于做到了五百万用户，对于年轻人来说，能把五百万人玩弄于鼓掌之间，已经是很牛逼轰轰的事了，不过用户越多，成本越高，每年服务器、带宽租金、房租水电、广告运营等成本，已经达到了十七八万，屌丝们不得不面对一个终极问题：如何盈利？</p>
-
-<p>屌丝们定了三盘沙县水饺，围着一箱子的冰啤酒开始计算：按照最近一月的登陆情况来看，四百万个账号已经不活跃了，真正有商业价值的只有一百万人，如 果开通xx功能，收点高级会员费，让其中1%的人升级为高级会员，每年付30块钱年费，那么每年收入就是100万x1%x30元=30万元！不错嘛， 扣除十七八万的运营成本，还剩毛利润12万，每个屌丝年底能分到4万大洋，如果按照打工者的算法，这三个人每人月薪3333元，木有奖金，木有津贴、木有任何福利，上班还得带自家的电脑。</p>
-
-<p>尽管如此，屌丝们还是激动得热泪盈眶：老子有钱啦！老子有钱啦！！！那一夜，人们看到三个发疯的屌丝在屋顶翩翩起舞。</p>
-
-<p>韩寒说，中国人民是最有忍耐力的族群，一点好处就感激涕零。他一定不知道，IT创业界里的屌丝，才是这群傻逼中的战斗机。他们可以平静地忍受每年都持续亏钱，而且还能信心十足的对所有人说公司的状态非常好，如果有一天居然收支平衡了，他们会激动的趁夜难眠，比北朝鲜倒掉还开心。</p>
-
-<!--more-->
-
-
-<p>本文开头的三个屌丝，其实是非常幸运的，至少能做到月薪3333元。大部分的屌丝在第一年做到几万用户的时候就会挂掉，原因众多，最主要要的是意志太弱，受不了最初的寂寞；意志稍微坚强点的会在第二年第三年慢慢挂掉，原因主要是资金断裂、团队分裂；能成功熬到第四年还没饿死、还没被口水淹死、还没被肠胃病颈椎病腰肌劳损折磨死的，甚至员工不减反增的，基本上属于神仙级别了。</p>
-
-<p>我为什么要说三个屌丝的故事呢。首先是因为这是身边每天都在发生的故事，其次是因为感到可惜，IT界在我眼里一直是一个无比高级的职业，聚集着全球最聪明、最富有的人类精英。以IT创业界的青年们的智商，他们可以做成任何一件事情，包括改造银行到制造汽车到发射航天飞机 。结果这帮人却整天在蓬头垢面得为3k的月薪而挣扎，太悲催了。</p>
-
-<p>为什么用悲催这个词？ 如果一个人生下来就在山沟沟里，一辈子都没机会去见什么好东西，这不叫悲催，这只叫苦难；而如果一个人生出来有一个奇怪的特异功能：皮肤出来的汗水会凝结成昂贵的水晶，本来只靠出汗就能赚钱，结果这傻逼居然觉得出汗这个行为太低级，做手术把自己的汗腺全给切了，而且丝毫没有意识到他做了什么傻事，这才叫真的悲催。</p>
-
-<p>我们IT界中的很多人，生下来就是有这个出汗成水晶的特异功能的，正是因为这种与众不同，这群人能混入牛逼的大学，整天打网游还能写出像样的毕业论文， 拿到学位，进外企，考CPA，做咨询、做证券分析，研究高分子材料，做电子商务，做云计算。。。一级一级的上升，直到有一天，发现身边的人里，已经没有一个不是CPA，不是咨询师，不是高级研究员了，身边的人全是业界精英，个个都超级强悍。在这个所谓的高级圈子里，自己并没有任何过人之处，只不过是just another analyst而已。在高级圈子里拼的头破血流，最后也只能混到给台湾人整理数据而已。莫然回首，发现当年的血气方刚、年少时的无限梦想，进化成了一身肥胖的赘肉。这个时候，有个旁观者说：“升级到头了，该降级了”</p>
-
-<p>当一个社会疯狂鼓吹快节奏的时候，一定需要有人来宣扬慢生活；当全社会跟打了鸡血似的吹捧升级的时候，一定需要有人来说说降级论。</p>
-
-<p>IT青年们喜欢打游戏，喜欢升级。他们的人生也和游戏一样，沉醉于不停的升级中，不仅喜欢升级自己手上的技术，把MySql改成MongoDB，把Apache升级为Nginx，在Mac上装Ubuntu，Ubuntu里再装个虚拟机去跑Mac OS。。。IT青年们也喜欢升级自己的人生，从程序员升级到项目经理，再升级到技术总监或产品总监，再升级到合伙人。。。</p>
-
-<p>在不断追求升级的过程中，所面临的一个很大事实是：当一个人从A刚升级到A+级的时候，其实这个人的能力层级依然只是A的层级，还未胜任A+的层级，他必须要到A+的后期，才可以胜任A+。就好像一个高中生，高考完之后，虽然理论上已经属于大学生了，但是他的实际能力依然只是高三毕业的水平，除非他全部pass了大一的期末考试。同样的道理，这个世界上有很多人的身份和称谓，都是在描述“未来的自己”，而不是现在的自己。当你从销售员升级为销售经理的时候，你自我感觉很好：“我现在是销售经理了”，但是这个时候 ，你并未通过公司对你作为销售经理这一年的工作成果的考核，你只是一个“未来可能是合格的销售经理”的前身。如果年终考核你失败了，那么这一年最准确的描述是：一个销售员，占了整整一年销售经理的位子，最后失败了。而且这一年一定会过的很累，因为通过考核的其他销售经理，才是真正胜任这个层级的人，跟一帮真正属于这个圈子的人厮杀，就好像拳击馆里当陪练的小角色，去和泰森比了一年的武，怎么可能不累呢？</p>
-
-<p>当我07年进入互联网行业的时候，就是那个拳击馆里陪练的小角色，我被迫去跟全国各地的泰森比拼，结果累的半死。后来我开始反思最初的目标，为什么要在自己身上挂一个“拳击高手”的招牌，被那么多泰森追着打？ 我把这块招牌卸了，找个完全没练武的人去比拼，不是更容易赢么？于是果断照做，去找了一个没人懂拳击的小乡村，做了纯英文的<a href="http://www.tucia.com/">Tucia.com</a>(需翻墙)，只做国外的业务。在那个地方，作为一个知名武馆的拳击小陪练，我成了村子里拳击技术最高超的人，受人仰慕，还开武馆教人拳击，活的非常滋润，而且在教人拳击的过程中，自己的拳术也比以前提高了很多，发展出一套属于自己的拳法，我虽然进不了泰森们的大圈子，但他们也进不了我的小圈子。</p>
-
-<p>关于圈子，有一个很赤裸裸的现实：不会是你进入圈子，只能是圈子进入你。很多人会四处找关系，“帮我介绍给xxx吧，我想进入你们的圈子”，这样的人是永远进不去这个圈子的，因为圈子的天性是，永远追求更高一个层级的人。而我们的大部分人，其实都在以低一级的属性，占着更高一级的位子，徘徊在更高一级的圈子边缘，与更高一级的人竞争，幻想着自己可以升级到那个圈子里去。也许永远进不去，悲催的努力一辈子；也许运气好，某一天真的进入这个圈子了，但那个时候又会有下一个目标，希望进入更高级的圈子，这是一场没有终点的战斗。永远的追求升级，永远的累。</p>
-
-<p>有没有想过降级呢？</p>
-
-<p>如果一个来自微软的高级工程师，辞职去一个养猪场做开放平台经理，那么他的到来不仅会让养猪圈感到无比荣幸，更是意味着，利用他在IT界训练出来的高效工作方式和逻辑思维能力，他可以掀起一场养猪行业的革命，使得20年后才会出现的人性、高效、开放、协作、健康的养殖方式提前到达。在这场革命中，他会活的非常有价值。这种价值，在原先的圈子里，是完全体验不到的，因为他此前的所有工作，只是在满身疮痍的windows系统上不停的打补丁，无论打多少都逃不开产品衰落、被人鄙视的命运。</p>
-
-<p>很多人的命运，都像是上面那个微软工程师。只需要降级，就能创造更大的价值，也能获得更大的满足。那为什么不呢？为什么要死死抱着那个所谓的“高级职业”不放呢？</p>
-
-<p>去年我曾犯贱去趟了移动互联网的浑水，做了个手机app，刚开始的时候感觉很高级，但很快，铺天盖地的竞争对手就出现了，我又发现自己陷入了07年一样的场景：作为一个小小陪练，我他妈的又被一帮泰森们给围住了。当泰森中的战斗机&#8212;微信，变得无比牛逼之后，我就知道，战胜这群泰森是绝对不可能的事情了。于是我再次投靠了“降级论”，把自己从牛逼哄哄的移动互联网行业，降级到了一个被人不齿的低级项目：<a href="http://www.tuciababy.com/">Tucia Baby</a>。</p>
-
-<p>这个项目虽然是传统行业，但是我们基本上是按照互联网产品的思路去做的，除了拍摄需要来店里以外，其他一切，包括营销、预约、客服、后期、选片、取片、客户关系等，所有环节都放在网络上，尤其是微博（<a href="http://weibo.com/tuciababy">@tuciababy官网</a>）。当然，最重要的是，作为一个脑残的果粉，我按照iPhone的做工和品质去要求每一张作品，必须达到我们能力可以做到的最好水准，不计成本的最好水准，才允许送给客户。正式接客不到两个月时间，虽然还远未达到成功，但目前已做到每天都有客户订单，财务上已实现盈利，未来相信一定会比大部分app开发者更光明。（ps:我们没有请工商、税务、城管去吃饭喝酒泡桑拿，也没有塞钱给任何政府机关。当你的产品真的用心做到很好的时候，其实你不需要讨好任何人的。）</p>
-
-<p>这个项目让我沉思了很久：07年我曾把一个纯纯的web2.0网站做到了alexa中国区前1000名（如有质疑，请查询2010年附近的tucia.com排名），结果一路亏损，到最后只剩下一个员工；11年我把那个纯纯的app做到苹果官方推荐区免费榜的第一位（<a href="http://ww3.sinaimg.cn/bmiddle/823ddc58gw1dkiqty41ukj.jpg">点此看截图</a>），那段时间每天四五千iPhone安装量，结果一路烧钱，到最后濒临关闭；而如今，我只需把自己从纯纯的互联网降级下来，做一些看起来有些“低级”的项目，居然就能立即实现收支平衡。</p>
-
-<p>除此以外，我还发现一个现象，中国消费者在与奸商们的长期斗争中，已经培养出了一种非常苦B的品质：只要不被坑，他就谢天谢地。如果商家严格做到了承诺的每一件事情，客户就会感动的泪如泉涌。如果商家不仅做到了所有承诺的事情，还很贴心的提供了一些额外的服务（比如我们给每位客户赠送非常好吃的樱桃和昂贵的进口巧克力作为甜点），那么客户就会激动的哭天喊地、奔走相告，推荐给他认识的每一个人。</p>
-
-<p>其实这片肮脏的国土，就是上天赐予IT青年们的最好机会。</p>
-
-<p>在一个不会练武的村子里，只要你会打两拳，你就是拳术最厉害的人；在一个没有服务意识、忽视产品质量的土地上，只要你用心做服务，用最高的标准去要求自己，你就会成为这块土地上最出色的商家；在一个没有现代管理意识，不懂网络、不懂微博、不懂用户体验、不懂口碑传播的粗犷社会里，你只需要把之前花在IT产品上的心思的10%拿过来用，就可以秒杀一切天朝对手。</p>
-
-<p>所以，</p>
-
-<p>IT青年们，当你在为网站的转化率苦苦思索的时候，当你在为app的活跃度辗转反侧的时候，当你在为融资计划苦苦哀求各界大佬引荐的时候，也许犯了一个错误，也许你们的脑子最值得闪光的地方，不是去悲催的IT界当炮灰，而应该是去按摩界、餐饮界、烧烤界、早餐界、理发界、家政界、按摩界、送花界、纺织界、成人用品界、现代化养殖界、有机蔬果界、个人护理界、汽车修理界。。。。与IT界相比，这些行业的确无比低级，他们的老板连qq都会发音成“抠抠”，他们的员工一辈子都没用过Email；跟他们解释什么是SEO，什么是用户体验，什么是数据挖掘，他们会在听你说完之前就开枪自杀掉。正是因为如此，这些行业才是如此的不堪一击。正是因为如此，当智商高达147的IT青年还在为3k薪水拼命、而智商不到50的烧烤店老板正坐在porsche里玩着前面那位青年开发的app的时候，我就忍不住仰望星空。</p>
-
-<p>这些原始而纯粹的行业，正在等待IT精英们的降级，如同蒲公英一般的伞兵，在黑夜里从天而降，长驱直入，用最智慧的产品、最优质的服务拯救这些早就该死的行业，屌丝的生命将会绽放出银色的羽翼，无比丰满，无比性感。</p>
-
-<p>最后注意，请珍惜生命，远离我的微博：<a href="http://weibo.com/meditic">@meditic</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[正则表达式]]></title>
-    <link href="http://tinyxd.me/blog/2012/07/07/regular-expressions-in-ruby/"/>
-    <updated>2012-07-07T23:40:00+08:00</updated>
-    <id>http://tinyxd.me/blog/2012/07/07/regular-expressions-in-ruby</id>
-    <content type="html"><![CDATA[<p>Ruby语言是一种“万事万物皆对象”的程序语言，正则表达式也是一个对象。正则表达式所属的类，就是Regexp类。<br/>
-要建立正则表达式两种方法： <br/>
-1.用“//”括住。  <br/>
-2.当正则表达式内部用到“/”字符的时候，改用%r会比较方便。 示例%r(样式)
-下面介绍一些规则。 <br/>
-1.^ 行首匹配 $行尾匹配 \A 字符串头 \Z字符串尾 <br/>
-2.指定想要匹配成功的文字范围用[]</p>
-
-<pre><code>比如[A-Z]所有大写英文字母[A-Za-z]所有英文字母[0-9]所有阿拉伯数字[^ABC]A、B、C以外的字   
-</code></pre>
-
-<p>3.匹配任意字符用.</p>
-
-<pre><code>想要指定字数/^…$/ 刚好三个字的一行   
-配合“*”等转义字符使用   
-</code></pre>
-
-<!--more-->
-
-
-<p>4.使用反斜杠的样式（“\”+“一个英文字母”）</p>
-
-<pre><code>\s 空白 会与空白字符（0x20）、定位字符、换行字符、换页字符匹配成功   
-\d与0-9之间的数字匹配成功
-\w与英文与数字匹配成功
-\A与字符串前端匹配成功
-\Z与字符串末端匹配成功
-</code></pre>
-
-<p>5.将转义字符当作一般字符</p>
-
-<pre><code>“\”后接上“^”、“$”、“[”这些英文、数字以外的转义字符时，这些字符就不在具备转义字符的效用了，而可以去匹配这些字符本身。
-</code></pre>
-
-<p>6.匹配连续出现的相同字符或单字</p>
-
-<pre><code>*出现0次以上
-+出现1次以上
-?出现0次或1次
-</code></pre>
-
-<p>7.最短匹配</p>
-
-<pre><code>*?出现0次以上，但取最短的匹配结果
-+?出现1次以上，但取最短的匹配结果
-</code></pre>
-
-<p>8.“()”与反复</p>
-
-<pre><code>使用“()”可以多个字构成的字符串反复匹配
-</code></pre>
-
-<p>9.多选</p>
-
-<pre><code>/^(ABC|DEF)$/
-正则项选项/```/后面类似/.../ei
-i忽略英文大小写差异
-s e u n 指定字符编码方式 s是Shift_JIS,e是EUC-JP，u是UTF-8 n是匹配是不考虑文字编码。
-x忽略正则表达式内部的空白，并忽略“#”后面的内容。加上这个选项就可以在正则表达式内部写注释了。
-m 让“.”能与换行符号匹配成功
-p /DEF.GHI/m =~ "ABC\nDEF\nGHI" #=&gt; 4 匹配成功
-</code></pre>
-
-<br />
-
-
-<p><strong>正则表达式的方法</strong>  <br/>
-sub、gsub、scan  <br/>
-sub方法只会取代第一个匹配成功处的字符串，而gsub则会取代所有匹配成功的字符串</p>
-
-<pre><code>str = “abc def g hi”    
-p str.sub(/\s+/,' ') #=&gt; "abc def g hi"   
-p str.gsub(/\s+/,' ') #=&gt; "abc def g hi"   
-</code></pre>
-
-<p>scan跟gsub一样会匹配字符串里所有符合样式的部分，但只是获取不会取代。</p>
-
-<br />
-
-
-<p>取出服务器的地址的正则表达式：</p>
-
-<pre><code>/http:\/\/([^\/]*)\// %r|http://([^/]*)/|   
-</code></pre>
-
-<figure class='code'><figcaption><span>url_match.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">str</span> <span class="o">=</span> <span class="s2">&quot;http://www.ruby-lang.org/ja/&quot;</span>
-</span><span class='line'><span class="sr">%r|http://([^/]*)/|</span> <span class="o">=~</span> <span class="n">str</span>
-</span><span class='line'><span class="nb">print</span> <span class="s2">&quot;server address: &quot;</span><span class="p">,</span> <span class="vg">$1</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>
-运行：</p>
-
-<pre><code>&gt;ruby url_match.rb   
-server address: www.ruby-lang.org
-</code></pre>
-
-<p>正则表达式的圣书：<code>Mastering Regular Expressions, Third Edition (Jeffrey E.F.Friedl 著/O'REILLY 出版)</code></p>
-
-<br />
-
-
-<p>本站文章如果没有特别说明，均为<strong>原创</strong>，转载请以<strong>链接</strong>方式注明本文地址：<code>http://tinyxd.me/blog/2012/07/07/regular-expressions-in-ruby/</code></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[ruby初学]]></title>
-    <link href="http://tinyxd.me/blog/2012/07/06/ruby-learning/"/>
-    <updated>2012-07-06T23:43:00+08:00</updated>
-    <id>http://tinyxd.me/blog/2012/07/06/ruby-learning</id>
-    <content type="html"><![CDATA[<p>这几天在学习Ruby，面对一个陌生的脚本语言，虽然陌生但是既然是脚本语言，自然也有与shell类似的地方，所以学习起来困难不是很大。 <br/>
-在感受到脚本语言的方便后，试了个例子，如下计算一个文件中单词的个数，以空格来区分。</p>
-
-<figure class='code'><figcaption><span>统计单词个数ruby脚本word.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1">#计算单词个数</span>
-</span><span class='line'><span class="n">count</span> <span class="o">=</span> <span class="no">Hash</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1">##统计单字</span>
-</span><span class='line'><span class="k">while</span> <span class="n">line</span> <span class="o">=</span> <span class="nb">gets</span>
-</span><span class='line'><span class="n">words</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span>
-</span><span class='line'><span class="n">words</span><span class="o">.</span><span class="n">each</span><span class="p">{</span><span class="o">|</span><span class="n">word</span><span class="o">|</span>
-</span><span class='line'><span class="n">count</span><span class="o">[</span><span class="n">word</span><span class="o">]</span> <span class="o">+=</span> <span class="mi">1</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1">##输出结果</span>
-</span><span class='line'><span class="n">count</span><span class="o">.</span><span class="n">sort</span><span class="p">{</span><span class="o">|</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="o">|</span>
-</span><span class='line'><span class="n">a</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span> <span class="o">&lt;=&gt;</span> <span class="n">b</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span>
-</span><span class='line'><span class="p">}</span><span class="o">.</span><span class="n">each</span><span class="p">{</span><span class="o">|</span><span class="n">key</span><span class="p">,</span><span class="n">value</span><span class="o">|</span>
-</span><span class='line'><span class="nb">print</span> <span class="s2">&quot;</span><span class="si">#{</span><span class="n">key</span><span class="si">}</span><span class="s2">: </span><span class="si">#{</span><span class="n">value</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>用法：<code>ruby word.rb your_file</code></p>
-
-<!--more-->
-
-
-<p>还有个问题以后可能会经常遇到，用p方法来输出包括日文或者中文的字符串的时候，会发生一般所谓的“乱码”的输出结果。所以在执行ruby程序时需要加上-Ks、-Ke之类的环境参数，这些参数用来指定文字编码。针对中文字符串，可以制定-Ku参数（UTF-8）来取得正常的显示效果。</p>
-
-<br />
-
-
-<p>本站文章如果没有特别说明，均为<strong>原创</strong>，转载请以<strong>链接</strong>方式注明本文地址：<code>http://tinyxd.me/blog/2012/07/06/ruby-learning/</code></p>
 ]]></content>
   </entry>
   
