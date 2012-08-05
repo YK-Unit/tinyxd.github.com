@@ -93,6 +93,63 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2012/05/25/archbang-arch-linux-an-zhuang-inode/">Archbang Arch Linux 安装inode</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-05-25T14:34:00+08:00" pubdate data-updated="true">May 25<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/05/25/archbang-arch-linux-an-zhuang-inode/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>第一步：cp iNodeClient.tar.gz 到 /home/***** 目录下。进入~目录下  <br/>
+第二步：终端运行 tar -xvf iNodeClient.tar.gz。<br/>
+第三步：修改/home//iNodeClient/下install.sh，把 OS_UBUNTU=`cat /etc/issue | grep &#8216;Ubuntu&#8217;`那一行及以下的脚本都删除，然后保存，执行sudo ./install.sh。<br/>
+第四步：cp  home/*****/iNodeClient/ 目录下的iNodeAuthService到/etc/rc.d/目录下，并修改权限chmod 755 /etc/rc.d/iNodeAuthService。<br/>
+第五步：打开/etc/rc.conf ，在DAEMONS处添加@iNodeAuthService。（让iNode认证服务开机自启动） <br/>
+第六步：现在执行sudo /etc/rc.d/iNodeAuthService start，发现出错了。错误出现在enablecards.ps这个文件里，打开看，你会发现这个文件的作用只是用来up网卡。一般来说你的网卡都已经up了的啦。你可以把里面的内容改成： <br/>
+#!/bin/sh<br/>
+x=eth0（你所使用的网卡） <br/>
+ifconfig $x up  <br/>
+再运行一次sudo /etc/rc.d/iNodeAuthService start，你应该会发现服务启动成功了。  <br/>
+第七步：命令行里面执行一下sudo ./iNodeClient 然后楼主发现出现了一些库的依赖问题。iNode需要一些比较旧的库，对于jpeg tiff等库 你可以用ln -s 来用新版本的库代替旧版本。而其中有一个是libpng12.so.0是必须需要旧版本的。见附件 或者可以去官网自己下载ftp://ftp.simplesystems.org/pub/libpng/png/src/  <br/>
+需要下载的文件是libpng-1.2.49.tar.bz2 <br/>
+安装方法如下： <br/>
+1.解压，然后执行./configure &#8211;prefix=/usr/ <br/>
+2.编译及安装 <br/>
+#make  <br/>
+#make install <br/>
+安装之前可以make check 以下 看看有没有什么错误，如果没错误 make install 那么libpng就安装好了。</p>
+
+<p>参考：http://ecnc.sysu.edu.cn/viewthread.php?tid=18558</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2012/05/23/wei-yi-jing-cun-zai-de-github-octopresspei-zhi-ben-di-huan-jing/">为已经存在的github Octopress配置本地环境</a></h1>
     
     
@@ -365,6 +422,10 @@ rvm:x:1004:admin
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2012/08/05/linux-process-address-space/">linux进程地址空间</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2012/08/02/blog-two-months/">写在开博两个月</a>
       </li>
     
@@ -380,15 +441,11 @@ rvm:x:1004:admin
         <a href="/blog/2012/07/31/linux-memory-management-2/">linux内存管理（中）</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2012/07/29/linux-memory-management-1/">linux内存管理（上）</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Category Cloud</h1>
-    <span id="tag-cloud"><a href='/blog/categories/davinci' style='font-size: 102.85714285714286%'>Davinci(1)</a> <a href='/blog/categories/embedded' style='font-size: 105.71428571428571%'>Embedded(2)</a> <a href='/blog/categories/essay' style='font-size: 108.57142857142857%'>Essay(3)</a> <a href='/blog/categories/git' style='font-size: 102.85714285714286%'>Git(1)</a> <a href='/blog/categories/it' style='font-size: 105.71428571428571%'>It(2)</a> <a href='/blog/categories/java' style='font-size: 102.85714285714286%'>Java(1)</a> <a href='/blog/categories/linux' style='font-size: 160.0%'>Linux(21)</a> <a href='/blog/categories/octopress' style='font-size: 122.85714285714286%'>Octopress(8)</a> <a href='/blog/categories/php' style='font-size: 102.85714285714286%'>Php(1)</a> <a href='/blog/categories/python' style='font-size: 102.85714285714286%'>Python(1)</a> <a href='/blog/categories/ruby' style='font-size: 108.57142857142857%'>Ruby(3)</a> <a href='/blog/categories/software' style='font-size: 128.57142857142858%'>Software(10)</a> </span>
+    <span id="tag-cloud"><a href='/blog/categories/davinci' style='font-size: 102.72727272727273%'>Davinci(1)</a> <a href='/blog/categories/embedded' style='font-size: 105.45454545454545%'>Embedded(2)</a> <a href='/blog/categories/essay' style='font-size: 108.18181818181819%'>Essay(3)</a> <a href='/blog/categories/git' style='font-size: 102.72727272727273%'>Git(1)</a> <a href='/blog/categories/it' style='font-size: 105.45454545454545%'>It(2)</a> <a href='/blog/categories/java' style='font-size: 102.72727272727273%'>Java(1)</a> <a href='/blog/categories/linux' style='font-size: 160.0%'>Linux(22)</a> <a href='/blog/categories/octopress' style='font-size: 121.81818181818181%'>Octopress(8)</a> <a href='/blog/categories/php' style='font-size: 102.72727272727273%'>Php(1)</a> <a href='/blog/categories/python' style='font-size: 102.72727272727273%'>Python(1)</a> <a href='/blog/categories/ruby' style='font-size: 108.18181818181819%'>Ruby(3)</a> <a href='/blog/categories/software' style='font-size: 127.27272727272728%'>Software(10)</a> </span>
 </section>
 <section>
   <h1>Blogroll</h1>
