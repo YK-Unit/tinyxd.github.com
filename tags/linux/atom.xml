@@ -4,7 +4,7 @@
   <title><![CDATA[Tag: linux | Keen on Art of Tech]]></title>
   <link href="http://tinyxd.me/tags/linux/atom.xml" rel="self"/>
   <link href="http://tinyxd.me/"/>
-  <updated>2012-08-06T19:12:36+08:00</updated>
+  <updated>2012-08-07T13:03:37+08:00</updated>
   <id>http://tinyxd.me/</id>
   <author>
     <name><![CDATA[Tiny]]></name>
@@ -12,6 +12,281 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[linux缺页异常处理程序]]></title>
+    <link href="http://tinyxd.me/blog/2012/08/07/linux-page-fault-exception/"/>
+    <updated>2012-08-07T12:54:00+08:00</updated>
+    <id>http://tinyxd.me/blog/2012/08/07/linux-page-fault-exception</id>
+    <content type="html"><![CDATA[<p>Linux的缺页（Page Fault）异常处理程序必须区分以下两种情况：由编程错误所引起的异常，及由引用属于进程地址空间但还尚未分配物理页框的页所引起的异常。</p>
+
+<p>线性区描述符可以让缺页异常处理程序非常有效地完成它的工作。do_page_fault()函数是80x86上的缺页中断服务程序，它把引起缺页的线性地址和当前进程的线性区相比较，从而能够根据和下图所示的方案选择适当的方法处理这个异常。</p>
+
+<!--more-->
+
+
+<iframe src="https://skydrive.live.com/embed?cid=1F260DE1061FCF3E&resid=1F260DE1061FCF3E%21159&authkey=ACvRvyPr-3BWicI" width="320" height="207" frameborder="0" scrolling="no"></iframe>
+
+
+<p></p>
+
+<p>在实际中，情况更复杂一些，因为缺页处理程序必须处理多种分得更细的特殊情况，它们不宜在总体方案中列出来，还必须区分许多种合理的访问。处理程序的详细流程图如图所示：</p>
+
+<iframe src="https://skydrive.live.com/embed?cid=1F260DE1061FCF3E&resid=1F260DE1061FCF3E%21160&authkey=AFYUnmLPL0RCxXM" width="299" height="319" frameborder="0" scrolling="no"></iframe>
+
+
+<p></p>
+
+<p>本文参考自《深入理解linux内核》和<a href="http://blog.csdn.net/yunsongice/article/details/5637671">缺页异常处理程序</a> 。 <br/>
+本文地址：<a href="http://tinyxd.me/blog/2012/08/07/linux-page-fault-exception/">http://tinyxd.me/blog/2012/08/07/linux-page-fault-exception/</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[linux线性区]]></title>
+    <link href="http://tinyxd.me/blog/2012/08/07/linux-linear-regions/"/>
+    <updated>2012-08-07T12:43:00+08:00</updated>
+    <id>http://tinyxd.me/blog/2012/08/07/linux-linear-regions</id>
+    <content type="html"><![CDATA[<p><strong><em>摘要</em></strong>：内核使用一种新的资源成功实现了对进程动态内存的推迟分配。当用户态进程请求动态内存时，并没有获得请求的页框，而仅仅获得对一个新的线性地址区间的使用权，而这一线性地址区间就成为进程地址空间的一部分。这一区间叫做“线性区”（memory region）。</p>
+
+<br />
+
+
+<p>Linux通过类型为vm_area_struct的对象实现线性区。</p>
+
+<p>每次运行一个程序，该程序的内容必须被放到进程的虚拟地址空间，对于可执行程序的共享库也是如此。可执行程序并非真正读到物理内存中，而只是链接到进程的虚拟内存中。</p>
+
+<!--more-->
+
+
+<p>不论我们运行某个程序多少次内存分配地址（bss、栈、堆、数据段、正文段）都是一样的。我们知道，linux操作系统每个进程的地址空间都是独立的，其实这里的独立说得是物理空间上得独立。即相同的虚拟地址，不同的物理地址。</p>
+
+<p>当一个可执行程序映射到进程虚拟地址空间时，一组vm_area_struct数据结构将被产生。每个vm_area_struct数据结构表示可执行印象的一部分;是可执行代码，或是初始化的数据，以及未初始化的数据等。</p>
+
+<p>　　linux操作系统是通过sys_exec对可执行文件进行映射以及读取的，有如下几步：</p>
+
+<p>　　1.创建一组vm_area_struct</p>
+
+<p>　　2.圈定一个虚拟用户空间，将其起始结束地址(elf段中已设置好)保存到vm_start和vm_end中。</p>
+
+<p>　　3.将磁盘file句柄保存在vm_file中</p>
+
+<p>　　4.将对应段在磁盘file中的偏移值(elf段中已设置好)保存在vm_pgoff中;</p>
+
+<p>　　5.将操作该磁盘file的磁盘操作函数保存在vm_ops中</p>
+
+<p>　　注意：这里没有对应 的页目录表项创建页表，更不存在设置页表项了。</p>
+
+<p>每个线性区描述符表示一个线性地址区间。vm_start字段包含区间的第一个线性地址，而vm_end字段包含区间之外的第一个线性地址。vm_end - vm_start表示线性区的长度。vm_mm字段指向拥有这个区间的进程的mm_struct内存描述符。我们稍后将描述vm_area_struct的其他字段。</p>
+
+<p>进程所拥有的线性区从来不重叠，并且内核尽力把新分配的线性区与紧邻的现有线性区进行合并。两个相邻区的访问权限如果相匹配，就能把它们合并在一起。</p>
+
+<p>当一个新的线性地址区间加入到进程的地址空间时，内核检查一个已经存在的线性区是否可以扩大。如果不能，就创建一个新的线性区。类似地，如果从进程的地址空间删除一个线性地址区间，内核就要调整受影响的线性区大小。有些情况下，调整大小迫使一个线性区被分成两个更小的部分（从理论上说，如果没有空闲的内存给新的内存描述符使用，删除一个线性地址区间可能会失败，不过这种情况出现的概率太小太小）。</p>
+
+<h2>线性区的数据结构 </h2>
+
+<p>进程所拥有的所有线性区是通过一个简单的链表链接在一起的。出现在链表中的线性区是按内存地址的升序排列的；不过，每两个线性区可以由未用的内存地址区隔开。每个vm_area_struct元素的vm_next字段指向链表的下一个元素。内核通过进程的内存描述符的mmap字段来查找线性区，其中mmap字段指向链表中的第一个线性区描述符。</p>
+
+<p>内存描述符的map_count字段存放进程所拥有的线性区数目。默认情况下，一个进程可以最多拥有65536个不同的线性区，系统管理员可以通过写/proc/sys/vm/max_map_count文件来修改这个限定值。</p>
+
+<p>内核频繁执行的一个操作就是查找包含指定线性地址的线性区。由于链表是经过排序的，因此，只要在指定线性地址之后找到一个线性区，搜索就可以结束。</p>
+
+<p>然而，仅当进程的线性区非常少时使用这种链表才是很方便的，比如说只有一二十个线性区。在链表中查找元素、插入元素、删除元素涉及许多操作，这些操作所花费的时间与链表的长度成线性比例。</p>
+
+<p>尽管多数的Linux进程使用的线性区的数量非常少，但是诸如面向对象的数据库，或malloc()的专用调试器那样过于庞大的大型应用程序可能会有成百上千的线性区。在这种情况下，线性区链表的管理变得非常低效，因此，与内存相关的系统调用的性能就降低到令人无法忍受的程度。</p>
+
+<p>Linux2.6实现了两种一种是线性的链表结构方便顺序索引，而红黑树的数据结构方便查找。</p>
+
+<h2>红黑树    </h2>
+
+<p>二叉排序树：每个元素（或说节点）通常有两个孩子：左孩子和右孩子。树中的元素被排序。对关键字为N的节点，它的左子树上的所有元素的关键字都比N小；相反，它的右子树上的所有元素的关键字都比N大。节点的关键字被写入节点内部。而除了具有基本的二叉排序树的特点以外，红-黑树必须满足下列5条规则：</p>
+
+<p>1、每个节点必须或为黑或为红。</p>
+
+<p>2、树的根必须为黑。</p>
+
+<p>3、新插入的节点必须为红色。</p>
+
+<p>4、红节点的孩子必须为黑。</p>
+
+<p>5、从一个节点到后代叶子节点的每个路径都包含相同数量的黑节点。当统计黑节点个数时，空指针也算作黑节点。</p>
+
+<p>这5条规则确保具有n个内部节点的任何红一黑树其高度最多为2 × log（n+l）。</p>
+
+<p>在红-黑树中搜索一个元素因此而变得非常高效，因为其操作的执行时间与树大小的对数成线性比例。换句话说，双倍的线性区个数只多增加一次循环。</p>
+
+<p>在红黑树中插入和删除一个元素也是高效的，因为算法能很快地遍历树以确定插入元素的位置或删除元素的位置。任何新节点必须作为一个叶子插入并着成红色。如果操作违背了上述规则，就必须移动或重新着色树的几个节点。</p>
+
+<p>为了存放进程的线性区，Linux既使用了链表，也使用了红-黑树。这两种数据结构包含指向同一线性区描述符的指针，当插入或删除一个线性区描述符时，内核通过红-黑树搜索前后元素，并用搜索结果快速更新链表而不用扫描链表。</p>
+
+<p>链表的头由内存描述符的mmap字段所指向。任何线性区对象都在vm_next字段存放指向链表下一个元素的指针。红-黑树的首部由内存描述符的mm_rb字段所指向。任和线性区对象都在类型为rb_node的vm_rb字段中存放节点颜色以及指向双亲、左孩子和右孩子的指针。</p>
+
+<p>一般来说，红-黑树用来确定含有指定地址的线性区，而链表通常在扫描整个线性区集合时来使用。</p>
+
+<h2>线性区访问权限 </h2>
+
+<p>页与线性区的关系：我们使用“页”这个术语既表示一组线性地址和其物理地址对应的关系。尤其是，我们把介于0-4095之间的线性地址区间称为第0页，介于4096-8191之间的线性地址区间称为第1页，依此类推。因此每个线性区都由一组号码连续的页所构成。</p>
+
+<p>与页相关的两种标志：</p>
+
+<ul>
+<li><p>在每个页表项中存放的几个标志，如：Read/Write、Present等（参见“常规分页”）。</p></li>
+<li><p>存放在每个页描述符flags字段中的一组标志（参见的“页框管理”）。</p></li>
+</ul>
+
+
+<p>第一种标志由80x86硬件用来检查能否执行所请求的寻址类型；第二种标志由Linux用于许多不同的目的。</p>
+
+<p>现在介绍第三种标志，即与线性区的页相关的那些标志。它们存放在vm_area_struct描述符的vm_flags字段中。一些标志给内核提供有关这个线性区全部页的信息，例如它们包含有什么内容，进程访问每个页的权限是什么。另外的标志描述线性区自身，例如它应该如何增长（这些标志位于include/linux/Mm.h）。</p>
+
+<p>VM_READ：页是可读的</p>
+
+<p>VM_WRITE：页是可写的</p>
+
+<p>VM_EXEC：页是可执行的</p>
+
+<p>VM_SHARED：页可以由几个进程共享</p>
+
+<p>VM_MAYREAD：可以设置VM_READ标志</p>
+
+<p>VM_MAYWRITE：可以设置VM_WRITE标志</p>
+
+<p>VM_MAYEXEC：可以设置VM_EXEC标志</p>
+
+<p>VM_MAYSHARE：可以设置VM_SHARE标志</p>
+
+<p>VM_GROWSDOWN：线性区可以向低地址扩展</p>
+
+<p>VM_GROWSUP：线性区可以向高地址扩展</p>
+
+<p>VM_SHM：线性区用于IPC的共享内存</p>
+
+<p>VM_DENYWRITE：线性区映射一个不能打开用于写的文件</p>
+
+<p>VM_EXECUTABLE：线性区映射一个可执行文件</p>
+
+<p>VM_LOCKED：线性区中的页被锁住，且不能换出</p>
+
+<p>VM_IO：线性区映射设备的I/O地址空间</p>
+
+<p>VM_SEQ_READ：应用程序顺序地访问页</p>
+
+<p>VM_RAND_READ：应用程序以真正的随机顺序访问页</p>
+
+<p>VM_DONTCOPY：当创建一个新进程时不拷贝线性区</p>
+
+<p>VM_DONTEXPAND：通过mremap()系统调用禁止线性区扩展</p>
+
+<p>VM_RESERVED：线性区是特殊的（如：它映射某个设备的I/O地址空间），因此它的页不能被交换出去</p>
+
+<p>VM_ACCOUNT：创建IPC共享线性区时检查是否有足够的空闲内存用干映射</p>
+
+<p>VM_HUGETLB：通过扩展分页机制处理线性区中的页</p>
+
+<p>VM_NONLINEAR：线性区实现非线性文件映射</p>
+
+<p>线性区描述符所包含的页访问权限可以任意组合。例如，存在这样一种可能性，允许一个线性区中的页可以执行但是不可以读取。为了有效地实现这种保护方案，与线性区的页相关的访问权限（读、写及执行）必须被复制到相应的所有表项中，以便由分页单元直接执行检查。换句话说，页访问权限表示何种类型的访问应该产生一个缺页异常。Linux委派缺页处理程序查找导致缺页的原因，因为缺页处理程序实现了许多页处理策略。</p>
+
+<p>页表标志的初值（注意，同一线性区所有页标志的初值必须一样）存放在vm_area_struct描述符的vm_page_prot字段中。当增加一个页时，内核根据vm_page_prot字段的值设置相应页表项中的标志。</p>
+
+<pre><code>typedef struct { unsigned long long pgprot; } pgprot_t;   /* include/asm-i386/Page.h */ 
+</code></pre>
+
+<p>然而，不能把线性区的访问权限直接转换成页保护位，这是因为：</p>
+
+<ul>
+<li><p>在某些情况下，即使由相应线性区描述符的vm flags字段所指定的某个页的访问权限允许对该页进行访问，但是，对该页的访问还是应当产生一个缺页异常。例如“写时复制”的情况，内核可能决定把属于两个不同进程的两个完全一样的可写私有页（它的VM_SHARE标志被清0）存入同一个页框中；在这种情况下，无论哪一个进程试图改动这个页都应当产生一个异常。</p></li>
+<li><p>80x86处理器的页表仅有两个保护位，即Read/Write和User/Supervisor标志。此外，一个线性区所包含的任何一个页的User/Supervisor标志必须总置为1，因为用户态进程必须总能够访问其中的页。</p></li>
+<li><p>启用PAE的新近Intel Pentium 4微处理器，在所有64位页表项中支持NX（No eXecute）标志。</p></li>
+</ul>
+
+
+<p>如果内核没有被编译成支持PAE，那么Linux采取以下规则以克服80x86微处理器的硬件限制：</p>
+
+<ul>
+<li><p>读访问权限总是隐含着执行访问权限，反之亦然。</p></li>
+<li><p>写访问权限总是隐含着读访问权限。</p></li>
+</ul>
+
+
+<p>反之，如果内核被编译成支持PAE，而且CPU有NX标志，Linux就采取不同的规则：</p>
+
+<ul>
+<li><p>行访问权限总是隐含着读访问权限。</p></li>
+<li><p>访问权限总是隐含着读访问权限。</p></li>
+</ul>
+
+
+<p>因此，要根据以下规则精简由读、写、执行和共享访问权限的16种可能组合：</p>
+
+<ul>
+<li><p>如果页具有写和共享两种访问权限，那么，Read/Write位被设置为1。</p></li>
+<li><p>如果页具有读或执行访问权限，但是既没有写也没有共享访问权限，那么，Read/Write位被清0。</p></li>
+<li><p>如果支持NX位，而且页没有执行访问权限，那么，把NX位设置为1。</p></li>
+<li><p>如果页没有任何访问权限，那么，Presen七位被清0，以便每次访问都产生一个缺页异常。然而，为了把这种情况与真正的页框不存在的情况相区分，Linux还把Page size位置为1（你可能认为Page size位的这种用法并不正当，因为这个位本来是表示实际页的大小。但是，Linux可以侥幸逃脱这种骗局，因为80 x 86芯片在页目录项中检查Page size位，而不是在页表的表项中检查该位。）</p></li>
+</ul>
+
+
+<p>访问权限的每种组合所对应的精简后的保护位存放在protection_map数组的16个元素中（mm/Mmap.c）：
+```
+pgprot_t protection_map[16] = {</p>
+
+<p><strong>P000, </strong>P001, <strong>P010, </strong>P011, <strong>P100, </strong>P101, <strong>P110, </strong>P111,</p>
+
+<p><strong>S000, </strong>S001, <strong>S010, </strong>S011, <strong>S100, </strong>S101, <strong>S110, </strong>S111</p>
+
+<p>};</p>
+
+<p>//include/asm-i386/Pgtable.h</p>
+
+<h1>define __P000 PAGE_NONE</h1>
+
+<h1>define __P001 PAGE_READONLY</h1>
+
+<h1>define __P010 PAGE_COPY</h1>
+
+<h1>define __P011 PAGE_COPY</h1>
+
+<h1>define __P100 PAGE_READONLY_EXEC</h1>
+
+<h1>define __P101 PAGE_READONLY_EXEC</h1>
+
+<h1>define __P110 PAGE_COPY_EXEC</h1>
+
+<h1>define __P111 PAGE_COPY_EXEC</h1>
+
+<h1>define __S000 PAGE_NONE</h1>
+
+<h1>define __S001 PAGE_READONLY</h1>
+
+<h1>define __S010 PAGE_SHARED</h1>
+
+<h1>define __S011 PAGE_SHARED</h1>
+
+<h1>define __S100 PAGE_READONLY_EXEC</h1>
+
+<h1>define __S101 PAGE_READONLY_EXEC</h1>
+
+<h1>define __S110 PAGE_SHARED_EXEC</h1>
+
+<h1>define __S111 PAGE_SHARED_EXEC</h1>
+
+<p><code>
+例如：
+</code></p>
+
+<h1>define COPY_EXEC /</h1>
+
+<p><em><em>pgprot(</em>PAGE_PRESENT | </em>PAGE_USER | _PAGE_ACCESSED)   <br/>
+```</p>
+
+<br />
+
+
+<p>本文章参考自《深入理解linux内核》 。 <br/>
+本文地址：<a href="http://tinyxd.me/blog/2012/08/07/linux-linear-regions/">http://tinyxd.me/blog/2012/08/07/linux-linear-regions/</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[linux进程地址空间]]></title>
@@ -396,199 +671,6 @@ struct vm_struct    *next;
 
 <p>本文章参考自《linux内核设计与实现》、<a href="http://blog.csdn.net/jiangyuping_fyl/article/details/7268287">slab分配器</a> 及 <a href="http://blog.csdn.net/yunsongice/article/details/5536197">非连续内存区</a> 。 <br/>
 本站文章如果没有特别说明，均为<strong>原创</strong>，转载请以<strong>链接</strong>方式注明本文地址：<a href="http://tinyxd.me/blog/2012/07/31/linux-memory-management-3/">http://tinyxd.me/blog/2012/07/31/linux-memory-management-3/</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[linux内存管理（中）]]></title>
-    <link href="http://tinyxd.me/blog/2012/07/31/linux-memory-management-2/"/>
-    <updated>2012-07-31T23:16:00+08:00</updated>
-    <id>http://tinyxd.me/blog/2012/07/31/linux-memory-management-2</id>
-    <content type="html"><![CDATA[<p><strong><em>摘要</em></strong>：slab分配器是Linux内存管理中非常重要和复杂的一部分，其工作是针对一些经常分配并释放的对象，如进程描述符等，这些对象的大小一般比较小，如果直接采用伙伴系统来进行分配和释放，不仅会造成大量的内碎片，而且处理速度也太慢。而slab分配器是基于对象进行管理的，相同类型的对象归为一类(如进程描述符就是一类)，每当要申请这样一个对象，slab分配器就从一个slab列表中分配一个这样大小的单元出去，而当要释放时，将其重新保存在该列表中，而不是直接返回给伙伴系统。slab分配对象时，会使用最近释放的对象内存块，因此其驻留在CPU高速缓存的概率较高。</p>
-
-<h2>简介</h2>
-
-<!--more-->
-
-
-<p>内存管理的目标是提供一种方法，为实现各种目的而在各个用户之间实现内存共享。内存管理方法应该实现以下两个功能：</p>
-
-<ul>
-<li><p>最小化管理内存所需的时间</p></li>
-<li><p>最大化用于一般应用的可用内存（最小化管理开销）</p></li>
-</ul>
-
-
-<p>内存管理实际上是一种关于权衡的零和游戏。您可以开发一种使用少量内存进行管理的算法，但是要花费更多时间来管理可用内存。也可以开发一个算法来有效地管理内存，但却要使用更多的内存。最终，特定应用程序的需求将促使对这种权衡作出选择。</p>
-
-<p>每个内存管理器都使用了一种基于堆的分配策略。在这种方法中，大块内存（称为 堆）用来为用户定义的目的提供内存。当用户需要一块内存时，就请求给自己分配一定大小的内存。堆管理器会查看可用内存的情况（使用特定算法）并返回一块内存。搜索过程中使用的一些算法有 first-fit（在堆中搜索到的第一个满足请求的内存块 ）和 best-fit（使用堆中满足请求的最合适的内存块）。当用户使用完内存后，就将内存返回给堆。</p>
-
-<p>这种基于堆的分配策略的根本问题是碎片（fragmentation）。当内存块被分配后，它们会以不同的顺序在不同的时间返回。这样会在堆中留下一些洞，需要花一些时间才能有效地管理空闲内存。这种算法通常具有较高的内存使用效率（分配需要的内存），但是却需要花费更多时间来对堆进行管理。</p>
-
-<p>另外一种方法称为 buddy memory allocation，是一种更快的内存分配技术，它将内存划分为 2 的幂次方个分区，并使用 best-fit 方法来分配内存请求。当用户释放内存时，就会检查 buddy 块，查看其相邻的内存块是否也已经被释放。如果是的话，将合并内存块以最小化内存碎片。这个算法的时间效率更高，但是由于使用 best-fit 方法的缘故，会产生内存浪费。</p>
-
-<p>伙伴系统算法采用页框作为基本内存区，适合对大块内存的请求，为了解决外碎片的问题。而小内存的分配，会产生内碎片（internal fragmentation），这需要新的数据结构来描述在同一页框中 如何分配小内存区。</p>
-
-<p>为了满足内核对这种小内存块的需要，Linux系统采用了一种被称为slab分配器的技术。Slab分配器的实现相当复杂，但原理不难，其核心思想就是“存储池[2]”的运用。内存片段（小块内存）被看作对象，当被使用完后，并不直接释放而是被缓存到“存储池”里，留做下次使用，这无疑避免了频繁创建与销毁对象所带来的额外负载。</p>
-
-<p>Slab技术不但避免了内存内部分片（下文将解释）带来的不便（引入Slab分配器的主要目的是为了减少对伙伴系统分配算法的调用次数——频繁分配和回收必然会导致内存碎片——难以找到大块连续的可用内存），而且可以很好利用硬件缓存提高访问速度。</p>
-
-<p>Slab并非是脱离伙伴关系而独立存在的一种内存分配方式，slab仍然是建立在页面基础之上，换句话说，Slab将页面（来自于伙伴关系管理的空闲页框链）撕碎成众多小内存块以供分配，slab中的对象分配和销毁使用kmem_cache_alloc与kmem_cache_free。每个高速缓存都是由kmem_cache_t(等价于struct kmem_cache)</p>
-
-<p>slab分配器把对象分组放进高速缓存。包含高速缓存的主内存区被划分为多个slab，每个slab由一个或多个连续的页框组成，这些页框既包含已分配的对象，也包含空闲的对象。内核周期性地扫描高速缓存并释放空slab对应的页框。</p>
-
-<p>普通高速缓存在系统初始化期间调用kmem_cache_init()和kmem_cache_sizes_init()来建立普通高速缓存。专用高速缓存由kmem_cache_create()函数创建。所有普通和专用高速缓存的名字都可以在运行期间通过读取/proc/slabinfo文件得到。这个文件也指明每个高速缓存中空闲对象的个数和已分配对象的个数。</p>
-
-<p>slab的对象描述符与slab描述符本身类似，也可以用两种可能的方式来存放：外部对象描述符（存放在slab的外部）、内部对象描述符（存放在slab的内部）。每个对象都有类型为kmem_bufctl_t的一个描述符。</p>
-
-<h2>API 函数 </h2>
-
-<p>现在来看一下能够创建新 slab 缓存、向缓存中增加内存、销毁缓存的应用程序接口（API）以及 slab 中对对象进行分配和释放操作的函数。</p>
-
-<p>第一个步骤是创建 slab 缓存结构，您可以将其静态创建为：</p>
-
-<p>struct struct kmem_cache *my_cachep;</p>
-
-<p>然后其他 slab 缓存函数将使用该引用进行创建、删除、分配等操作。kmem_cache 结构包含了每个中央处理器单元（CPU）的数据、一组可调整的（可以通过 proc 文件系统访问）参数、统计信息和管理 slab 缓存所必须的元素。</p>
-
-<p>kmem_cache_create</p>
-
-<p>内核函数 kmem_cache_create 用来创建一个新缓存。这通常是在内核初始化时执行的，或者在首次加载内核模块时执行。其原型定义如下：</p>
-
-<p>struct kmem_cache * kmem_cache_create( const char <em>name, size_t size, size_t align,                        unsigned long flags;                        void (</em>ctor)(void<em>, struct kmem_cache </em>, unsigned long),                        void (<em>dtor)(void</em>, struct kmem_cache *, unsigned long));</p>
-
-<p>name 参数定义了缓存名称，proc 文件系统（在 /proc/slabinfo 中）使用它标识这个缓存。 size 参数指定了为这个缓存创建的对象的大小， align 参数定义了每个对象必需的对齐。 flags 参数指定了为缓存启用的选项。这些标志如表 1 所示。</p>
-
-<p>表 1. kmem_cache_create 的部分选项（在 flags 参数中指定）</p>
-
-<p>选项                  说明</p>
-
-<p>SLAB_RED_ZONE      在对象头、尾插入标志，用来支持对缓冲区溢出的检查。</p>
-
-<p>SLAB_POISON            使用一种己知模式填充 slab，允许对缓存中的对象进行监视（对象属对象所有，不过可以在外部进行修改）。</p>
-
-<p>SLAB_HWCACHE_ALIGN             指定缓存对象必须与硬件缓存行对齐。</p>
-
-<p>ctor 和 dtor 参数定义了一个可选的对象构造器和析构器。构造器和析构器是用户提供的回调函数。当从缓存中分配新对象时，可以通过构造器进行初始化。</p>
-
-<p>在创建缓存之后， kmem_cache_create 函数会返回对它的引用。注意这个函数并没有向缓存分配任何内存。相反，在试图从缓存（最初为空）分配对象时，refill 操作将内存分配给它。当所有对象都被使用掉时，也可以通过相同的操作向缓存添加内存。</p>
-
-<p>kmem_cache_destroy</p>
-
-<p>内核函数 kmem_cache_destroy 用来销毁缓存。这个调用是由内核模块在被卸载时执行的。在调用这个函数时，缓存必须为空。</p>
-
-<p>void kmem_cache_destroy( struct kmem_cache *cachep );</p>
-
-<p>kmem_cache_alloc</p>
-
-<p>要从一个命名的缓存中分配一个对象，可以使用 kmem_cache_alloc 函数。调用者提供了从中分配对象的缓存以及一组标志：</p>
-
-<p>void kmem_cache_alloc( struct kmem_cache *cachep, gfp_t flags );</p>
-
-<p>这个函数从缓存中返回一个对象。注意如果缓存目前为空，那么这个函数就会调用 cache_alloc_refill 向缓存中增加内存。kmem_cache_alloc 的 flags 选项与 kmalloc 的 flags 选项相同。表 2 给出了标志选项的部分列表。</p>
-
-<p>表 2. kmem_cache_alloc 和 kmalloc 内核函数的标志选项</p>
-
-<p>标志    说明</p>
-
-<p>GFP_USER 为用户分配内存（这个调用可能会睡眠）。</p>
-
-<p>GFP_KERNEL       从内核 RAM 中分配内存（这个调用可能会睡眠）。</p>
-
-<p>GFP_ATOMIC         使该调用强制处于非睡眠状态（对中断处理程序非常有用）。</p>
-
-<p>GFP_HIGHUSER       从高端内存中分配内存。</p>
-
-<p>kmem_cache_zalloc</p>
-
-<p>内核函数 kmem_cache_zalloc 与 kmem_cache_alloc 类似，只不过它对对象执行 memset 操作，用来在将对象返回调用者之前对其进行清除操作。</p>
-
-<p>kmem_cache_free</p>
-
-<p>要将一个对象释放回 slab，可以使用 kmem_cache_free。调用者提供了缓存引用和要释放的对象。</p>
-
-<p>void kmem_cache_free( struct kmem_cache <em>cachep, void </em>objp );</p>
-
-<p>kmalloc 和 kfree</p>
-
-<p>内核中最常用的内存管理函数是 kmalloc 和 kfree 函数。这两个函数的原型如下：</p>
-
-<p>void <em>kmalloc( size_t size, int flags ); void kfree( const void </em>objp );</p>
-
-<p>注意在 kmalloc 中，惟一两个参数是要分配的对象的大小和一组标志（请参看 表 2 中的部分列表）。但是 kmalloc 和 kfree 使用了类似于前面定义的函数的 slab 缓存。kmalloc 没有为要从中分配对象的某个 slab 缓存命名，而是循环遍历可用缓存来查找可以满足大小限制的缓存。找到之后，就（使用 <code>__kmem_cache_alloc</code>）分配一个对象。要使用 kfree 释放对象，从中分配对象的缓存可以通过调用 virt_to_cache 确定。这个函数会返回一个缓存引用，然后在 __cache_free 调用中使用该引用释放对象。</p>
-
-<h2>其他函数 </h2>
-
-<p>slab 缓存 API 还提供了其他一些非常有用的函数。 kmem_cache_size 函数会返回这个缓存所管理的对象的大小。您也可以通过调用kmem_cache_name 来检索给定缓存的名称（在创建缓存时定义）。缓存可以通过释放其中的空闲 slab 进行收缩。这可以通过调用kmem_cache_shrink 实现。注意这个操作（称为回收）是由内核定期自动执行的（通过 kswapd）。</p>
-
-<p>unsigned int kmem_cache_size( struct kmem_cache <em>cachep ); const char </em>kmem_cache_name( struct kmem_cache <em>cachep ); int kmem_cache_shrink( struct kmem_cache </em>cachep );</p>
-
-<h2>补充： </h2>
-
-<p>如果对存储区的请求不频繁，就用一组普通高速缓存来处理，普通高速缓存中的对象具有几何分布的大小，范围为32~131072字节。</p>
-
-<p>使用kmalloc()函数申请，kfree()释放。</p>
-
-<br />
-
-
-<p>本文章参考自《深入理解linux内核》及 <a href="https://www.ibm.com/developerworks/cn/linux/l-linux-slab-allocator/">动态内存管理</a>。 <br/>
-本站文章如果没有特别说明，均为<strong>原创</strong>，转载请以<strong>链接</strong>方式注明本文地址：<a href="http://tinyxd.me/blog/2012/07/31/linux-memory-management-2/">http://tinyxd.me/blog/2012/07/31/linux-memory-management-2/</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[linux内存管理（上）]]></title>
-    <link href="http://tinyxd.me/blog/2012/07/29/linux-memory-management-1/"/>
-    <updated>2012-07-29T23:33:00+08:00</updated>
-    <id>http://tinyxd.me/blog/2012/07/29/linux-memory-management-1</id>
-    <content type="html"><![CDATA[<p><strong><em>摘要</em></strong>：内核如何给自己分配动态内存呢？</p>
-
-<p>“页框管理”和“内存区管理”是对连续物理内存区处理的两种不同技术。</p>
-
-<p>“非连续内存区管理”是处理非连续内存区的第三种技术。</p>
-
-<h2>页框管理  </h2>
-
-<p>intel的Pentium处理器可以采用两种不同的页框大小：4KB和4MB。Linux采用4KB页框大小作为标准的内存分配单元。物理页在系统中由页框结构struct paga描述，系统中所有的页框存储在数组mem_map[]中，可以通过该数组找到系统中的每一页（空闲或非空闲）。</p>
-
-<!--more-->
-
-
-<h2>内存管理区  </h2>
-
-<p>Linux2.6把每个内存节点的物理内存划分为3个管理区（zone）。在80X86UMA体系结构中的管理区为：</p>
-
-<p>ZONE_DMA：包含低于16MB的内存页框</p>
-
-<p>ZONE_NORMAL：包含高于16MB且低于896MB的内存页框</p>
-
-<p>ZONE_HIGHMEM：包含从896MB开始高于896MB的内存页框（并不映射在内核线性地址空间的第4个GB）</p>
-
-<p>注意：ZONE_DMA和ZONE_NORMAL区包含内存的“常规”页框，通过把它们线性映射到线性地址空间的第4个GB，内核就可以直接进行访问。相反，ZONE_HIGHMEM区包含的内存页不能由内核直接访问，尽管它们也线性地映射到了线性地址空间的第4个GB。在64位体系结构上ZONE_HIGHMEM区总是空的。</p>
-
-<p>Linux内核管理物理内存是通过分页机制实现的，它将整个内存划分成无数4k(在i386体系结构中)大小页，从而分配和回收内存的基本单位便是内存页了。利用分页管理有助于灵活分配内存地址，因为分配时不必要求必须有大块的连续内存，系统可以东一页、西一页的凑出所需要的内存供进程使用。虽然如此，但是实际上系统使用内存还是倾向于分配连续的内存块，因为分配连续内存时，页表不需要更改，因此能降低TLB的刷新率（频繁刷新会很大增加访问速度）。</p>
-
-<p>鉴于上述需求，内核分配物理页为了尽量减少不连续情况，采用了“伙伴”关系来管理空闲页框。伙伴关系分配算法大家不应陌生——几乎所有操作系统书都会提到,我们不去详细说它了，如果不明白可以参看有关资料。这里只需要大家明白Linux中空闲页面的组织和管理利用了伙伴关系，因此空闲页面分配时也需要遵循伙伴关系，最小单位只能是2的幂倍页面大小。内核中分配空闲页框的基本函数是get_free_page/get_free_pages，它们或是分配单页或是分配指定的页框（2、4、8…512页）。</p>
-
-<p>注意：get_free_page是在内核中分配内存，不同于malloc在用户空间中分配，malloc利用堆动态分配，实际上是调用brk()系统调用，该调用的作用是扩大或缩小进程堆空间（它会修改进程的brk域）。如果现有的内存区域不够容纳堆空间，则会以页面大小的倍数位单位，扩张或收缩对应的内存区域，但brk值并非以页面大小为倍数修改，而是按实际请求修改。因此Malloc在用户空间分配内存可以以字节为单位分配,但内核在内部仍然会是以页为单位分配的。</p>
-
-<h2>高端内存页框的内核映射  </h2>
-
-<p>内核可以采用三种不同的机制将页框映射到高端内存；分别叫做永久内核映射、临时内核映射及非连续内存分配。</p>
-
-<p>永久内核映射可能阻塞当前进程，不能用于中断处理程序和可延迟函数。</p>
-
-<p>临时内核映射比永久内核映射的实现要简单，可以用在中断处理程序和可延迟函数的内部，因为它们从不阻塞当前进程。</p>
-
-<h2>伙伴系统算法（buddy systerm）  </h2>
-
-<p>内核要分配一组连续的页框，必须建立一种健壮、高效的分配策略。为此，必须解决著名的外部碎片（external fragmentation）问题。频繁地请求和释放不同大小的一组连续页框，必然导致在已分配页框的块内分散了许多小块的空闲页框。由此带来的问题是，即使有足够的空闲页框可以满足请求，但要分配一个大块的连续页框就可能无法满足。</p>
-
-<p>Linux 采用伙伴系统（buddy system）算法来解决外碎片问题。把所有的空闲页框分组为11个块链表，每个块链表分别包含大小为1, 2, 4, 8, 16, 32, 64, 128, 256，512和1024 个连续的页框。对1024 个页框的最大请求对应着4MB 大小的连续RAM块。每个块的第一个页框的物理地址是该块大小的整数倍。例如，大小为16 个页框的块，其起始地址是16 × 212（212 ＝ 4096，这是一个常规页的大小）的倍数。</p>
-
-<p>本文章参考自《深入理解linux内核》及 <a href="http://www.cnblogs.com/hoys/archive/2011/09/08/2171606.html">Linux内存管理(上)</a> 。 <br/>
-本站文章如果没有特别说明，均为<strong>原创</strong>，转载请以<strong>链接</strong>方式注明本文地址：<a href="http://tinyxd.me/blog/2012/07/29/linux-memory-management-1/">http://tinyxd.me/blog/2012/07/29/linux-memory-management-1/</a></p>
 ]]></content>
   </entry>
   

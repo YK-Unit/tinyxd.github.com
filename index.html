@@ -93,6 +93,101 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2012/08/07/linux-page-fault-exception/">Linux缺页异常处理程序</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-08-07T12:54:00+08:00" pubdate data-updated="true">Aug 7<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/08/07/linux-page-fault-exception/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Linux的缺页（Page Fault）异常处理程序必须区分以下两种情况：由编程错误所引起的异常，及由引用属于进程地址空间但还尚未分配物理页框的页所引起的异常。</p>
+
+<p>线性区描述符可以让缺页异常处理程序非常有效地完成它的工作。do_page_fault()函数是80x86上的缺页中断服务程序，它把引起缺页的线性地址和当前进程的线性区相比较，从而能够根据和下图所示的方案选择适当的方法处理这个异常。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2012/08/07/linux-page-fault-exception/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/08/07/linux-linear-regions/">Linux线性区</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-08-07T12:43:00+08:00" pubdate data-updated="true">Aug 7<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/08/07/linux-linear-regions/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><strong><em>摘要</em></strong>：内核使用一种新的资源成功实现了对进程动态内存的推迟分配。当用户态进程请求动态内存时，并没有获得请求的页框，而仅仅获得对一个新的线性地址区间的使用权，而这一线性地址区间就成为进程地址空间的一部分。这一区间叫做“线性区”（memory region）。</p>
+
+<br />
+
+
+<p>Linux通过类型为vm_area_struct的对象实现线性区。</p>
+
+<p>每次运行一个程序，该程序的内容必须被放到进程的虚拟地址空间，对于可执行程序的共享库也是如此。可执行程序并非真正读到物理内存中，而只是链接到进程的虚拟内存中。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2012/08/07/linux-linear-regions/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2012/08/05/linux-process-address-space/">Linux进程地址空间</a></h1>
     
     
@@ -482,116 +577,6 @@ ps：今天和麦子做的网站&#8212;-<a href="http://www.aitinan.com/">挨踢
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/07/25/archlinux-update-about-glibc/">Archlinux升级出现关于glibc的问题解决办法</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-07-25T18:44:00+08:00" pubdate data-updated="true">Jul 25<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/07/25/archlinux-update-about-glibc/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>好久没更新archlinux，今天更新，发现由于archlinux系统根目录结构的改变，导致好多人遇到问题，不错，笔者必然也遇到了。由于有前人的探索，再加上查阅archlinux官网论坛，得以顺利解决问题。
-运行<code>pacman -Syu</code>时会出现</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>error: failed to commit transaction (conflicting files)
-</span><span class='line'>glibc: /lib exists in filesystem
-</span><span class='line'>Errors occurred, no packages were upgraded.</span></code></pre></td></tr></table></div></figure>
-
-
-<p> <br/>
-由于这次是glibc的升级，绝对不可以用<code>--force</code>，而之前是filesysterm的升级，必须用<code>--force</code>。 <br/>
-那么接下来该怎么办呢？ <br/>
-查阅了archlinux论坛地址：<a href="https://bbs.archlinux.org/viewforum.php?id=44">https://bbs.archlinux.org/viewforum.php?id=44</a>，并参考了<a href="http://www.j927.net/arch/archlinux%E5%8D%87%E7%BA%A7%E5%A4%B1%E8%B4%A5%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E8%AE%B0%E5%BD%95.html">这篇文章</a>。    <br/>
-发现这个<a href="https://bbs.archlinux.org/viewtopic.php?id=145186">帖子</a>，其中提到这两篇文章：<a href="http://allanmcrae.com/2012/07/updating-arch-linux-from-a-core-install/">updating-arch-linux-from-a-core-install</a> 和<a href="https://wiki.archlinux.org/index.php/DeveloperWiki:usrlib">DeveloperWiki:usrlib</a>，总结以下命令：</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2012/07/25/archlinux-update-about-glibc/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/07/18/linux-kernel-synchronization/">Linux内核同步</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-07-18T15:57:00+08:00" pubdate data-updated="true">Jul 18<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/07/18/linux-kernel-synchronization/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2>内核抢占</h2>
-
-<p>抢占内核的主要特点是：一个在内核态运行的进程，可能在执行内核函数期间被另外一个进程取代。 <br/>
-只有当内核正在执行异常处理程序（尤其是系统调用），而且内核抢占没有被显式地禁用时，才可能抢占内核。 <br/>
-内核使用的各种同步技术：每CPU变量、原子操作、内存屏障、自旋锁、信号量、顺序锁、本地中断的禁止、本地软中断的禁止、读-拷贝-更新（RCU）。</p>
-
-<h2>每CPU变量</h2>
-
-<p>主要是数据结构的数组，系统的每个CPU对应数组的一个元素。 <br/>
-一个CPU不应该访问与其他CPU对应的数组元素。另外，它可以随意读或修改它自己的元素而不用担心出现竞争条件，因为它是唯一有资格这么做的CPU。在单处理器和多处理器系统中，内核抢占都可能使每CPU变量产生竞争条件。总的原则是内核控制路径应该在禁用抢占的情况下访问每CPU变量。</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2012/07/18/linux-kernel-synchronization/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -615,6 +600,14 @@ ps：今天和麦子做的网站&#8212;-<a href="http://www.aitinan.com/">挨踢
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2012/08/07/linux-page-fault-exception/">linux缺页异常处理程序</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/08/07/linux-linear-regions/">linux线性区</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2012/08/05/linux-process-address-space/">linux进程地址空间</a>
       </li>
     
@@ -626,19 +619,11 @@ ps：今天和麦子做的网站&#8212;-<a href="http://www.aitinan.com/">挨踢
         <a href="/blog/2012/08/01/awk-study/">awk 学习</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2012/07/31/linux-memory-management-3/">linux内存管理（下）</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/07/31/linux-memory-management-2/">linux内存管理（中）</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Category Cloud</h1>
-    <span id="tag-cloud"><a href='/blog/categories/davinci' style='font-size: 102.72727272727273%'>Davinci(1)</a> <a href='/blog/categories/embedded' style='font-size: 105.45454545454545%'>Embedded(2)</a> <a href='/blog/categories/essay' style='font-size: 108.18181818181819%'>Essay(3)</a> <a href='/blog/categories/git' style='font-size: 102.72727272727273%'>Git(1)</a> <a href='/blog/categories/it' style='font-size: 105.45454545454545%'>It(2)</a> <a href='/blog/categories/java' style='font-size: 102.72727272727273%'>Java(1)</a> <a href='/blog/categories/linux' style='font-size: 160.0%'>Linux(22)</a> <a href='/blog/categories/octopress' style='font-size: 121.81818181818181%'>Octopress(8)</a> <a href='/blog/categories/php' style='font-size: 102.72727272727273%'>Php(1)</a> <a href='/blog/categories/python' style='font-size: 102.72727272727273%'>Python(1)</a> <a href='/blog/categories/ruby' style='font-size: 108.18181818181819%'>Ruby(3)</a> <a href='/blog/categories/software' style='font-size: 127.27272727272728%'>Software(10)</a> </span>
+    <span id="tag-cloud"><a href='/blog/categories/davinci' style='font-size: 102.5%'>Davinci(1)</a> <a href='/blog/categories/embedded' style='font-size: 105.0%'>Embedded(2)</a> <a href='/blog/categories/essay' style='font-size: 107.5%'>Essay(3)</a> <a href='/blog/categories/git' style='font-size: 102.5%'>Git(1)</a> <a href='/blog/categories/it' style='font-size: 105.0%'>It(2)</a> <a href='/blog/categories/java' style='font-size: 102.5%'>Java(1)</a> <a href='/blog/categories/linux' style='font-size: 160.0%'>Linux(24)</a> <a href='/blog/categories/octopress' style='font-size: 120.0%'>Octopress(8)</a> <a href='/blog/categories/php' style='font-size: 102.5%'>Php(1)</a> <a href='/blog/categories/python' style='font-size: 102.5%'>Python(1)</a> <a href='/blog/categories/ruby' style='font-size: 107.5%'>Ruby(3)</a> <a href='/blog/categories/software' style='font-size: 125.0%'>Software(10)</a> </span>
 </section>
 <section>
   <h1>Blogroll</h1>

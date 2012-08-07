@@ -5,12 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>php初学 - Keen on Art of Tech</title>
+  <title>linux缺页异常处理程序 - Keen on Art of Tech</title>
 <meta name="author" content="Tiny">
 
 
-<meta name="description" content="php learning">
-<meta name="keywords" content="php">
+<meta name="description" content="专注嵌入式技术与软件编程,涉及linux,archlinux,debian,ubuntu,embedded等.">
+<meta name="keywords" content="linux page fault exception，缺页异常处理">
 
   <!-- http://t.co/dKP3o1e -->
   <meta name="HandheldFriendly" content="True">
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://tinyxd.me/blog/2012/06/19/learn-php">
+  <link rel="canonical" href="http://tinyxd.me/blog/2012/08/07/linux-page-fault-exception">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -90,7 +90,7 @@
   
   <header>
     
-      <h1 class="entry-title">Php初学</h1>
+      <h1 class="entry-title">Linux缺页异常处理程序</h1>
     
     
       <p class="meta">
@@ -106,7 +106,7 @@
   
 
 
-<time datetime="2012-06-19T20:28:00+08:00" pubdate data-updated="true">Jun 19<span>th</span>, 2012</time>
+<time datetime="2012-08-07T12:54:00+08:00" pubdate data-updated="true">Aug 7<span>th</span>, 2012</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -115,75 +115,27 @@
   </header>
 
 
-<div class="entry-content"><p>1.搭建学习环境 采用简单的打包好的：lamp. <br/>
-<a href="https://help.ubuntu.com/community/ApacheMySQLPHP#Run.2C_Stop.2C_Test.2C_And_Restart_Apache">help web sites</a></p>
+<div class="entry-content"><p>Linux的缺页（Page Fault）异常处理程序必须区分以下两种情况：由编程错误所引起的异常，及由引用属于进程地址空间但还尚未分配物理页框的页所引起的异常。</p>
 
-<p>2.PHP中文手册 <br/>
-http://www.phpchina.com/resource/manual/phpnew/</p>
+<p>线性区描述符可以让缺页异常处理程序非常有效地完成它的工作。do_page_fault()函数是80x86上的缺页中断服务程序，它把引起缺页的线性地址和当前进程的线性区相比较，从而能够根据和下图所示的方案选择适当的方法处理这个异常。</p>
 
 <!--more-->
 
 
-<p>example： <br/>
-第一个 PHP 脚本：hello.php</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="x">&lt;html&gt;</span>
-</span><span class='line'><span class="x"> &lt;head&gt;</span>
-</span><span class='line'><span class="x">  &lt;title&gt;PHP 测试&lt;/title&gt;</span>
-</span><span class='line'><span class="x"> &lt;/head&gt;</span>
-</span><span class='line'><span class="x"> &lt;body&gt;</span>
-</span><span class='line'><span class="x"> </span><span class="cp">&lt;?php</span> <span class="k">echo</span> <span class="s1">&#39;&lt;p&gt;Hello World</span>
-</span><span class='line'><span class="s1">&#39;</span><span class="p">;</span> <span class="cp">?&gt;</span><span class="x"></span>
-</span><span class='line'><span class="x"> &lt;/body&gt;</span>
-</span><span class='line'><span class="x">&lt;/html&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
+<iframe src="https://skydrive.live.com/embed?cid=1F260DE1061FCF3E&resid=1F260DE1061FCF3E%21159&authkey=ACvRvyPr-3BWicI" width="320" height="207" frameborder="0" scrolling="no"></iframe>
 
 
-<p>PHP基本语法：</p>
+<p></p>
 
-<p>四种标量类型：</p>
+<p>在实际中，情况更复杂一些，因为缺页处理程序必须处理多种分得更细的特殊情况，它们不宜在总体方案中列出来，还必须区分许多种合理的访问。处理程序的详细流程图如图所示：</p>
 
-<ul>
-<li> boolean （布尔型）</li>
-<li> integer （整型）</li>
-<li> float （浮点型, 也称作 double)</li>
-<li> string （字符串）</li>
-</ul>
+<iframe src="https://skydrive.live.com/embed?cid=1F260DE1061FCF3E&resid=1F260DE1061FCF3E%21160&authkey=AFYUnmLPL0RCxXM" width="299" height="319" frameborder="0" scrolling="no"></iframe>
 
 
-<p>两种复合类型：</p>
+<p></p>
 
-<ul>
-<li> array （数组）</li>
-<li> object （对象）</li>
-</ul>
-
-
-<p>最后是两种特殊类型：</p>
-
-<ul>
-<li> resource　（资源）</li>
-<li> NULL　（NULL）</li>
-</ul>
-
-
-<p>为了确保代码的易读性，本手册还介绍了一些伪类型：</p>
-
-<ul>
-<li> mixed</li>
-<li> number</li>
-<li> callback</li>
-</ul>
-
+<p>本文参考自《深入理解linux内核》和<a href="http://blog.csdn.net/yunsongice/article/details/5637671">缺页异常处理程序</a> 。 <br/>
+本文地址：<a href="http://tinyxd.me/blog/2012/08/07/linux-page-fault-exception/">http://tinyxd.me/blog/2012/08/07/linux-page-fault-exception/</a></p>
 </div>
 
 
@@ -206,12 +158,12 @@ http://www.phpchina.com/resource/manual/phpnew/</p>
   
 
 
-<time datetime="2012-06-19T20:28:00+08:00" pubdate data-updated="true">Jun 19<span>th</span>, 2012</time>
+<time datetime="2012-08-07T12:54:00+08:00" pubdate data-updated="true">Aug 7<span>th</span>, 2012</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/php/'>php</a>
+    <a class='category' href='/blog/categories/linux/'>linux</a>
   
 </span>
 
@@ -220,7 +172,7 @@ http://www.phpchina.com/resource/manual/phpnew/</p>
 
 <span class="tags">
   
-     Tag: <a class='tag' href='/tags/php/'>php</a>
+     Tag: <a class='tag' href='/tags/kernel/'>kernel</a>, <a class='tag' href='/tags/linux/'>linux</a>
   
 </span>
 
@@ -243,10 +195,8 @@ http://www.phpchina.com/resource/manual/phpnew/</p>
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2012/06/18/debianan-zhuang-nvidiaxian-qia-qu-dong/" title="Previous Post: debian安装nvidia显卡驱动">&laquo; debian安装nvidia显卡驱动</a>
+        <a class="basic-alignment left" href="/blog/2012/08/07/linux-linear-regions/" title="Previous Post: linux线性区">&laquo; linux线性区</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2012/06/19/seo-meta-octopress/" title="Next Post: 给octopress添加关键字和网站描述">给octopress添加关键字和网站描述 &raquo;</a>
       
     </p>
   </footer>
@@ -372,8 +322,8 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://tinyxd.me/blog/2012/06/19/learn-php/';
-        var disqus_url = 'http://tinyxd.me/blog/2012/06/19/learn-php/';
+        var disqus_identifier = 'http://tinyxd.me/blog/2012/08/07/linux-page-fault-exception/';
+        var disqus_url = 'http://tinyxd.me/blog/2012/08/07/linux-page-fault-exception/';
         var disqus_script = 'embed.js';
       
     (function () {
