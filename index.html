@@ -93,6 +93,53 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2012/08/08/linux-system-calls/">Linux系统调用</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-08-08T18:18:00+08:00" pubdate data-updated="true">Aug 8<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/08/08/linux-system-calls/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><strong><em>摘要</em></strong>：操作系统为在用户态运行的进程与硬件设备（如CPU、磁盘、打印机等等）进行交互提供了一组接口。在应用程序和硬件之间设置一个额外层具有很多优点。首先，这使得编程更加容易，那用户从学习硬件设备的低级编程特性中解放出来。其次，这极大地提高了系统的安全性，因为内核在试图满足某个请求之前在接口级就可以检查这种请求的正确性。最后，更重要的是这些接口使得程序更具有可移植性，因为只要内核所提供的一组接口相同，那么在任一内核上就可以正确地编译和执行程序。</p>
+
+<h2>简介     </h2>
+
+<p>系统调用是在内核中实现的，再通过一定的方式把系统调用给用户，一般都通过门(gate)陷入(trap)实现。系统调用是用户程序和内核交互的接口。 </p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2012/08/08/linux-system-calls/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2012/08/07/linux-page-fault-exception/">Linux缺页异常处理程序</a></h1>
     
     
@@ -524,59 +571,6 @@ ps：今天和麦子做的网站&#8212;-<a href="http://www.aitinan.com/">挨踢
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/07/26/linux-timing-measurements/">Linux系统定时测量</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-07-26T12:48:00+08:00" pubdate data-updated="true">Jul 26<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/07/26/linux-timing-measurements/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Linux内核必须完成的两种主要定时测量：</p>
-
-<p>保存当前的时间和日期，以便通过time()、ftime()、gettimeofday()系统调用把它们返回给用户程序，也可以由内核本身把当前时间作为文件和网络包的时间戳。</p>
-
-<p>维持定时器，这种机制能够告诉内核或用户程序某一时间间隔已经过去了。</p>
-
-<p>一般会遇到的几种时钟和定时器电路：实时时钟（Real Time Clock RTC）、时间戳计数器（Time Stamp Counter TSC）、可编程间隔定时器（Programmable Interval Timer PIT）、CPU本地定时器（APIC中）、高精度事件定时器（HPET）、ACPI电源管理定时器。</p>
-
-<p>Linux的计时体系结构是一组与时间流相关的内核数据结构和函数。实际上，基于80x86多处理器机器所具有的计时体系结构与单处理器机器所具有的稍有不同：</p>
-
-<p>在三处理器系统上，所有的计时活动都是由全局定时器（可以是可编程间隔定时器也可以是高精度事件定时器）产生的中断触发的。</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2012/07/26/linux-timing-measurements/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -600,6 +594,10 @@ ps：今天和麦子做的网站&#8212;-<a href="http://www.aitinan.com/">挨踢
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2012/08/08/linux-system-calls/">linux系统调用</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2012/08/07/linux-page-fault-exception/">linux缺页异常处理程序</a>
       </li>
     
@@ -615,15 +613,11 @@ ps：今天和麦子做的网站&#8212;-<a href="http://www.aitinan.com/">挨踢
         <a href="/blog/2012/08/02/blog-two-months/">写在开博两个月</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2012/08/01/awk-study/">awk 学习</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Category Cloud</h1>
-    <span id="tag-cloud"><a href='/blog/categories/davinci' style='font-size: 102.5%'>Davinci(1)</a> <a href='/blog/categories/embedded' style='font-size: 105.0%'>Embedded(2)</a> <a href='/blog/categories/essay' style='font-size: 107.5%'>Essay(3)</a> <a href='/blog/categories/git' style='font-size: 102.5%'>Git(1)</a> <a href='/blog/categories/it' style='font-size: 105.0%'>It(2)</a> <a href='/blog/categories/java' style='font-size: 102.5%'>Java(1)</a> <a href='/blog/categories/linux' style='font-size: 160.0%'>Linux(24)</a> <a href='/blog/categories/octopress' style='font-size: 120.0%'>Octopress(8)</a> <a href='/blog/categories/php' style='font-size: 102.5%'>Php(1)</a> <a href='/blog/categories/python' style='font-size: 102.5%'>Python(1)</a> <a href='/blog/categories/ruby' style='font-size: 107.5%'>Ruby(3)</a> <a href='/blog/categories/software' style='font-size: 125.0%'>Software(10)</a> </span>
+    <span id="tag-cloud"><a href='/blog/categories/davinci' style='font-size: 102.4%'>Davinci(1)</a> <a href='/blog/categories/embedded' style='font-size: 104.8%'>Embedded(2)</a> <a href='/blog/categories/essay' style='font-size: 107.2%'>Essay(3)</a> <a href='/blog/categories/git' style='font-size: 102.4%'>Git(1)</a> <a href='/blog/categories/it' style='font-size: 104.8%'>It(2)</a> <a href='/blog/categories/java' style='font-size: 102.4%'>Java(1)</a> <a href='/blog/categories/linux' style='font-size: 160.0%'>Linux(25)</a> <a href='/blog/categories/octopress' style='font-size: 119.2%'>Octopress(8)</a> <a href='/blog/categories/php' style='font-size: 102.4%'>Php(1)</a> <a href='/blog/categories/python' style='font-size: 102.4%'>Python(1)</a> <a href='/blog/categories/ruby' style='font-size: 107.2%'>Ruby(3)</a> <a href='/blog/categories/software' style='font-size: 124.0%'>Software(10)</a> </span>
 </section>
 <section>
   <h1>Blogroll</h1>

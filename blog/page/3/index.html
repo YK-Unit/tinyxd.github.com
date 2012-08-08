@@ -93,6 +93,68 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2012/07/09/add-douban-aside/">给octopress博客添加豆瓣侧边栏</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-07-09T22:38:00+08:00" pubdate data-updated="true">Jul 9<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/07/09/add-douban-aside/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>1.添加<code>source/_includes/custom/asides/douban.html</code></p>
+
+<div><script src='https://gist.github.com/3076932.js?file=douban.html'></script>
+<noscript><pre><code>{% if site.douban_user %}
+&lt;section&gt;
+&lt;h2&gt;Reading List&lt;/h2&gt;
+&lt;div&gt;
+&lt;script type=&quot;text/javascript&quot; src=&quot;http://www.douban.com/service/badge/tinyxd/?show=dolist&amp;amp;select=random&amp;amp;n=6&amp;amp;columns=3&amp;amp;hidelogo=yes&amp;amp;hideself=yes&quot; &gt;&lt;/script&gt;
+&lt;/div&gt;
+&lt;/section&gt;
+{% endif %}</code></pre></noscript></div>
+
+
+<p>其中<code>&lt;div&gt; &lt;/div&gt;</code>中间的代码从<a href="http://www.douban.com/service/badgemakerjs">这里</a>获取，记得改成自己的哦！ <br/>
+2.在<code>_config.yml</code>中添加：     <br/>
+douban_user: XXX<br/>
+(XXX为你的豆瓣用户名) <br/>
+3.记得把这里（default_asides: ）加上douban.html的位置
+然后，<code>rake generate</code> 和<code>rake preview</code>看看效果吧  <br/>
+类似微薄侧边浪也是这么弄的。</p>
+
+<br />
+
+
+<p>本站文章如果没有特别说明，均为<strong>原创</strong>，转载请以<strong>链接</strong>方式注明本文地址：<a href="http://tinyxd.me/blog/2012/07/09/add-douban-aside/">http://tinyxd.me/blog/2012/07/09/add-douban-aside/</a></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2012/07/09/reasons-to-stay-in-it/">IT生活：10个继续干IT的理由</a></h1>
     
     
@@ -602,58 +664,6 @@ http://mirrors6.ustc.edu.cn/
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/07/03/vc-debug-release/">Vc Debug 变 Release</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-07-03T12:23:00+08:00" pubdate data-updated="true">Jul 3<span>rd</span>, 2012</time>
-        
-         | <a href="/blog/2012/07/03/vc-debug-release/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>今天遇到将debug改为release版本出现好多问题，最后一一解决，现将方法贴到下面 <br/>
-生成release版的步骤： <br/>
-1.首先修改<code>project-setting-general-using mfc in a static libraryproject-setting</code>右键点击菜单空白处——选择“组建”——选择“Win32 Release“——重新编译链接。 <br/>
-2.然后<code>project-setting -c++ -precompiled Headers- not using</code> <br/>
-最后出现这个错误</p>
-
-<pre><code>nafxcwd.lib(afxmem.obj) : error LNK2005: "void __cdecl operator delete(void *)" (??3@YAXPAX@Z) already defined in LIBCMTD.lib(dbgdel.obj)   
-</code></pre>
-
-<p>关于静态库引发 nafxcw.lib LNK2005 错误的解决方法</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2012/07/03/vc-debug-release/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/4/">&larr; Older</a>
@@ -679,6 +689,10 @@ http://mirrors6.ustc.edu.cn/
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2012/08/08/linux-system-calls/">linux系统调用</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2012/08/07/linux-page-fault-exception/">linux缺页异常处理程序</a>
       </li>
     
@@ -694,15 +708,11 @@ http://mirrors6.ustc.edu.cn/
         <a href="/blog/2012/08/02/blog-two-months/">写在开博两个月</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2012/08/01/awk-study/">awk 学习</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Category Cloud</h1>
-    <span id="tag-cloud"><a href='/blog/categories/davinci' style='font-size: 102.5%'>Davinci(1)</a> <a href='/blog/categories/embedded' style='font-size: 105.0%'>Embedded(2)</a> <a href='/blog/categories/essay' style='font-size: 107.5%'>Essay(3)</a> <a href='/blog/categories/git' style='font-size: 102.5%'>Git(1)</a> <a href='/blog/categories/it' style='font-size: 105.0%'>It(2)</a> <a href='/blog/categories/java' style='font-size: 102.5%'>Java(1)</a> <a href='/blog/categories/linux' style='font-size: 160.0%'>Linux(24)</a> <a href='/blog/categories/octopress' style='font-size: 120.0%'>Octopress(8)</a> <a href='/blog/categories/php' style='font-size: 102.5%'>Php(1)</a> <a href='/blog/categories/python' style='font-size: 102.5%'>Python(1)</a> <a href='/blog/categories/ruby' style='font-size: 107.5%'>Ruby(3)</a> <a href='/blog/categories/software' style='font-size: 125.0%'>Software(10)</a> </span>
+    <span id="tag-cloud"><a href='/blog/categories/davinci' style='font-size: 102.4%'>Davinci(1)</a> <a href='/blog/categories/embedded' style='font-size: 104.8%'>Embedded(2)</a> <a href='/blog/categories/essay' style='font-size: 107.2%'>Essay(3)</a> <a href='/blog/categories/git' style='font-size: 102.4%'>Git(1)</a> <a href='/blog/categories/it' style='font-size: 104.8%'>It(2)</a> <a href='/blog/categories/java' style='font-size: 102.4%'>Java(1)</a> <a href='/blog/categories/linux' style='font-size: 160.0%'>Linux(25)</a> <a href='/blog/categories/octopress' style='font-size: 119.2%'>Octopress(8)</a> <a href='/blog/categories/php' style='font-size: 102.4%'>Php(1)</a> <a href='/blog/categories/python' style='font-size: 102.4%'>Python(1)</a> <a href='/blog/categories/ruby' style='font-size: 107.2%'>Ruby(3)</a> <a href='/blog/categories/software' style='font-size: 124.0%'>Software(10)</a> </span>
 </section>
 <section>
   <h1>Blogroll</h1>
