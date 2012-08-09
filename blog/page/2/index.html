@@ -93,6 +93,62 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2012/07/26/linux-process-scheduling/">Linux进程调度</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-07-26T23:18:00+08:00" pubdate data-updated="true">Jul 26<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/07/26/linux-process-scheduling/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><strong><em>摘要</em></strong>：linux与任何分时系统一样，通过一个进程到另一个进程的快速切换，达到表面上看来的多个进程同时执行的神奇效果。</p>
+
+<br />
+
+
+<p>Linux的调度基于分时（time sharing）技术：多个进程以“时间多路复用”方式运行，因为CPU的时间被分成“片（slice）”，给每个可运行进程分配一片。</p>
+
+<p>在linux中，进程的优先级是动态的。调度程序跟踪进程正在做什么，并周期性地调整它们的优先级。</p>
+
+<h2>分类 </h2>
+
+<p>传统上，把进程分类为“IO受限（IO bound）”或“CPU受限（CPU bound）”。前者频繁使用IO设备，并花费很多时间等待IO操作的完成；而后者则需要大量CPU时间的数值计算应用程序。</p>
+
+<p>另一种分类方法把进程区分为三类：交互式进程（interactive process）、批处理进程（batch process、实时进程（real-time process）。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2012/07/26/linux-process-scheduling/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2012/07/26/linux-timing-measurements/">Linux系统定时测量</a></h1>
     
     
@@ -653,65 +709,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/07/10/linux-filesysterm/">Linux文件系统</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-07-10T23:26:00+08:00" pubdate data-updated="true">Jul 10<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/07/10/linux-filesysterm/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>linux文件操作：文件操作系统调用（create、open、read、write、lseek、close）、c库文件操作（fopen、fscanf、fprintf、fread、fwrite、fseek、fclose等）。</p>
-
-<p>linux文件系统：在设备驱动程序的设计中，一般会关心file和inode这两个结构体。</p>
-
-<h2>devfs、udev、sysfs的区别：</h2>
-
-<p>以下内容来自<a href="http://blog.csdn.net/yeqishi/article/details/5491413">devfs, sysfs, udev文件系统区别</a> 和 linux设备驱动开发详解（第二版）</p>
-
-<h3>一.devfs设备文件简略介绍(2.6版本以后内核都采用udev设备文件系统)</h3>
-
-<p>devfs(设备文件系统)是由2.4内核引入的，具有如下优点：</p>
-
-<p>1.可以通过程序在设备初始化时在/dev目录下创建设备文件，卸载时将它删除。</p>
-
-<p>2.设备驱动程序可以指定设备号,所有者,和权限位,用户空间可以修改所有者和权限位。</p>
-
-<p>3.不再需要为设备驱动程序分配主设备号以及处理的次设备号，在程序可以直接给register_chrdev()传递0主设备号以动态获得可用的主设备号，并在devfs_register() 中指定次设备号。</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2012/07/10/linux-filesysterm/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/3/">&larr; Older</a>
@@ -737,6 +734,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2012/08/09/linux-heap-management/">linux堆的管理</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2012/08/08/linux-system-calls/">linux系统调用</a>
       </li>
     
@@ -752,15 +753,11 @@
         <a href="/blog/2012/08/05/linux-process-address-space/">linux进程地址空间</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2012/08/02/blog-two-months/">写在开博两个月</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Category Cloud</h1>
-    <span id="tag-cloud"><a href='/blog/categories/davinci' style='font-size: 102.4%'>Davinci(1)</a> <a href='/blog/categories/embedded' style='font-size: 104.8%'>Embedded(2)</a> <a href='/blog/categories/essay' style='font-size: 107.2%'>Essay(3)</a> <a href='/blog/categories/git' style='font-size: 102.4%'>Git(1)</a> <a href='/blog/categories/it' style='font-size: 104.8%'>It(2)</a> <a href='/blog/categories/java' style='font-size: 102.4%'>Java(1)</a> <a href='/blog/categories/linux' style='font-size: 160.0%'>Linux(25)</a> <a href='/blog/categories/octopress' style='font-size: 119.2%'>Octopress(8)</a> <a href='/blog/categories/php' style='font-size: 102.4%'>Php(1)</a> <a href='/blog/categories/python' style='font-size: 102.4%'>Python(1)</a> <a href='/blog/categories/ruby' style='font-size: 107.2%'>Ruby(3)</a> <a href='/blog/categories/software' style='font-size: 124.0%'>Software(10)</a> </span>
+    <span id="tag-cloud"><a href='/blog/categories/davinci' style='font-size: 102.3076923076923%'>Davinci(1)</a> <a href='/blog/categories/embedded' style='font-size: 104.61538461538461%'>Embedded(2)</a> <a href='/blog/categories/essay' style='font-size: 106.92307692307692%'>Essay(3)</a> <a href='/blog/categories/git' style='font-size: 102.3076923076923%'>Git(1)</a> <a href='/blog/categories/it' style='font-size: 104.61538461538461%'>It(2)</a> <a href='/blog/categories/java' style='font-size: 102.3076923076923%'>Java(1)</a> <a href='/blog/categories/linux' style='font-size: 160.0%'>Linux(26)</a> <a href='/blog/categories/octopress' style='font-size: 118.46153846153845%'>Octopress(8)</a> <a href='/blog/categories/php' style='font-size: 102.3076923076923%'>Php(1)</a> <a href='/blog/categories/python' style='font-size: 102.3076923076923%'>Python(1)</a> <a href='/blog/categories/ruby' style='font-size: 106.92307692307692%'>Ruby(3)</a> <a href='/blog/categories/software' style='font-size: 123.07692307692308%'>Software(10)</a> </span>
 </section>
 <section>
   <h1>Blogroll</h1>
