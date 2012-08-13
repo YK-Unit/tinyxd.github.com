@@ -93,6 +93,76 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2012/07/11/soft-interrupt-and-tasklet/">软中断和tasklet</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-07-11T22:57:00+08:00" pubdate data-updated="true">Jul 11<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/07/11/soft-interrupt-and-tasklet/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>软中断：</h2>
+
+<p>Linux中的软中断机制用于系统中对时间要求最严格以及最重要的中断下半部进行使用。在系统设计过程中，大家都清楚中断上下文不能处理太多的事情，需要快速的返回，否则很容易导致中断事件的丢失，所以这就产生了一个问题：中断发生之后的事务处理由谁来完成？在前后台程序中，由于只有中断上下文和一个任务上下文，所以中断上下文触发事件，设置标记位，任务上下文循环扫描标记位，执行相应的动作，也就是中断发生之后的事情由任务来完成了，只不过任务上下文采用扫描的方式，实时性不能得到保证。在Linux系统和Windows系统中，这个不断循环的任务就是本文所要讲述的软中断daemon。在Windows中处理耗时的中断事务称之为中断延迟处理，在Linux中称之为中断下半部，显然中断上半部处理清中断之类十分清闲的动作，然后在退出中断服务程序时触发中断下半部，完成具体的功能。</p>
+
+<p>在Linux中，中断下半部的实现基于软中断机制。所以理清楚软中断机制的原理，那么中断下半部的实现也就非常简单了。通过上述的描述，大家也应该清楚为什么要定义软中断机制了，一句话就是为了要处理对时间要求苛刻的任务，恰好中断下半部就有这样的需求，所以其实现采用了软中断机制。</p>
+
+<p>linux2.6中使用的软中断：</p>
+
+<figure class='code'><figcaption><span>interrupt.h</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="k">enum</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="n">HI_SOFTIRQ</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="cm">/*用于高优先级的tasklet(下标(优先级0))*/</span>
+</span><span class='line'>  <span class="n">TIMER_SOFTIRQ</span><span class="p">,</span> <span class="cm">/*用于定时器的下半部(下标(优先级1))*/</span>
+</span><span class='line'>  <span class="n">NET_TX_SOFTIRQ</span><span class="p">,</span><span class="cm">/*用于网络层发包(下标(优先级2))*/</span>
+</span><span class='line'>  <span class="n">NET_RX_SOFTIRQ</span><span class="p">,</span> <span class="cm">/*用于网络层收报(下标(优先级3))*/</span>
+</span><span class='line'>  <span class="n">SCSI_SOFTIRQ</span><span class="p">,</span> <span class="cm">/*用于scsi设备(下标(优先级4))*/</span>
+</span><span class='line'>  <span class="n">TASKLET_SOFTIRQ</span> <span class="cm">/*用于低优先级的tasklet(下标(优先级5))*/</span>
+</span><span class='line'><span class="p">};</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2012/07/11/soft-interrupt-and-tasklet/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2012/07/10/linux-filesysterm/">Linux文件系统</a></h1>
     
     
@@ -608,55 +678,6 @@ douban_user: XXX<br/>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/07/06/linux-sleep-usage/">Linux Sleep 的用法</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-07-06T12:40:00+08:00" pubdate data-updated="true">Jul 6<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/07/06/linux-sleep-usage/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><strong>应用程序</strong>：</p>
-
-<pre><code>#include &lt;syswait.h&gt;
-usleep(n) //n微秒
-Sleep（n）//n毫秒
-sleep（n）//n秒
-</code></pre>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2012/07/06/linux-sleep-usage/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/4/">&larr; Older</a>
@@ -682,6 +703,10 @@ sleep（n）//n秒
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2012/08/14/vps-lnmp-setup-and-typecho-blog/">VPS申请及博客搭建</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2012/08/09/linux-heap-management/">linux堆的管理</a>
       </li>
     
@@ -697,15 +722,11 @@ sleep（n）//n秒
         <a href="/blog/2012/08/07/linux-linear-regions/">linux线性区</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2012/08/05/linux-process-address-space/">linux进程地址空间</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Category Cloud</h1>
-    <span id="tag-cloud"><a href='/blog/categories/davinci' style='font-size: 102.3076923076923%'>Davinci(1)</a> <a href='/blog/categories/embedded' style='font-size: 104.61538461538461%'>Embedded(2)</a> <a href='/blog/categories/essay' style='font-size: 106.92307692307692%'>Essay(3)</a> <a href='/blog/categories/git' style='font-size: 102.3076923076923%'>Git(1)</a> <a href='/blog/categories/it' style='font-size: 104.61538461538461%'>It(2)</a> <a href='/blog/categories/java' style='font-size: 102.3076923076923%'>Java(1)</a> <a href='/blog/categories/linux' style='font-size: 160.0%'>Linux(26)</a> <a href='/blog/categories/octopress' style='font-size: 118.46153846153845%'>Octopress(8)</a> <a href='/blog/categories/php' style='font-size: 102.3076923076923%'>Php(1)</a> <a href='/blog/categories/python' style='font-size: 102.3076923076923%'>Python(1)</a> <a href='/blog/categories/ruby' style='font-size: 106.92307692307692%'>Ruby(3)</a> <a href='/blog/categories/software' style='font-size: 123.07692307692308%'>Software(10)</a> </span>
+    <span id="tag-cloud"><a href='/blog/categories/davinci' style='font-size: 102.3076923076923%'>Davinci(1)</a> <a href='/blog/categories/embedded' style='font-size: 104.61538461538461%'>Embedded(2)</a> <a href='/blog/categories/essay' style='font-size: 106.92307692307692%'>Essay(3)</a> <a href='/blog/categories/git' style='font-size: 102.3076923076923%'>Git(1)</a> <a href='/blog/categories/it' style='font-size: 104.61538461538461%'>It(2)</a> <a href='/blog/categories/java' style='font-size: 102.3076923076923%'>Java(1)</a> <a href='/blog/categories/linux' style='font-size: 160.0%'>Linux(26)</a> <a href='/blog/categories/octopress' style='font-size: 118.46153846153845%'>Octopress(8)</a> <a href='/blog/categories/php' style='font-size: 102.3076923076923%'>Php(1)</a> <a href='/blog/categories/python' style='font-size: 102.3076923076923%'>Python(1)</a> <a href='/blog/categories/ruby' style='font-size: 106.92307692307692%'>Ruby(3)</a> <a href='/blog/categories/software' style='font-size: 123.07692307692308%'>Software(10)</a> <a href='/blog/categories/vps' style='font-size: 102.3076923076923%'>Vps(1)</a> </span>
 </section>
 <section>
   <h1>Blogroll</h1>
