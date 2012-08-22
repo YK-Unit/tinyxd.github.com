@@ -93,6 +93,51 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2012/07/31/linux-memory-management-2/">Linux内存管理（中）</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-07-31T23:16:00+08:00" pubdate data-updated="true">Jul 31<span>st</span>, 2012</time>
+        
+         | <a href="/blog/2012/07/31/linux-memory-management-2/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><strong><em>摘要</em></strong>：slab分配器是Linux内存管理中非常重要和复杂的一部分，其工作是针对一些经常分配并释放的对象，如进程描述符等，这些对象的大小一般比较小，如果直接采用伙伴系统来进行分配和释放，不仅会造成大量的内碎片，而且处理速度也太慢。而slab分配器是基于对象进行管理的，相同类型的对象归为一类(如进程描述符就是一类)，每当要申请这样一个对象，slab分配器就从一个slab列表中分配一个这样大小的单元出去，而当要释放时，将其重新保存在该列表中，而不是直接返回给伙伴系统。slab分配对象时，会使用最近释放的对象内存块，因此其驻留在CPU高速缓存的概率较高。</p>
+
+<h2>简介</h2>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2012/07/31/linux-memory-management-2/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2012/07/29/linux-memory-management-1/">Linux内存管理（上）</a></h1>
     
     
@@ -632,64 +677,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/07/11/linux-workqueue/">Linux工作队列</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-07-11T23:08:00+08:00" pubdate data-updated="true">Jul 11<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/07/11/linux-workqueue/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2>工作队列(workqueue)</h2>
-
-<p>Linux中的Workqueue机制就是为了简化内核线程的创建。通过调用workqueue的接口就能创建内核线程。并且可以根据当前系统CPU的个数创建线程的数量，使得线程处理的事务能够并行化。</p>
-
-<p>workqueue是内核中实现简单而有效的机制，他显然简化了内核daemon的创建，方便了用户的编程，</p>
-
-<p>尽管可延迟函数和工作队列非常相似，但是它们的区别还是很大的。主要区别在于：可延迟函数运行在中断上下文中，而工作队列中的函数运行在进程上下文中。执行可阻塞函数（例如：需要访问磁盘数据块的函数）的唯一方式是在进程上下文中运行。因为在中断上下文中不可能发生进程切换。可延迟函数和工作队列中的函数都不能访问进程的用户态地址空间。事实上，可延迟函数被执行时不可能有任何正在运行的进程。另一方面，工作队列中的函数是由内核线程来执行的，因此，根本不存在它要访问的用户态地址空间。</p>
-
-<h2>工作队列的数据结构</h2>
-
-<p style="text-indent:2em">与工作队列相关的主要数据结构有两个：cpu_workqueue_struct和work_struct。名为workqueue_struct的描述符，包括一个有NR_CPUS个元素的数组，NR_CPUS是系统中CPU的最大数量（双核是有两个工作队列）。每个元素都是cpu_workqueue_struct类型的描述符。 
-
-</p>
-
-
-<p></p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2012/07/11/linux-workqueue/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/3/">&larr; Older</a>
@@ -715,6 +702,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2012/08/23/archlinux-change-mac/">archlinux修改mac地址</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2012/08/14/vps-lnmp-setup-and-typecho-blog/">VPS申请及博客搭建</a>
       </li>
     
@@ -730,21 +721,20 @@
         <a href="/blog/2012/08/07/linux-page-fault-exception/">linux缺页异常处理程序</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2012/08/07/linux-linear-regions/">linux线性区</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Category Cloud</h1>
-    <span id="tag-cloud"><a href='/blog/categories/davinci' style='font-size: 102.3076923076923%'>Davinci(1)</a> <a href='/blog/categories/embedded' style='font-size: 104.61538461538461%'>Embedded(2)</a> <a href='/blog/categories/essay' style='font-size: 106.92307692307692%'>Essay(3)</a> <a href='/blog/categories/git' style='font-size: 102.3076923076923%'>Git(1)</a> <a href='/blog/categories/it' style='font-size: 104.61538461538461%'>It(2)</a> <a href='/blog/categories/java' style='font-size: 102.3076923076923%'>Java(1)</a> <a href='/blog/categories/linux' style='font-size: 160.0%'>Linux(26)</a> <a href='/blog/categories/octopress' style='font-size: 118.46153846153845%'>Octopress(8)</a> <a href='/blog/categories/php' style='font-size: 102.3076923076923%'>Php(1)</a> <a href='/blog/categories/python' style='font-size: 102.3076923076923%'>Python(1)</a> <a href='/blog/categories/ruby' style='font-size: 106.92307692307692%'>Ruby(3)</a> <a href='/blog/categories/software' style='font-size: 123.07692307692308%'>Software(10)</a> <a href='/blog/categories/vps' style='font-size: 102.3076923076923%'>Vps(1)</a> </span>
+    <span id="tag-cloud"><a href='/blog/categories/davinci' style='font-size: 102.22222222222223%'>Davinci(1)</a> <a href='/blog/categories/embedded' style='font-size: 104.44444444444444%'>Embedded(2)</a> <a href='/blog/categories/essay' style='font-size: 106.66666666666667%'>Essay(3)</a> <a href='/blog/categories/git' style='font-size: 102.22222222222223%'>Git(1)</a> <a href='/blog/categories/it' style='font-size: 104.44444444444444%'>It(2)</a> <a href='/blog/categories/java' style='font-size: 102.22222222222223%'>Java(1)</a> <a href='/blog/categories/linux' style='font-size: 160.0%'>Linux(27)</a> <a href='/blog/categories/octopress' style='font-size: 117.77777777777777%'>Octopress(8)</a> <a href='/blog/categories/php' style='font-size: 102.22222222222223%'>Php(1)</a> <a href='/blog/categories/python' style='font-size: 102.22222222222223%'>Python(1)</a> <a href='/blog/categories/ruby' style='font-size: 106.66666666666667%'>Ruby(3)</a> <a href='/blog/categories/software' style='font-size: 122.22222222222223%'>Software(10)</a> <a href='/blog/categories/vps' style='font-size: 102.22222222222223%'>Vps(1)</a> </span>
 </section>
 <section>
   <h1>Blogroll</h1>
   <ul>
     <li>
     <a href="http://tinyxd.me/" target="_blank"> 西电小新 </a>
+    </li>
+    <li>
+    <a href="http://info.tinyxd.me/" target="_blank"> 冰之竹语 </a>
     </li>
     <li>
      <a href="http://www.aitinan.com/" target="_blank"> 挨踢男的那点事</a> 
