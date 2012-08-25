@@ -4,7 +4,7 @@
   <title><![CDATA[Keen on Art of Tech]]></title>
   <link href="http://tinyxd.me/atom.xml" rel="self"/>
   <link href="http://tinyxd.me/"/>
-  <updated>2012-08-23T00:26:31+08:00</updated>
+  <updated>2012-08-26T00:31:48+08:00</updated>
   <id>http://tinyxd.me/</id>
   <author>
     <name><![CDATA[Tiny]]></name>
@@ -12,6 +12,132 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[图床管理]]></title>
+    <link href="http://tinyxd.me/blog/2012/08/26/imag-file-explorer/"/>
+    <updated>2012-08-26T00:08:00+08:00</updated>
+    <id>http://tinyxd.me/blog/2012/08/26/imag-file-explorer</id>
+    <content type="html"><![CDATA[<p>做网站，尤其是做多个网站的，文件的统一管理，备份是很重要的。本站用<a href="http://encode-explorer.siineiolekala.net/">Encode Explorer</a>来管理本站图片、上传附件等。 <br/>
+去Encode Explorer在sourceforge的<a href="http://sourceforge.net/projects/encode-explorer/files/encode-explorer/">项目官网</a>下载程序，其代码不过3k多行。只要将index.php上传到网站根目录，然后把nginx设置好用<a href="http://upload.tinyxd.me/">2级域名</a>指向此根目录，就可以了。    <br/>
+其中index.php需要改几个地方：   <br/>
+1.<code>$_CONFIG['lang'] = "zh_CN";</code> 支持中文  <br/>
+2.<code>$_CONFIG['users'] = array(array('username', 'password', 'admin'));</code>  建立admin用户   <br/>
+其中index.php介绍比较详细了。语法格式：array(username, password, status)    status为user可以查看目录但不可以修改，admin能够上传文件和删除文件。   <br/>
+3.<code>$_CONFIG['new_dir_mode'] = 0755;</code>     <br/>
+<code>$_CONFIG['upload_file_mode'] = 0644;</code> <br/>
+修改新建文件夹和上传文件的默认权限。    <br/>
+这就是最终完成的，用二级域名（只要将该域名dns解析到vps服务器地址就可以了）<a href="http://upload.tinyxd.me/">http://upload.tinyxd.me/</a>来上传/浏览/删除文件。  <br/>
+本文参考了<a href="http://log4d.com/">log4d</a>的<a href="http://log4d.com/2012/05/image-host/">使用独立图床子域名</a>。</p>
+
+<br />
+
+
+<p>本文地址：<a href="http://tinyxd.me/2012/08/26/imag-file-explorer/">http://tinyxd.me/2012/08/26/imag-file-explorer/</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[vps lnmp配置优化]]></title>
+    <link href="http://tinyxd.me/blog/2012/08/25/vps-optimization/"/>
+    <updated>2012-08-25T23:40:00+08:00</updated>
+    <id>http://tinyxd.me/blog/2012/08/25/vps-optimization</id>
+    <content type="html"><![CDATA[<p>我选用了lnmp（linux + Nginx + PHP + MySQL ）来安装，方便快捷，安装后发现其实好多已经优化好了。  <br/>
+其中需要注意到的有以下几个： <br/>
+一. 基于xen架构的可以增加swap分区大小
+我的vps是openVZ的，swap分区是不能随意更改的。PS.主机商已经提供了128M的swap了。满足了！</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cd /var/
+</span><span class='line'>dd if=/dev/zero of=swapfile bs=1024 count=262144
+</span><span class='line'>/sbin/mkswap swapfile
+</span><span class='line'>/sbin/swapon swapfile</span></code></pre></td></tr></table></div></figure>
+
+
+<p>然后让自己做的swap分区在系统启动时自动加载：</p>
+
+<pre><code>vi /etc/fstab   
+</code></pre>
+
+<p>在适当位置添加以下内容：</p>
+
+<pre><code>/var/swapfile swap swap defaults 0 0
+</code></pre>
+
+<!--more-->
+
+
+<p>二.Nginx主配置文件（nginx.conf）的优化
+Nginx每个进程耗费10M~12M内存，只开启一个Nginx进程，节省内存。</p>
+
+<pre><code>worker_processes 1;   
+</code></pre>
+
+<p>对网页文件、CSS、JS、XML等启动gzip压缩，减少数据传输量，提高访问速度。</p>
+
+<pre><code>gzip on;
+gzip_min_length  1k;
+gzip_buffers     4 16k;
+gzip_http_version 1.0;
+gzip_comp_level 2;
+gzip_types       text/plain application/x-javascript text/css application/xml;
+gzip_vary on;
+</code></pre>
+
+<p>还有：</p>
+
+<pre><code>location ~ .*\.(php|php5)?$
+   {
+     #将Nginx与FastCGI的通信方式由TCP改为Unix Socket。TCP在高并发访问下比Unix Socket稳定，但Unix Socket速度要比TCP快。
+     fastcgi_pass  unix:/tmp/php-cgi.sock;
+     #fastcgi_pass  127.0.0.1:9000;
+     fastcgi_index index.php;
+     include fcgi.conf;
+   }
+
+   location ~ /read.php
+   {
+     #将Nginx与FastCGI的通信方式由TCP改为Unix Socket。TCP在高并发访问下比Unix Socket稳定，但Unix Socket速度要比TCP快。
+     fastcgi_pass  unix:/tmp/php-cgi.sock;
+     #fastcgi_pass  127.0.0.1:9000;
+     fastcgi_index index.php;
+     include fcgi.conf;
+   }
+
+   #博客的图片较多，更改较少，将它们在浏览器本地缓存15天，可以提高下次打开我博客的页面加载速度。
+   location ~ .*\.(gif|jpg|jpeg|png|bmp|swf)$
+   {
+     expires      15d;
+   } 
+
+   #博客会加载很多JavaScript、CSS，将它们在浏览器本地缓存1天，访问者在看完一篇文章或一页后，再看另一篇文件或另一页的内容，无需从服务器再次下载相同的JavaScript、CSS，提高了页面显示速度。
+   location ~ .*\.(js|css)?$
+   {
+     expires      1d;
+   }   
+</code></pre>
+
+<p>其实上面说的lnmp自动安装包已经做好了这些优化！ <br/>
+包括后面<a href="http://blog.s135.com/post/375/2/1/">这篇文章</a>提到的，lnmp已经配置好了。</p>
+
+<br />
+
+
+<p>对于新手的忠告，将配置改好后，记得reload，或者restart。 <br/>
+经过优化后的vps，有人做过测试一小时，1000+的pv量都是没有问题的。相同的价格可见买vps还是比较合算的。 <br/>
+PS.我的vps现在放了两个站：<a href="http://tinyxd.me/">本站</a>、<a href="http://info.tinyxd.me/">冰之竹语</a>。后期准备再弄个技术bbs之类的玩玩。 <br/>
+对了我还放了个文件管理器<a href="http://encode-explorer.siineiolekala.net/">Encode Explorer</a>，专门用来存放上传的图片和文件的。地址在<a href="http://upload.tinyxd.me/">这里</a>。其实这一招是从<a href="http://log4d.com/2012/05/image-host/">这里</a>学来的。。。
+我将在我的下一篇<a href="http://tinyxd.me/2012/08/25/imag-file-explorer/">文章</a>中详细说明。</p>
+
+<br />
+
+
+<p>本文地址：<a href="http://tinyxd.me/2012/08/25/vps-optimization/">http://tinyxd.me/2012/08/25/vps-optimization/</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[archlinux修改mac地址]]></title>
@@ -1985,158 +2111,6 @@ a.先备份下 /etc/wpa_supplicant.conf：</p>
 
 
 <p>本站文章如果没有特别说明，均为<strong>原创</strong>，转载请以<strong>链接</strong>方式注明本文地址：<a href="http://tinyxd.me/blog/2012/07/14/archlinux-time-config/">http://tinyxd.me/blog/2012/07/14/archlinux-time-config/</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[debian硬盘安装笔记]]></title>
-    <link href="http://tinyxd.me/blog/2012/07/13/debian-setup/"/>
-    <updated>2012-07-13T11:29:00+08:00</updated>
-    <id>http://tinyxd.me/blog/2012/07/13/debian-setup</id>
-    <content type="html"><![CDATA[<p>以前安装的时候都有光盘，这次换的机器，光驱坏了，那么有没有可能硬盘安装debian么？答案当然是可以的。 <br/>
-1.下载debian最新ISO映像。 <br/>
-2.下载安装所需要的vmlinuz  initrd.gz  boot.img.gz的这三个文件. <br/>
-   下载地址：<a href="http://debian.osuosl.org/debian/dists/Debian6.0.5/main/installer-i386/current/images/hd-media/">http://debian.osuosl.org/debian/dists/Debian6.0.5/main/installer-i386/current/images/hd-media/</a> <br/>
-3.下载grub4 for DOS    <br/>
-下载地址：<a href="http://download.gna.org/grub4dos/grub4dos-0.4.4-2009-06-20.zip">http://download.gna.org/grub4dos/grub4dos-0.4.4-2009-06-20.zip</a></p>
-
-<h2>安装过程：</h2>
-
-<p>1、先把WINXP安装到C盘，这里唯一要说的是如果在安装WINXP时，选择了把C盘格式化为NTFS格式，那么之后安装用的DEBIAN的ISO文件就不能放在C盘了，必须放在FAT32格式的分区的根目录下。切记哦！否则硬盘安装DEBIAN时后找不到ISO文件哦。</p>
-
-<p>WINXP安装好以后，把下载的GRUB4 for DOS包解压缩到C盘根目录，并将目录名改为grub，（个人认为不改也应该可以，不过没试，你可以试下呵），并进入GRUB目录将grldr文件复制到C盘根目录下；把vmlinuz、initrd.gz、boot.img.gz三个文件也复制到C盘根目录下：（基本上这个时候C盘是NTFS格式还是FAT32格式都没有关系的）</p>
-
-<!--more-->
-
-
-<p>2、打开C盘根目录下的boot.ini文件，打开boot.ini后在文件的最后一行加上    C:\grldr=”GRUB FOR DOS”</p>
-
-<p>之后保存并关闭boot.ini文件。</p>
-
-<p>3、把前面下载的DEBIAN安装CD的ISO文件复制到C盘根目录下，（要保证C盘是FAT32格式的），否则就复制到其它FAT32分区的根目录下。</p>
-
-<p>4、以上检查没有问题后重新启动电脑，这时应该会出现如下启动菜单：</p>
-
-<p>5、选第二项“GRUB FOR DOS”后，等屏幕出现如下画面时，按键盘上的“C”进入命令行状态。</p>
-
-<p>6、按“C”键后屏幕显示如下：</p>
-
-<p>7、这个时候输入如下三行命令：</p>
-
-<pre><code>kernel (hd0,0)/vmlinuz
-
-initrd (hd0,0)/initrd.gz
-
-boot
-</code></pre>
-
-<p>这里的（hd0,0）指的是C盘，hd是指硬盘啦，第一个0是指电脑里的第一块硬盘，第二个0是指该硬盘上的第一个主分区，如果是第二个主分区就是（hd0,1）啦，如果你有兴趣上网查一下相关的知识了，这里不说了。</p>
-
-<p>8、接下来就是安装debian，先会自动寻找ISO映像，找到后就开始安装，不再赘述。</p>
-
-<p>9、如果你的C盘是FAT32格式的，ISO文件也复制到C盘根目录，那么就不用担心了，安装程序会自动找到的。（ISO文件在其它FAT32分区根目录下也一样，我已试过呵）</p>
-
-<p>10、我的分区是这样的：/boot 200M  、2G swap、15G / 、其余大概40G的/home</p>
-
-<p>11、等系统装好后，需要设置中文字体，还需要安装一些必要软件等等。见我以前的文章，下面是链接：<a href="http://blog.chinaunix.net/uid-26053577-id-3011222.html">http://blog.chinaunix.net/uid-26053577-id-3011222.html</a></p>
-
-<p>本文章来自本人<strong><a href="http://blog.chinaunix.net/uid/26053577.html">ChinaUnix</a></strong>博客。  <br/>
-本站文章如果没有特别说明，均为<strong>原创</strong>，转载请以<strong>链接</strong>方式注明本文地址：<a href="http://tinyxd.me/blog/2012/07/13/debian-setup/">http://tinyxd.me/blog/2012/07/13/debian-setup/</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[本地备份octopress]]></title>
-    <link href="http://tinyxd.me/blog/2012/07/12/python-backup-octopress/"/>
-    <updated>2012-07-12T22:42:00+08:00</updated>
-    <id>http://tinyxd.me/blog/2012/07/12/python-backup-octopress</id>
-    <content type="html"><![CDATA[<p>用python脚本备份octopress，当然也可以备份其他的目录。只要修改对应路径就可以了。</p>
-
-<figure class='code'><figcaption><span>octopress_backup.py</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="c">#!/usr/bin/python2</span>
-</span><span class='line'><span class="c"># Filename: octopress_backup.py</span>
-</span><span class='line'>
-</span><span class='line'><span class="kn">import</span> <span class="nn">os</span>
-</span><span class='line'><span class="kn">import</span> <span class="nn">time</span>
-</span><span class='line'>
-</span><span class='line'><span class="c"># 1. 需要备份的目录(也可以将其他的文件夹一起打包)</span>
-</span><span class='line'><span class="n">source</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;/home/tiny/octopress&#39;</span><span class="p">,</span> <span class="s">&#39;/home/tiny/mytest&#39;</span><span class="p">]</span>
-</span><span class='line'>
-</span><span class='line'><span class="c"># 2. 备份的目标位置</span>
-</span><span class='line'><span class="n">target_dir</span> <span class="o">=</span> <span class="s">&#39;/home/tiny/backup/&#39;</span> <span class="c"># Remember to change this to what you will be using</span>
-</span><span class='line'>
-</span><span class='line'><span class="c"># 3. 本脚本备份成tar，当然也可以压缩gzip。</span>
-</span><span class='line'><span class="c"># 4. 日期是目录名</span>
-</span><span class='line'><span class="n">today</span> <span class="o">=</span> <span class="n">target_dir</span> <span class="o">+</span> <span class="n">time</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s">&#39;%Y%m</span><span class="si">%d</span><span class="s">&#39;</span><span class="p">)</span>
-</span><span class='line'><span class="c"># 当前时间是备份文件的名称</span>
-</span><span class='line'><span class="n">now</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s">&#39;%H%M%S&#39;</span><span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'><span class="c"># 可以对备份的文件进行一些说明</span>
-</span><span class='line'><span class="n">comment</span> <span class="o">=</span> <span class="nb">raw_input</span><span class="p">(</span><span class="s">&#39;Enter a comment --&gt; &#39;</span><span class="p">)</span>
-</span><span class='line'><span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">comment</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="c"># check if a comment was entered</span>
-</span><span class='line'>    <span class="n">target</span> <span class="o">=</span> <span class="n">today</span> <span class="o">+</span> <span class="n">os</span><span class="o">.</span><span class="n">sep</span> <span class="o">+</span> <span class="n">now</span> <span class="o">+</span> <span class="s">&#39;.tar&#39;</span>
-</span><span class='line'><span class="k">else</span><span class="p">:</span>
-</span><span class='line'>    <span class="n">target</span> <span class="o">=</span> <span class="n">today</span> <span class="o">+</span> <span class="n">os</span><span class="o">.</span><span class="n">sep</span> <span class="o">+</span> <span class="n">now</span> <span class="o">+</span> <span class="s">&#39;_&#39;</span> <span class="o">+</span>\
-</span><span class='line'>        <span class="n">comment</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&#39; &#39;</span><span class="p">,</span> <span class="s">&#39;_&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="s">&#39;.tar&#39;</span>
-</span><span class='line'>
-</span><span class='line'><span class="c"># 创建子文件夹</span>
-</span><span class='line'><span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">today</span><span class="p">):</span>
-</span><span class='line'>    <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">today</span><span class="p">)</span> <span class="c"># make directory</span>
-</span><span class='line'>    <span class="k">print</span> <span class="s">&#39;Successfully created directory&#39;</span><span class="p">,</span> <span class="n">today</span>
-</span><span class='line'>
-</span><span class='line'><span class="c"># 5. tar压缩命令（unix/linux）</span>
-</span><span class='line'><span class="n">tar_command</span> <span class="o">=</span> <span class="s">&quot;tar -cvf &#39;</span><span class="si">%s</span><span class="s">&#39; </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="s">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">source</span><span class="p">))</span>
-</span><span class='line'>
-</span><span class='line'><span class="c"># 运行备份命令</span>
-</span><span class='line'><span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="n">tar_command</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-</span><span class='line'>    <span class="k">print</span> <span class="s">&#39;Successful backup to&#39;</span><span class="p">,</span> <span class="n">target</span>
-</span><span class='line'><span class="k">else</span><span class="p">:</span>
-</span><span class='line'>    <span class="k">print</span> <span class="s">&#39;Backup FAILED&#39;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<br />
-
-
-<p>本站文章如果没有特别说明，均为<strong>原创</strong>，转载请以<strong>链接</strong>方式注明本文地址：<a href="http://tinyxd.me/blog/2012/07/12/python-backup-octopress/">http://tinyxd.me/blog/2012/07/12/python-backup-octopress/</a></p>
 ]]></content>
   </entry>
   

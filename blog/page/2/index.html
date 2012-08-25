@@ -93,6 +93,104 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2012/08/01/awk-study/">Awk 学习</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-08-01T00:15:00+08:00" pubdate data-updated="true">Aug 1<span>st</span>, 2012</time>
+        
+         | <a href="/blog/2012/08/01/awk-study/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>AWK是一种优良的文本处理工具。它不仅是 Linux 中也是任何环境中现有的功能最强大的数据处理引擎之一。这种编程及数据操作语言（其名称得自于它的创始人 Alfred Aho 、Peter Weinberger 和 Brian Kernighan 姓氏的首个字母）的最大功能取决于一个人所拥有的知识。AWK 提供了极其强大的功能：可以进行样式装入、流控制、数学运算符、进程控制语句甚至于内置的变量和函数。它具备了一个完整的语言所应具有的几乎所有精美特性。</p>
+
+<h2>一、awk调用方式 </h2>
+
+<p>1、awk [-F field-separator] &#8216;commands&#8217; input-file(s)</p>
+
+<p>commands 是真正的awk命令</p>
+
+<p>-F 为域分隔符</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2012/08/01/awk-study/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/07/31/linux-memory-management-3/">Linux内存管理（下）</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-07-31T23:51:00+08:00" pubdate data-updated="true">Jul 31<span>st</span>, 2012</time>
+        
+         | <a href="/blog/2012/07/31/linux-memory-management-3/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><strong><em>摘要</em></strong>：把一块存放slab结构的内存区映射到一组连续的页框是最好的选择，这样会充分利用高速缓存并获得较低的平均访问时间。不过，上面的方式主要是针对那些使用非常频繁的内核数据结构——如task_struct、inode来设计的。如果对内存区的请求不是很频繁，那么，通过连续的线性地址，而不是物理地址来访问非连续的物理页框这样一种分配模式就会很有意义了。这种模式的主要优点是避免了外碎片，而缺点是必须打乱内核页表。此外，非连续内存区的大小必须是4096 的倍数。Linux 在几个方面使用非连续内存区：为活动的交换区分配数据结构，为模块分配空间，或者给某些I/O 驱动程序分配缓冲区等。此外，非连续内存区还提供了另一种使用高端内存页框的方法。</p>
+
+<h2>非连续内存区的线性地址    </h2>
+
+<p>要查找线性地址的一个空闲区，我们可以从PAGE_OFFSET开始查找（通常为0xc0000000，即第4 个GB 的起始地址）。下图让我们回忆了如何使用第4个GB 的线性地址：</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2012/07/31/linux-memory-management-3/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2012/07/31/linux-memory-management-2/">Linux内存管理（中）</a></h1>
     
     
@@ -499,184 +597,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/07/13/debian-setup/">Debian硬盘安装笔记</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-07-13T11:29:00+08:00" pubdate data-updated="true">Jul 13<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/07/13/debian-setup/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>以前安装的时候都有光盘，这次换的机器，光驱坏了，那么有没有可能硬盘安装debian么？答案当然是可以的。 <br/>
-1.下载debian最新ISO映像。 <br/>
-2.下载安装所需要的vmlinuz  initrd.gz  boot.img.gz的这三个文件. <br/>
-   下载地址：<a href="http://debian.osuosl.org/debian/dists/Debian6.0.5/main/installer-i386/current/images/hd-media/">http://debian.osuosl.org/debian/dists/Debian6.0.5/main/installer-i386/current/images/hd-media/</a> <br/>
-3.下载grub4 for DOS    <br/>
-下载地址：<a href="http://download.gna.org/grub4dos/grub4dos-0.4.4-2009-06-20.zip">http://download.gna.org/grub4dos/grub4dos-0.4.4-2009-06-20.zip</a></p>
-
-<h2>安装过程：</h2>
-
-<p>1、先把WINXP安装到C盘，这里唯一要说的是如果在安装WINXP时，选择了把C盘格式化为NTFS格式，那么之后安装用的DEBIAN的ISO文件就不能放在C盘了，必须放在FAT32格式的分区的根目录下。切记哦！否则硬盘安装DEBIAN时后找不到ISO文件哦。</p>
-
-<p>WINXP安装好以后，把下载的GRUB4 for DOS包解压缩到C盘根目录，并将目录名改为grub，（个人认为不改也应该可以，不过没试，你可以试下呵），并进入GRUB目录将grldr文件复制到C盘根目录下；把vmlinuz、initrd.gz、boot.img.gz三个文件也复制到C盘根目录下：（基本上这个时候C盘是NTFS格式还是FAT32格式都没有关系的）</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2012/07/13/debian-setup/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/07/12/python-backup-octopress/">本地备份octopress</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-07-12T22:42:00+08:00" pubdate data-updated="true">Jul 12<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/07/12/python-backup-octopress/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>用python脚本备份octopress，当然也可以备份其他的目录。只要修改对应路径就可以了。</p>
-
-<figure class='code'><figcaption><span>octopress_backup.py</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="c">#!/usr/bin/python2</span>
-</span><span class='line'><span class="c"># Filename: octopress_backup.py</span>
-</span><span class='line'>
-</span><span class='line'><span class="kn">import</span> <span class="nn">os</span>
-</span><span class='line'><span class="kn">import</span> <span class="nn">time</span>
-</span><span class='line'>
-</span><span class='line'><span class="c"># 1. 需要备份的目录(也可以将其他的文件夹一起打包)</span>
-</span><span class='line'><span class="n">source</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;/home/tiny/octopress&#39;</span><span class="p">,</span> <span class="s">&#39;/home/tiny/mytest&#39;</span><span class="p">]</span>
-</span><span class='line'>
-</span><span class='line'><span class="c"># 2. 备份的目标位置</span>
-</span><span class='line'><span class="n">target_dir</span> <span class="o">=</span> <span class="s">&#39;/home/tiny/backup/&#39;</span> <span class="c"># Remember to change this to what you will be using</span>
-</span><span class='line'>
-</span><span class='line'><span class="c"># 3. 本脚本备份成tar，当然也可以压缩gzip。</span>
-</span><span class='line'><span class="c"># 4. 日期是目录名</span>
-</span><span class='line'><span class="n">today</span> <span class="o">=</span> <span class="n">target_dir</span> <span class="o">+</span> <span class="n">time</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s">&#39;%Y%m</span><span class="si">%d</span><span class="s">&#39;</span><span class="p">)</span>
-</span><span class='line'><span class="c"># 当前时间是备份文件的名称</span>
-</span><span class='line'><span class="n">now</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s">&#39;%H%M%S&#39;</span><span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'><span class="c"># 可以对备份的文件进行一些说明</span>
-</span><span class='line'><span class="n">comment</span> <span class="o">=</span> <span class="nb">raw_input</span><span class="p">(</span><span class="s">&#39;Enter a comment --&gt; &#39;</span><span class="p">)</span>
-</span><span class='line'><span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">comment</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="c"># check if a comment was entered</span>
-</span><span class='line'>    <span class="n">target</span> <span class="o">=</span> <span class="n">today</span> <span class="o">+</span> <span class="n">os</span><span class="o">.</span><span class="n">sep</span> <span class="o">+</span> <span class="n">now</span> <span class="o">+</span> <span class="s">&#39;.tar&#39;</span>
-</span><span class='line'><span class="k">else</span><span class="p">:</span>
-</span><span class='line'>    <span class="n">target</span> <span class="o">=</span> <span class="n">today</span> <span class="o">+</span> <span class="n">os</span><span class="o">.</span><span class="n">sep</span> <span class="o">+</span> <span class="n">now</span> <span class="o">+</span> <span class="s">&#39;_&#39;</span> <span class="o">+</span>\
-</span><span class='line'>        <span class="n">comment</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&#39; &#39;</span><span class="p">,</span> <span class="s">&#39;_&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="s">&#39;.tar&#39;</span>
-</span><span class='line'>
-</span><span class='line'><span class="c"># 创建子文件夹</span>
-</span><span class='line'><span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">today</span><span class="p">):</span>
-</span><span class='line'>    <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">today</span><span class="p">)</span> <span class="c"># make directory</span>
-</span><span class='line'>    <span class="k">print</span> <span class="s">&#39;Successfully created directory&#39;</span><span class="p">,</span> <span class="n">today</span>
-</span><span class='line'>
-</span><span class='line'><span class="c"># 5. tar压缩命令（unix/linux）</span>
-</span><span class='line'><span class="n">tar_command</span> <span class="o">=</span> <span class="s">&quot;tar -cvf &#39;</span><span class="si">%s</span><span class="s">&#39; </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="s">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">source</span><span class="p">))</span>
-</span><span class='line'>
-</span><span class='line'><span class="c"># 运行备份命令</span>
-</span><span class='line'><span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="n">tar_command</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-</span><span class='line'>    <span class="k">print</span> <span class="s">&#39;Successful backup to&#39;</span><span class="p">,</span> <span class="n">target</span>
-</span><span class='line'><span class="k">else</span><span class="p">:</span>
-</span><span class='line'>    <span class="k">print</span> <span class="s">&#39;Backup FAILED&#39;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<br />
-
-
-<p>本站文章如果没有特别说明，均为<strong>原创</strong>，转载请以<strong>链接</strong>方式注明本文地址：<a href="http://tinyxd.me/blog/2012/07/12/python-backup-octopress/">http://tinyxd.me/blog/2012/07/12/python-backup-octopress/</a></p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/3/">&larr; Older</a>
@@ -702,6 +622,14 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2012/08/26/imag-file-explorer/">图床管理</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/08/25/vps-optimization/">vps lnmp配置优化</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2012/08/23/archlinux-change-mac/">archlinux修改mac地址</a>
       </li>
     
@@ -713,19 +641,11 @@
         <a href="/blog/2012/08/09/linux-heap-management/">linux堆的管理</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2012/08/08/linux-system-calls/">linux系统调用</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/08/07/linux-page-fault-exception/">linux缺页异常处理程序</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Category Cloud</h1>
-    <span id="tag-cloud"><a href='/blog/categories/davinci' style='font-size: 102.22222222222223%'>Davinci(1)</a> <a href='/blog/categories/embedded' style='font-size: 104.44444444444444%'>Embedded(2)</a> <a href='/blog/categories/essay' style='font-size: 106.66666666666667%'>Essay(3)</a> <a href='/blog/categories/git' style='font-size: 102.22222222222223%'>Git(1)</a> <a href='/blog/categories/it' style='font-size: 104.44444444444444%'>It(2)</a> <a href='/blog/categories/java' style='font-size: 102.22222222222223%'>Java(1)</a> <a href='/blog/categories/linux' style='font-size: 160.0%'>Linux(27)</a> <a href='/blog/categories/octopress' style='font-size: 117.77777777777777%'>Octopress(8)</a> <a href='/blog/categories/php' style='font-size: 102.22222222222223%'>Php(1)</a> <a href='/blog/categories/python' style='font-size: 102.22222222222223%'>Python(1)</a> <a href='/blog/categories/ruby' style='font-size: 106.66666666666667%'>Ruby(3)</a> <a href='/blog/categories/software' style='font-size: 122.22222222222223%'>Software(10)</a> <a href='/blog/categories/vps' style='font-size: 102.22222222222223%'>Vps(1)</a> </span>
+    <span id="tag-cloud"><a href='/blog/categories/davinci' style='font-size: 102.22222222222223%'>Davinci(1)</a> <a href='/blog/categories/embedded' style='font-size: 104.44444444444444%'>Embedded(2)</a> <a href='/blog/categories/essay' style='font-size: 106.66666666666667%'>Essay(3)</a> <a href='/blog/categories/git' style='font-size: 102.22222222222223%'>Git(1)</a> <a href='/blog/categories/it' style='font-size: 104.44444444444444%'>It(2)</a> <a href='/blog/categories/java' style='font-size: 102.22222222222223%'>Java(1)</a> <a href='/blog/categories/linux' style='font-size: 160.0%'>Linux(27)</a> <a href='/blog/categories/octopress' style='font-size: 117.77777777777777%'>Octopress(8)</a> <a href='/blog/categories/php' style='font-size: 102.22222222222223%'>Php(1)</a> <a href='/blog/categories/python' style='font-size: 102.22222222222223%'>Python(1)</a> <a href='/blog/categories/ruby' style='font-size: 106.66666666666667%'>Ruby(3)</a> <a href='/blog/categories/software' style='font-size: 122.22222222222223%'>Software(10)</a> <a href='/blog/categories/vps' style='font-size: 106.66666666666667%'>Vps(3)</a> </span>
 </section>
 <section>
   <h1>Blogroll</h1>

@@ -93,6 +93,125 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2012/08/26/imag-file-explorer/">图床管理</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-08-26T00:08:00+08:00" pubdate data-updated="true">Aug 26<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/08/26/imag-file-explorer/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>做网站，尤其是做多个网站的，文件的统一管理，备份是很重要的。本站用<a href="http://encode-explorer.siineiolekala.net/">Encode Explorer</a>来管理本站图片、上传附件等。 <br/>
+去Encode Explorer在sourceforge的<a href="http://sourceforge.net/projects/encode-explorer/files/encode-explorer/">项目官网</a>下载程序，其代码不过3k多行。只要将index.php上传到网站根目录，然后把nginx设置好用<a href="http://upload.tinyxd.me/">2级域名</a>指向此根目录，就可以了。    <br/>
+其中index.php需要改几个地方：   <br/>
+1.<code>$_CONFIG['lang'] = "zh_CN";</code> 支持中文  <br/>
+2.<code>$_CONFIG['users'] = array(array('username', 'password', 'admin'));</code>  建立admin用户   <br/>
+其中index.php介绍比较详细了。语法格式：array(username, password, status)    status为user可以查看目录但不可以修改，admin能够上传文件和删除文件。   <br/>
+3.<code>$_CONFIG['new_dir_mode'] = 0755;</code>     <br/>
+<code>$_CONFIG['upload_file_mode'] = 0644;</code> <br/>
+修改新建文件夹和上传文件的默认权限。    <br/>
+这就是最终完成的，用二级域名（只要将该域名dns解析到vps服务器地址就可以了）<a href="http://upload.tinyxd.me/">http://upload.tinyxd.me/</a>来上传/浏览/删除文件。  <br/>
+本文参考了<a href="http://log4d.com/">log4d</a>的<a href="http://log4d.com/2012/05/image-host/">使用独立图床子域名</a>。</p>
+
+<br />
+
+
+<p>本文地址：<a href="http://tinyxd.me/2012/08/26/imag-file-explorer/">http://tinyxd.me/2012/08/26/imag-file-explorer/</a></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/08/25/vps-optimization/">Vps Lnmp配置优化</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-08-25T23:40:00+08:00" pubdate data-updated="true">Aug 25<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/08/25/vps-optimization/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>我选用了lnmp（linux + Nginx + PHP + MySQL ）来安装，方便快捷，安装后发现其实好多已经优化好了。  <br/>
+其中需要注意到的有以下几个： <br/>
+一. 基于xen架构的可以增加swap分区大小
+我的vps是openVZ的，swap分区是不能随意更改的。PS.主机商已经提供了128M的swap了。满足了！</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cd /var/
+</span><span class='line'>dd if=/dev/zero of=swapfile bs=1024 count=262144
+</span><span class='line'>/sbin/mkswap swapfile
+</span><span class='line'>/sbin/swapon swapfile</span></code></pre></td></tr></table></div></figure>
+
+
+<p>然后让自己做的swap分区在系统启动时自动加载：</p>
+
+<pre><code>vi /etc/fstab   
+</code></pre>
+
+<p>在适当位置添加以下内容：</p>
+
+<pre><code>/var/swapfile swap swap defaults 0 0
+</code></pre>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2012/08/25/vps-optimization/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2012/08/23/archlinux-change-mac/">Archlinux修改mac地址</a></h1>
     
     
@@ -489,104 +608,6 @@ ps：今天和麦子做的网站&#8212;-<a href="http://www.aitinan.com/">挨踢
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/08/01/awk-study/">Awk 学习</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-08-01T00:15:00+08:00" pubdate data-updated="true">Aug 1<span>st</span>, 2012</time>
-        
-         | <a href="/blog/2012/08/01/awk-study/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>AWK是一种优良的文本处理工具。它不仅是 Linux 中也是任何环境中现有的功能最强大的数据处理引擎之一。这种编程及数据操作语言（其名称得自于它的创始人 Alfred Aho 、Peter Weinberger 和 Brian Kernighan 姓氏的首个字母）的最大功能取决于一个人所拥有的知识。AWK 提供了极其强大的功能：可以进行样式装入、流控制、数学运算符、进程控制语句甚至于内置的变量和函数。它具备了一个完整的语言所应具有的几乎所有精美特性。</p>
-
-<h2>一、awk调用方式 </h2>
-
-<p>1、awk [-F field-separator] &#8216;commands&#8217; input-file(s)</p>
-
-<p>commands 是真正的awk命令</p>
-
-<p>-F 为域分隔符</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2012/08/01/awk-study/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/07/31/linux-memory-management-3/">Linux内存管理（下）</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-07-31T23:51:00+08:00" pubdate data-updated="true">Jul 31<span>st</span>, 2012</time>
-        
-         | <a href="/blog/2012/07/31/linux-memory-management-3/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><strong><em>摘要</em></strong>：把一块存放slab结构的内存区映射到一组连续的页框是最好的选择，这样会充分利用高速缓存并获得较低的平均访问时间。不过，上面的方式主要是针对那些使用非常频繁的内核数据结构——如task_struct、inode来设计的。如果对内存区的请求不是很频繁，那么，通过连续的线性地址，而不是物理地址来访问非连续的物理页框这样一种分配模式就会很有意义了。这种模式的主要优点是避免了外碎片，而缺点是必须打乱内核页表。此外，非连续内存区的大小必须是4096 的倍数。Linux 在几个方面使用非连续内存区：为活动的交换区分配数据结构，为模块分配空间，或者给某些I/O 驱动程序分配缓冲区等。此外，非连续内存区还提供了另一种使用高端内存页框的方法。</p>
-
-<h2>非连续内存区的线性地址    </h2>
-
-<p>要查找线性地址的一个空闲区，我们可以从PAGE_OFFSET开始查找（通常为0xc0000000，即第4 个GB 的起始地址）。下图让我们回忆了如何使用第4个GB 的线性地址：</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2012/07/31/linux-memory-management-3/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -610,6 +631,14 @@ ps：今天和麦子做的网站&#8212;-<a href="http://www.aitinan.com/">挨踢
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2012/08/26/imag-file-explorer/">图床管理</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/08/25/vps-optimization/">vps lnmp配置优化</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2012/08/23/archlinux-change-mac/">archlinux修改mac地址</a>
       </li>
     
@@ -621,19 +650,11 @@ ps：今天和麦子做的网站&#8212;-<a href="http://www.aitinan.com/">挨踢
         <a href="/blog/2012/08/09/linux-heap-management/">linux堆的管理</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2012/08/08/linux-system-calls/">linux系统调用</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/08/07/linux-page-fault-exception/">linux缺页异常处理程序</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Category Cloud</h1>
-    <span id="tag-cloud"><a href='/blog/categories/davinci' style='font-size: 102.22222222222223%'>Davinci(1)</a> <a href='/blog/categories/embedded' style='font-size: 104.44444444444444%'>Embedded(2)</a> <a href='/blog/categories/essay' style='font-size: 106.66666666666667%'>Essay(3)</a> <a href='/blog/categories/git' style='font-size: 102.22222222222223%'>Git(1)</a> <a href='/blog/categories/it' style='font-size: 104.44444444444444%'>It(2)</a> <a href='/blog/categories/java' style='font-size: 102.22222222222223%'>Java(1)</a> <a href='/blog/categories/linux' style='font-size: 160.0%'>Linux(27)</a> <a href='/blog/categories/octopress' style='font-size: 117.77777777777777%'>Octopress(8)</a> <a href='/blog/categories/php' style='font-size: 102.22222222222223%'>Php(1)</a> <a href='/blog/categories/python' style='font-size: 102.22222222222223%'>Python(1)</a> <a href='/blog/categories/ruby' style='font-size: 106.66666666666667%'>Ruby(3)</a> <a href='/blog/categories/software' style='font-size: 122.22222222222223%'>Software(10)</a> <a href='/blog/categories/vps' style='font-size: 102.22222222222223%'>Vps(1)</a> </span>
+    <span id="tag-cloud"><a href='/blog/categories/davinci' style='font-size: 102.22222222222223%'>Davinci(1)</a> <a href='/blog/categories/embedded' style='font-size: 104.44444444444444%'>Embedded(2)</a> <a href='/blog/categories/essay' style='font-size: 106.66666666666667%'>Essay(3)</a> <a href='/blog/categories/git' style='font-size: 102.22222222222223%'>Git(1)</a> <a href='/blog/categories/it' style='font-size: 104.44444444444444%'>It(2)</a> <a href='/blog/categories/java' style='font-size: 102.22222222222223%'>Java(1)</a> <a href='/blog/categories/linux' style='font-size: 160.0%'>Linux(27)</a> <a href='/blog/categories/octopress' style='font-size: 117.77777777777777%'>Octopress(8)</a> <a href='/blog/categories/php' style='font-size: 102.22222222222223%'>Php(1)</a> <a href='/blog/categories/python' style='font-size: 102.22222222222223%'>Python(1)</a> <a href='/blog/categories/ruby' style='font-size: 106.66666666666667%'>Ruby(3)</a> <a href='/blog/categories/software' style='font-size: 122.22222222222223%'>Software(10)</a> <a href='/blog/categories/vps' style='font-size: 106.66666666666667%'>Vps(3)</a> </span>
 </section>
 <section>
   <h1>Blogroll</h1>
