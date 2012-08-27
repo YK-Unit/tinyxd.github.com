@@ -4,7 +4,7 @@
   <title><![CDATA[Keen on Art of Tech]]></title>
   <link href="http://tinyxd.me/atom.xml" rel="self"/>
   <link href="http://tinyxd.me/"/>
-  <updated>2012-08-26T23:41:43+08:00</updated>
+  <updated>2012-08-27T23:42:52+08:00</updated>
   <id>http://tinyxd.me/</id>
   <author>
     <name><![CDATA[Tiny]]></name>
@@ -12,6 +12,157 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[用Dropbox备份VPS网站及数据库 ]]></title>
+    <link href="http://tinyxd.me/blog/2012/08/27/use-dropbox-backup-vps-and-database/"/>
+    <updated>2012-08-27T23:28:00+08:00</updated>
+    <id>http://tinyxd.me/blog/2012/08/27/use-dropbox-backup-vps-and-database</id>
+    <content type="html"><![CDATA[<p>用SSH客户端（PuTTY）登陆，进入root目录：</p>
+
+<pre><code>cd ~
+</code></pre>
+
+<p>linux下用ssh登录：</p>
+
+<pre><code>ssh (ip) -l (用户名) -p (端口号)
+</code></pre>
+
+<p>下载dropbox程序： <br/>
+32位版本：</p>
+
+<pre><code>wget -O dropbox.tar.gz http://www.dropbox.com/download/?plat=lnx.x86
+</code></pre>
+
+<p>64位版本：</p>
+
+<pre><code>wget -O - "https://www.dropbox.com/download?plat=lnx.x86_64
+</code></pre>
+
+<p>解压缩：</p>
+
+<pre><code>    tar -zxof dropbox.tar.gz
+</code></pre>
+
+<p>然后第一次运行dropbox：</p>
+
+<pre><code>    ~/.dropbox-dist/dropboxd &amp;
+</code></pre>
+
+<p>运行后会出现一串URL地址，把这个复制到流量器上，跟你的dropbox账户进行绑定。</p>
+
+<!--more-->
+
+
+<p>绑定好之后就可以开始同步了。 <br/>
+首先进入dropbox，</p>
+
+<pre><code>   cd ~/Dropbox
+</code></pre>
+
+<p>备份整个wwwroot目录，建立一个软连接：</p>
+
+<pre><code>    ln -s /home/wwwroot
+</code></pre>
+
+<p>由于dropbox耗费的内存确实够大，建议不要开太长时间 <br/>
+如果上面操作没有错误的话，在dropbox就可以看到同步的文件了。 <br/>
+附别人写的一个脚本：</p>
+
+<figure class='code'><figcaption><span>dropboxbak.sh </span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>   <span class="c">#!/bin/sh</span>
+</span><span class='line'>    <span class="nv">BACKUP_SRC</span><span class="o">=</span><span class="s2">&quot;/root/Dropbox&quot;</span>  <span class="c">#用于同步的本地目录</span>
+</span><span class='line'>    <span class="nv">BACKUP_WWW</span><span class="o">=</span><span class="s2">&quot;/home/wwwroot&quot;</span>     <span class="c">#你的网站目录</span>
+</span><span class='line'>    <span class="nv">NOW</span><span class="o">=</span><span class="k">$(</span>date +<span class="s2">&quot;%Y.%m.%d&quot;</span><span class="k">)</span>
+</span><span class='line'>    <span class="nv">MYSQL_SERVER</span><span class="o">=</span><span class="s2">&quot;127.0.0.1&quot;</span>
+</span><span class='line'>    <span class="nv">MYSQL_USER</span><span class="o">=</span><span class="s2">&quot;user&quot;</span>
+</span><span class='line'>    <span class="nv">MYSQL_PASS</span><span class="o">=</span><span class="s2">&quot;password&quot;</span>
+</span><span class='line'>    <span class="nv">DAY</span><span class="o">=</span><span class="k">$(</span>date +<span class="s2">&quot;%u&quot;</span><span class="k">)</span>             <span class="c">#取当前星期，1表示周一</span>
+</span><span class='line'>    start<span class="o">()</span> <span class="o">{</span>
+</span><span class='line'>   <span class="nb">echo </span>starting bak SQL
+</span><span class='line'>    <span class="c">#dump数据库数据，以及备份网站整站文件</span>
+</span><span class='line'>    mysqldump -u <span class="nv">$MYSQL_USER</span> -h <span class="nv">$MYSQL_SERVER</span> -p<span class="nv">$MYSQL_PASS</span> 需要备份的数据库名称 &gt; <span class="s2">&quot;$BACKUP_SRC/$NOW-Databases.sql&quot;</span>
+</span><span class='line'>    <span class="nb">echo </span>starting dropbox
+</span><span class='line'>    /root/.dropbox-dist/dropboxd &amp;
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'>    stop<span class="o">()</span> <span class="o">{</span>
+</span><span class='line'>    <span class="nb">echo </span>stoping dropbox
+</span><span class='line'>    pkill dropbox
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'>    <span class="k">case</span> <span class="s2">&quot;$1&quot;</span> in
+</span><span class='line'>    start<span class="o">)</span>
+</span><span class='line'>    start
+</span><span class='line'>    ;;
+</span><span class='line'>    stop<span class="o">)</span>
+</span><span class='line'>    stop
+</span><span class='line'>    ;;
+</span><span class='line'>    <span class="k">esac</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>将脚本放到~/.dropbox下，修改脚本权限：</p>
+
+<pre><code>        chmod 755 ~/.dropbox/dropboxbak.sh
+</code></pre>
+
+<p>添加计划任务：</p>
+
+<pre><code>        crontab –e
+</code></pre>
+
+<p>添加两条内容：</p>
+
+<pre><code>            0   3 * * * sh /root/.dropbox/dropboxbak.sh start
+
+            30 3 * * * sh /root/.dropbox/dropboxbak.sh stop
+</code></pre>
+
+<p>具体参数参照文档。 <br/>
+删除dropbox的方法：</p>
+
+<figure class='code'><figcaption><span>dropboxbak.sh </span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># sh /root/.dropbox/dropboxbak.sh stop</span>
+</span><span class='line'><span class="c"># su - root</span>
+</span><span class='line'><span class="c"># cd</span>
+</span><span class='line'><span class="c"># rm -rf .dropbox .dropbox-dist  Dropbox dropbox.tar.gz dbmakefakelib.py dbreadconfig.py</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<br />
+
+
+<p>本文地址：<a href="http://tinyxd.me/blog/2012/08/27/use-dropbox-backup-vps-and-database/">http://tinyxd.me/blog/2012/08/27/use-dropbox-backup-vps-and-database/</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[图床管理]]></title>
@@ -2008,109 +2159,6 @@ a.先备份下 /etc/wpa_supplicant.conf：</p>
 
 
 <p>本站文章如果没有特别说明，均为<strong>原创</strong>，转载请以<strong>链接</strong>方式注明本文地址：<a href="http://tinyxd.me/blog/2012/07/16/archlinux-wireless-network-connection/">http://tinyxd.me/blog/2012/07/16/archlinux-wireless-network-connection/</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[archlinux下的时间时区设置]]></title>
-    <link href="http://tinyxd.me/blog/2012/07/14/archlinux-time-config/"/>
-    <updated>2012-07-14T23:56:00+08:00</updated>
-    <id>http://tinyxd.me/blog/2012/07/14/archlinux-time-config</id>
-    <content type="html"><![CDATA[<p>本文方法适合于archlinux，archbang等衍生版本。archbang亲测。 <br/>
-1.打开<code>/etc/rc.conf</code>，将<code>TIMEZONE</code>改为<code>"Asia/Shanghai"</code>。 <br/>
-2.打开<code>/etc/rc.conf</code>，将<code>HARDWARECLOCK</code>改为<code>"localtime"</code>。 <br/>
-下面是改完的rc.conf：</p>
-
-<!--more-->
-
-
-<p></p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>#
-</span><span class='line'># /etc/rc.conf - Main Configuration for Arch Linux
-</span><span class='line'>
-</span><span class='line'>LOCALE="en_US.UTF-8"
-</span><span class='line'>DAEMON_LOCALE="no"
-</span><span class='line'>HARDWARECLOCK="localtime"
-</span><span class='line'>TIMEZONE="Asia/Shanghai"
-</span><span class='line'>KEYMAP="us"
-</span><span class='line'>CONSOLEFONT=
-</span><span class='line'>CONSOLEMAP=
-</span><span class='line'>USECOLOR="yes"
-</span><span class='line'>
-</span><span class='line'>MODULES=()
-</span><span class='line'>
-</span><span class='line'>UDEV_TIMEOUT=30
-</span><span class='line'>USEDMRAID="no"
-</span><span class='line'>USEBTRFS="no"
-</span><span class='line'>USELVM="no"
-</span><span class='line'>
-</span><span class='line'>HOSTNAME="archbang"
-</span><span class='line'>
-</span><span class='line'>interface=eth0
-</span><span class='line'>address=
-</span><span class='line'>netmask=
-</span><span class='line'>broadcast=
-</span><span class='line'>gateway=
-</span><span class='line'>
-</span><span class='line'>DAEMONS=(dbus networkmanager !network !dhcdbd syslog-ng @alsa @iNodeAuthService @openntpd)</span></code></pre></td></tr></table></div></figure>
-
-
-<p>3.在<code>/etc/localtime</code>做个软链接给具体的<code>zoneinfo</code>：</p>
-
-<pre><code>sudo ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime     
-</code></pre>
-
-<p>4.这个时候时区应该算是正确设置好了，把硬件时钟再同步回系统来。</p>
-
-<pre><code>$ sudo hwclock --hctosys   
-</code></pre>
-
-<p>5.现在看时间正确了没，如果还有问题，参照archlinux的官方wiki（题外话：wiki是个好东西，可以找到你需要的）安装openNTPD，自动同步时间。</p>
-
-<pre><code>$ sudo pacman -S openntpd   
-</code></pre>
-
-<p>配置文件看了下，基本都不用修改，直接起服务：</p>
-
-<pre><code>$ sudo /etc/rc.d/openntpd start   
-</code></pre>
-
-<p>确保网络通畅，等一会，系统时间应该就会更新了，确实蛮方便 <br/>
-最后在<code>rc.conf</code>的DAEMONS里面加上<code>@openntpd</code>，确保开机后台运行。</p>
-
-<br />   
-
-
-<p>本站文章如果没有特别说明，均为<strong>原创</strong>，转载请以<strong>链接</strong>方式注明本文地址：<a href="http://tinyxd.me/blog/2012/07/14/archlinux-time-config/">http://tinyxd.me/blog/2012/07/14/archlinux-time-config/</a></p>
 ]]></content>
   </entry>
   

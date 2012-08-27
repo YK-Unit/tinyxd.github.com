@@ -93,6 +93,80 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2012/08/27/use-dropbox-backup-vps-and-database/">用Dropbox备份VPS网站及数据库</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-08-27T23:28:00+08:00" pubdate data-updated="true">Aug 27<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/08/27/use-dropbox-backup-vps-and-database/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>用SSH客户端（PuTTY）登陆，进入root目录：</p>
+
+<pre><code>cd ~
+</code></pre>
+
+<p>linux下用ssh登录：</p>
+
+<pre><code>ssh (ip) -l (用户名) -p (端口号)
+</code></pre>
+
+<p>下载dropbox程序： <br/>
+32位版本：</p>
+
+<pre><code>wget -O dropbox.tar.gz http://www.dropbox.com/download/?plat=lnx.x86
+</code></pre>
+
+<p>64位版本：</p>
+
+<pre><code>wget -O - "https://www.dropbox.com/download?plat=lnx.x86_64
+</code></pre>
+
+<p>解压缩：</p>
+
+<pre><code>    tar -zxof dropbox.tar.gz
+</code></pre>
+
+<p>然后第一次运行dropbox：</p>
+
+<pre><code>    ~/.dropbox-dist/dropboxd &amp;
+</code></pre>
+
+<p>运行后会出现一串URL地址，把这个复制到流量器上，跟你的dropbox账户进行绑定。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2012/08/27/use-dropbox-backup-vps-and-database/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2012/08/26/imag-file-explorer/">图床管理</a></h1>
     
     
@@ -569,45 +643,6 @@ Vps是host1free提供的（128MB,10G,无限流量），申请地址：<a href="h
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/08/02/blog-two-months/">写在开博两个月</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-08-02T18:46:00+08:00" pubdate data-updated="true">Aug 2<span>nd</span>, 2012</time>
-        
-         | <a href="/blog/2012/08/02/blog-two-months/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>其实今天距离开博两个月还有几天的时间，因为今天PR变为2，所以写篇短文，记录下。  <br/>
-ps：今天和麦子做的网站&#8212;-<a href="http://www.aitinan.com/">挨踢男的那点事（专注移动互联网）</a>加了友链。其中不乏原创文章，写的很好。推荐大家去逛逛。</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -631,6 +666,10 @@ ps：今天和麦子做的网站&#8212;-<a href="http://www.aitinan.com/">挨踢
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2012/08/27/use-dropbox-backup-vps-and-database/">用Dropbox备份VPS网站及数据库 </a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2012/08/26/imag-file-explorer/">图床管理</a>
       </li>
     
@@ -646,15 +685,11 @@ ps：今天和麦子做的网站&#8212;-<a href="http://www.aitinan.com/">挨踢
         <a href="/blog/2012/08/14/vps-lnmp-setup-and-typecho-blog/">VPS申请及博客搭建</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2012/08/09/linux-heap-management/">linux堆的管理</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Category Cloud</h1>
-    <span id="tag-cloud"><a href='/blog/categories/davinci' style='font-size: 102.22222222222223%'>Davinci(1)</a> <a href='/blog/categories/embedded' style='font-size: 104.44444444444444%'>Embedded(2)</a> <a href='/blog/categories/essay' style='font-size: 106.66666666666667%'>Essay(3)</a> <a href='/blog/categories/git' style='font-size: 102.22222222222223%'>Git(1)</a> <a href='/blog/categories/it' style='font-size: 104.44444444444444%'>It(2)</a> <a href='/blog/categories/java' style='font-size: 102.22222222222223%'>Java(1)</a> <a href='/blog/categories/linux' style='font-size: 160.0%'>Linux(27)</a> <a href='/blog/categories/octopress' style='font-size: 117.77777777777777%'>Octopress(8)</a> <a href='/blog/categories/php' style='font-size: 102.22222222222223%'>Php(1)</a> <a href='/blog/categories/python' style='font-size: 102.22222222222223%'>Python(1)</a> <a href='/blog/categories/ruby' style='font-size: 106.66666666666667%'>Ruby(3)</a> <a href='/blog/categories/software' style='font-size: 122.22222222222223%'>Software(10)</a> <a href='/blog/categories/vps' style='font-size: 106.66666666666667%'>Vps(3)</a> </span>
+    <span id="tag-cloud"><a href='/blog/categories/davinci' style='font-size: 102.22222222222223%'>Davinci(1)</a> <a href='/blog/categories/embedded' style='font-size: 104.44444444444444%'>Embedded(2)</a> <a href='/blog/categories/essay' style='font-size: 106.66666666666667%'>Essay(3)</a> <a href='/blog/categories/git' style='font-size: 102.22222222222223%'>Git(1)</a> <a href='/blog/categories/it' style='font-size: 104.44444444444444%'>It(2)</a> <a href='/blog/categories/java' style='font-size: 102.22222222222223%'>Java(1)</a> <a href='/blog/categories/linux' style='font-size: 160.0%'>Linux(27)</a> <a href='/blog/categories/octopress' style='font-size: 117.77777777777777%'>Octopress(8)</a> <a href='/blog/categories/php' style='font-size: 102.22222222222223%'>Php(1)</a> <a href='/blog/categories/python' style='font-size: 102.22222222222223%'>Python(1)</a> <a href='/blog/categories/ruby' style='font-size: 106.66666666666667%'>Ruby(3)</a> <a href='/blog/categories/software' style='font-size: 122.22222222222223%'>Software(10)</a> <a href='/blog/categories/vps' style='font-size: 108.88888888888889%'>Vps(4)</a> </span>
 </section>
 <section>
   <h1>Blogroll</h1>
