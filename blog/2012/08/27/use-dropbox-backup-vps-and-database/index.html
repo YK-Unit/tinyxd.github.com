@@ -123,6 +123,10 @@
 <p>linux下用ssh登录：</p>
 
 <pre><code>ssh (ip) -l (用户名) -p (端口号)
+或者
+ssh username@ip
+或者  
+ssh username@domain
 </code></pre>
 
 <p>下载dropbox程序： <br/>
@@ -136,6 +140,9 @@
 <pre><code>wget -O - "https://www.dropbox.com/download?plat=lnx.x86_64
 </code></pre>
 
+<!--more-->
+
+
 <p>解压缩：</p>
 
 <pre><code>    tar -zxof dropbox.tar.gz
@@ -146,12 +153,8 @@
 <pre><code>    ~/.dropbox-dist/dropboxd &amp;
 </code></pre>
 
-<p>运行后会出现一串URL地址，把这个复制到流量器上，跟你的dropbox账户进行绑定。</p>
-
-<!--more-->
-
-
-<p>绑定好之后就可以开始同步了。 <br/>
+<p>运行后会出现一串URL地址，把这个复制到流量器上，跟你的dropbox账户进行绑定。
+绑定好之后就可以开始同步了。 <br/>
 首先进入dropbox，</p>
 
 <pre><code>   cd ~/Dropbox
