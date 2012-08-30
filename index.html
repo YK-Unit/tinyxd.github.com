@@ -93,6 +93,65 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2012/08/30/debian-ubuntu-setup-openvpn/">VPS安装openVPN</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-08-30T12:24:00+08:00" pubdate data-updated="true">Aug 30<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/08/30/debian-ubuntu-setup-openvpn/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>首先，你得有VPS或者独立服务器。 <br/>
+因为我的VPS是openVZ的，查资料发现新的openVZ的VPS是支持PPTP的。不过鉴于安全性的考虑我还是使用openVPN。 <br/>
+本文后面会介绍在debian 6下面安装openvpn的一些注意事项以及在xp下面安装openVPN。</p>
+
+<h2>使用一键安装包来安装openVPN   </h2>
+
+<p>1.检查你的VPS是否支持Tun/Tap/nat/ppp，登录VPS检查</p>
+
+<pre><code>cat /dev/net/tun
+</code></pre>
+
+<p>如果返回 <code>cat: /dev/net/tun: File descriptor in bad state</code> 说明tun是可用的。</p>
+
+<pre><code>iptables -t nat -A POSTROUTING -s 10.8.0.0/24 -o venet0 -j MASQUERADE
+</code></pre>
+
+<p>如果返回<code>iptables: No chain/target/match by that name</code>说明nat也是可以用的。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2012/08/30/debian-ubuntu-setup-openvpn/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2012/08/27/use-dropbox-backup-vps-and-database/">用Dropbox备份VPS网站及数据库</a></h1>
     
     
@@ -583,58 +642,6 @@ Vps是host1free提供的（128MB,10G,无限流量），申请地址：<a href="h
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/08/05/linux-process-address-space/">Linux进程地址空间</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-08-05T12:51:00+08:00" pubdate data-updated="true">Aug 5<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/08/05/linux-process-address-space/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2>简介   </h2>
-
-<p>内核中获得动态内存的方式：<code>__get_free_pages()</code>或alloc_pages()从分区页框分配器中获得页框，kmem_cache_alloc()或kmalloc()使用slab分配器为专用或通用对象分配块，vmalloc()或vmalloc_32()获得一块非连续的内存区。如果所请求的内存区得以满足，这些函数都返回一个页描述符地址或线性地址（即所分配动态内存区的起始地址）。</p>
-
-<p>使用以上简单方法的原因：</p>
-
-<pre><code>内核是操作系统中优先级最高的成分 
-
-内核信任自己。 
-</code></pre>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2012/08/05/linux-process-address-space/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -658,6 +665,10 @@ Vps是host1free提供的（128MB,10G,无限流量），申请地址：<a href="h
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2012/08/30/debian-ubuntu-setup-openvpn/">VPS安装openVPN</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2012/08/27/use-dropbox-backup-vps-and-database/">用Dropbox备份VPS网站及数据库 </a>
       </li>
     
@@ -673,15 +684,11 @@ Vps是host1free提供的（128MB,10G,无限流量），申请地址：<a href="h
         <a href="/blog/2012/08/23/archlinux-change-mac/">archlinux修改mac地址</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2012/08/14/vps-lnmp-setup-and-typecho-blog/">VPS申请及博客搭建</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Category Cloud</h1>
-    <span id="tag-cloud"><a href='/blog/categories/davinci' style='font-size: 102.22222222222223%'>Davinci(1)</a> <a href='/blog/categories/embedded' style='font-size: 104.44444444444444%'>Embedded(2)</a> <a href='/blog/categories/essay' style='font-size: 106.66666666666667%'>Essay(3)</a> <a href='/blog/categories/git' style='font-size: 102.22222222222223%'>Git(1)</a> <a href='/blog/categories/it' style='font-size: 104.44444444444444%'>It(2)</a> <a href='/blog/categories/java' style='font-size: 102.22222222222223%'>Java(1)</a> <a href='/blog/categories/linux' style='font-size: 160.0%'>Linux(27)</a> <a href='/blog/categories/octopress' style='font-size: 117.77777777777777%'>Octopress(8)</a> <a href='/blog/categories/php' style='font-size: 102.22222222222223%'>Php(1)</a> <a href='/blog/categories/python' style='font-size: 102.22222222222223%'>Python(1)</a> <a href='/blog/categories/ruby' style='font-size: 106.66666666666667%'>Ruby(3)</a> <a href='/blog/categories/software' style='font-size: 122.22222222222223%'>Software(10)</a> <a href='/blog/categories/vps' style='font-size: 108.88888888888889%'>Vps(4)</a> </span>
+    <span id="tag-cloud"><a href='/blog/categories/davinci' style='font-size: 102.22222222222223%'>Davinci(1)</a> <a href='/blog/categories/embedded' style='font-size: 104.44444444444444%'>Embedded(2)</a> <a href='/blog/categories/essay' style='font-size: 106.66666666666667%'>Essay(3)</a> <a href='/blog/categories/git' style='font-size: 102.22222222222223%'>Git(1)</a> <a href='/blog/categories/it' style='font-size: 104.44444444444444%'>It(2)</a> <a href='/blog/categories/java' style='font-size: 102.22222222222223%'>Java(1)</a> <a href='/blog/categories/linux' style='font-size: 160.0%'>Linux(27)</a> <a href='/blog/categories/octopress' style='font-size: 117.77777777777777%'>Octopress(8)</a> <a href='/blog/categories/php' style='font-size: 102.22222222222223%'>Php(1)</a> <a href='/blog/categories/python' style='font-size: 102.22222222222223%'>Python(1)</a> <a href='/blog/categories/ruby' style='font-size: 106.66666666666667%'>Ruby(3)</a> <a href='/blog/categories/software' style='font-size: 122.22222222222223%'>Software(10)</a> <a href='/blog/categories/vps' style='font-size: 111.11111111111111%'>Vps(5)</a> </span>
 </section>
 <section>
   <h1>Blogroll</h1>

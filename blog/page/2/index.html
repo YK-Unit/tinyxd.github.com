@@ -93,6 +93,58 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2012/08/05/linux-process-address-space/">Linux进程地址空间</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-08-05T12:51:00+08:00" pubdate data-updated="true">Aug 5<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/08/05/linux-process-address-space/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>简介   </h2>
+
+<p>内核中获得动态内存的方式：<code>__get_free_pages()</code>或alloc_pages()从分区页框分配器中获得页框，kmem_cache_alloc()或kmalloc()使用slab分配器为专用或通用对象分配块，vmalloc()或vmalloc_32()获得一块非连续的内存区。如果所请求的内存区得以满足，这些函数都返回一个页描述符地址或线性地址（即所分配动态内存区的起始地址）。</p>
+
+<p>使用以上简单方法的原因：</p>
+
+<pre><code>内核是操作系统中优先级最高的成分 
+
+内核信任自己。 
+</code></pre>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2012/08/05/linux-process-address-space/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2012/08/02/blog-two-months/">写在开博两个月</a></h1>
     
     
@@ -540,56 +592,6 @@ ps：今天和麦子做的网站&#8212;-<a href="http://www.aitinan.com/">挨踢
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/07/16/archlinux-wireless-network-connection/">Archlinux 无线网络连接</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-07-16T11:24:00+08:00" pubdate data-updated="true">Jul 16<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/07/16/archlinux-wireless-network-connection/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>今天，回家了。由于家里用的无线路由器，我的本是archlinux系统，所以这就涉及到archlinux的无线网络配置。 <br/>
-本文参考了<a href="https://wiki.archlinux.org/index.php/Wireless_Setup">archlinux官方wiki</a>。 <br/>
-配置无线网络一般分两步： <br/>
-第一步是识别硬件、安装正确的驱动程序并进行配置； <br/>
-第二步是选择一种管理无线连接的方式。 <br/>
-关于第一步，wiki中有详细的介绍，我就不多叙述。 <br/>
-第二步，有几个命令和无线网络的加密方法，需要说说。 <br/>
-大概有两种方法：一个是手动，一个是自动。</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2012/07/16/archlinux-wireless-network-connection/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/3/">&larr; Older</a>
@@ -615,6 +617,10 @@ ps：今天和麦子做的网站&#8212;-<a href="http://www.aitinan.com/">挨踢
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2012/08/30/debian-ubuntu-setup-openvpn/">VPS安装openVPN</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2012/08/27/use-dropbox-backup-vps-and-database/">用Dropbox备份VPS网站及数据库 </a>
       </li>
     
@@ -630,15 +636,11 @@ ps：今天和麦子做的网站&#8212;-<a href="http://www.aitinan.com/">挨踢
         <a href="/blog/2012/08/23/archlinux-change-mac/">archlinux修改mac地址</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2012/08/14/vps-lnmp-setup-and-typecho-blog/">VPS申请及博客搭建</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Category Cloud</h1>
-    <span id="tag-cloud"><a href='/blog/categories/davinci' style='font-size: 102.22222222222223%'>Davinci(1)</a> <a href='/blog/categories/embedded' style='font-size: 104.44444444444444%'>Embedded(2)</a> <a href='/blog/categories/essay' style='font-size: 106.66666666666667%'>Essay(3)</a> <a href='/blog/categories/git' style='font-size: 102.22222222222223%'>Git(1)</a> <a href='/blog/categories/it' style='font-size: 104.44444444444444%'>It(2)</a> <a href='/blog/categories/java' style='font-size: 102.22222222222223%'>Java(1)</a> <a href='/blog/categories/linux' style='font-size: 160.0%'>Linux(27)</a> <a href='/blog/categories/octopress' style='font-size: 117.77777777777777%'>Octopress(8)</a> <a href='/blog/categories/php' style='font-size: 102.22222222222223%'>Php(1)</a> <a href='/blog/categories/python' style='font-size: 102.22222222222223%'>Python(1)</a> <a href='/blog/categories/ruby' style='font-size: 106.66666666666667%'>Ruby(3)</a> <a href='/blog/categories/software' style='font-size: 122.22222222222223%'>Software(10)</a> <a href='/blog/categories/vps' style='font-size: 108.88888888888889%'>Vps(4)</a> </span>
+    <span id="tag-cloud"><a href='/blog/categories/davinci' style='font-size: 102.22222222222223%'>Davinci(1)</a> <a href='/blog/categories/embedded' style='font-size: 104.44444444444444%'>Embedded(2)</a> <a href='/blog/categories/essay' style='font-size: 106.66666666666667%'>Essay(3)</a> <a href='/blog/categories/git' style='font-size: 102.22222222222223%'>Git(1)</a> <a href='/blog/categories/it' style='font-size: 104.44444444444444%'>It(2)</a> <a href='/blog/categories/java' style='font-size: 102.22222222222223%'>Java(1)</a> <a href='/blog/categories/linux' style='font-size: 160.0%'>Linux(27)</a> <a href='/blog/categories/octopress' style='font-size: 117.77777777777777%'>Octopress(8)</a> <a href='/blog/categories/php' style='font-size: 102.22222222222223%'>Php(1)</a> <a href='/blog/categories/python' style='font-size: 102.22222222222223%'>Python(1)</a> <a href='/blog/categories/ruby' style='font-size: 106.66666666666667%'>Ruby(3)</a> <a href='/blog/categories/software' style='font-size: 122.22222222222223%'>Software(10)</a> <a href='/blog/categories/vps' style='font-size: 111.11111111111111%'>Vps(5)</a> </span>
 </section>
 <section>
   <h1>Blogroll</h1>
