@@ -93,6 +93,72 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2012/07/02/add-flickr-aside-in-octopress/">Octopress博客添加flickr侧边栏</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-07-02T11:14:00+08:00" pubdate data-updated="true">Jul 2<span>nd</span>, 2012</time>
+        
+         | <a href="/blog/2012/07/02/add-flickr-aside-in-octopress/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>octopress添加侧边栏： <br/>
+1.新建 <code>source/_includes/custom/asides/flickr.html</code>，代码如下：</p>
+
+<div><script src='https://gist.github.com/1421792.js?file=flickr.html'></script>
+<noscript><pre><code>{% if site.flickr_user %}
+&lt;section class=&quot;flickr&quot;&gt;
+&lt;h1&gt;My Flickr&lt;/h1&gt;
+&lt;!-- Start of Flickr Badge --&gt;
+&lt;style type=&quot;text/css&quot;&gt;
+/*
+Images are wrapped in divs classed &quot;flickr_badge_image&quot; with ids &quot;flickr_badge_imageX&quot; where &quot;X&quot; is an integer specifying ordinal position. Below are some styles to get you started!
+*/
+#flickr_badge_wrapper {padding:10px 0 10px 0;}
+.flickr_badge_image {margin: 0 9px 8px 0px;display: inline-block;}
+&lt;/style&gt;
+&lt;div id=&quot;flickr_badge_uber_wrapper&quot;&gt;&lt;div id=&quot;flickr_badge_wrapper&quot;&gt;
+&lt;script type=&quot;text/javascript&quot; src=&quot;http://www.flickr.com/badge_code_v2.gne?count={{ site.flickr_count }}&amp;display=latest&amp;size=s&amp;layout=x&amp;source=user&amp;user={{ site.flickr_user }}&quot;&gt;&lt;/script&gt;
+&lt;/div&gt;&lt;/div&gt;
+&lt;!-- End of Flickr Badge --&gt;
+&lt;/section&gt;
+{% endif %}</code></pre></noscript></div>
+
+
+
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2012/07/02/add-flickr-aside-in-octopress/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2012/07/01/merge-sort/">排序算法总结（五）</a></h1>
     
     
@@ -600,63 +666,6 @@ http://www.phpchina.com/resource/manual/phpnew/</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/06/18/debianan-zhuang-nvidiaxian-qia-qu-dong/">Debian安装nvidia显卡驱动</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-06-18T20:31:00+08:00" pubdate data-updated="true">Jun 18<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/06/18/debianan-zhuang-nvidiaxian-qia-qu-dong/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>在自己的电脑上硬盘安装了Debian.下面介绍一下我是如何安装显卡驱动的.我的显卡是GForce 7100GS的.</p>
-
-<p>1>下载显卡驱动.</p>
-
-<p>这个可以到Nvidia的官网上去找,找到自己对应的版本就可以了。</p>
-
-<p>2>安装gcc并设置版本.</p>
-
-<p>#apt-get install gcc 这样安装的是gcc-4.4,如果在安装过程中提示您安装的gcc版本有问题,你可以再安装一下gcc-4.3并将gcc版本设置为4.3,具体做法:</p>
-
-<p>#apt-get install gcc-4.3</p>
-
-<p>#ln -sf /usr/bin/gcc-4.3 /usr/bin/gcc 这一句用来将gcc的版本设置为4.3</p>
-
-<p>#ls -l /usr/bin/gcc* 这一句用来查看当前使用的gcc版本</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2012/06/18/debianan-zhuang-nvidiaxian-qia-qu-dong/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/6/">&larr; Older</a>
@@ -682,6 +691,10 @@ http://www.phpchina.com/resource/manual/phpnew/</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2012/09/10/job-hunting-2012/">开始找工作了</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2012/09/02/nginx-ssl/">个人网站上安装SSL证书</a>
       </li>
     
@@ -697,15 +710,11 @@ http://www.phpchina.com/resource/manual/phpnew/</p>
         <a href="/blog/2012/08/26/imag-file-explorer/">图床管理</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2012/08/25/vps-optimization/">vps lnmp配置优化</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Category Cloud</h1>
-    <span id="tag-cloud"><a href='/blog/categories/davinci' style='font-size: 102.22222222222223%'>Davinci(1)</a> <a href='/blog/categories/embedded' style='font-size: 104.44444444444444%'>Embedded(2)</a> <a href='/blog/categories/essay' style='font-size: 106.66666666666667%'>Essay(3)</a> <a href='/blog/categories/git' style='font-size: 102.22222222222223%'>Git(1)</a> <a href='/blog/categories/it' style='font-size: 104.44444444444444%'>It(2)</a> <a href='/blog/categories/java' style='font-size: 102.22222222222223%'>Java(1)</a> <a href='/blog/categories/linux' style='font-size: 160.0%'>Linux(27)</a> <a href='/blog/categories/octopress' style='font-size: 117.77777777777777%'>Octopress(8)</a> <a href='/blog/categories/php' style='font-size: 102.22222222222223%'>Php(1)</a> <a href='/blog/categories/python' style='font-size: 102.22222222222223%'>Python(1)</a> <a href='/blog/categories/ruby' style='font-size: 106.66666666666667%'>Ruby(3)</a> <a href='/blog/categories/software' style='font-size: 122.22222222222223%'>Software(10)</a> <a href='/blog/categories/vps' style='font-size: 113.33333333333333%'>Vps(6)</a> </span>
+    <span id="tag-cloud"><a href='/blog/categories/davinci' style='font-size: 102.22222222222223%'>Davinci(1)</a> <a href='/blog/categories/embedded' style='font-size: 104.44444444444444%'>Embedded(2)</a> <a href='/blog/categories/essay' style='font-size: 108.88888888888889%'>Essay(4)</a> <a href='/blog/categories/git' style='font-size: 102.22222222222223%'>Git(1)</a> <a href='/blog/categories/it' style='font-size: 104.44444444444444%'>It(2)</a> <a href='/blog/categories/java' style='font-size: 102.22222222222223%'>Java(1)</a> <a href='/blog/categories/linux' style='font-size: 160.0%'>Linux(27)</a> <a href='/blog/categories/octopress' style='font-size: 117.77777777777777%'>Octopress(8)</a> <a href='/blog/categories/php' style='font-size: 102.22222222222223%'>Php(1)</a> <a href='/blog/categories/python' style='font-size: 102.22222222222223%'>Python(1)</a> <a href='/blog/categories/ruby' style='font-size: 106.66666666666667%'>Ruby(3)</a> <a href='/blog/categories/software' style='font-size: 122.22222222222223%'>Software(10)</a> <a href='/blog/categories/vps' style='font-size: 113.33333333333333%'>Vps(6)</a> </span>
 </section>
 <section>
   <h1>Blogroll</h1>
