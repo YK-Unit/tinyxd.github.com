@@ -4,7 +4,7 @@
   <title><![CDATA[Category: octopress | Keen on Art of Tech]]></title>
   <link href="http://tinyxd.me/blog/categories/octopress/atom.xml" rel="self"/>
   <link href="http://tinyxd.me/"/>
-  <updated>2013-01-15T12:36:05+08:00</updated>
+  <updated>2013-01-16T14:05:46+08:00</updated>
   <id>http://tinyxd.me/</id>
   <author>
     <name><![CDATA[Tiny]]></name>
@@ -12,6 +12,75 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[文章末尾自动添加本文地址]]></title>
+    <link href="http://tinyxd.me/blog/2013/01/16/add-article-info-footer/"/>
+    <updated>2013-01-16T13:23:00+08:00</updated>
+    <id>http://tinyxd.me/blog/2013/01/16/add-article-info-footer</id>
+    <content type="html"><![CDATA[<p>为每篇post添加本文地址和keywords信息。 <br/>
+Ruby脚本如下，添加到plugins文件夹中。  <br/>
+``` ruby post_footer_filter.rb
+#</p>
+
+<h1>post_footer_filter.rb</h1>
+
+<h1>Append every post some footer infomation like original url</h1>
+
+<h1>Written by Kevin Lynx .</h1>
+
+<h1>Modified by Tiny (http://tinyxd.me/) .</h1>
+
+<h1>Email: admin#tinyxd.me</h1>
+
+<h1>Date: 1.16.2013</h1>
+
+<p>#
+require './plugins/post_filters'</p>
+
+<p>module AppendFooterFilter
+  def append(post)</p>
+
+<pre><code> author = post.site.config['author']
+ url = post.site.config['url']
+ pre = post.site.config['original_url_pre']
+ post.content + %Q[&lt;p class='post-footer'&gt;
+</code></pre>
+
+<h1>{pre or "original link:"}</h1>
+
+<p><a href='#{post.full_url}'>#{post.full_url}</a><br/>
+&nbsp;Written by <a href='#{url}'>#{author}</a>
+&nbsp;Posted at <a href='#{url}'>#{url}</a><br/>
+&nbsp;Keywords : {{ page.keywords }}
+</p>]
+  end
+end</p>
+
+<p>module Jekyll
+  class AppendFooter &lt; PostFilter</p>
+
+<pre><code>include AppendFooterFilter
+def pre_render(post)
+  post.content = append(post) if post.is_post?
+end
+</code></pre>
+
+<p>  end
+end</p>
+
+<p>Liquid::Template.register_filter AppendFooterFilter
+``` <br/>
+本人已将插件上传到https://github.com/tinyxd/post_footer。</p>
+
+<!--more-->
+
+
+<p>在_config.yml中添加origional_url_pre，本文配置为"本站文章如果没有特别说明，均为原创，转载请以链接方式注明本文地址："。</p>
+
+<p>本文参考：<code>http://codemacro.com/2012/07/26/post-footer-plugin-for-octopress/</code>。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[给octopress博客添加豆瓣侧边栏]]></title>
@@ -114,72 +183,6 @@ keywords: ruby , linux , archlinux , debian , software ,programming , embedded ,
 </code>
 3.这样在主页代码中也会出现keywords和description信息。每个post也会出现。方便被搜索网站索引。这个涉及到了SEO。
 以上文章参考自<a href="http://www.yatishmehta.in/seo-for-octopress">这里</a>。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[为已经存在的github Octopress配置本地环境]]></title>
-    <link href="http://tinyxd.me/blog/2012/05/23/wei-yi-jing-cun-zai-de-github-octopresspei-zhi-ben-di-huan-jing/"/>
-    <updated>2012-05-23T20:59:00+08:00</updated>
-    <id>http://tinyxd.me/blog/2012/05/23/wei-yi-jing-cun-zai-de-github-octopresspei-zhi-ben-di-huan-jing</id>
-    <content type="html"><![CDATA[<p><strong>转自：</strong><br/>
-http://www.360doc.com/content/12/0520/19/3565338_212362686.shtml</p>
-
-<p>本文介绍如何为已经存在于github上的octopress配置本地环境。<br/>
-在本地安装RVM(Ruby Version Manager)和Ruby 1.9.2；</p>
-
-<p>从你的github得到你的octopress内容：</p>
-
-<pre><code>git clone -b source git@github.com:username/username.github.com.git octopress # get the source code from your "source" branch of your octopress on github
-＃ learn from: http://stackoverflow.com/questions/1911109/git-clone-a-specific-branch
-cd octopress
-git clone git@github.com:username/username.github.com.git _deploy # get your static pages content from your "master"branch of your cotopress on github
-</code></pre>
-
-<!--more-->
-
-
-<p>安装依赖gems:</p>
-
-<pre><code>gem install bundler # Install dependencies   
-bundle install   #如果出现bundle命令没找到，还需要修改～/.bashrc
-vim ~/.bashrc
-#for ruby gem
-PATH=$PATH:~/.gem/ruby/1.9.1/bin
-export PATH
-rake install # Install the default Octopress theme  不需要 因为我已经有了自己的主题   
-rake setup_github_pages #需要这个 要不然rake deploy会出错   
-</code></pre>
-
-<p>这就基本结束了。</p>
-
-<p>编写文章，预览部署：</p>
-
-<pre><code>cd octopress
-rake new_post["Your Title of Your Article"]
-rake generate # generate your blog static pages content according to your input. 
-rake preview # start a web server on "http://localhost:4000", you can preview your blog content.
-rake deploy # push your static pages content to your github pages repo ("master" branch)
-</code></pre>
-
-<p>提交你的文本修改到github:</p>
-
-<pre><code>cd your_local_octopress_directory
-git add .
-git commit -m 'your message'
-git push origin source
-</code></pre>
-
-<p>注意：如果要从github得到最新的source内容，请运行以下命令：</p>
-
-<pre><code>cd your_local_octopress_directory
-cd _deploy
-git pull origin master
-cd ..
-git pull origin source
-</code></pre>
-
-<p>原则很简单，只要记住“your_local_octopress_directory”对应的的remote source branch，而”_deploy”对应的是remote master branch即可。</p>
 ]]></content>
   </entry>
   

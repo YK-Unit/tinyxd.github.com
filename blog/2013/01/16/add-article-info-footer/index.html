@@ -5,12 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>让Debian支持ntfs文件系统读写 - Keen on Art of Tech</title>
+  <title>文章末尾自动添加本文地址 - Keen on Art of Tech</title>
 <meta name="author" content="Tiny">
 
 
-<meta name="description" content="debian , ntfs , linux , filesysterm，文件系统">
-<meta name="keywords" content="debian , ntfs , linux , filesysterm，文件系统">
+<meta name="description" content="文章末尾自动添加本文地址">
+<meta name="keywords" content="octopress|本文地址">
 
   <!-- http://t.co/dKP3o1e -->
   <meta name="HandheldFriendly" content="True">
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://tinyxd.me/blog/2012/06/30/debian-ntfs-filesysterm">
+  <link rel="canonical" href="http://tinyxd.me/blog/2013/01/16/add-article-info-footer">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -85,7 +85,7 @@
   
   <header>
     
-      <h1 class="entry-title">让Debian支持ntfs文件系统读写</h1>
+      <h1 class="entry-title">文章末尾自动添加本文地址</h1>
     
     
       <p class="meta">
@@ -101,7 +101,7 @@
   
 
 
-<time datetime="2012-06-30T15:45:00+08:00" pubdate data-updated="true">Jun 30<span>th</span>, 2012</time>
+<time datetime="2013-01-16T13:23:00+08:00" pubdate data-updated="true">Jan 16<span>th</span>, 2013</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -110,40 +110,10 @@
   </header>
 
 
-<div class="entry-content"><p>刚装好debian发现在debian下往windows盘下拷贝不过去资料，上网查了些资料发现是因为不知道ntfs的读写。 <br/>
-查看我的版本号6.0.5</p>
+<div class="entry-content"><p>为每篇post添加本文地址和keywords信息。 <br/>
+Ruby脚本如下，添加到plugins文件夹中。</p>
 
-<pre><code>#more /etc/debian_version   
-6.0.5   
-</code></pre>
-
-<p>我的Debian系统: 6.0.5 <br/>
-要是用的软件使用软件:ntfs-3g <br/>
-1.修改默认源 <br/>
-因为我们学校有自己的源，故而修改成我们学校的源，而后进行更新</p>
-
-<pre><code>apt-get update   
-</code></pre>
-
-<!--more-->
-
-
-<p>2.执行安装 <br/>
-执行命令:</p>
-
-<pre><code>apt-get install ntfs-3g   
-</code></pre>
-
-<p>3.使用 <br/>
-直接使用执行命令:</p>
-
-<pre><code>mount -t ntfs-3g /dev/hdax /mnt/windows   
-</code></pre>
-
-<p>这里的/dev/hdax 请改为你自己的windows磁盘分区，可利用fdisk -l 查看。  <br/>
-如下：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span>post_footer_filter.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -162,48 +132,78 @@
 <span class='line-number'>17</span>
 <span class='line-number'>18</span>
 <span class='line-number'>19</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>debian:/mnt# fdisk -l
-</span><span class='line'>Disk /dev/sda: 500.1 GB, 500107862016 bytes
-</span><span class='line'>255 heads, 63 sectors/track, 60801 cylinders
-</span><span class='line'>Units = cylinders of 16065 * 512 = 8225280 bytes
-</span><span class='line'>Sector size (logical/physical): 512 bytes / 512 bytes
-</span><span class='line'>I/O size (minimum/optimal): 512 bytes / 512 bytes
-</span><span class='line'>Disk identifier: 0x559ed1e5
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1">#</span>
+</span><span class='line'><span class="c1"># post_footer_filter.rb</span>
+</span><span class='line'><span class="c1"># Append every post some footer infomation like original url</span>
+</span><span class='line'><span class="c1"># Written by Kevin Lynx .</span>
+</span><span class='line'><span class="c1"># Modified by Tiny (http://tinyxd.me/) .</span>
+</span><span class='line'><span class="c1"># Email: admin#tinyxd.me</span>
+</span><span class='line'><span class="c1"># Date: 1.16.2013</span>
+</span><span class='line'><span class="c1">#</span>
+</span><span class='line'><span class="nb">require</span> <span class="s1">&#39;./plugins/post_filters&#39;</span>
 </span><span class='line'>
-</span><span class='line'>  Device Boot      Start         End      Blocks   Id  System
-</span><span class='line'>/dev/sda1               1        6528    52436128+   7  HPFS/NTFS
-</span><span class='line'>/dev/sda2            6529       60802   435949345+   f  W95 Ext'd (LBA)
-</span><span class='line'>/dev/sda5            6529       24543   144705456    7  HPFS/NTFS
-</span><span class='line'>/dev/sda6           24544       42558   144705456    7  HPFS/NTFS
-</span><span class='line'>/dev/sda7           42559       53060    84357283+   7  HPFS/NTFS
-</span><span class='line'>/dev/sda8           53061       53321     2096451    b  W95 FAT32
-</span><span class='line'>/dev/sda9   *       53322       53346      194560   83  Linux
-</span><span class='line'>/dev/sda10          53346       53589     1951744   82  Linux swap / Solaris
-</span><span class='line'>/dev/sda11          53589       55413    14647296   83  Linux
-</span><span class='line'>/dev/sda12          55413       60802    43287552   83  Linux   </span></code></pre></td></tr></table></div></figure>
+</span><span class='line'><span class="k">module</span> <span class="nn">AppendFooterFilter</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">append</span><span class="p">(</span><span class="n">post</span><span class="p">)</span>
+</span><span class='line'>     <span class="n">author</span> <span class="o">=</span> <span class="n">post</span><span class="o">.</span><span class="n">site</span><span class="o">.</span><span class="n">config</span><span class="o">[</span><span class="s1">&#39;author&#39;</span><span class="o">]</span>
+</span><span class='line'>     <span class="n">url</span> <span class="o">=</span> <span class="n">post</span><span class="o">.</span><span class="n">site</span><span class="o">.</span><span class="n">config</span><span class="o">[</span><span class="s1">&#39;url&#39;</span><span class="o">]</span>
+</span><span class='line'>     <span class="n">pre</span> <span class="o">=</span> <span class="n">post</span><span class="o">.</span><span class="n">site</span><span class="o">.</span><span class="n">config</span><span class="o">[</span><span class="s1">&#39;original_url_pre&#39;</span><span class="o">]</span>
+</span><span class='line'>     <span class="n">post</span><span class="o">.</span><span class="n">content</span> <span class="o">+</span> <span class="sx">%Q[&lt;p class=&#39;post-footer&#39;&gt;</span>
+</span><span class='line'><span class="si">#{</span><span class="n">pre</span> <span class="ow">or</span> <span class="s2">&quot;original link:&quot;</span><span class="si">}</span><span class="sx"></span>
+</span><span class='line'><span class="sx">&lt;a href=&#39;</span><span class="si">#{</span><span class="n">post</span><span class="o">.</span><span class="n">full_url</span><span class="si">}</span><span class="sx">&#39;&gt;</span><span class="si">#{</span><span class="n">post</span><span class="o">.</span><span class="n">full_url</span><span class="si">}</span><span class="sx">&lt;/a&gt;&lt;br/&gt;</span>
+</span><span class='line'><span class="sx">&amp;nbsp;Written by &lt;a href=&#39;</span><span class="si">#{</span><span class="n">url</span><span class="si">}</span><span class="sx">&#39;&gt;</span><span class="si">#{</span><span class="n">author</span><span class="si">}</span><span class="sx">&lt;/a&gt;</span>
+</span><span class='line'><span class="sx">&amp;nbsp;Posted at &lt;a href=&#39;</span><span class="si">#{</span><span class="n">url</span><span class="si">}</span><span class="sx">&#39;&gt;</span><span class="si">#{</span><span class="n">url</span><span class="si">}</span><span class="sx">&lt;/a&gt;&lt;br/&gt;</span>
+</span><span class='line'><span class="sx">&amp;nbsp;Keywords : octopress|本文地址</span>
+</span><span class='line'><span class="sx">&lt;/p&gt;]</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">module</span> <span class="nn">Jekyll</span>
+</span><span class='line'>  <span class="k">class</span> <span class="nc">AppendFooter</span> <span class="o">&lt;</span> <span class="no">PostFilter</span>
+</span><span class='line'>    <span class="kp">include</span> <span class="no">AppendFooterFilter</span>
+</span><span class='line'>    <span class="k">def</span> <span class="nf">pre_render</span><span class="p">(</span><span class="n">post</span><span class="p">)</span>
+</span><span class='line'>      <span class="n">post</span><span class="o">.</span><span class="n">content</span> <span class="o">=</span> <span class="n">append</span><span class="p">(</span><span class="n">post</span><span class="p">)</span> <span class="k">if</span> <span class="n">post</span><span class="o">.</span><span class="n">is_post?</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="no">Liquid</span><span class="o">::</span><span class="no">Template</span><span class="o">.</span><span class="n">register_filter</span> <span class="no">AppendFooterFilter</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
-<p>如果是加入开机自动映射的话，编辑/etc/fstab,加入如下内容就可以了。</p>
+<p> <br/>
+本人已将插件上传到https://github.com/tinyxd/post_footer。</p>
 
-<pre><code>/dev/hdax /mnt/windows ntfs-3g defaults 0 0   
-</code></pre>
+<!--more-->
 
-<p>下面是我的系统加载NTFS文件系统的相关命令：</p>
 
-<pre><code>mount -t ntfs-3g /dev/sda6 /mnt/D
-mount -t ntfs-3g /dev/sda7 /mnt/E   
-</code></pre>
+<p>在_config.yml中添加origional_url_pre，本文配置为&#8221;本站文章如果没有特别说明，均为原创，转载请以链接方式注明本文地址：&#8221;。</p>
 
-<p>以上文章是对网上搜集的资料的整理。如需转载请注明出处，本文地址： <br/>
-<code>http://tinyxd.me/blog/2012/06/30/debian-ntfs-filesysterm/</code>  <p class='post-footer'></p>
+<p>本文参考：<code>http://codemacro.com/2012/07/26/post-footer-plugin-for-octopress/</code>。</p>
 
-<pre><code>        本站文章如果没有特别说明，均为原创，转载请以链接方式注明本文地址：
-        &lt;a href='http://tinyxd.me/blog/2012/06/30/debian-ntfs-filesysterm/'&gt;http://tinyxd.me/blog/2012/06/30/debian-ntfs-filesysterm/&lt;/a&gt;&lt;br/&gt;
-        &amp;nbsp;Written by &lt;a href='http://tinyxd.me'&gt;Tiny&lt;/a&gt;
-        &amp;nbsp;Posted at &lt;a href='http://tinyxd.me'&gt;http://tinyxd.me&lt;/a&gt;&lt;br/&gt;
-        &amp;nbsp;Keywords : debian , ntfs , linux , filesysterm，文件系统
-        &lt;/p&gt;
-</code></pre>
+<p class='post-footer'>
+            本站文章如果没有特别说明，均为原创，转载请以链接方式注明本文地址：
+            <a href='http://tinyxd.me/blog/2013/01/16/add-article-info-footer/'>http://tinyxd.me/blog/2013/01/16/add-article-info-footer/</a><br/>
+            &nbsp;Written by <a href='http://tinyxd.me'>Tiny</a>
+            &nbsp;Posted at <a href='http://tinyxd.me'>http://tinyxd.me</a><br/>
+            &nbsp;Keywords : octopress|本文地址
+            </p>
+
 </div>
 
 
@@ -226,12 +226,12 @@ mount -t ntfs-3g /dev/sda7 /mnt/E
   
 
 
-<time datetime="2012-06-30T15:45:00+08:00" pubdate data-updated="true">Jun 30<span>th</span>, 2012</time>
+<time datetime="2013-01-16T13:23:00+08:00" pubdate data-updated="true">Jan 16<span>th</span>, 2013</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/linux/'>linux</a>
+    <a class='category' href='/blog/categories/octopress/'>octopress</a>
   
 </span>
 
@@ -240,7 +240,7 @@ mount -t ntfs-3g /dev/sda7 /mnt/E
 
 <span class="tags">
   
-     Tag: <a class='tag' href='/tags/debian/'>debian</a>, <a class='tag' href='/tags/linux/'>linux</a>, <a class='tag' href='/tags/ntfs/'>ntfs</a>
+     Tag: <a class='tag' href='/tags/octopress/'>octopress</a>
   
 </span>
 
@@ -271,10 +271,8 @@ mount -t ntfs-3g /dev/sda7 /mnt/E
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2012/06/29/radix-sort/" title="Previous Post: 排序算法总结（四）">&laquo; 排序算法总结（四）</a>
+        <a class="basic-alignment left" href="/blog/2013/01/02/the-blog-stated/" title="Previous Post: 新的一年">&laquo; 新的一年</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2012/07/01/merge-sort/" title="Next Post: 排序算法总结（五）">排序算法总结（五） &raquo;</a>
       
     </p>
   </footer>
@@ -361,8 +359,8 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://tinyxd.me/blog/2012/06/30/debian-ntfs-filesysterm/';
-        var disqus_url = 'http://tinyxd.me/blog/2012/06/30/debian-ntfs-filesysterm/';
+        var disqus_identifier = 'http://tinyxd.me/blog/2013/01/16/add-article-info-footer/';
+        var disqus_url = 'http://tinyxd.me/blog/2013/01/16/add-article-info-footer/';
         var disqus_script = 'embed.js';
       
     (function () {
