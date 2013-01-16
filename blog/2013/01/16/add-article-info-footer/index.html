@@ -113,81 +113,45 @@
 <div class="entry-content"><p>为每篇post添加本文地址和keywords信息。 <br/>
 Ruby脚本如下，添加到plugins文件夹中。</p>
 
-<figure class='code'><figcaption><span>post_footer_filter.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1">#</span>
-</span><span class='line'><span class="c1"># post_footer_filter.rb</span>
-</span><span class='line'><span class="c1"># Append every post some footer infomation like original url</span>
-</span><span class='line'><span class="c1"># Written by Kevin Lynx .</span>
-</span><span class='line'><span class="c1"># Modified by Tiny (http://tinyxd.me/) .</span>
-</span><span class='line'><span class="c1"># Email: admin#tinyxd.me</span>
-</span><span class='line'><span class="c1"># Date: 1.16.2013</span>
-</span><span class='line'><span class="c1">#</span>
-</span><span class='line'><span class="nb">require</span> <span class="s1">&#39;./plugins/post_filters&#39;</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">module</span> <span class="nn">AppendFooterFilter</span>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">append</span><span class="p">(</span><span class="n">post</span><span class="p">)</span>
-</span><span class='line'>     <span class="n">author</span> <span class="o">=</span> <span class="n">post</span><span class="o">.</span><span class="n">site</span><span class="o">.</span><span class="n">config</span><span class="o">[</span><span class="s1">&#39;author&#39;</span><span class="o">]</span>
-</span><span class='line'>     <span class="n">url</span> <span class="o">=</span> <span class="n">post</span><span class="o">.</span><span class="n">site</span><span class="o">.</span><span class="n">config</span><span class="o">[</span><span class="s1">&#39;url&#39;</span><span class="o">]</span>
-</span><span class='line'>     <span class="n">pre</span> <span class="o">=</span> <span class="n">post</span><span class="o">.</span><span class="n">site</span><span class="o">.</span><span class="n">config</span><span class="o">[</span><span class="s1">&#39;original_url_pre&#39;</span><span class="o">]</span>
-</span><span class='line'>     <span class="n">post</span><span class="o">.</span><span class="n">content</span> <span class="o">+</span> <span class="sx">%Q[&lt;p class=&#39;post-footer&#39;&gt;</span>
-</span><span class='line'><span class="si">#{</span><span class="n">pre</span> <span class="ow">or</span> <span class="s2">&quot;original link:&quot;</span><span class="si">}</span><span class="sx"></span>
-</span><span class='line'><span class="sx">&lt;a href=&#39;</span><span class="si">#{</span><span class="n">post</span><span class="o">.</span><span class="n">full_url</span><span class="si">}</span><span class="sx">&#39;&gt;</span><span class="si">#{</span><span class="n">post</span><span class="o">.</span><span class="n">full_url</span><span class="si">}</span><span class="sx">&lt;/a&gt;&lt;br/&gt;</span>
-</span><span class='line'><span class="sx">&amp;nbsp;Written by &lt;a href=&#39;</span><span class="si">#{</span><span class="n">url</span><span class="si">}</span><span class="sx">&#39;&gt;</span><span class="si">#{</span><span class="n">author</span><span class="si">}</span><span class="sx">&lt;/a&gt;</span>
-</span><span class='line'><span class="sx">&amp;nbsp;Posted at &lt;a href=&#39;</span><span class="si">#{</span><span class="n">url</span><span class="si">}</span><span class="sx">&#39;&gt;</span><span class="si">#{</span><span class="n">url</span><span class="si">}</span><span class="sx">&lt;/a&gt;&lt;br/&gt;</span>
-</span><span class='line'><span class="sx">&amp;nbsp;Keywords : octopress|本文地址</span>
-</span><span class='line'><span class="sx">&lt;/p&gt;]</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'><span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">module</span> <span class="nn">Jekyll</span>
-</span><span class='line'>  <span class="k">class</span> <span class="nc">AppendFooter</span> <span class="o">&lt;</span> <span class="no">PostFilter</span>
-</span><span class='line'>    <span class="kp">include</span> <span class="no">AppendFooterFilter</span>
-</span><span class='line'>    <span class="k">def</span> <span class="nf">pre_render</span><span class="p">(</span><span class="n">post</span><span class="p">)</span>
-</span><span class='line'>      <span class="n">post</span><span class="o">.</span><span class="n">content</span> <span class="o">=</span> <span class="n">append</span><span class="p">(</span><span class="n">post</span><span class="p">)</span> <span class="k">if</span> <span class="n">post</span><span class="o">.</span><span class="n">is_post?</span>
-</span><span class='line'>    <span class="k">end</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'><span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'><span class="no">Liquid</span><span class="o">::</span><span class="no">Template</span><span class="o">.</span><span class="n">register_filter</span> <span class="no">AppendFooterFilter</span>
-</span></code></pre></td></tr></table></div></figure>
+<div><script src='https://gist.github.com/4545472.js?file=post_footer_filter.rb'></script>
+<noscript><pre><code>#
+# post_footer_filter.rb
+# Append every post some footer infomation like original url
+# Written by Kevin Lynx .
+# Modified by Tiny (http://tinyxd.me/) .
+# Email: admin#tinyxd.me
+# Date: 1.16.2013
+#
+require './plugins/post_filters'
+
+module AppendFooterFilter
+  def append(post)
+     author = post.site.config['author']
+     url = post.site.config['url']
+     pre = post.site.config['original_url_pre']
+     post.content + %Q[&lt;p class='post-footer'&gt;
+#{pre or &quot;original link:&quot;}
+&lt;a href='#{post.full_url}'&gt;`#{post.full_url}`&lt;/a&gt;&lt;br/&gt;
+&amp;nbsp;Written by &lt;a href='#{url}'&gt;#{author}&lt;/a&gt;
+&amp;nbsp;Posted at &lt;a href='#{url}'&gt;#{url}&lt;/a&gt;&lt;br/&gt;
+&amp;nbsp;Keywords : {{ page.keywords }}
+&lt;/p&gt;]
+  end
+end
+
+module Jekyll
+  class AppendFooter &lt; PostFilter
+    include AppendFooterFilter
+    def pre_render(post)
+      post.content = append(post) if post.is_post?
+    end
+  end
+end
+
+Liquid::Template.register_filter AppendFooterFilter</code></pre></noscript></div>
 
 
-<p> <br/>
-本人已将插件上传到https://github.com/tinyxd/post_footer。</p>
+<p>本人已将插件上传到https://github.com/tinyxd/post_footer。</p>
 
 <!--more-->
 
