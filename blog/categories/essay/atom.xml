@@ -4,7 +4,7 @@
   <title><![CDATA[Category: essay | Keen on Art of Tech]]></title>
   <link href="http://tinyxd.me/blog/categories/essay/atom.xml" rel="self"/>
   <link href="http://tinyxd.me/"/>
-  <updated>2013-01-16T16:35:19+08:00</updated>
+  <updated>2013-01-16T17:08:34+08:00</updated>
   <id>http://tinyxd.me/</id>
   <author>
     <name><![CDATA[Tiny]]></name>
@@ -29,7 +29,7 @@
 最后，说一句，关于本博客的主题，得到大家的肯定，我非常高兴，博友可以修改后发布，源码在我的github项目：<code>https://github.com/tinyxd/tinyxd.github.com</code>。如果有需要可以发Email（admin#tinyxd.me）交流。
 本站所有作品采用知识共享署名-非商业性使用-相同方式共享 2.5 中国大陆许可协议进行许可。 <br/>
 附上最近很火的航母style，希望自己的工作能一飞冲天： <br/>
-<img src="http://upload.tinyxd.me/2013/01/2013style.gif" title="[2013style [2013style]]" ></p>
+{% img http://upload.tinyxd.me/2013/01/2013style.gif [2013style [2013style]] %}</p>
 ]]></content>
   </entry>
   

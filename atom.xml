@@ -4,7 +4,7 @@
   <title><![CDATA[Keen on Art of Tech]]></title>
   <link href="http://tinyxd.me/atom.xml" rel="self"/>
   <link href="http://tinyxd.me/"/>
-  <updated>2013-01-16T16:35:19+08:00</updated>
+  <updated>2013-01-16T17:07:55+08:00</updated>
   <id>http://tinyxd.me/</id>
   <author>
     <name><![CDATA[Tiny]]></name>
@@ -73,7 +73,7 @@ Liquid::Template.register_filter AppendFooterFilter</code></pre></noscript></div
             <a href='http://tinyxd.me/blog/2013/01/16/add-article-info-footer/'>http://tinyxd.me/blog/2013/01/16/add-article-info-footer/</a><br/>
             &nbsp;Written by <a href='http://tinyxd.me'>Tiny</a>
             &nbsp;Posted at <a href='http://tinyxd.me'>http://tinyxd.me</a><br/>
-            &nbsp;Keywords : octopress|本文地址
+            &nbsp;Keywords : octopress | 本文地址
             </p>
 
 ]]></content>
@@ -102,7 +102,7 @@ Liquid::Template.register_filter AppendFooterFilter</code></pre></noscript></div
             <a href='http://tinyxd.me/blog/2013/01/02/the-blog-stated/'>http://tinyxd.me/blog/2013/01/02/the-blog-stated/</a><br/>
             &nbsp;Written by <a href='http://tinyxd.me'>Tiny</a>
             &nbsp;Posted at <a href='http://tinyxd.me'>http://tinyxd.me</a><br/>
-            &nbsp;Keywords : 
+            &nbsp;Keywords : 新的一年 | github | 工作
             </p>
 
 ]]></content>
