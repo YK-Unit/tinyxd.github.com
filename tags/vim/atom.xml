@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Tag: vim | Keen on Art of Tech]]></title>
+  <link href="http://tinyxd.me/tags/vim/atom.xml" rel="self"/>
+  <link href="http://tinyxd.me/"/>
+  <updated>2013-01-17T23:16:32+08:00</updated>
+  <id>http://tinyxd.me/</id>
+  <author>
+    <name><![CDATA[Tiny]]></name>
+    <email><![CDATA[admin@tinyxd.me]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[vim的一些配置]]></title>
+    <link href="http://tinyxd.me/blog/2013/01/17/vim-config/"/>
+    <updated>2013-01-17T17:44:00+08:00</updated>
+    <id>http://tinyxd.me/blog/2013/01/17/vim-config</id>
+    <content type="html"><![CDATA[<p>一直很想系统的学习vim，因为各种原因把，一直把这个计划搁置到了现在，现在凑着学习vimwiki，再次把这个提上日程。 <br/>
+vim配置： <br/>
+使用了<a href="https://github.com/vingel/vim/blob/master/vimrc">vingel</a>的配置文件。 <br/>
+由于我还要学习vimwiki，所以添加了vimwiki的一些配置。
+```  <br/>
+"""""""""""""""""""""""""""""""""""""""
+"vimwiki设置
+"""""""""""""""""""""""""""""""""""""""
+" 打开语法高亮
+"syntax enable
+syntax on</p>
+
+<p>" 打开对文件类型插件的支持
+filetype indent on
+filetype plugin on
+"filetype plugin indent on</p>
+
+<p>" ######### VimWiki 写作助手 ######### "</p>
+
+<p>" 使用鼠标映射
+let g:vimwiki_use_mouse = 1</p>
+
+<p>" 不要将驼峰式词组作为 Wiki 词条
+let g:vimwiki_camel_case = 0</p>
+
+<p>let g:vimwiki_list = [{
+\ 'path': '/media/software/Dropbox/my_vimwiki_site/wiki',
+\ 'path_html': '/media/software/Dropbox/my_vimwiki_site/html/',
+ \'template_path' : 'd:/vimwiki/template/',</p>
+
+<pre><code>        \'template_default' : 'default_template',
+        \'template_ext' : '.html',
+</code></pre>
+
+<p>\ 'auto_export': 1,}]</p>
+
+<p>```</p>
+]]></content>
+  </entry>
+  
+</feed>

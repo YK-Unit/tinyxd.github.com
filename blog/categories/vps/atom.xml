@@ -4,7 +4,7 @@
   <title><![CDATA[Category: vps | Keen on Art of Tech]]></title>
   <link href="http://tinyxd.me/blog/categories/vps/atom.xml" rel="self"/>
   <link href="http://tinyxd.me/"/>
-  <updated>2013-01-17T01:21:14+08:00</updated>
+  <updated>2013-01-17T23:16:32+08:00</updated>
   <id>http://tinyxd.me/</id>
   <author>
     <name><![CDATA[Tiny]]></name>
@@ -303,7 +303,7 @@ ssh username@domain
 
 <p>具体参数参照文档。 <br/>
 删除dropbox的方法： <br/>
-```</p>
+``` bash</p>
 
 <h1>sh /root/.dropbox/dropboxbak.sh stop</h1>
 
@@ -313,12 +313,9 @@ ssh username@domain
 
 <h1>rm -rf .dropbox .dropbox-dist  Dropbox dropbox.tar.gz dbmakefakelib.py dbreadconfig.py</h1>
 
-<p>```</p>
-
-<br />
-
-
-<p>本文地址：<a href="http://tinyxd.me/blog/2012/08/27/use-dropbox-backup-vps-and-database/">http://tinyxd.me/blog/2012/08/27/use-dropbox-backup-vps-and-database/</a></p>
+<p>```    <br/>
+更多内容请参考相关网站。
+</br></p>
 ]]></content>
   </entry>
   
