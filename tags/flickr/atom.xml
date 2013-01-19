@@ -4,7 +4,7 @@
   <title><![CDATA[Tag: flickr | Keen on Art of Tech]]></title>
   <link href="http://tinyxd.me/tags/flickr/atom.xml" rel="self"/>
   <link href="http://tinyxd.me/"/>
-  <updated>2013-01-17T23:16:32+08:00</updated>
+  <updated>2013-01-19T12:04:15+08:00</updated>
   <id>http://tinyxd.me/</id>
   <author>
     <name><![CDATA[Tiny]]></name>
@@ -20,25 +20,7 @@
     <id>http://tinyxd.me/blog/2012/07/02/add-flickr-aside-in-octopress</id>
     <content type="html"><![CDATA[<p>octopress添加侧边栏： <br/>
 1.新建 <code>source/_includes/custom/asides/flickr.html</code>，代码如下：
-<div><script src='https://gist.github.com/1421792.js?file=flickr.html'></script>
-<noscript><pre><code>{% if site.flickr_user %}
-&lt;section class=&quot;flickr&quot;&gt;
-&lt;h1&gt;My Flickr&lt;/h1&gt;
-&lt;!-- Start of Flickr Badge --&gt;
-&lt;style type=&quot;text/css&quot;&gt;
-/*
-Images are wrapped in divs classed &quot;flickr_badge_image&quot; with ids &quot;flickr_badge_imageX&quot; where &quot;X&quot; is an integer specifying ordinal position. Below are some styles to get you started!
-*/
-#flickr_badge_wrapper {padding:10px 0 10px 0;}
-.flickr_badge_image {margin: 0 9px 8px 0px;display: inline-block;}
-&lt;/style&gt;
-&lt;div id=&quot;flickr_badge_uber_wrapper&quot;&gt;&lt;div id=&quot;flickr_badge_wrapper&quot;&gt;
-&lt;script type=&quot;text/javascript&quot; src=&quot;http://www.flickr.com/badge_code_v2.gne?count={{ site.flickr_count }}&amp;display=latest&amp;size=s&amp;layout=x&amp;source=user&amp;user={{ site.flickr_user }}&quot;&gt;&lt;/script&gt;
-&lt;/div&gt;&lt;/div&gt;
-&lt;!-- End of Flickr Badge --&gt;
-&lt;/section&gt;
-{% endif %}</code></pre></noscript></div>
-</p>
+{% gist 1421792  flickr.html %}</p>
 
 <!--more-->
 

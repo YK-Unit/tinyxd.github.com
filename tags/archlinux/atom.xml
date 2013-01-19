@@ -4,7 +4,7 @@
   <title><![CDATA[Tag: archlinux | Keen on Art of Tech]]></title>
   <link href="http://tinyxd.me/tags/archlinux/atom.xml" rel="self"/>
   <link href="http://tinyxd.me/"/>
-  <updated>2013-01-17T23:16:32+08:00</updated>
+  <updated>2013-01-19T12:04:15+08:00</updated>
   <id>http://tinyxd.me/</id>
   <author>
     <name><![CDATA[Tiny]]></name>
@@ -216,64 +216,37 @@ a.先备份下 /etc/wpa_supplicant.conf：</p>
 
 
 <p> <br/>
-<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>#&lt;/p>
-</span><span class='line'>
-</span><span class='line'>&lt;h1>/etc/rc.conf - Main Configuration for Arch Linux&lt;/h1>
-</span><span class='line'>
-</span><span class='line'>&lt;p>LOCALE="en_US.UTF-8"
-</span><span class='line'>DAEMON_LOCALE="no"
-</span><span class='line'>HARDWARECLOCK="localtime"
-</span><span class='line'>TIMEZONE="Asia/Shanghai"
-</span><span class='line'>KEYMAP="us"
-</span><span class='line'>CONSOLEFONT=
-</span><span class='line'>CONSOLEMAP=
-</span><span class='line'>USECOLOR="yes"&lt;/p>
-</span><span class='line'>
-</span><span class='line'>&lt;p>MODULES=()&lt;/p>
-</span><span class='line'>
-</span><span class='line'>&lt;p>UDEV_TIMEOUT=30
-</span><span class='line'>USEDMRAID="no"
-</span><span class='line'>USEBTRFS="no"
-</span><span class='line'>USELVM="no"&lt;/p>
-</span><span class='line'>
-</span><span class='line'>&lt;p>HOSTNAME="archbang"&lt;/p>
-</span><span class='line'>
-</span><span class='line'>&lt;p>interface=eth0
-</span><span class='line'>address=
-</span><span class='line'>netmask=
-</span><span class='line'>broadcast=
-</span><span class='line'>gateway=&lt;/p>
-</span><span class='line'>
-</span><span class='line'>&lt;p>DAEMONS=(dbus networkmanager !network !dhcdbd syslog-ng @alsa @iNodeAuthService @openntpd)</span></code></pre></td></tr></table></div></figure></notextile></div> <br/>
+{% codeblock  %}
+#</p>
+
+<h1>/etc/rc.conf - Main Configuration for Arch Linux</h1>
+
+<p>LOCALE="en_US.UTF-8"
+DAEMON_LOCALE="no"
+HARDWARECLOCK="localtime"
+TIMEZONE="Asia/Shanghai"
+KEYMAP="us"
+CONSOLEFONT=
+CONSOLEMAP=
+USECOLOR="yes"</p>
+
+<p>MODULES=()</p>
+
+<p>UDEV_TIMEOUT=30
+USEDMRAID="no"
+USEBTRFS="no"
+USELVM="no"</p>
+
+<p>HOSTNAME="archbang"</p>
+
+<p>interface=eth0
+address=
+netmask=
+broadcast=
+gateway=</p>
+
+<p>DAEMONS=(dbus networkmanager !network !dhcdbd syslog-ng @alsa @iNodeAuthService @openntpd)
+{% endcodeblock %} <br/>
 3.在<code>/etc/localtime</code>做个软链接给具体的<code>zoneinfo</code>：</p>
 
 <pre><code>sudo ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime     
