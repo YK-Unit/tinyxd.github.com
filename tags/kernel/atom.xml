@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Tag: kernel | Keen on Art of Tech]]></title>
-  <link href="http://tinyxd.me/tags/kernel/atom.xml" rel="self"/>
-  <link href="http://tinyxd.me/"/>
-  <updated>2013-01-19T12:04:15+08:00</updated>
-  <id>http://tinyxd.me/</id>
+  <link href="http://blog.tinyxd.me/tags/kernel/atom.xml" rel="self"/>
+  <link href="http://blog.tinyxd.me/"/>
+  <updated>2013-01-20T13:51:46+08:00</updated>
+  <id>http://blog.tinyxd.me/</id>
   <author>
     <name><![CDATA[Tiny]]></name>
     <email><![CDATA[admin@tinyxd.me]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[linux堆的管理]]></title>
-    <link href="http://tinyxd.me/blog/2012/08/09/linux-heap-management/"/>
+    <link href="http://blog.tinyxd.me/blog/2012/08/09/linux-heap-management/"/>
     <updated>2012-08-09T18:32:00+08:00</updated>
-    <id>http://tinyxd.me/blog/2012/08/09/linux-heap-management</id>
+    <id>http://blog.tinyxd.me/blog/2012/08/09/linux-heap-management</id>
     <content type="html"><![CDATA[<p>每个Unix进程都拥有一个特殊的线性区，这个线性区就是所谓的堆（heap），堆用于满足进程的动态内存请求。内存描述符的start_brk与brk字段分别限定了这个区的开始地址和结束地址。</p>
 
 <!--more-->
@@ -164,9 +164,9 @@ goto out;
   
   <entry>
     <title type="html"><![CDATA[linux系统调用]]></title>
-    <link href="http://tinyxd.me/blog/2012/08/08/linux-system-calls/"/>
+    <link href="http://blog.tinyxd.me/blog/2012/08/08/linux-system-calls/"/>
     <updated>2012-08-08T18:18:00+08:00</updated>
-    <id>http://tinyxd.me/blog/2012/08/08/linux-system-calls</id>
+    <id>http://blog.tinyxd.me/blog/2012/08/08/linux-system-calls</id>
     <content type="html"><![CDATA[<p><strong><em>摘要</em></strong>：操作系统为在用户态运行的进程与硬件设备（如CPU、磁盘、打印机等等）进行交互提供了一组接口。在应用程序和硬件之间设置一个额外层具有很多优点。首先，这使得编程更加容易，那用户从学习硬件设备的低级编程特性中解放出来。其次，这极大地提高了系统的安全性，因为内核在试图满足某个请求之前在接口级就可以检查这种请求的正确性。最后，更重要的是这些接口使得程序更具有可移植性，因为只要内核所提供的一组接口相同，那么在任一内核上就可以正确地编译和执行程序。</p>
 
 <h2>简介     </h2>
@@ -305,9 +305,9 @@ Linux系统种存在许多的内核函数，有些是内核文件种自己使用
   
   <entry>
     <title type="html"><![CDATA[linux缺页异常处理程序]]></title>
-    <link href="http://tinyxd.me/blog/2012/08/07/linux-page-fault-exception/"/>
+    <link href="http://blog.tinyxd.me/blog/2012/08/07/linux-page-fault-exception/"/>
     <updated>2012-08-07T12:54:00+08:00</updated>
-    <id>http://tinyxd.me/blog/2012/08/07/linux-page-fault-exception</id>
+    <id>http://blog.tinyxd.me/blog/2012/08/07/linux-page-fault-exception</id>
     <content type="html"><![CDATA[<p>Linux的缺页（Page Fault）异常处理程序必须区分以下两种情况：由编程错误所引起的异常，及由引用属于进程地址空间但还尚未分配物理页框的页所引起的异常。</p>
 
 <p>线性区描述符可以让缺页异常处理程序非常有效地完成它的工作。do_page_fault()函数是80x86上的缺页中断服务程序，它把引起缺页的线性地址和当前进程的线性区相比较，从而能够根据和下图所示的方案选择适当的方法处理这个异常。</p>
@@ -334,9 +334,9 @@ Linux系统种存在许多的内核函数，有些是内核文件种自己使用
   
   <entry>
     <title type="html"><![CDATA[linux线性区]]></title>
-    <link href="http://tinyxd.me/blog/2012/08/07/linux-linear-regions/"/>
+    <link href="http://blog.tinyxd.me/blog/2012/08/07/linux-linear-regions/"/>
     <updated>2012-08-07T12:43:00+08:00</updated>
-    <id>http://tinyxd.me/blog/2012/08/07/linux-linear-regions</id>
+    <id>http://blog.tinyxd.me/blog/2012/08/07/linux-linear-regions</id>
     <content type="html"><![CDATA[<p><strong><em>摘要</em></strong>：内核使用一种新的资源成功实现了对进程动态内存的推迟分配。当用户态进程请求动态内存时，并没有获得请求的页框，而仅仅获得对一个新的线性地址区间的使用权，而这一线性地址区间就成为进程地址空间的一部分。这一区间叫做“线性区”（memory region）。</p>
 
 <br />
@@ -580,9 +580,9 @@ pgprot_t protection_map[16] = {</p>
   
   <entry>
     <title type="html"><![CDATA[linux进程地址空间]]></title>
-    <link href="http://tinyxd.me/blog/2012/08/05/linux-process-address-space/"/>
+    <link href="http://blog.tinyxd.me/blog/2012/08/05/linux-process-address-space/"/>
     <updated>2012-08-05T12:51:00+08:00</updated>
-    <id>http://tinyxd.me/blog/2012/08/05/linux-process-address-space</id>
+    <id>http://blog.tinyxd.me/blog/2012/08/05/linux-process-address-space</id>
     <content type="html"><![CDATA[<h2>简介   </h2>
 
 <p>内核中获得动态内存的方式：<code>__get_free_pages()</code>或alloc_pages()从分区页框分配器中获得页框，kmem_cache_alloc()或kmalloc()使用slab分配器为专用或通用对象分配块，vmalloc()或vmalloc_32()获得一块非连续的内存区。如果所请求的内存区得以满足，这些函数都返回一个页描述符地址或线性地址（即所分配动态内存区的起始地址）。</p>

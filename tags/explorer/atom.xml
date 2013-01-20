@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Tag: explorer | Keen on Art of Tech]]></title>
-  <link href="http://tinyxd.me/tags/explorer/atom.xml" rel="self"/>
-  <link href="http://tinyxd.me/"/>
-  <updated>2013-01-19T12:04:15+08:00</updated>
-  <id>http://tinyxd.me/</id>
+  <link href="http://blog.tinyxd.me/tags/explorer/atom.xml" rel="self"/>
+  <link href="http://blog.tinyxd.me/"/>
+  <updated>2013-01-20T13:51:46+08:00</updated>
+  <id>http://blog.tinyxd.me/</id>
   <author>
     <name><![CDATA[Tiny]]></name>
     <email><![CDATA[admin@tinyxd.me]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[图床管理]]></title>
-    <link href="http://tinyxd.me/blog/2012/08/26/imag-file-explorer/"/>
+    <link href="http://blog.tinyxd.me/blog/2012/08/26/imag-file-explorer/"/>
     <updated>2012-08-26T00:08:00+08:00</updated>
-    <id>http://tinyxd.me/blog/2012/08/26/imag-file-explorer</id>
+    <id>http://blog.tinyxd.me/blog/2012/08/26/imag-file-explorer</id>
     <content type="html"><![CDATA[<p>做网站，尤其是做多个网站的，文件的统一管理，备份是很重要的。本站用<a href="http://encode-explorer.siineiolekala.net/">Encode Explorer</a>来管理本站图片、上传附件等。 <br/>
 去Encode Explorer在sourceforge的<a href="http://sourceforge.net/projects/encode-explorer/files/encode-explorer/">项目官网</a>下载程序，其代码不过3k多行。只要将index.php上传到网站根目录，然后把nginx设置好用<a href="http://upload.tinyxd.me/">2级域名</a>指向此根目录，就可以了。    <br/>
 其中index.php需要改几个地方：   <br/>

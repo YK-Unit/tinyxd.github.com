@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Tag: archlinux | Keen on Art of Tech]]></title>
-  <link href="http://tinyxd.me/tags/archlinux/atom.xml" rel="self"/>
-  <link href="http://tinyxd.me/"/>
-  <updated>2013-01-19T12:04:15+08:00</updated>
-  <id>http://tinyxd.me/</id>
+  <link href="http://blog.tinyxd.me/tags/archlinux/atom.xml" rel="self"/>
+  <link href="http://blog.tinyxd.me/"/>
+  <updated>2013-01-20T13:51:46+08:00</updated>
+  <id>http://blog.tinyxd.me/</id>
   <author>
     <name><![CDATA[Tiny]]></name>
     <email><![CDATA[admin@tinyxd.me]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[archlinux修改mac地址]]></title>
-    <link href="http://tinyxd.me/blog/2012/08/23/archlinux-change-mac/"/>
+    <link href="http://blog.tinyxd.me/blog/2012/08/23/archlinux-change-mac/"/>
     <updated>2012-08-23T00:03:00+08:00</updated>
-    <id>http://tinyxd.me/blog/2012/08/23/archlinux-change-mac</id>
+    <id>http://blog.tinyxd.me/blog/2012/08/23/archlinux-change-mac</id>
     <content type="html"><![CDATA[<p>快开学了，开学了紧接着就是找工作。由于今年的形势还不太好，所以最近一直在复习一些编程方面的东西，好久没更新文章了。 <br/>
 还没到月底，自己的流量都已经用完了，悲催啊！！！借用别人的，这就需要修改mac地址。学校流量3G真的伤不起阿！！！囧 <br/>
 查阅Archlinux Wiki可以看到有两种临时改变mac地址的方法：  <br/>
@@ -52,9 +52,9 @@ spoof_mac() {</p>
   
   <entry>
     <title type="html"><![CDATA[archlinux升级出现关于glibc的问题解决办法]]></title>
-    <link href="http://tinyxd.me/blog/2012/07/25/archlinux-update-about-glibc/"/>
+    <link href="http://blog.tinyxd.me/blog/2012/07/25/archlinux-update-about-glibc/"/>
     <updated>2012-07-25T18:44:00+08:00</updated>
-    <id>http://tinyxd.me/blog/2012/07/25/archlinux-update-about-glibc</id>
+    <id>http://blog.tinyxd.me/blog/2012/07/25/archlinux-update-about-glibc</id>
     <content type="html"><![CDATA[<p>好久没更新archlinux，今天更新，发现由于archlinux系统根目录结构的改变，导致好多人遇到问题，不错，笔者必然也遇到了。由于有前人的探索，再加上查阅archlinux官网论坛，得以顺利解决问题。
 运行<code>pacman -Syu</code>时会出现 <br/>
 <code>
@@ -106,9 +106,9 @@ shell &gt; pacman -S broadcom-wl #如果需要的话，再次安装即可
   
   <entry>
     <title type="html"><![CDATA[archlinux 无线网络连接]]></title>
-    <link href="http://tinyxd.me/blog/2012/07/16/archlinux-wireless-network-connection/"/>
+    <link href="http://blog.tinyxd.me/blog/2012/07/16/archlinux-wireless-network-connection/"/>
     <updated>2012-07-16T11:24:00+08:00</updated>
-    <id>http://tinyxd.me/blog/2012/07/16/archlinux-wireless-network-connection</id>
+    <id>http://blog.tinyxd.me/blog/2012/07/16/archlinux-wireless-network-connection</id>
     <content type="html"><![CDATA[<p>今天，回家了。由于家里用的无线路由器，我的本是archlinux系统，所以这就涉及到archlinux的无线网络配置。 <br/>
 本文参考了<a href="https://wiki.archlinux.org/index.php/Wireless_Setup">archlinux官方wiki</a>。 <br/>
 配置无线网络一般分两步： <br/>
@@ -204,9 +204,9 @@ a.先备份下 /etc/wpa_supplicant.conf：</p>
   
   <entry>
     <title type="html"><![CDATA[archlinux下的时间时区设置]]></title>
-    <link href="http://tinyxd.me/blog/2012/07/14/archlinux-time-config/"/>
+    <link href="http://blog.tinyxd.me/blog/2012/07/14/archlinux-time-config/"/>
     <updated>2012-07-14T23:56:00+08:00</updated>
-    <id>http://tinyxd.me/blog/2012/07/14/archlinux-time-config</id>
+    <id>http://blog.tinyxd.me/blog/2012/07/14/archlinux-time-config</id>
     <content type="html"><![CDATA[<p>本文方法适合于archlinux，archbang等衍生版本。archbang亲测。 <br/>
 1.打开<code>/etc/rc.conf</code>，将<code>TIMEZONE</code>改为<code>"Asia/Shanghai"</code>。 <br/>
 2.打开<code>/etc/rc.conf</code>，将<code>HARDWARECLOCK</code>改为<code>"localtime"</code>。 <br/>
@@ -216,37 +216,64 @@ a.先备份下 /etc/wpa_supplicant.conf：</p>
 
 
 <p> <br/>
-{% codeblock  %}
-#</p>
-
-<h1>/etc/rc.conf - Main Configuration for Arch Linux</h1>
-
-<p>LOCALE="en_US.UTF-8"
-DAEMON_LOCALE="no"
-HARDWARECLOCK="localtime"
-TIMEZONE="Asia/Shanghai"
-KEYMAP="us"
-CONSOLEFONT=
-CONSOLEMAP=
-USECOLOR="yes"</p>
-
-<p>MODULES=()</p>
-
-<p>UDEV_TIMEOUT=30
-USEDMRAID="no"
-USEBTRFS="no"
-USELVM="no"</p>
-
-<p>HOSTNAME="archbang"</p>
-
-<p>interface=eth0
-address=
-netmask=
-broadcast=
-gateway=</p>
-
-<p>DAEMONS=(dbus networkmanager !network !dhcdbd syslog-ng @alsa @iNodeAuthService @openntpd)
-{% endcodeblock %} <br/>
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;h1>/etc/rc.conf - Main Configuration for Arch Linux&lt;/h1>
+</span><span class='line'>
+</span><span class='line'>&lt;p>LOCALE="en_US.UTF-8"
+</span><span class='line'>DAEMON_LOCALE="no"
+</span><span class='line'>HARDWARECLOCK="localtime"
+</span><span class='line'>TIMEZONE="Asia/Shanghai"
+</span><span class='line'>KEYMAP="us"
+</span><span class='line'>CONSOLEFONT=
+</span><span class='line'>CONSOLEMAP=
+</span><span class='line'>USECOLOR="yes"&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>MODULES=()&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>UDEV_TIMEOUT=30
+</span><span class='line'>USEDMRAID="no"
+</span><span class='line'>USEBTRFS="no"
+</span><span class='line'>USELVM="no"&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>HOSTNAME="archbang"&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>interface=eth0
+</span><span class='line'>address=
+</span><span class='line'>netmask=
+</span><span class='line'>broadcast=
+</span><span class='line'>gateway=&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>DAEMONS=(dbus networkmanager !network !dhcdbd syslog-ng @alsa @iNodeAuthService @openntpd)</span></code></pre></td></tr></table></div></figure></notextile></div> <br/>
 3.在<code>/etc/localtime</code>做个软链接给具体的<code>zoneinfo</code>：</p>
 
 <pre><code>sudo ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime     
@@ -279,9 +306,9 @@ gateway=</p>
   
   <entry>
     <title type="html"><![CDATA[解决pygments.rb (RubyPython) 找不到libpython的问题(archlinux下)]]></title>
-    <link href="http://tinyxd.me/blog/2012/06/05/cannot-find-libpython/"/>
+    <link href="http://blog.tinyxd.me/blog/2012/06/05/cannot-find-libpython/"/>
     <updated>2012-06-05T08:01:00+08:00</updated>
-    <id>http://tinyxd.me/blog/2012/06/05/cannot-find-libpython</id>
+    <id>http://blog.tinyxd.me/blog/2012/06/05/cannot-find-libpython</id>
     <content type="html"><![CDATA[<p>本文章转自：<a href="http://ruby-china.org/topics/289">Ruby China 论坛</a> <br/>
 如果找不到python，或者系统默认得python是3.x (比如Arch Linux)，手动制定下路径 <br/>
 <code>

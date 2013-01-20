@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Tag: nginx | Keen on Art of Tech]]></title>
-  <link href="http://tinyxd.me/tags/nginx/atom.xml" rel="self"/>
-  <link href="http://tinyxd.me/"/>
-  <updated>2013-01-19T12:04:15+08:00</updated>
-  <id>http://tinyxd.me/</id>
+  <link href="http://blog.tinyxd.me/tags/nginx/atom.xml" rel="self"/>
+  <link href="http://blog.tinyxd.me/"/>
+  <updated>2013-01-20T13:51:46+08:00</updated>
+  <id>http://blog.tinyxd.me/</id>
   <author>
     <name><![CDATA[Tiny]]></name>
     <email><![CDATA[admin@tinyxd.me]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[个人网站上安装SSL证书]]></title>
-    <link href="http://tinyxd.me/blog/2012/09/02/nginx-ssl/"/>
+    <link href="http://blog.tinyxd.me/blog/2012/09/02/nginx-ssl/"/>
     <updated>2012-09-02T22:45:00+08:00</updated>
-    <id>http://tinyxd.me/blog/2012/09/02/nginx-ssl</id>
+    <id>http://blog.tinyxd.me/blog/2012/09/02/nginx-ssl</id>
     <content type="html"><![CDATA[<p>SSL(Secure Sockets Layer 安全套接层),及其继任者传输层安全（Transport Layer Security，TLS）是为网络通信提供安全及数据完整性的一种安全协议。TLS与SSL在传输层对网络连接进行加密。   <br/>
 HTTPS（Secure Hypertext Transfer Protocol）安全超文本传输协议，HTTPS应用了Netscape的完全套接字层（SSL）作为HTTP应用层的子层。（HTTPS使用端口443，而不是象HTTP那样使用端口80来和TCP/IP进行通信。）   <br/>
 建个网站不容易，各种都要收费，那么有免费的当然就更好了！免费的SSL证书：<a href="https://www.startssl.com/">StartSSL</a>来了！ <br/>

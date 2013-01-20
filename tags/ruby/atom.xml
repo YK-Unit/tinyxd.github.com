@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Tag: ruby | Keen on Art of Tech]]></title>
-  <link href="http://tinyxd.me/tags/ruby/atom.xml" rel="self"/>
-  <link href="http://tinyxd.me/"/>
-  <updated>2013-01-19T12:04:15+08:00</updated>
-  <id>http://tinyxd.me/</id>
+  <link href="http://blog.tinyxd.me/tags/ruby/atom.xml" rel="self"/>
+  <link href="http://blog.tinyxd.me/"/>
+  <updated>2013-01-20T13:51:46+08:00</updated>
+  <id>http://blog.tinyxd.me/</id>
   <author>
     <name><![CDATA[Tiny]]></name>
     <email><![CDATA[admin@tinyxd.me]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[正则表达式]]></title>
-    <link href="http://tinyxd.me/blog/2012/07/07/regular-expressions-in-ruby/"/>
+    <link href="http://blog.tinyxd.me/blog/2012/07/07/regular-expressions-in-ruby/"/>
     <updated>2012-07-07T23:40:00+08:00</updated>
-    <id>http://tinyxd.me/blog/2012/07/07/regular-expressions-in-ruby</id>
+    <id>http://blog.tinyxd.me/blog/2012/07/07/regular-expressions-in-ruby</id>
     <content type="html"><![CDATA[<p>Ruby语言是一种“万事万物皆对象”的程序语言，正则表达式也是一个对象。正则表达式所属的类，就是Regexp类。<br/>
 要建立正则表达式两种方法： <br/>
 1.用“//”括住。  <br/>
@@ -125,9 +125,9 @@ server address: www.ruby-lang.org
   
   <entry>
     <title type="html"><![CDATA[ruby初学]]></title>
-    <link href="http://tinyxd.me/blog/2012/07/06/ruby-learning/"/>
+    <link href="http://blog.tinyxd.me/blog/2012/07/06/ruby-learning/"/>
     <updated>2012-07-06T23:43:00+08:00</updated>
-    <id>http://tinyxd.me/blog/2012/07/06/ruby-learning</id>
+    <id>http://blog.tinyxd.me/blog/2012/07/06/ruby-learning</id>
     <content type="html"><![CDATA[<p>这几天在学习Ruby，面对一个陌生的脚本语言，虽然陌生但是既然是脚本语言，自然也有与shell类似的地方，所以学习起来困难不是很大。 <br/>
 在感受到脚本语言的方便后，试了个例子，如下计算一个文件中单词的个数，以空格来区分。 <br/>
 ``` ruby 统计单词个数ruby脚本word.rb</p>
@@ -169,9 +169,9 @@ print "#{key}: #{value}\n"
   
   <entry>
     <title type="html"><![CDATA[解决pygments.rb (RubyPython) 找不到libpython的问题(archlinux下)]]></title>
-    <link href="http://tinyxd.me/blog/2012/06/05/cannot-find-libpython/"/>
+    <link href="http://blog.tinyxd.me/blog/2012/06/05/cannot-find-libpython/"/>
     <updated>2012-06-05T08:01:00+08:00</updated>
-    <id>http://tinyxd.me/blog/2012/06/05/cannot-find-libpython</id>
+    <id>http://blog.tinyxd.me/blog/2012/06/05/cannot-find-libpython</id>
     <content type="html"><![CDATA[<p>本文章转自：<a href="http://ruby-china.org/topics/289">Ruby China 论坛</a> <br/>
 如果找不到python，或者系统默认得python是3.x (比如Arch Linux)，手动制定下路径 <br/>
 <code>

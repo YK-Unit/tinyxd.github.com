@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: essay | Keen on Art of Tech]]></title>
-  <link href="http://tinyxd.me/blog/categories/essay/atom.xml" rel="self"/>
-  <link href="http://tinyxd.me/"/>
-  <updated>2013-01-19T12:04:15+08:00</updated>
-  <id>http://tinyxd.me/</id>
+  <link href="http://blog.tinyxd.me/blog/categories/essay/atom.xml" rel="self"/>
+  <link href="http://blog.tinyxd.me/"/>
+  <updated>2013-01-20T13:51:46+08:00</updated>
+  <id>http://blog.tinyxd.me/</id>
   <author>
     <name><![CDATA[Tiny]]></name>
     <email><![CDATA[admin@tinyxd.me]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[新的一年]]></title>
-    <link href="http://tinyxd.me/blog/2013/01/02/the-blog-stated/"/>
+    <link href="http://blog.tinyxd.me/blog/2013/01/02/the-blog-stated/"/>
     <updated>2013-01-02T12:22:00+08:00</updated>
-    <id>http://tinyxd.me/blog/2013/01/02/the-blog-stated</id>
+    <id>http://blog.tinyxd.me/blog/2013/01/02/the-blog-stated</id>
     <content type="html"><![CDATA[<p>好久没有写博客了，上篇博客是找工作之前，现在工作已经尘埃落定了。工作找完后，就开始忙着写论文，考驾照。 <br/>
 回首2012，感觉运气不佳，希望2013年能够运气好好。  <br/>
 2013愿望List： <br/>
@@ -29,15 +29,15 @@
 最后，说一句，关于本博客的主题，得到大家的肯定，我非常高兴，博友可以修改后发布，源码在我的github项目：<code>https://github.com/tinyxd/tinyxd.github.com</code>。如果有需要可以发Email（admin#tinyxd.me）交流。
 本站所有作品采用知识共享署名-非商业性使用-相同方式共享 2.5 中国大陆许可协议进行许可。 <br/>
 附上最近很火的航母style，希望自己的工作能一飞冲天： <br/>
-{% img http://upload.tinyxd.me/2013/01/2013style.gif [2013style [2013style]] %}</p>
+<img src="http://upload.tinyxd.me/2013/01/2013style.gif" title="[2013style [2013style]]" ></p>
 ]]></content>
   </entry>
   
   <entry>
     <title type="html"><![CDATA[开始找工作了]]></title>
-    <link href="http://tinyxd.me/blog/2012/09/10/job-hunting-2012/"/>
+    <link href="http://blog.tinyxd.me/blog/2012/09/10/job-hunting-2012/"/>
     <updated>2012-09-10T00:24:00+08:00</updated>
-    <id>http://tinyxd.me/blog/2012/09/10/job-hunting-2012</id>
+    <id>http://blog.tinyxd.me/blog/2012/09/10/job-hunting-2012</id>
     <content type="html"><![CDATA[<p>今天，航天二院专场招聘，正式拉开了招聘的序幕。人好多！  <br/>
 <img src="http://upload.tinyxd.me/2012/09/job.JPG"  alt="Job Hunting" width="970" height="660"></p>
 ]]></content>
@@ -45,9 +45,9 @@
   
   <entry>
     <title type="html"><![CDATA[写在开博两个月]]></title>
-    <link href="http://tinyxd.me/blog/2012/08/02/blog-two-months/"/>
+    <link href="http://blog.tinyxd.me/blog/2012/08/02/blog-two-months/"/>
     <updated>2012-08-02T18:46:00+08:00</updated>
-    <id>http://tinyxd.me/blog/2012/08/02/blog-two-months</id>
+    <id>http://blog.tinyxd.me/blog/2012/08/02/blog-two-months</id>
     <content type="html"><![CDATA[<p>其实今天距离开博两个月还有几天的时间，因为今天PR变为2，所以写篇短文，记录下。  <br/>
 ps：今天和麦子做的网站----<a href="http://www.aitinan.com/">挨踢男的那点事（专注移动互联网）</a>加了友链。其中不乏原创文章，写的很好。推荐大家去逛逛。</p>
 ]]></content>
@@ -55,9 +55,9 @@ ps：今天和麦子做的网站----<a href="http://www.aitinan.com/">挨踢男�
   
   <entry>
     <title type="html"><![CDATA[写在开博一个月]]></title>
-    <link href="http://tinyxd.me/blog/2012/07/08/blog-one-month/"/>
+    <link href="http://blog.tinyxd.me/blog/2012/07/08/blog-one-month/"/>
     <updated>2012-07-08T23:31:00+08:00</updated>
-    <id>http://tinyxd.me/blog/2012/07/08/blog-one-month</id>
+    <id>http://blog.tinyxd.me/blog/2012/07/08/blog-one-month</id>
     <content type="html"><![CDATA[<p>其实说开博一个月，不太妥当。用octopress搭建博客是在5月底，域名是在6月9号申请的。Anyway，在这一个月中，深切体会到了“隔行如隔山”。从刚开始一点不懂，到现在知道了“SEO”、“sitemap”、"PR"、还有各种博客工具，学习了ruby、html，css等等。
 到现在google PR值仍然为0（站长真是不容易啊），不过bing、yahoo、sogou等搜索引擎已经开始收录了，只是baidu还没有动静（伤感中），只好继续等待了。
 先写到这吧，有啥体会了再继续。。。</p>
@@ -66,9 +66,9 @@ ps：今天和麦子做的网站----<a href="http://www.aitinan.com/">挨踢男�
   
   <entry>
     <title type="html"><![CDATA[互联网创业降级论]]></title>
-    <link href="http://tinyxd.me/blog/2012/07/08/degrading-for-success/"/>
+    <link href="http://blog.tinyxd.me/blog/2012/07/08/degrading-for-success/"/>
     <updated>2012-07-08T00:46:00+08:00</updated>
-    <id>http://tinyxd.me/blog/2012/07/08/degrading-for-success</id>
+    <id>http://blog.tinyxd.me/blog/2012/07/08/degrading-for-success</id>
     <content type="html"><![CDATA[<p>本文来自：<a href="http://meditic.com/degrading-for-success/">meditic</a>  <br/>
 几乎一年没有写博客了，说没时间那是借口，唯一的原因是，年纪越大越发觉自己肤浅。有些想法还没提笔，就发现很幼稚，就不敢发出来贻笑大方了。这次先给大家说个小故事：</p>
 

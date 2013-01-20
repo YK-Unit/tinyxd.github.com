@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Tag: embedded | Keen on Art of Tech]]></title>
-  <link href="http://tinyxd.me/tags/embedded/atom.xml" rel="self"/>
-  <link href="http://tinyxd.me/"/>
-  <updated>2013-01-19T12:04:15+08:00</updated>
-  <id>http://tinyxd.me/</id>
+  <link href="http://blog.tinyxd.me/tags/embedded/atom.xml" rel="self"/>
+  <link href="http://blog.tinyxd.me/"/>
+  <updated>2013-01-20T13:51:46+08:00</updated>
+  <id>http://blog.tinyxd.me/</id>
   <author>
     <name><![CDATA[Tiny]]></name>
     <email><![CDATA[admin@tinyxd.me]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[嵌入式linux应用程序自启动]]></title>
-    <link href="http://tinyxd.me/blog/2012/06/10/qian-ru-shi-linuxying-yong-cheng-xu-zi-qi-dong/"/>
+    <link href="http://blog.tinyxd.me/blog/2012/06/10/qian-ru-shi-linuxying-yong-cheng-xu-zi-qi-dong/"/>
     <updated>2012-06-10T19:46:00+08:00</updated>
-    <id>http://tinyxd.me/blog/2012/06/10/qian-ru-shi-linuxying-yong-cheng-xu-zi-qi-dong</id>
+    <id>http://blog.tinyxd.me/blog/2012/06/10/qian-ru-shi-linuxying-yong-cheng-xu-zi-qi-dong</id>
     <content type="html"><![CDATA[<p>在很多嵌入式系统中，由于可用资源较少，常常在系统启动后就直接让应用程序自动启动，以减少用户操作和节省资源。如何让自己的应用程序自动启动呢？    在Linux系统中，配置应用程序自动启动的方法有以下三种：</p>
 
 <!--more-->
@@ -47,16 +47,16 @@
   
   <entry>
     <title type="html"><![CDATA[cache一致性问题总结]]></title>
-    <link href="http://tinyxd.me/blog/2012/05/31/cache--zhi-xing-wen-ti-zong-jie/"/>
+    <link href="http://blog.tinyxd.me/blog/2012/05/31/cache--zhi-xing-wen-ti-zong-jie/"/>
     <updated>2012-05-31T20:59:00+08:00</updated>
-    <id>http://tinyxd.me/blog/2012/05/31/cache--zhi-xing-wen-ti-zong-jie</id>
+    <id>http://blog.tinyxd.me/blog/2012/05/31/cache--zhi-xing-wen-ti-zong-jie</id>
     <content type="html"><![CDATA[<h2>1.现代并行机中，为了提高处理器的速度，处理器往往带有Cache。</h2>
 
 <p>一个数据在整个系统内可能有多份拷贝，这就引发了Cache一致性问题。
 例如下图中的2个处理器和共享内存构成的系统。初始时刻，处理机P1和P2都将变量X从共享内存装入了私有Cache。
 这时，两个Cache中和共享内存中的变量X的值是一样的。在程序运行的某一时刻，处理机P1把X的值修改为X'，并更新了私有Cache中 的值。
 此时无论P1采用写直达（write-through），还是写回（write-back）策略，都不会修改P2私有Cache中X的值。这时如果P2需要读取X，则它得到的是过时的值。 <br/>
-{% img  /images/cache.gif %}</p>
+<img src="/images/cache.gif"></p>
 
 <!--more-->
 
@@ -87,9 +87,9 @@ Master包括Core、EDMA以及串行高速IO（sRIO），EMAC等外设。Master�
   
   <entry>
     <title type="html"><![CDATA[帮您快速入门TI的Codec Engine]]></title>
-    <link href="http://tinyxd.me/blog/2012/05/26/bang-nin-kuai-su-ru-men-tide-codec-engine-zhuan-zai/"/>
+    <link href="http://blog.tinyxd.me/blog/2012/05/26/bang-nin-kuai-su-ru-men-tide-codec-engine-zhuan-zai/"/>
     <updated>2012-05-26T06:18:00+08:00</updated>
-    <id>http://tinyxd.me/blog/2012/05/26/bang-nin-kuai-su-ru-men-tide-codec-engine-zhuan-zai</id>
+    <id>http://blog.tinyxd.me/blog/2012/05/26/bang-nin-kuai-su-ru-men-tide-codec-engine-zhuan-zai</id>
     <content type="html"><![CDATA[<p>转自TI官网：  <br/>
 德州仪器半导体技术（上海）有限公司 通用DSP 技术应用工程师 崔晶</p>
 

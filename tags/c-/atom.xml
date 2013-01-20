@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Tag: c++ | Keen on Art of Tech]]></title>
-  <link href="http://tinyxd.me/tags/c-/atom.xml" rel="self"/>
-  <link href="http://tinyxd.me/"/>
-  <updated>2013-01-19T12:04:15+08:00</updated>
-  <id>http://tinyxd.me/</id>
+  <link href="http://blog.tinyxd.me/tags/c-/atom.xml" rel="self"/>
+  <link href="http://blog.tinyxd.me/"/>
+  <updated>2013-01-20T13:51:46+08:00</updated>
+  <id>http://blog.tinyxd.me/</id>
   <author>
     <name><![CDATA[Tiny]]></name>
     <email><![CDATA[admin@tinyxd.me]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[vc debug 变 release]]></title>
-    <link href="http://tinyxd.me/blog/2012/07/03/vc-debug-release/"/>
+    <link href="http://blog.tinyxd.me/blog/2012/07/03/vc-debug-release/"/>
     <updated>2012-07-03T12:23:00+08:00</updated>
-    <id>http://tinyxd.me/blog/2012/07/03/vc-debug-release</id>
+    <id>http://blog.tinyxd.me/blog/2012/07/03/vc-debug-release</id>
     <content type="html"><![CDATA[<p>今天遇到将debug改为release版本出现好多问题，最后一一解决，现将方法贴到下面 <br/>
 生成release版的步骤： <br/>
 1.首先修改<code>project-setting-general-using mfc in a static libraryproject-setting</code>右键点击菜单空白处——选择“组建”——选择“Win32 Release“——重新编译链接。 <br/>
@@ -55,25 +55,13 @@ Debug 通常称为调试版本，它包含调试信息，并且不作任何优�
 
 
 <p>Debug 版本：
-{% blockquote %}
-/MDd /MLd 或 /MTd 使用 Debug runtime library(调试版本的运行时刻函数库)
-/Od 关闭优化开关
-/D "<em>DEBUG" 相当于 #define </em>DEBUG,打开编译调试代码开关(主要针对assert函数)
-/ZI 创建 Edit and continue(编辑继续)数据库，这样在调试过程中如果修改了源代码不需重新编译
-/GZ 可以帮助捕获内存错误
-/Gm 打开最小化重链接开关，减少链接时间
- {% endblockquote %}</p>
+<blockquote><p>/MDd /MLd 或 /MTd 使用 Debug runtime library(调试版本的运行时刻函数库)<br/>/Od 关闭优化开关<br/>/D "<em>DEBUG" 相当于 #define </em>DEBUG,打开编译调试代码开关(主要针对assert函数)<br/>/ZI 创建 Edit and continue(编辑继续)数据库，这样在调试过程中如果修改了源代码不需重新编译<br/>/GZ 可以帮助捕获内存错误<br/>/Gm 打开最小化重链接开关，减少链接时间</p></blockquote></p>
 
 <br />
 
 
 <p>Release 版本： <br/>
-{% blockquote %}
-/MD /ML 或 /MT 使用发布版本的运行时刻函数库
-/O1 或 /O2 优化开关，使程序最小或最快
-/D "NDEBUG" 关闭条件编译调试代码开关(即不编译assert函数)
-/GF 合并重复的字符串，并将字符串常量放到只读内存，防止 被修改
-{% endblockquote %}</p>
+<blockquote><p>/MD /ML 或 /MT 使用发布版本的运行时刻函数库<br/>/O1 或 /O2 优化开关，使程序最小或最快<br/>/D "NDEBUG" 关闭条件编译调试代码开关(即不编译assert函数)<br/>/GF 合并重复的字符串，并将字符串常量放到只读内存，防止 被修改</p></blockquote></p>
 
 <br />
 
@@ -84,9 +72,9 @@ Debug 通常称为调试版本，它包含调试信息，并且不作任何优�
   
   <entry>
     <title type="html"><![CDATA[排序算法总结（四）]]></title>
-    <link href="http://tinyxd.me/blog/2012/06/29/radix-sort/"/>
+    <link href="http://blog.tinyxd.me/blog/2012/06/29/radix-sort/"/>
     <updated>2012-06-29T23:28:00+08:00</updated>
-    <id>http://tinyxd.me/blog/2012/06/29/radix-sort</id>
+    <id>http://blog.tinyxd.me/blog/2012/06/29/radix-sort</id>
     <content type="html"><![CDATA[<p>“基数排序法”属于“分配式排序”（distribution sort），基数排序法又称“桶子法”（bucket sort）或bin sort ，它是通过键值的部分资讯，将要排序的元素分配至某些“桶”中，借以达到排序的作用。基数排序法是属于稳定性的排序，其时间复杂度为O（nlog(r)m），其中r为所采用的基数，而m为堆数。在某些时候，基数排序法的效率高于其他的比较性排序。 <br/>
 什么是基数排序： 基数排序也称桶排序，是一种当关键字为整数类型时的一种非常高效的排序方法。基数排序算法进出桶中的数据元素序列满足先进先出的原则（桶实际就是队列）。</p>
 
@@ -206,9 +194,9 @@ delete [] count;
   
   <entry>
     <title type="html"><![CDATA[排序算法总结（三）]]></title>
-    <link href="http://tinyxd.me/blog/2012/06/28/select-sort/"/>
+    <link href="http://blog.tinyxd.me/blog/2012/06/28/select-sort/"/>
     <updated>2012-06-28T12:38:00+08:00</updated>
-    <id>http://tinyxd.me/blog/2012/06/28/select-sort</id>
+    <id>http://blog.tinyxd.me/blog/2012/06/28/select-sort</id>
     <content type="html"><![CDATA[<p>选择排序是指在每次排序时，选择最大或者最小项，将其放入适当的位置上，反复操作，直到所有数据排序完成为止。选择排序是一类比较常见的排序，现实生活中也比较常见，比如一个班级的学生排队，先将最高的学生排到队首，然后在其他学生中再挑出最高的一个，排在第二的位置，以此类推，直到全部排完。</p>
 
 <p>选择排序的交换操作介于 0 和 ( n - 1 ) 次之间。选择排序的比较操作为 n ( n - 1 ) / 2 次之间。选择排序的赋值操作介于 0 和 3 ( n - 1 ) 次之间。 比较次数O（  n<sup>2</sup> ）,比较次数与关键字的初始状态无关，总的比较次数N=(n-1)+(n-2)+...+1=n*(n-1)/2。 交换次数O(n),最好情况是，已经有序，交换0次；最坏情况是，逆序，交换n-1次。 交换次数比冒泡排序少多了，由于交换所需CPU时间比比较所需的CPU时间多，n值较小时，选择排序比冒泡排序快。</p>
@@ -394,9 +382,9 @@ for(i=L.length;i&gt;1;i--)
   
   <entry>
     <title type="html"><![CDATA[排序算法总结（二）]]></title>
-    <link href="http://tinyxd.me/blog/2012/06/27/swap-sort/"/>
+    <link href="http://blog.tinyxd.me/blog/2012/06/27/swap-sort/"/>
     <updated>2012-06-27T20:50:00+08:00</updated>
-    <id>http://tinyxd.me/blog/2012/06/27/swap-sort</id>
+    <id>http://blog.tinyxd.me/blog/2012/06/27/swap-sort</id>
     <content type="html"><![CDATA[<p>昨天总结了插入排序，今天总结交换排序。 <br/>
 交换排序是一种主要以交换的方式对序列进行排序的方法。排序的基本方法或手段主要就是比较和交换，像选择法等都借助了交换的手段，但都不是主要以交换为手段，如在直接选择排序的时候，一轮比较就能确定最大元素的位置，最后再进行交换。交换排序被公认为“稳定”的排序方法。</p>
 
@@ -449,9 +437,9 @@ sort(a,i+1,right);
   
   <entry>
     <title type="html"><![CDATA[排序算法总结（一）]]></title>
-    <link href="http://tinyxd.me/blog/2012/06/27/straight-insertion-sort/"/>
+    <link href="http://blog.tinyxd.me/blog/2012/06/27/straight-insertion-sort/"/>
     <updated>2012-06-27T08:00:00+08:00</updated>
-    <id>http://tinyxd.me/blog/2012/06/27/straight-insertion-sort</id>
+    <id>http://blog.tinyxd.me/blog/2012/06/27/straight-insertion-sort</id>
     <content type="html"><![CDATA[<p>排序算法是在学习数据结构的过程中，必须熟练掌握的。而由于其算法种类比较多，所以总结一下还是有必要的。今天先把插入排序总结下。 <br/>
 插入排序的基本操作就是将一个数据插入到已经排好序的有序数据中，从而得到一个新的、个数加一的有序数据，算法适用于少量数据的排序，时间复杂度为O(n<sup>2)。是稳定的排序方法。</sup></p>
 

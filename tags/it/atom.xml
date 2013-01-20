@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Tag: IT | Keen on Art of Tech]]></title>
-  <link href="http://tinyxd.me/tags/it/atom.xml" rel="self"/>
-  <link href="http://tinyxd.me/"/>
-  <updated>2013-01-19T12:04:15+08:00</updated>
-  <id>http://tinyxd.me/</id>
+  <link href="http://blog.tinyxd.me/tags/it/atom.xml" rel="self"/>
+  <link href="http://blog.tinyxd.me/"/>
+  <updated>2013-01-20T13:51:46+08:00</updated>
+  <id>http://blog.tinyxd.me/</id>
   <author>
     <name><![CDATA[Tiny]]></name>
     <email><![CDATA[admin@tinyxd.me]]></email>
@@ -15,12 +15,10 @@
   
   <entry>
     <title type="html"><![CDATA[IT生活：10个继续干IT的理由]]></title>
-    <link href="http://tinyxd.me/blog/2012/07/09/reasons-to-stay-in-it/"/>
+    <link href="http://blog.tinyxd.me/blog/2012/07/09/reasons-to-stay-in-it/"/>
     <updated>2012-07-09T00:25:00+08:00</updated>
-    <id>http://tinyxd.me/blog/2012/07/09/reasons-to-stay-in-it</id>
-    <content type="html"><![CDATA[<p>{% blockquote %}
-前面我们曾经分析过不要做IT的十个理由，现在反方有话要说了。一位曾经混迹IT江湖几进几出的过来人现身说法：“曾经有一份美好的工作摆在我的面前，我没有珍惜，等到失去时才后悔莫及。人生最悲哀的事情莫过于此。如果上天能再给我一次重来的机会，我会对那份工作说三个字：我爱你。如果非给这份职业加个期限，我希望是一万年！”
-{% endblockquote %}</p>
+    <id>http://blog.tinyxd.me/blog/2012/07/09/reasons-to-stay-in-it</id>
+    <content type="html"><![CDATA[<p><blockquote><p>前面我们曾经分析过不要做IT的十个理由，现在反方有话要说了。一位曾经混迹IT江湖几进几出的过来人现身说法：“曾经有一份美好的工作摆在我的面前，我没有珍惜，等到失去时才后悔莫及。人生最悲哀的事情莫过于此。如果上天能再给我一次重来的机会，我会对那份工作说三个字：我爱你。如果非给这份职业加个期限，我希望是一万年！”</p></blockquote></p>
 
 <br />
 
@@ -91,9 +89,9 @@ Jack在他的文章中提到，IT专业人士得不到大众的尊重。我从�
   
   <entry>
     <title type="html"><![CDATA[IT生活：10个不干IT的理由]]></title>
-    <link href="http://tinyxd.me/blog/2012/07/09/reasons-for-quitting-it/"/>
+    <link href="http://blog.tinyxd.me/blog/2012/07/09/reasons-for-quitting-it/"/>
     <updated>2012-07-09T00:16:00+08:00</updated>
-    <id>http://tinyxd.me/blog/2012/07/09/reasons-for-quitting-it</id>
+    <id>http://blog.tinyxd.me/blog/2012/07/09/reasons-for-quitting-it</id>
     <content type="html"><![CDATA[<p>作者：Jack Wallen     来源：http://www.techrepublic.com   <br/>
 摘要： 搞IT有很多好处——但是审时度势一下，你也许会考虑别的职业选择。Jack Wallen 阐述了哪些影响因素会成为压垮某些IT人士的最后一根稻草。</p>
 
@@ -158,9 +156,9 @@ Jack在他的文章中提到，IT专业人士得不到大众的尊重。我从�
   
   <entry>
     <title type="html"><![CDATA[互联网创业降级论]]></title>
-    <link href="http://tinyxd.me/blog/2012/07/08/degrading-for-success/"/>
+    <link href="http://blog.tinyxd.me/blog/2012/07/08/degrading-for-success/"/>
     <updated>2012-07-08T00:46:00+08:00</updated>
-    <id>http://tinyxd.me/blog/2012/07/08/degrading-for-success</id>
+    <id>http://blog.tinyxd.me/blog/2012/07/08/degrading-for-success</id>
     <content type="html"><![CDATA[<p>本文来自：<a href="http://meditic.com/degrading-for-success/">meditic</a>  <br/>
 几乎一年没有写博客了，说没时间那是借口，唯一的原因是，年纪越大越发觉自己肤浅。有些想法还没提笔，就发现很幼稚，就不敢发出来贻笑大方了。这次先给大家说个小故事：</p>
 

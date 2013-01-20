@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Tag: lnmp | Keen on Art of Tech]]></title>
-  <link href="http://tinyxd.me/tags/lnmp/atom.xml" rel="self"/>
-  <link href="http://tinyxd.me/"/>
-  <updated>2013-01-19T12:04:15+08:00</updated>
-  <id>http://tinyxd.me/</id>
+  <link href="http://blog.tinyxd.me/tags/lnmp/atom.xml" rel="self"/>
+  <link href="http://blog.tinyxd.me/"/>
+  <updated>2013-01-20T13:51:46+08:00</updated>
+  <id>http://blog.tinyxd.me/</id>
   <author>
     <name><![CDATA[Tiny]]></name>
     <email><![CDATA[admin@tinyxd.me]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[vps lnmp配置优化]]></title>
-    <link href="http://tinyxd.me/blog/2012/08/25/vps-optimization/"/>
+    <link href="http://blog.tinyxd.me/blog/2012/08/25/vps-optimization/"/>
     <updated>2012-08-25T23:40:00+08:00</updated>
-    <id>http://tinyxd.me/blog/2012/08/25/vps-optimization</id>
+    <id>http://blog.tinyxd.me/blog/2012/08/25/vps-optimization</id>
     <content type="html"><![CDATA[<p>我选用了lnmp（linux + Nginx + PHP + MySQL ）来安装，方便快捷，安装后发现其实好多已经优化好了。  <br/>
 其中需要注意到的有以下几个： <br/>
 一. 基于xen架构的可以增加swap分区大小

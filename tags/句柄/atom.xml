@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Tag: 句柄 | Keen on Art of Tech]]></title>
-  <link href="http://tinyxd.me/tags/句柄/atom.xml" rel="self"/>
-  <link href="http://tinyxd.me/"/>
-  <updated>2013-01-19T12:04:15+08:00</updated>
-  <id>http://tinyxd.me/</id>
+  <link href="http://blog.tinyxd.me/tags/句柄/atom.xml" rel="self"/>
+  <link href="http://blog.tinyxd.me/"/>
+  <updated>2013-01-20T13:51:46+08:00</updated>
+  <id>http://blog.tinyxd.me/</id>
   <author>
     <name><![CDATA[Tiny]]></name>
     <email><![CDATA[admin@tinyxd.me]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[读C++ Primer 之句柄类]]></title>
-    <link href="http://tinyxd.me/blog/2012/06/08/c-plus-plus-ju-bing-lei/"/>
+    <link href="http://blog.tinyxd.me/blog/2012/06/08/c-plus-plus-ju-bing-lei/"/>
     <updated>2012-06-08T20:28:00+08:00</updated>
-    <id>http://tinyxd.me/blog/2012/06/08/c-plus-plus-ju-bing-lei</id>
+    <id>http://blog.tinyxd.me/blog/2012/06/08/c-plus-plus-ju-bing-lei</id>
     <content type="html"><![CDATA[<p>转自Linux社区 作者：xizero00：http://www.linuxidc.com/Linux/2011-08/40175.htm</p>
 
 <p>我们知道C++中最令人头疼的当属指针，如果您申请了对象却没有释放它，时间一长就会造成系统崩溃，大量的内存溢出使得您的程序的健壮性出现问题</p>

@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Tag: typecho | Keen on Art of Tech]]></title>
-  <link href="http://tinyxd.me/tags/typecho/atom.xml" rel="self"/>
-  <link href="http://tinyxd.me/"/>
-  <updated>2013-01-19T12:04:15+08:00</updated>
-  <id>http://tinyxd.me/</id>
+  <link href="http://blog.tinyxd.me/tags/typecho/atom.xml" rel="self"/>
+  <link href="http://blog.tinyxd.me/"/>
+  <updated>2013-01-20T13:51:46+08:00</updated>
+  <id>http://blog.tinyxd.me/</id>
   <author>
     <name><![CDATA[Tiny]]></name>
     <email><![CDATA[admin@tinyxd.me]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[VPS申请及博客搭建]]></title>
-    <link href="http://tinyxd.me/blog/2012/08/14/vps-lnmp-setup-and-typecho-blog/"/>
+    <link href="http://blog.tinyxd.me/blog/2012/08/14/vps-lnmp-setup-and-typecho-blog/"/>
     <updated>2012-08-14T00:33:00+08:00</updated>
-    <id>http://tinyxd.me/blog/2012/08/14/vps-lnmp-setup-and-typecho-blog</id>
+    <id>http://blog.tinyxd.me/blog/2012/08/14/vps-lnmp-setup-and-typecho-blog</id>
     <content type="html"><![CDATA[<p>前些天，在网上溜达时，突然看到一款免费的vps。不错。。。免费的。。。哥当时是激动啊，对于像我这样的屌丝，有免费的当然不会放过的。 <br/>
 于是乎哥就开始折腾了。 <br/>
 一、Vps申请 <br/>

@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Tag: c | Keen on Art of Tech]]></title>
-  <link href="http://tinyxd.me/tags/c/atom.xml" rel="self"/>
-  <link href="http://tinyxd.me/"/>
-  <updated>2013-01-19T12:04:15+08:00</updated>
-  <id>http://tinyxd.me/</id>
+  <link href="http://blog.tinyxd.me/tags/c/atom.xml" rel="self"/>
+  <link href="http://blog.tinyxd.me/"/>
+  <updated>2013-01-20T13:51:46+08:00</updated>
+  <id>http://blog.tinyxd.me/</id>
   <author>
     <name><![CDATA[Tiny]]></name>
     <email><![CDATA[admin@tinyxd.me]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[排序算法总结（五）]]></title>
-    <link href="http://tinyxd.me/blog/2012/07/01/merge-sort/"/>
+    <link href="http://blog.tinyxd.me/blog/2012/07/01/merge-sort/"/>
     <updated>2012-07-01T23:45:00+08:00</updated>
-    <id>http://tinyxd.me/blog/2012/07/01/merge-sort</id>
+    <id>http://blog.tinyxd.me/blog/2012/07/01/merge-sort</id>
     <content type="html"><![CDATA[<p>归并（Merge）排序法是将两个（或两个以上）有序表合并成一个新的有序表，即把待排序序列分为若干个子序列，每个子序列是有序的。然后再把有序子序列合并为整体有序序列。 <br/>
 归并排序是建立在归并操作上的一种有效的排序算法。该算法是采用分治法（Divide and Conquer）的一个非常典型的应用。 <br/>
 将已有序的子序列合并，得到完全有序的序列；即先使每个子序列有序，再使子序列段间有序。若将两个有序表合并成一个有序表，称为2-路归并。 <br/>

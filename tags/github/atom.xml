@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Tag: github | Keen on Art of Tech]]></title>
-  <link href="http://tinyxd.me/tags/github/atom.xml" rel="self"/>
-  <link href="http://tinyxd.me/"/>
-  <updated>2013-01-19T12:04:15+08:00</updated>
-  <id>http://tinyxd.me/</id>
+  <link href="http://blog.tinyxd.me/tags/github/atom.xml" rel="self"/>
+  <link href="http://blog.tinyxd.me/"/>
+  <updated>2013-01-20T13:51:46+08:00</updated>
+  <id>http://blog.tinyxd.me/</id>
   <author>
     <name><![CDATA[Tiny]]></name>
     <email><![CDATA[admin@tinyxd.me]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[为已经存在的github Octopress配置本地环境]]></title>
-    <link href="http://tinyxd.me/blog/2012/05/23/wei-yi-jing-cun-zai-de-github-octopresspei-zhi-ben-di-huan-jing/"/>
+    <link href="http://blog.tinyxd.me/blog/2012/05/23/wei-yi-jing-cun-zai-de-github-octopresspei-zhi-ben-di-huan-jing/"/>
     <updated>2012-05-23T20:59:00+08:00</updated>
-    <id>http://tinyxd.me/blog/2012/05/23/wei-yi-jing-cun-zai-de-github-octopresspei-zhi-ben-di-huan-jing</id>
+    <id>http://blog.tinyxd.me/blog/2012/05/23/wei-yi-jing-cun-zai-de-github-octopresspei-zhi-ben-di-huan-jing</id>
     <content type="html"><![CDATA[<p><strong>转自：</strong><br/>
 http://www.360doc.com/content/12/0520/19/3565338_212362686.shtml</p>
 

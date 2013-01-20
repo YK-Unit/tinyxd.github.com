@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: python | Keen on Art of Tech]]></title>
-  <link href="http://tinyxd.me/blog/categories/python/atom.xml" rel="self"/>
-  <link href="http://tinyxd.me/"/>
-  <updated>2013-01-19T12:04:15+08:00</updated>
-  <id>http://tinyxd.me/</id>
+  <link href="http://blog.tinyxd.me/blog/categories/python/atom.xml" rel="self"/>
+  <link href="http://blog.tinyxd.me/"/>
+  <updated>2013-01-20T13:51:46+08:00</updated>
+  <id>http://blog.tinyxd.me/</id>
   <author>
     <name><![CDATA[Tiny]]></name>
     <email><![CDATA[admin@tinyxd.me]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[本地备份octopress]]></title>
-    <link href="http://tinyxd.me/blog/2012/07/12/python-backup-octopress/"/>
+    <link href="http://blog.tinyxd.me/blog/2012/07/12/python-backup-octopress/"/>
     <updated>2012-07-12T22:42:00+08:00</updated>
-    <id>http://tinyxd.me/blog/2012/07/12/python-backup-octopress</id>
+    <id>http://blog.tinyxd.me/blog/2012/07/12/python-backup-octopress</id>
     <content type="html"><![CDATA[<p>用python脚本备份octopress，当然也可以备份其他的目录。只要修改对应路径就可以了。
 ``` python octopress_backup.py</p>
 

@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Tag: vc | Keen on Art of Tech]]></title>
-  <link href="http://tinyxd.me/tags/vc/atom.xml" rel="self"/>
-  <link href="http://tinyxd.me/"/>
-  <updated>2013-01-19T12:04:15+08:00</updated>
-  <id>http://tinyxd.me/</id>
+  <link href="http://blog.tinyxd.me/tags/vc/atom.xml" rel="self"/>
+  <link href="http://blog.tinyxd.me/"/>
+  <updated>2013-01-20T13:51:46+08:00</updated>
+  <id>http://blog.tinyxd.me/</id>
   <author>
     <name><![CDATA[Tiny]]></name>
     <email><![CDATA[admin@tinyxd.me]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[vc debug 变 release]]></title>
-    <link href="http://tinyxd.me/blog/2012/07/03/vc-debug-release/"/>
+    <link href="http://blog.tinyxd.me/blog/2012/07/03/vc-debug-release/"/>
     <updated>2012-07-03T12:23:00+08:00</updated>
-    <id>http://tinyxd.me/blog/2012/07/03/vc-debug-release</id>
+    <id>http://blog.tinyxd.me/blog/2012/07/03/vc-debug-release</id>
     <content type="html"><![CDATA[<p>今天遇到将debug改为release版本出现好多问题，最后一一解决，现将方法贴到下面 <br/>
 生成release版的步骤： <br/>
 1.首先修改<code>project-setting-general-using mfc in a static libraryproject-setting</code>右键点击菜单空白处——选择“组建”——选择“Win32 Release“——重新编译链接。 <br/>
@@ -55,25 +55,13 @@ Debug 通常称为调试版本，它包含调试信息，并且不作任何优�
 
 
 <p>Debug 版本：
-{% blockquote %}
-/MDd /MLd 或 /MTd 使用 Debug runtime library(调试版本的运行时刻函数库)
-/Od 关闭优化开关
-/D "<em>DEBUG" 相当于 #define </em>DEBUG,打开编译调试代码开关(主要针对assert函数)
-/ZI 创建 Edit and continue(编辑继续)数据库，这样在调试过程中如果修改了源代码不需重新编译
-/GZ 可以帮助捕获内存错误
-/Gm 打开最小化重链接开关，减少链接时间
- {% endblockquote %}</p>
+<blockquote><p>/MDd /MLd 或 /MTd 使用 Debug runtime library(调试版本的运行时刻函数库)<br/>/Od 关闭优化开关<br/>/D "<em>DEBUG" 相当于 #define </em>DEBUG,打开编译调试代码开关(主要针对assert函数)<br/>/ZI 创建 Edit and continue(编辑继续)数据库，这样在调试过程中如果修改了源代码不需重新编译<br/>/GZ 可以帮助捕获内存错误<br/>/Gm 打开最小化重链接开关，减少链接时间</p></blockquote></p>
 
 <br />
 
 
 <p>Release 版本： <br/>
-{% blockquote %}
-/MD /ML 或 /MT 使用发布版本的运行时刻函数库
-/O1 或 /O2 优化开关，使程序最小或最快
-/D "NDEBUG" 关闭条件编译调试代码开关(即不编译assert函数)
-/GF 合并重复的字符串，并将字符串常量放到只读内存，防止 被修改
-{% endblockquote %}</p>
+<blockquote><p>/MD /ML 或 /MT 使用发布版本的运行时刻函数库<br/>/O1 或 /O2 优化开关，使程序最小或最快<br/>/D "NDEBUG" 关闭条件编译调试代码开关(即不编译assert函数)<br/>/GF 合并重复的字符串，并将字符串常量放到只读内存，防止 被修改</p></blockquote></p>
 
 <br />
 

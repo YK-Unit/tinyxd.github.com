@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Tag: vim | Keen on Art of Tech]]></title>
-  <link href="http://tinyxd.me/tags/vim/atom.xml" rel="self"/>
-  <link href="http://tinyxd.me/"/>
-  <updated>2013-01-19T12:04:15+08:00</updated>
-  <id>http://tinyxd.me/</id>
+  <link href="http://blog.tinyxd.me/tags/vim/atom.xml" rel="self"/>
+  <link href="http://blog.tinyxd.me/"/>
+  <updated>2013-01-20T13:51:46+08:00</updated>
+  <id>http://blog.tinyxd.me/</id>
   <author>
     <name><![CDATA[Tiny]]></name>
     <email><![CDATA[admin@tinyxd.me]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[vim的一些配置]]></title>
-    <link href="http://tinyxd.me/blog/2013/01/17/vim-config/"/>
+    <link href="http://blog.tinyxd.me/blog/2013/01/17/vim-config/"/>
     <updated>2013-01-17T17:44:00+08:00</updated>
-    <id>http://tinyxd.me/blog/2013/01/17/vim-config</id>
+    <id>http://blog.tinyxd.me/blog/2013/01/17/vim-config</id>
     <content type="html"><![CDATA[<p>一直很想系统的学习vim，因为各种原因把，一直把这个计划搁置到了现在，现在凑着学习vimwiki，再次把这个提上日程。 <br/>
 vim配置： <br/>
 使用了<a href="https://github.com/vingel/vim/blob/master/vimrc">vingel</a>的配置文件。 <br/>

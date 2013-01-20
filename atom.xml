@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Keen on Art of Tech]]></title>
-  <link href="http://tinyxd.me/atom.xml" rel="self"/>
-  <link href="http://tinyxd.me/"/>
-  <updated>2013-01-19T12:03:35+08:00</updated>
-  <id>http://tinyxd.me/</id>
+  <link href="http://blog.tinyxd.me/atom.xml" rel="self"/>
+  <link href="http://blog.tinyxd.me/"/>
+  <updated>2013-01-20T13:51:46+08:00</updated>
+  <id>http://blog.tinyxd.me/</id>
   <author>
     <name><![CDATA[Tiny]]></name>
     <email><![CDATA[admin@tinyxd.me]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[vim的一些配置]]></title>
-    <link href="http://tinyxd.me/blog/2013/01/17/vim-config/"/>
+    <link href="http://blog.tinyxd.me/blog/2013/01/17/vim-config/"/>
     <updated>2013-01-17T17:44:00+08:00</updated>
-    <id>http://tinyxd.me/blog/2013/01/17/vim-config</id>
+    <id>http://blog.tinyxd.me/blog/2013/01/17/vim-config</id>
     <content type="html"><![CDATA[<p>一直很想系统的学习vim，因为各种原因把，一直把这个计划搁置到了现在，现在凑着学习vimwiki，再次把这个提上日程。 <br/>
 vim配置： <br/>
 使用了<a href="https://github.com/vingel/vim/blob/master/vimrc">vingel</a>的配置文件。 <br/>
@@ -86,9 +86,9 @@ vim配置： <br/>
 
 
 <p class='post-footer'>本站文章如果没有特别说明，均为原创，转载请以链接方式注明本文地址：
-<a href='http://tinyxd.me/blog/2013/01/17/vim-config/'>http://tinyxd.me/blog/2013/01/17/vim-config/</a><br/>
-&nbsp;Written by <a href='http://tinyxd.me'>Tiny</a>
-&nbsp;Posted at <a href='http://tinyxd.me'>http://tinyxd.me</a><br/>
+<a href='http://blog.tinyxd.me/blog/2013/01/17/vim-config/'>http://blog.tinyxd.me/blog/2013/01/17/vim-config/</a><br/>
+&nbsp;Written by <a href='http://blog.tinyxd.me'>Tiny</a>
+&nbsp;Posted at <a href='http://blog.tinyxd.me'>http://blog.tinyxd.me</a><br/>
 &nbsp;关键字： vim  |  vi  |  配置  | vimwiki</p>
 
 ]]></content>
@@ -96,9 +96,9 @@ vim配置： <br/>
   
   <entry>
     <title type="html"><![CDATA[文章末尾自动添加本文地址]]></title>
-    <link href="http://tinyxd.me/blog/2013/01/16/add-article-info-footer/"/>
+    <link href="http://blog.tinyxd.me/blog/2013/01/16/add-article-info-footer/"/>
     <updated>2013-01-16T13:23:00+08:00</updated>
-    <id>http://tinyxd.me/blog/2013/01/16/add-article-info-footer</id>
+    <id>http://blog.tinyxd.me/blog/2013/01/16/add-article-info-footer</id>
     <content type="html"><![CDATA[<p>为每篇post添加本文地址和keywords信息。 <br/>
 Ruby脚本如下，添加到plugins文件夹中。</p>
 
@@ -150,9 +150,9 @@ Liquid::Template.register_filter AppendFooterFilter</code></pre></noscript></div
 <p>本文参考：<code>http://codemacro.com/2012/07/26/post-footer-plugin-for-octopress/</code>。</p>
 
 <p class='post-footer'>本站文章如果没有特别说明，均为原创，转载请以链接方式注明本文地址：
-<a href='http://tinyxd.me/blog/2013/01/16/add-article-info-footer/'>http://tinyxd.me/blog/2013/01/16/add-article-info-footer/</a><br/>
-&nbsp;Written by <a href='http://tinyxd.me'>Tiny</a>
-&nbsp;Posted at <a href='http://tinyxd.me'>http://tinyxd.me</a><br/>
+<a href='http://blog.tinyxd.me/blog/2013/01/16/add-article-info-footer/'>http://blog.tinyxd.me/blog/2013/01/16/add-article-info-footer/</a><br/>
+&nbsp;Written by <a href='http://blog.tinyxd.me'>Tiny</a>
+&nbsp;Posted at <a href='http://blog.tinyxd.me'>http://blog.tinyxd.me</a><br/>
 &nbsp;关键字： octopress | 本文地址</p>
 
 ]]></content>
@@ -160,9 +160,9 @@ Liquid::Template.register_filter AppendFooterFilter</code></pre></noscript></div
   
   <entry>
     <title type="html"><![CDATA[新的一年]]></title>
-    <link href="http://tinyxd.me/blog/2013/01/02/the-blog-stated/"/>
+    <link href="http://blog.tinyxd.me/blog/2013/01/02/the-blog-stated/"/>
     <updated>2013-01-02T12:22:00+08:00</updated>
-    <id>http://tinyxd.me/blog/2013/01/02/the-blog-stated</id>
+    <id>http://blog.tinyxd.me/blog/2013/01/02/the-blog-stated</id>
     <content type="html"><![CDATA[<p>好久没有写博客了，上篇博客是找工作之前，现在工作已经尘埃落定了。工作找完后，就开始忙着写论文，考驾照。 <br/>
 回首2012，感觉运气不佳，希望2013年能够运气好好。  <br/>
 2013愿望List： <br/>
@@ -177,9 +177,9 @@ Liquid::Template.register_filter AppendFooterFilter</code></pre></noscript></div
 <img src="http://upload.tinyxd.me/2013/01/2013style.gif" title="[2013style [2013style]]" ></p>
 
 <p class='post-footer'>本站文章如果没有特别说明，均为原创，转载请以链接方式注明本文地址：
-<a href='http://tinyxd.me/blog/2013/01/02/the-blog-stated/'>http://tinyxd.me/blog/2013/01/02/the-blog-stated/</a><br/>
-&nbsp;Written by <a href='http://tinyxd.me'>Tiny</a>
-&nbsp;Posted at <a href='http://tinyxd.me'>http://tinyxd.me</a><br/>
+<a href='http://blog.tinyxd.me/blog/2013/01/02/the-blog-stated/'>http://blog.tinyxd.me/blog/2013/01/02/the-blog-stated/</a><br/>
+&nbsp;Written by <a href='http://blog.tinyxd.me'>Tiny</a>
+&nbsp;Posted at <a href='http://blog.tinyxd.me'>http://blog.tinyxd.me</a><br/>
 &nbsp;关键字： 新的一年 | github | 工作</p>
 
 ]]></content>
@@ -187,16 +187,16 @@ Liquid::Template.register_filter AppendFooterFilter</code></pre></noscript></div
   
   <entry>
     <title type="html"><![CDATA[开始找工作了]]></title>
-    <link href="http://tinyxd.me/blog/2012/09/10/job-hunting-2012/"/>
+    <link href="http://blog.tinyxd.me/blog/2012/09/10/job-hunting-2012/"/>
     <updated>2012-09-10T00:24:00+08:00</updated>
-    <id>http://tinyxd.me/blog/2012/09/10/job-hunting-2012</id>
+    <id>http://blog.tinyxd.me/blog/2012/09/10/job-hunting-2012</id>
     <content type="html"><![CDATA[<p>今天，航天二院专场招聘，正式拉开了招聘的序幕。人好多！  <br/>
 <img src="http://upload.tinyxd.me/2012/09/job.JPG"  alt="Job Hunting" width="970" height="660"></p>
 
 <p class='post-footer'>本站文章如果没有特别说明，均为原创，转载请以链接方式注明本文地址：
-<a href='http://tinyxd.me/blog/2012/09/10/job-hunting-2012/'>http://tinyxd.me/blog/2012/09/10/job-hunting-2012/</a><br/>
-&nbsp;Written by <a href='http://tinyxd.me'>Tiny</a>
-&nbsp;Posted at <a href='http://tinyxd.me'>http://tinyxd.me</a><br/>
+<a href='http://blog.tinyxd.me/blog/2012/09/10/job-hunting-2012/'>http://blog.tinyxd.me/blog/2012/09/10/job-hunting-2012/</a><br/>
+&nbsp;Written by <a href='http://blog.tinyxd.me'>Tiny</a>
+&nbsp;Posted at <a href='http://blog.tinyxd.me'>http://blog.tinyxd.me</a><br/>
 &nbsp;关键字： job hunting,西电找工作人海</p>
 
 ]]></content>
@@ -204,9 +204,9 @@ Liquid::Template.register_filter AppendFooterFilter</code></pre></noscript></div
   
   <entry>
     <title type="html"><![CDATA[个人网站上安装SSL证书]]></title>
-    <link href="http://tinyxd.me/blog/2012/09/02/nginx-ssl/"/>
+    <link href="http://blog.tinyxd.me/blog/2012/09/02/nginx-ssl/"/>
     <updated>2012-09-02T22:45:00+08:00</updated>
-    <id>http://tinyxd.me/blog/2012/09/02/nginx-ssl</id>
+    <id>http://blog.tinyxd.me/blog/2012/09/02/nginx-ssl</id>
     <content type="html"><![CDATA[<p>SSL(Secure Sockets Layer 安全套接层),及其继任者传输层安全（Transport Layer Security，TLS）是为网络通信提供安全及数据完整性的一种安全协议。TLS与SSL在传输层对网络连接进行加密。   <br/>
 HTTPS（Secure Hypertext Transfer Protocol）安全超文本传输协议，HTTPS应用了Netscape的完全套接字层（SSL）作为HTTP应用层的子层。（HTTPS使用端口443，而不是象HTTP那样使用端口80来和TCP/IP进行通信。）   <br/>
 建个网站不容易，各种都要收费，那么有免费的当然就更好了！免费的SSL证书：<a href="https://www.startssl.com/">StartSSL</a>来了！ <br/>
@@ -285,9 +285,9 @@ HTTPS（Secure Hypertext Transfer Protocol）安全超文本传输协议，HTTPS
 <p>本文地址：<a href="http://tinyxd.me/blog/2012/09/02/nginx-ssl/">http://tinyxd.me/blog/2012/09/02/nginx-ssl/</a></p>
 
 <p class='post-footer'>本站文章如果没有特别说明，均为原创，转载请以链接方式注明本文地址：
-<a href='http://tinyxd.me/blog/2012/09/02/nginx-ssl/'>http://tinyxd.me/blog/2012/09/02/nginx-ssl/</a><br/>
-&nbsp;Written by <a href='http://tinyxd.me'>Tiny</a>
-&nbsp;Posted at <a href='http://tinyxd.me'>http://tinyxd.me</a><br/>
+<a href='http://blog.tinyxd.me/blog/2012/09/02/nginx-ssl/'>http://blog.tinyxd.me/blog/2012/09/02/nginx-ssl/</a><br/>
+&nbsp;Written by <a href='http://blog.tinyxd.me'>Tiny</a>
+&nbsp;Posted at <a href='http://blog.tinyxd.me'>http://blog.tinyxd.me</a><br/>
 &nbsp;关键字： 安装SSL,vps nginx</p>
 
 ]]></content>
@@ -295,9 +295,9 @@ HTTPS（Secure Hypertext Transfer Protocol）安全超文本传输协议，HTTPS
   
   <entry>
     <title type="html"><![CDATA[VPS安装openVPN]]></title>
-    <link href="http://tinyxd.me/blog/2012/08/30/debian-ubuntu-setup-openvpn/"/>
+    <link href="http://blog.tinyxd.me/blog/2012/08/30/debian-ubuntu-setup-openvpn/"/>
     <updated>2012-08-30T12:24:00+08:00</updated>
-    <id>http://tinyxd.me/blog/2012/08/30/debian-ubuntu-setup-openvpn</id>
+    <id>http://blog.tinyxd.me/blog/2012/08/30/debian-ubuntu-setup-openvpn</id>
     <content type="html"><![CDATA[<p>首先，你得有VPS或者独立服务器。 <br/>
 因为我的VPS是openVZ的，查资料发现新的openVZ的VPS是支持PPTP的。不过鉴于安全性的考虑我还是使用openVPN。 <br/>
 本文后面会介绍在debian 6下面安装openvpn的一些注意事项以及在xp下面安装openVPN。</p>
@@ -419,9 +419,9 @@ chmod +x debian-openvpn.sh
 <p>本文地址：<a href="http://tinyxd.me/blog/2012/08/30/debian-ubuntu-setup-openvpn/">http://tinyxd.me/blog/2012/08/30/debian-ubuntu-setup-openvpn/</a></p>
 
 <p class='post-footer'>本站文章如果没有特别说明，均为原创，转载请以链接方式注明本文地址：
-<a href='http://tinyxd.me/blog/2012/08/30/debian-ubuntu-setup-openvpn/'>http://tinyxd.me/blog/2012/08/30/debian-ubuntu-setup-openvpn/</a><br/>
-&nbsp;Written by <a href='http://tinyxd.me'>Tiny</a>
-&nbsp;Posted at <a href='http://tinyxd.me'>http://tinyxd.me</a><br/>
+<a href='http://blog.tinyxd.me/blog/2012/08/30/debian-ubuntu-setup-openvpn/'>http://blog.tinyxd.me/blog/2012/08/30/debian-ubuntu-setup-openvpn/</a><br/>
+&nbsp;Written by <a href='http://blog.tinyxd.me'>Tiny</a>
+&nbsp;Posted at <a href='http://blog.tinyxd.me'>http://blog.tinyxd.me</a><br/>
 &nbsp;关键字： debian,ubuntu,安装openvpn</p>
 
 ]]></content>
@@ -429,9 +429,9 @@ chmod +x debian-openvpn.sh
   
   <entry>
     <title type="html"><![CDATA[用Dropbox备份VPS网站及数据库 ]]></title>
-    <link href="http://tinyxd.me/blog/2012/08/27/use-dropbox-backup-vps-and-database/"/>
+    <link href="http://blog.tinyxd.me/blog/2012/08/27/use-dropbox-backup-vps-and-database/"/>
     <updated>2012-08-27T23:28:00+08:00</updated>
-    <id>http://tinyxd.me/blog/2012/08/27/use-dropbox-backup-vps-and-database</id>
+    <id>http://blog.tinyxd.me/blog/2012/08/27/use-dropbox-backup-vps-and-database</id>
     <content type="html"><![CDATA[<p>用SSH客户端（PuTTY）登陆，进入root目录：</p>
 
 <pre><code>cd ~
@@ -578,18 +578,18 @@ ssh username@domain
 <p>    <br/>
 更多内容请参考相关网站。
 </br><p class='post-footer'>本站文章如果没有特别说明，均为原创，转载请以链接方式注明本文地址：
-<a href='http://tinyxd.me/blog/2012/08/27/use-dropbox-backup-vps-and-database/'>http://tinyxd.me/blog/2012/08/27/use-dropbox-backup-vps-and-database/</a><br/>
-&nbsp;Written by <a href='http://tinyxd.me'>Tiny</a>
-&nbsp;Posted at <a href='http://tinyxd.me'>http://tinyxd.me</a><br/>
+<a href='http://blog.tinyxd.me/blog/2012/08/27/use-dropbox-backup-vps-and-database/'>http://blog.tinyxd.me/blog/2012/08/27/use-dropbox-backup-vps-and-database/</a><br/>
+&nbsp;Written by <a href='http://blog.tinyxd.me'>Tiny</a>
+&nbsp;Posted at <a href='http://blog.tinyxd.me'>http://blog.tinyxd.me</a><br/>
 &nbsp;关键字： vps,dropbox,备份数据库</p></p>
 ]]></content>
   </entry>
   
   <entry>
     <title type="html"><![CDATA[图床管理]]></title>
-    <link href="http://tinyxd.me/blog/2012/08/26/imag-file-explorer/"/>
+    <link href="http://blog.tinyxd.me/blog/2012/08/26/imag-file-explorer/"/>
     <updated>2012-08-26T00:08:00+08:00</updated>
-    <id>http://tinyxd.me/blog/2012/08/26/imag-file-explorer</id>
+    <id>http://blog.tinyxd.me/blog/2012/08/26/imag-file-explorer</id>
     <content type="html"><![CDATA[<p>做网站，尤其是做多个网站的，文件的统一管理，备份是很重要的。本站用<a href="http://encode-explorer.siineiolekala.net/">Encode Explorer</a>来管理本站图片、上传附件等。 <br/>
 去Encode Explorer在sourceforge的<a href="http://sourceforge.net/projects/encode-explorer/files/encode-explorer/">项目官网</a>下载程序，其代码不过3k多行。只要将index.php上传到网站根目录，然后把nginx设置好用<a href="http://upload.tinyxd.me/">2级域名</a>指向此根目录，就可以了。    <br/>
 其中index.php需要改几个地方：   <br/>
@@ -606,18 +606,18 @@ ssh username@domain
 
 
 <p>本文地址：<a href="http://tinyxd.me/blog/2012/08/26/imag-file-explorer/">http://tinyxd.me/blog/2012/08/26/imag-file-explorer/</a><p class='post-footer'>本站文章如果没有特别说明，均为原创，转载请以链接方式注明本文地址：
-<a href='http://tinyxd.me/blog/2012/08/26/imag-file-explorer/'>http://tinyxd.me/blog/2012/08/26/imag-file-explorer/</a><br/>
-&nbsp;Written by <a href='http://tinyxd.me'>Tiny</a>
-&nbsp;Posted at <a href='http://tinyxd.me'>http://tinyxd.me</a><br/>
+<a href='http://blog.tinyxd.me/blog/2012/08/26/imag-file-explorer/'>http://blog.tinyxd.me/blog/2012/08/26/imag-file-explorer/</a><br/>
+&nbsp;Written by <a href='http://blog.tinyxd.me'>Tiny</a>
+&nbsp;Posted at <a href='http://blog.tinyxd.me'>http://blog.tinyxd.me</a><br/>
 &nbsp;关键字： 图床管理,Encode Explorer,vps</p></p>
 ]]></content>
   </entry>
   
   <entry>
     <title type="html"><![CDATA[vps lnmp配置优化]]></title>
-    <link href="http://tinyxd.me/blog/2012/08/25/vps-optimization/"/>
+    <link href="http://blog.tinyxd.me/blog/2012/08/25/vps-optimization/"/>
     <updated>2012-08-25T23:40:00+08:00</updated>
-    <id>http://tinyxd.me/blog/2012/08/25/vps-optimization</id>
+    <id>http://blog.tinyxd.me/blog/2012/08/25/vps-optimization</id>
     <content type="html"><![CDATA[<p>我选用了lnmp（linux + Nginx + PHP + MySQL ）来安装，方便快捷，安装后发现其实好多已经优化好了。  <br/>
 其中需要注意到的有以下几个： <br/>
 一. 基于xen架构的可以增加swap分区大小
@@ -714,9 +714,9 @@ PS.我的vps现在放了两个站：<a href="http://tinyxd.me/">本站</a>、<a 
 <p>本文地址：<a href="http://tinyxd.me/blog/2012/08/25/vps-optimization/">http://tinyxd.me/blog/2012/08/25/vps-optimization/</a></p>
 
 <p class='post-footer'>本站文章如果没有特别说明，均为原创，转载请以链接方式注明本文地址：
-<a href='http://tinyxd.me/blog/2012/08/25/vps-optimization/'>http://tinyxd.me/blog/2012/08/25/vps-optimization/</a><br/>
-&nbsp;Written by <a href='http://tinyxd.me'>Tiny</a>
-&nbsp;Posted at <a href='http://tinyxd.me'>http://tinyxd.me</a><br/>
+<a href='http://blog.tinyxd.me/blog/2012/08/25/vps-optimization/'>http://blog.tinyxd.me/blog/2012/08/25/vps-optimization/</a><br/>
+&nbsp;Written by <a href='http://blog.tinyxd.me'>Tiny</a>
+&nbsp;Posted at <a href='http://blog.tinyxd.me'>http://blog.tinyxd.me</a><br/>
 &nbsp;关键字： vps优化,lnmp配置</p>
 
 ]]></content>
@@ -724,9 +724,9 @@ PS.我的vps现在放了两个站：<a href="http://tinyxd.me/">本站</a>、<a 
   
   <entry>
     <title type="html"><![CDATA[archlinux修改mac地址]]></title>
-    <link href="http://tinyxd.me/blog/2012/08/23/archlinux-change-mac/"/>
+    <link href="http://blog.tinyxd.me/blog/2012/08/23/archlinux-change-mac/"/>
     <updated>2012-08-23T00:03:00+08:00</updated>
-    <id>http://tinyxd.me/blog/2012/08/23/archlinux-change-mac</id>
+    <id>http://blog.tinyxd.me/blog/2012/08/23/archlinux-change-mac</id>
     <content type="html"><![CDATA[<p>快开学了，开学了紧接着就是找工作。由于今年的形势还不太好，所以最近一直在复习一些编程方面的东西，好久没更新文章了。 <br/>
 还没到月底，自己的流量都已经用完了，悲催啊！！！借用别人的，这就需要修改mac地址。学校流量3G真的伤不起阿！！！囧 <br/>
 查阅Archlinux Wiki可以看到有两种临时改变mac地址的方法：  <br/>
@@ -770,9 +770,9 @@ PS.我的vps现在放了两个站：<a href="http://tinyxd.me/">本站</a>、<a 
 本文地址：<a href="http://tinyxd.me/blog/2012/08/23/archlinux-change-mac/">http://tinyxd.me/blog/2012/08/23/archlinux-change-mac/</a></p>
 
 <p class='post-footer'>本站文章如果没有特别说明，均为原创，转载请以链接方式注明本文地址：
-<a href='http://tinyxd.me/blog/2012/08/23/archlinux-change-mac/'>http://tinyxd.me/blog/2012/08/23/archlinux-change-mac/</a><br/>
-&nbsp;Written by <a href='http://tinyxd.me'>Tiny</a>
-&nbsp;Posted at <a href='http://tinyxd.me'>http://tinyxd.me</a><br/>
+<a href='http://blog.tinyxd.me/blog/2012/08/23/archlinux-change-mac/'>http://blog.tinyxd.me/blog/2012/08/23/archlinux-change-mac/</a><br/>
+&nbsp;Written by <a href='http://blog.tinyxd.me'>Tiny</a>
+&nbsp;Posted at <a href='http://blog.tinyxd.me'>http://blog.tinyxd.me</a><br/>
 &nbsp;关键字： mac,修改mac,archlinux,</p>
 
 ]]></content>
@@ -780,9 +780,9 @@ PS.我的vps现在放了两个站：<a href="http://tinyxd.me/">本站</a>、<a 
   
   <entry>
     <title type="html"><![CDATA[VPS申请及博客搭建]]></title>
-    <link href="http://tinyxd.me/blog/2012/08/14/vps-lnmp-setup-and-typecho-blog/"/>
+    <link href="http://blog.tinyxd.me/blog/2012/08/14/vps-lnmp-setup-and-typecho-blog/"/>
     <updated>2012-08-14T00:33:00+08:00</updated>
-    <id>http://tinyxd.me/blog/2012/08/14/vps-lnmp-setup-and-typecho-blog</id>
+    <id>http://blog.tinyxd.me/blog/2012/08/14/vps-lnmp-setup-and-typecho-blog</id>
     <content type="html"><![CDATA[<p>前些天，在网上溜达时，突然看到一款免费的vps。不错。。。免费的。。。哥当时是激动啊，对于像我这样的屌丝，有免费的当然不会放过的。 <br/>
 于是乎哥就开始折腾了。 <br/>
 一、Vps申请 <br/>
@@ -816,18 +816,18 @@ ps：博客还没有取名，希望大家给点建议。</p>
 
 <p>本站博客未特别注明，均为原创，转载请注明出处。 <br/>
 本文地址：<a href="http://tinyxd.me/blog/2012/08/14/vps-lnmp-setup-and-typecho-blog/">http://tinyxd.me/blog/2012/08/14/vps-lnmp-setup-and-typecho-blog/</a>   <p class='post-footer'>本站文章如果没有特别说明，均为原创，转载请以链接方式注明本文地址：
-<a href='http://tinyxd.me/blog/2012/08/14/vps-lnmp-setup-and-typecho-blog/'>http://tinyxd.me/blog/2012/08/14/vps-lnmp-setup-and-typecho-blog/</a><br/>
-&nbsp;Written by <a href='http://tinyxd.me'>Tiny</a>
-&nbsp;Posted at <a href='http://tinyxd.me'>http://tinyxd.me</a><br/>
+<a href='http://blog.tinyxd.me/blog/2012/08/14/vps-lnmp-setup-and-typecho-blog/'>http://blog.tinyxd.me/blog/2012/08/14/vps-lnmp-setup-and-typecho-blog/</a><br/>
+&nbsp;Written by <a href='http://blog.tinyxd.me'>Tiny</a>
+&nbsp;Posted at <a href='http://blog.tinyxd.me'>http://blog.tinyxd.me</a><br/>
 &nbsp;关键字： vps,typecho,主机申请,博客搭建</p></p>
 ]]></content>
   </entry>
   
   <entry>
     <title type="html"><![CDATA[linux堆的管理]]></title>
-    <link href="http://tinyxd.me/blog/2012/08/09/linux-heap-management/"/>
+    <link href="http://blog.tinyxd.me/blog/2012/08/09/linux-heap-management/"/>
     <updated>2012-08-09T18:32:00+08:00</updated>
-    <id>http://tinyxd.me/blog/2012/08/09/linux-heap-management</id>
+    <id>http://blog.tinyxd.me/blog/2012/08/09/linux-heap-management</id>
     <content type="html"><![CDATA[<p>每个Unix进程都拥有一个特殊的线性区，这个线性区就是所谓的堆（heap），堆用于满足进程的动态内存请求。内存描述符的start_brk与brk字段分别限定了这个区的开始地址和结束地址。</p>
 
 <!--more-->
@@ -1004,18 +1004,18 @@ ps：博客还没有取名，希望大家给点建议。</p>
 
 <p>本文参考《深入理解linux内核》。 <br/>
 本文地址：<a href="http://tinyxd.me/blog/2012/08/09/linux-heap-management/">http://tinyxd.me/blog/2012/08/09/linux-heap-management/</a>   <p class='post-footer'>本站文章如果没有特别说明，均为原创，转载请以链接方式注明本文地址：
-<a href='http://tinyxd.me/blog/2012/08/09/linux-heap-management/'>http://tinyxd.me/blog/2012/08/09/linux-heap-management/</a><br/>
-&nbsp;Written by <a href='http://tinyxd.me'>Tiny</a>
-&nbsp;Posted at <a href='http://tinyxd.me'>http://tinyxd.me</a><br/>
+<a href='http://blog.tinyxd.me/blog/2012/08/09/linux-heap-management/'>http://blog.tinyxd.me/blog/2012/08/09/linux-heap-management/</a><br/>
+&nbsp;Written by <a href='http://blog.tinyxd.me'>Tiny</a>
+&nbsp;Posted at <a href='http://blog.tinyxd.me'>http://blog.tinyxd.me</a><br/>
 &nbsp;关键字： heap,堆管理,内核</p></p>
 ]]></content>
   </entry>
   
   <entry>
     <title type="html"><![CDATA[linux系统调用]]></title>
-    <link href="http://tinyxd.me/blog/2012/08/08/linux-system-calls/"/>
+    <link href="http://blog.tinyxd.me/blog/2012/08/08/linux-system-calls/"/>
     <updated>2012-08-08T18:18:00+08:00</updated>
-    <id>http://tinyxd.me/blog/2012/08/08/linux-system-calls</id>
+    <id>http://blog.tinyxd.me/blog/2012/08/08/linux-system-calls</id>
     <content type="html"><![CDATA[<p><strong><em>摘要</em></strong>：操作系统为在用户态运行的进程与硬件设备（如CPU、磁盘、打印机等等）进行交互提供了一组接口。在应用程序和硬件之间设置一个额外层具有很多优点。首先，这使得编程更加容易，那用户从学习硬件设备的低级编程特性中解放出来。其次，这极大地提高了系统的安全性，因为内核在试图满足某个请求之前在接口级就可以检查这种请求的正确性。最后，更重要的是这些接口使得程序更具有可移植性，因为只要内核所提供的一组接口相同，那么在任一内核上就可以正确地编译和执行程序。</p>
 
 <h2>简介     </h2>
@@ -1198,18 +1198,18 @@ ps：博客还没有取名，希望大家给点建议。</p>
 
 <p>本文参考自《深入理解linux内核》和<a href="http://chriszeng87.iteye.com/blog/1204500">linux系统调用</a> 。 <br/>
 本文地址：<a href="http://tinyxd.me/blog/2012/08/08/linux-system-calls/">http://tinyxd.me/blog/2012/08/08/linux-system-calls/</a>   <p class='post-footer'>本站文章如果没有特别说明，均为原创，转载请以链接方式注明本文地址：
-<a href='http://tinyxd.me/blog/2012/08/08/linux-system-calls/'>http://tinyxd.me/blog/2012/08/08/linux-system-calls/</a><br/>
-&nbsp;Written by <a href='http://tinyxd.me'>Tiny</a>
-&nbsp;Posted at <a href='http://tinyxd.me'>http://tinyxd.me</a><br/>
+<a href='http://blog.tinyxd.me/blog/2012/08/08/linux-system-calls/'>http://blog.tinyxd.me/blog/2012/08/08/linux-system-calls/</a><br/>
+&nbsp;Written by <a href='http://blog.tinyxd.me'>Tiny</a>
+&nbsp;Posted at <a href='http://blog.tinyxd.me'>http://blog.tinyxd.me</a><br/>
 &nbsp;关键字： linux,kernel,系统调用,systerm calls</p></p>
 ]]></content>
   </entry>
   
   <entry>
     <title type="html"><![CDATA[linux缺页异常处理程序]]></title>
-    <link href="http://tinyxd.me/blog/2012/08/07/linux-page-fault-exception/"/>
+    <link href="http://blog.tinyxd.me/blog/2012/08/07/linux-page-fault-exception/"/>
     <updated>2012-08-07T12:54:00+08:00</updated>
-    <id>http://tinyxd.me/blog/2012/08/07/linux-page-fault-exception</id>
+    <id>http://blog.tinyxd.me/blog/2012/08/07/linux-page-fault-exception</id>
     <content type="html"><![CDATA[<p>Linux的缺页（Page Fault）异常处理程序必须区分以下两种情况：由编程错误所引起的异常，及由引用属于进程地址空间但还尚未分配物理页框的页所引起的异常。</p>
 
 <p>线性区描述符可以让缺页异常处理程序非常有效地完成它的工作。do_page_fault()函数是80x86上的缺页中断服务程序，它把引起缺页的线性地址和当前进程的线性区相比较，从而能够根据和下图所示的方案选择适当的方法处理这个异常。</p>
@@ -1231,18 +1231,18 @@ ps：博客还没有取名，希望大家给点建议。</p>
 
 <p>本文参考自《深入理解linux内核》和<a href="http://blog.csdn.net/yunsongice/article/details/5637671">缺页异常处理程序</a> 。 <br/>
 本文地址：<a href="http://tinyxd.me/blog/2012/08/07/linux-page-fault-exception/">http://tinyxd.me/blog/2012/08/07/linux-page-fault-exception/</a>   <p class='post-footer'>本站文章如果没有特别说明，均为原创，转载请以链接方式注明本文地址：
-<a href='http://tinyxd.me/blog/2012/08/07/linux-page-fault-exception/'>http://tinyxd.me/blog/2012/08/07/linux-page-fault-exception/</a><br/>
-&nbsp;Written by <a href='http://tinyxd.me'>Tiny</a>
-&nbsp;Posted at <a href='http://tinyxd.me'>http://tinyxd.me</a><br/>
+<a href='http://blog.tinyxd.me/blog/2012/08/07/linux-page-fault-exception/'>http://blog.tinyxd.me/blog/2012/08/07/linux-page-fault-exception/</a><br/>
+&nbsp;Written by <a href='http://blog.tinyxd.me'>Tiny</a>
+&nbsp;Posted at <a href='http://blog.tinyxd.me'>http://blog.tinyxd.me</a><br/>
 &nbsp;关键字： linux page fault exception，缺页异常处理</p></p>
 ]]></content>
   </entry>
   
   <entry>
     <title type="html"><![CDATA[linux线性区]]></title>
-    <link href="http://tinyxd.me/blog/2012/08/07/linux-linear-regions/"/>
+    <link href="http://blog.tinyxd.me/blog/2012/08/07/linux-linear-regions/"/>
     <updated>2012-08-07T12:43:00+08:00</updated>
-    <id>http://tinyxd.me/blog/2012/08/07/linux-linear-regions</id>
+    <id>http://blog.tinyxd.me/blog/2012/08/07/linux-linear-regions</id>
     <content type="html"><![CDATA[<p><strong><em>摘要</em></strong>：内核使用一种新的资源成功实现了对进程动态内存的推迟分配。当用户态进程请求动态内存时，并没有获得请求的页框，而仅仅获得对一个新的线性地址区间的使用权，而这一线性地址区间就成为进程地址空间的一部分。这一区间叫做“线性区”（memory region）。</p>
 
 <br />
@@ -1524,18 +1524,18 @@ ps：博客还没有取名，希望大家给点建议。</p>
 
 <p>本文章参考自《深入理解linux内核》 。 <br/>
 本文地址：<a href="http://tinyxd.me/blog/2012/08/07/linux-linear-regions/">http://tinyxd.me/blog/2012/08/07/linux-linear-regions/</a><p class='post-footer'>本站文章如果没有特别说明，均为原创，转载请以链接方式注明本文地址：
-<a href='http://tinyxd.me/blog/2012/08/07/linux-linear-regions/'>http://tinyxd.me/blog/2012/08/07/linux-linear-regions/</a><br/>
-&nbsp;Written by <a href='http://tinyxd.me'>Tiny</a>
-&nbsp;Posted at <a href='http://tinyxd.me'>http://tinyxd.me</a><br/>
+<a href='http://blog.tinyxd.me/blog/2012/08/07/linux-linear-regions/'>http://blog.tinyxd.me/blog/2012/08/07/linux-linear-regions/</a><br/>
+&nbsp;Written by <a href='http://blog.tinyxd.me'>Tiny</a>
+&nbsp;Posted at <a href='http://blog.tinyxd.me'>http://blog.tinyxd.me</a><br/>
 &nbsp;关键字： linux线性区，linear regions</p></p>
 ]]></content>
   </entry>
   
   <entry>
     <title type="html"><![CDATA[linux进程地址空间]]></title>
-    <link href="http://tinyxd.me/blog/2012/08/05/linux-process-address-space/"/>
+    <link href="http://blog.tinyxd.me/blog/2012/08/05/linux-process-address-space/"/>
     <updated>2012-08-05T12:51:00+08:00</updated>
-    <id>http://tinyxd.me/blog/2012/08/05/linux-process-address-space</id>
+    <id>http://blog.tinyxd.me/blog/2012/08/05/linux-process-address-space</id>
     <content type="html"><![CDATA[<h2>简介   </h2>
 
 <p>内核中获得动态内存的方式：<code>__get_free_pages()</code>或alloc_pages()从分区页框分配器中获得页框，kmem_cache_alloc()或kmalloc()使用slab分配器为专用或通用对象分配块，vmalloc()或vmalloc_32()获得一块非连续的内存区。如果所请求的内存区得以满足，这些函数都返回一个页描述符地址或线性地址（即所分配动态内存区的起始地址）。</p>
@@ -1600,32 +1600,32 @@ ps：博客还没有取名，希望大家给点建议。</p>
 
 <p>本文章参考自《深入理解linux内核》 。 <br/>
 本站文章如果没有特别说明，均为<strong>原创</strong>，转载请以<strong>链接</strong>方式注明本文地址：<a href="http://tinyxd.me/blog/2012/08/05/linux-process-address-space/">http://tinyxd.me/blog/2012/08/05/linux-process-address-space/</a><p class='post-footer'>本站文章如果没有特别说明，均为原创，转载请以链接方式注明本文地址：
-<a href='http://tinyxd.me/blog/2012/08/05/linux-process-address-space/'>http://tinyxd.me/blog/2012/08/05/linux-process-address-space/</a><br/>
-&nbsp;Written by <a href='http://tinyxd.me'>Tiny</a>
-&nbsp;Posted at <a href='http://tinyxd.me'>http://tinyxd.me</a><br/>
+<a href='http://blog.tinyxd.me/blog/2012/08/05/linux-process-address-space/'>http://blog.tinyxd.me/blog/2012/08/05/linux-process-address-space/</a><br/>
+&nbsp;Written by <a href='http://blog.tinyxd.me'>Tiny</a>
+&nbsp;Posted at <a href='http://blog.tinyxd.me'>http://blog.tinyxd.me</a><br/>
 &nbsp;关键字： 进程地址空间,linux,kernel,内核</p></p>
 ]]></content>
   </entry>
   
   <entry>
     <title type="html"><![CDATA[写在开博两个月]]></title>
-    <link href="http://tinyxd.me/blog/2012/08/02/blog-two-months/"/>
+    <link href="http://blog.tinyxd.me/blog/2012/08/02/blog-two-months/"/>
     <updated>2012-08-02T18:46:00+08:00</updated>
-    <id>http://tinyxd.me/blog/2012/08/02/blog-two-months</id>
+    <id>http://blog.tinyxd.me/blog/2012/08/02/blog-two-months</id>
     <content type="html"><![CDATA[<p>其实今天距离开博两个月还有几天的时间，因为今天PR变为2，所以写篇短文，记录下。  <br/>
 ps：今天和麦子做的网站&#8212;-<a href="http://www.aitinan.com/">挨踢男的那点事（专注移动互联网）</a>加了友链。其中不乏原创文章，写的很好。推荐大家去逛逛。<p class='post-footer'>本站文章如果没有特别说明，均为原创，转载请以链接方式注明本文地址：
-<a href='http://tinyxd.me/blog/2012/08/02/blog-two-months/'>http://tinyxd.me/blog/2012/08/02/blog-two-months/</a><br/>
-&nbsp;Written by <a href='http://tinyxd.me'>Tiny</a>
-&nbsp;Posted at <a href='http://tinyxd.me'>http://tinyxd.me</a><br/>
+<a href='http://blog.tinyxd.me/blog/2012/08/02/blog-two-months/'>http://blog.tinyxd.me/blog/2012/08/02/blog-two-months/</a><br/>
+&nbsp;Written by <a href='http://blog.tinyxd.me'>Tiny</a>
+&nbsp;Posted at <a href='http://blog.tinyxd.me'>http://blog.tinyxd.me</a><br/>
 &nbsp;关键字： blog,essay</p></p>
 ]]></content>
   </entry>
   
   <entry>
     <title type="html"><![CDATA[awk 学习]]></title>
-    <link href="http://tinyxd.me/blog/2012/08/01/awk-study/"/>
+    <link href="http://blog.tinyxd.me/blog/2012/08/01/awk-study/"/>
     <updated>2012-08-01T00:15:00+08:00</updated>
-    <id>http://tinyxd.me/blog/2012/08/01/awk-study</id>
+    <id>http://blog.tinyxd.me/blog/2012/08/01/awk-study</id>
     <content type="html"><![CDATA[<p>AWK是一种优良的文本处理工具。它不仅是 Linux 中也是任何环境中现有的功能最强大的数据处理引擎之一。这种编程及数据操作语言（其名称得自于它的创始人 Alfred Aho 、Peter Weinberger 和 Brian Kernighan 姓氏的首个字母）的最大功能取决于一个人所拥有的知识。AWK 提供了极其强大的功能：可以进行样式装入、流控制、数学运算符、进程控制语句甚至于内置的变量和函数。它具备了一个完整的语言所应具有的几乎所有精美特性。</p>
 
 <h2>一、awk调用方式 </h2>
@@ -1834,9 +1834,9 @@ ps：今天和麦子做的网站&#8212;-<a href="http://www.aitinan.com/">挨踢
 本文地址：<a href="http://tinyxd.me/blog/2012/08/01/awk-study/">http://tinyxd.me/blog/2012/08/01/awk-study/</a>。</p>
 
 <p class='post-footer'>本站文章如果没有特别说明，均为原创，转载请以链接方式注明本文地址：
-<a href='http://tinyxd.me/blog/2012/08/01/awk-study/'>http://tinyxd.me/blog/2012/08/01/awk-study/</a><br/>
-&nbsp;Written by <a href='http://tinyxd.me'>Tiny</a>
-&nbsp;Posted at <a href='http://tinyxd.me'>http://tinyxd.me</a><br/>
+<a href='http://blog.tinyxd.me/blog/2012/08/01/awk-study/'>http://blog.tinyxd.me/blog/2012/08/01/awk-study/</a><br/>
+&nbsp;Written by <a href='http://blog.tinyxd.me'>Tiny</a>
+&nbsp;Posted at <a href='http://blog.tinyxd.me'>http://blog.tinyxd.me</a><br/>
 &nbsp;关键字： linux,awk</p>
 
 ]]></content>
@@ -1844,9 +1844,9 @@ ps：今天和麦子做的网站&#8212;-<a href="http://www.aitinan.com/">挨踢
   
   <entry>
     <title type="html"><![CDATA[linux内存管理（下）]]></title>
-    <link href="http://tinyxd.me/blog/2012/07/31/linux-memory-management-3/"/>
+    <link href="http://blog.tinyxd.me/blog/2012/07/31/linux-memory-management-3/"/>
     <updated>2012-07-31T23:51:00+08:00</updated>
-    <id>http://tinyxd.me/blog/2012/07/31/linux-memory-management-3</id>
+    <id>http://blog.tinyxd.me/blog/2012/07/31/linux-memory-management-3</id>
     <content type="html"><![CDATA[<p><strong><em>摘要</em></strong>：把一块存放slab结构的内存区映射到一组连续的页框是最好的选择，这样会充分利用高速缓存并获得较低的平均访问时间。不过，上面的方式主要是针对那些使用非常频繁的内核数据结构——如task_struct、inode来设计的。如果对内存区的请求不是很频繁，那么，通过连续的线性地址，而不是物理地址来访问非连续的物理页框这样一种分配模式就会很有意义了。这种模式的主要优点是避免了外碎片，而缺点是必须打乱内核页表。此外，非连续内存区的大小必须是4096 的倍数。Linux 在几个方面使用非连续内存区：为活动的交换区分配数据结构，为模块分配空间，或者给某些I/O 驱动程序分配缓冲区等。此外，非连续内存区还提供了另一种使用高端内存页框的方法。</p>
 
 <h2>非连续内存区的线性地址    </h2>
@@ -1955,18 +1955,18 @@ ps：今天和麦子做的网站&#8212;-<a href="http://www.aitinan.com/">挨踢
 
 <p>本文章参考自《linux内核设计与实现》、<a href="http://blog.csdn.net/jiangyuping_fyl/article/details/7268287">slab分配器</a> 及 <a href="http://blog.csdn.net/yunsongice/article/details/5536197">非连续内存区</a> 。 <br/>
 本站文章如果没有特别说明，均为<strong>原创</strong>，转载请以<strong>链接</strong>方式注明本文地址：<a href="http://tinyxd.me/blog/2012/07/31/linux-memory-management-3/">http://tinyxd.me/blog/2012/07/31/linux-memory-management-3/</a><p class='post-footer'>本站文章如果没有特别说明，均为原创，转载请以链接方式注明本文地址：
-<a href='http://tinyxd.me/blog/2012/07/31/linux-memory-management-3/'>http://tinyxd.me/blog/2012/07/31/linux-memory-management-3/</a><br/>
-&nbsp;Written by <a href='http://tinyxd.me'>Tiny</a>
-&nbsp;Posted at <a href='http://tinyxd.me'>http://tinyxd.me</a><br/>
+<a href='http://blog.tinyxd.me/blog/2012/07/31/linux-memory-management-3/'>http://blog.tinyxd.me/blog/2012/07/31/linux-memory-management-3/</a><br/>
+&nbsp;Written by <a href='http://blog.tinyxd.me'>Tiny</a>
+&nbsp;Posted at <a href='http://blog.tinyxd.me'>http://blog.tinyxd.me</a><br/>
 &nbsp;关键字： linux,kernel,内核,内存管理,非连续内存区</p></p>
 ]]></content>
   </entry>
   
   <entry>
     <title type="html"><![CDATA[linux内存管理（中）]]></title>
-    <link href="http://tinyxd.me/blog/2012/07/31/linux-memory-management-2/"/>
+    <link href="http://blog.tinyxd.me/blog/2012/07/31/linux-memory-management-2/"/>
     <updated>2012-07-31T23:16:00+08:00</updated>
-    <id>http://tinyxd.me/blog/2012/07/31/linux-memory-management-2</id>
+    <id>http://blog.tinyxd.me/blog/2012/07/31/linux-memory-management-2</id>
     <content type="html"><![CDATA[<p><strong><em>摘要</em></strong>：slab分配器是Linux内存管理中非常重要和复杂的一部分，其工作是针对一些经常分配并释放的对象，如进程描述符等，这些对象的大小一般比较小，如果直接采用伙伴系统来进行分配和释放，不仅会造成大量的内碎片，而且处理速度也太慢。而slab分配器是基于对象进行管理的，相同类型的对象归为一类(如进程描述符就是一类)，每当要申请这样一个对象，slab分配器就从一个slab列表中分配一个这样大小的单元出去，而当要释放时，将其重新保存在该列表中，而不是直接返回给伙伴系统。slab分配对象时，会使用最近释放的对象内存块，因此其驻留在CPU高速缓存的概率较高。</p>
 
 <h2>简介</h2>
@@ -2097,9 +2097,9 @@ ps：今天和麦子做的网站&#8212;-<a href="http://www.aitinan.com/">挨踢
 
 <p>本文章参考自《深入理解linux内核》及 <a href="https://www.ibm.com/developerworks/cn/linux/l-linux-slab-allocator/">动态内存管理</a>。 <br/>
 本站文章如果没有特别说明，均为<strong>原创</strong>，转载请以<strong>链接</strong>方式注明本文地址：<a href="http://tinyxd.me/blog/2012/07/31/linux-memory-management-2/">http://tinyxd.me/blog/2012/07/31/linux-memory-management-2/</a><p class='post-footer'>本站文章如果没有特别说明，均为原创，转载请以链接方式注明本文地址：
-<a href='http://tinyxd.me/blog/2012/07/31/linux-memory-management-2/'>http://tinyxd.me/blog/2012/07/31/linux-memory-management-2/</a><br/>
-&nbsp;Written by <a href='http://tinyxd.me'>Tiny</a>
-&nbsp;Posted at <a href='http://tinyxd.me'>http://tinyxd.me</a><br/>
+<a href='http://blog.tinyxd.me/blog/2012/07/31/linux-memory-management-2/'>http://blog.tinyxd.me/blog/2012/07/31/linux-memory-management-2/</a><br/>
+&nbsp;Written by <a href='http://blog.tinyxd.me'>Tiny</a>
+&nbsp;Posted at <a href='http://blog.tinyxd.me'>http://blog.tinyxd.me</a><br/>
 &nbsp;关键字： linux,kernel,内核,内存管理,slab,buddy,伙伴算法</p></p>
 ]]></content>
   </entry>

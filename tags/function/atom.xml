@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Tag: function | Keen on Art of Tech]]></title>
-  <link href="http://tinyxd.me/tags/function/atom.xml" rel="self"/>
-  <link href="http://tinyxd.me/"/>
-  <updated>2013-01-19T12:04:15+08:00</updated>
-  <id>http://tinyxd.me/</id>
+  <link href="http://blog.tinyxd.me/tags/function/atom.xml" rel="self"/>
+  <link href="http://blog.tinyxd.me/"/>
+  <updated>2013-01-20T13:51:46+08:00</updated>
+  <id>http://blog.tinyxd.me/</id>
   <author>
     <name><![CDATA[Tiny]]></name>
     <email><![CDATA[admin@tinyxd.me]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[函数压栈的一些思考]]></title>
-    <link href="http://tinyxd.me/blog/2012/06/13/han-shu-ya-zhan/"/>
+    <link href="http://blog.tinyxd.me/blog/2012/06/13/han-shu-ya-zhan/"/>
     <updated>2012-06-13T07:22:00+08:00</updated>
-    <id>http://tinyxd.me/blog/2012/06/13/han-shu-ya-zhan</id>
+    <id>http://blog.tinyxd.me/blog/2012/06/13/han-shu-ya-zhan</id>
     <content type="html"><![CDATA[<p>今天，有个同学跑过来问我一个问题fun（i，i++，++i），我立马想到这个是跟函数压栈的顺序有关的，随后去网上查找资料，并开始写了一些测试实验。</p>
 
 <p>先把cu上的一个解释先贴上来：</p>

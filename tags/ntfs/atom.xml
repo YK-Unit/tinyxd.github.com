@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Tag: ntfs | Keen on Art of Tech]]></title>
-  <link href="http://tinyxd.me/tags/ntfs/atom.xml" rel="self"/>
-  <link href="http://tinyxd.me/"/>
-  <updated>2013-01-19T12:04:15+08:00</updated>
-  <id>http://tinyxd.me/</id>
+  <link href="http://blog.tinyxd.me/tags/ntfs/atom.xml" rel="self"/>
+  <link href="http://blog.tinyxd.me/"/>
+  <updated>2013-01-20T13:51:46+08:00</updated>
+  <id>http://blog.tinyxd.me/</id>
   <author>
     <name><![CDATA[Tiny]]></name>
     <email><![CDATA[admin@tinyxd.me]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[让Debian支持ntfs文件系统读写]]></title>
-    <link href="http://tinyxd.me/blog/2012/06/30/debian-ntfs-filesysterm/"/>
+    <link href="http://blog.tinyxd.me/blog/2012/06/30/debian-ntfs-filesysterm/"/>
     <updated>2012-06-30T15:45:00+08:00</updated>
-    <id>http://tinyxd.me/blog/2012/06/30/debian-ntfs-filesysterm</id>
+    <id>http://blog.tinyxd.me/blog/2012/06/30/debian-ntfs-filesysterm</id>
     <content type="html"><![CDATA[<p>刚装好debian发现在debian下往windows盘下拷贝不过去资料，上网查了些资料发现是因为不知道ntfs的读写。 <br/>
 查看我的版本号6.0.5</p>
 

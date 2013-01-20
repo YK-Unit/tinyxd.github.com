@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Tag: awk | Keen on Art of Tech]]></title>
-  <link href="http://tinyxd.me/tags/awk/atom.xml" rel="self"/>
-  <link href="http://tinyxd.me/"/>
-  <updated>2013-01-19T12:04:15+08:00</updated>
-  <id>http://tinyxd.me/</id>
+  <link href="http://blog.tinyxd.me/tags/awk/atom.xml" rel="self"/>
+  <link href="http://blog.tinyxd.me/"/>
+  <updated>2013-01-20T13:51:46+08:00</updated>
+  <id>http://blog.tinyxd.me/</id>
   <author>
     <name><![CDATA[Tiny]]></name>
     <email><![CDATA[admin@tinyxd.me]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[awk 学习]]></title>
-    <link href="http://tinyxd.me/blog/2012/08/01/awk-study/"/>
+    <link href="http://blog.tinyxd.me/blog/2012/08/01/awk-study/"/>
     <updated>2012-08-01T00:15:00+08:00</updated>
-    <id>http://tinyxd.me/blog/2012/08/01/awk-study</id>
+    <id>http://blog.tinyxd.me/blog/2012/08/01/awk-study</id>
     <content type="html"><![CDATA[<p>AWK是一种优良的文本处理工具。它不仅是 Linux 中也是任何环境中现有的功能最强大的数据处理引擎之一。这种编程及数据操作语言（其名称得自于它的创始人 Alfred Aho 、Peter Weinberger 和 Brian Kernighan 姓氏的首个字母）的最大功能取决于一个人所拥有的知识。AWK 提供了极其强大的功能：可以进行样式装入、流控制、数学运算符、进程控制语句甚至于内置的变量和函数。它具备了一个完整的语言所应具有的几乎所有精美特性。</p>
 
 <h2>一、awk调用方式 </h2>

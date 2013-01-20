@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Tag: archbang | Keen on Art of Tech]]></title>
-  <link href="http://tinyxd.me/tags/archbang/atom.xml" rel="self"/>
-  <link href="http://tinyxd.me/"/>
-  <updated>2013-01-19T12:04:15+08:00</updated>
-  <id>http://tinyxd.me/</id>
+  <link href="http://blog.tinyxd.me/tags/archbang/atom.xml" rel="self"/>
+  <link href="http://blog.tinyxd.me/"/>
+  <updated>2013-01-20T13:51:46+08:00</updated>
+  <id>http://blog.tinyxd.me/</id>
   <author>
     <name><![CDATA[Tiny]]></name>
     <email><![CDATA[admin@tinyxd.me]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[archbang arch linux 安装inode ]]></title>
-    <link href="http://tinyxd.me/blog/2012/05/25/archbang-arch-linux-an-zhuang-inode/"/>
+    <link href="http://blog.tinyxd.me/blog/2012/05/25/archbang-arch-linux-an-zhuang-inode/"/>
     <updated>2012-05-25T14:34:00+08:00</updated>
-    <id>http://tinyxd.me/blog/2012/05/25/archbang-arch-linux-an-zhuang-inode</id>
+    <id>http://blog.tinyxd.me/blog/2012/05/25/archbang-arch-linux-an-zhuang-inode</id>
     <content type="html"><![CDATA[<p>第一步：cp iNodeClient.tar.gz 到 /home/***** 目录下。进入~目录下  <br/>
 第二步：终端运行 tar -xvf iNodeClient.tar.gz。<br/>
 第三步：修改/home//iNodeClient/下install.sh，把 OS_UBUNTU=`cat /etc/issue | grep 'Ubuntu'`那一行及以下的脚本都删除，然后保存，执行sudo ./install.sh。<br/>

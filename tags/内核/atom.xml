@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Tag: 内核 | Keen on Art of Tech]]></title>
-  <link href="http://tinyxd.me/tags/内核/atom.xml" rel="self"/>
-  <link href="http://tinyxd.me/"/>
-  <updated>2013-01-19T12:04:15+08:00</updated>
-  <id>http://tinyxd.me/</id>
+  <link href="http://blog.tinyxd.me/tags/内核/atom.xml" rel="self"/>
+  <link href="http://blog.tinyxd.me/"/>
+  <updated>2013-01-20T13:51:46+08:00</updated>
+  <id>http://blog.tinyxd.me/</id>
   <author>
     <name><![CDATA[Tiny]]></name>
     <email><![CDATA[admin@tinyxd.me]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[linux内存管理（下）]]></title>
-    <link href="http://tinyxd.me/blog/2012/07/31/linux-memory-management-3/"/>
+    <link href="http://blog.tinyxd.me/blog/2012/07/31/linux-memory-management-3/"/>
     <updated>2012-07-31T23:51:00+08:00</updated>
-    <id>http://tinyxd.me/blog/2012/07/31/linux-memory-management-3</id>
+    <id>http://blog.tinyxd.me/blog/2012/07/31/linux-memory-management-3</id>
     <content type="html"><![CDATA[<p><strong><em>摘要</em></strong>：把一块存放slab结构的内存区映射到一组连续的页框是最好的选择，这样会充分利用高速缓存并获得较低的平均访问时间。不过，上面的方式主要是针对那些使用非常频繁的内核数据结构——如task_struct、inode来设计的。如果对内存区的请求不是很频繁，那么，通过连续的线性地址，而不是物理地址来访问非连续的物理页框这样一种分配模式就会很有意义了。这种模式的主要优点是避免了外碎片，而缺点是必须打乱内核页表。此外，非连续内存区的大小必须是4096 的倍数。Linux 在几个方面使用非连续内存区：为活动的交换区分配数据结构，为模块分配空间，或者给某些I/O 驱动程序分配缓冲区等。此外，非连续内存区还提供了另一种使用高端内存页框的方法。</p>
 
 <h2>非连续内存区的线性地址    </h2>
@@ -115,9 +115,9 @@ struct vm_struct    *next;
   
   <entry>
     <title type="html"><![CDATA[linux内存管理（中）]]></title>
-    <link href="http://tinyxd.me/blog/2012/07/31/linux-memory-management-2/"/>
+    <link href="http://blog.tinyxd.me/blog/2012/07/31/linux-memory-management-2/"/>
     <updated>2012-07-31T23:16:00+08:00</updated>
-    <id>http://tinyxd.me/blog/2012/07/31/linux-memory-management-2</id>
+    <id>http://blog.tinyxd.me/blog/2012/07/31/linux-memory-management-2</id>
     <content type="html"><![CDATA[<p><strong><em>摘要</em></strong>：slab分配器是Linux内存管理中非常重要和复杂的一部分，其工作是针对一些经常分配并释放的对象，如进程描述符等，这些对象的大小一般比较小，如果直接采用伙伴系统来进行分配和释放，不仅会造成大量的内碎片，而且处理速度也太慢。而slab分配器是基于对象进行管理的，相同类型的对象归为一类(如进程描述符就是一类)，每当要申请这样一个对象，slab分配器就从一个slab列表中分配一个这样大小的单元出去，而当要释放时，将其重新保存在该列表中，而不是直接返回给伙伴系统。slab分配对象时，会使用最近释放的对象内存块，因此其驻留在CPU高速缓存的概率较高。</p>
 
 <h2>简介</h2>
@@ -253,9 +253,9 @@ struct vm_struct    *next;
   
   <entry>
     <title type="html"><![CDATA[linux内存管理（上）]]></title>
-    <link href="http://tinyxd.me/blog/2012/07/29/linux-memory-management-1/"/>
+    <link href="http://blog.tinyxd.me/blog/2012/07/29/linux-memory-management-1/"/>
     <updated>2012-07-29T23:33:00+08:00</updated>
-    <id>http://tinyxd.me/blog/2012/07/29/linux-memory-management-1</id>
+    <id>http://blog.tinyxd.me/blog/2012/07/29/linux-memory-management-1</id>
     <content type="html"><![CDATA[<p><strong><em>摘要</em></strong>：内核如何给自己分配动态内存呢？</p>
 
 <p>“页框管理”和“内存区管理”是对连续物理内存区处理的两种不同技术。</p>
@@ -308,9 +308,9 @@ struct vm_struct    *next;
   
   <entry>
     <title type="html"><![CDATA[linux进程调度]]></title>
-    <link href="http://tinyxd.me/blog/2012/07/26/linux-process-scheduling/"/>
+    <link href="http://blog.tinyxd.me/blog/2012/07/26/linux-process-scheduling/"/>
     <updated>2012-07-26T23:18:00+08:00</updated>
-    <id>http://tinyxd.me/blog/2012/07/26/linux-process-scheduling</id>
+    <id>http://blog.tinyxd.me/blog/2012/07/26/linux-process-scheduling</id>
     <content type="html"><![CDATA[<p><strong><em>摘要</em></strong>：linux与任何分时系统一样，通过一个进程到另一个进程的快速切换，达到表面上看来的多个进程同时执行的神奇效果。</p>
 
 <br />
@@ -470,9 +470,9 @@ struct vm_struct    *next;
   
   <entry>
     <title type="html"><![CDATA[linux系统定时测量]]></title>
-    <link href="http://tinyxd.me/blog/2012/07/26/linux-timing-measurements/"/>
+    <link href="http://blog.tinyxd.me/blog/2012/07/26/linux-timing-measurements/"/>
     <updated>2012-07-26T12:48:00+08:00</updated>
-    <id>http://tinyxd.me/blog/2012/07/26/linux-timing-measurements</id>
+    <id>http://blog.tinyxd.me/blog/2012/07/26/linux-timing-measurements</id>
     <content type="html"><![CDATA[<p>Linux内核必须完成的两种主要定时测量：</p>
 
 <p>保存当前的时间和日期，以便通过time()、ftime()、gettimeofday()系统调用把它们返回给用户程序，也可以由内核本身把当前时间作为文件和网络包的时间戳。</p>

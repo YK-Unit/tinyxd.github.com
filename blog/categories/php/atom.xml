@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: php | Keen on Art of Tech]]></title>
-  <link href="http://tinyxd.me/blog/categories/php/atom.xml" rel="self"/>
-  <link href="http://tinyxd.me/"/>
-  <updated>2013-01-19T12:04:15+08:00</updated>
-  <id>http://tinyxd.me/</id>
+  <link href="http://blog.tinyxd.me/blog/categories/php/atom.xml" rel="self"/>
+  <link href="http://blog.tinyxd.me/"/>
+  <updated>2013-01-20T13:51:46+08:00</updated>
+  <id>http://blog.tinyxd.me/</id>
   <author>
     <name><![CDATA[Tiny]]></name>
     <email><![CDATA[admin@tinyxd.me]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[php初学]]></title>
-    <link href="http://tinyxd.me/blog/2012/06/19/learn-php/"/>
+    <link href="http://blog.tinyxd.me/blog/2012/06/19/learn-php/"/>
     <updated>2012-06-19T20:28:00+08:00</updated>
-    <id>http://tinyxd.me/blog/2012/06/19/learn-php</id>
+    <id>http://blog.tinyxd.me/blog/2012/06/19/learn-php</id>
     <content type="html"><![CDATA[<p>1.搭建学习环境 采用简单的打包好的：lamp. <br/>
 <a href="https://help.ubuntu.com/community/ApacheMySQLPHP#Run.2C_Stop.2C_Test.2C_And_Restart_Apache">help web sites</a></p>
 

@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Tag: debian | Keen on Art of Tech]]></title>
-  <link href="http://tinyxd.me/tags/debian/atom.xml" rel="self"/>
-  <link href="http://tinyxd.me/"/>
-  <updated>2013-01-19T12:04:15+08:00</updated>
-  <id>http://tinyxd.me/</id>
+  <link href="http://blog.tinyxd.me/tags/debian/atom.xml" rel="self"/>
+  <link href="http://blog.tinyxd.me/"/>
+  <updated>2013-01-20T13:51:46+08:00</updated>
+  <id>http://blog.tinyxd.me/</id>
   <author>
     <name><![CDATA[Tiny]]></name>
     <email><![CDATA[admin@tinyxd.me]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[debian硬盘安装笔记]]></title>
-    <link href="http://tinyxd.me/blog/2012/07/13/debian-setup/"/>
+    <link href="http://blog.tinyxd.me/blog/2012/07/13/debian-setup/"/>
     <updated>2012-07-13T11:29:00+08:00</updated>
-    <id>http://tinyxd.me/blog/2012/07/13/debian-setup</id>
+    <id>http://blog.tinyxd.me/blog/2012/07/13/debian-setup</id>
     <content type="html"><![CDATA[<p>以前安装的时候都有光盘，这次换的机器，光驱坏了，那么有没有可能硬盘安装debian么？答案当然是可以的。 <br/>
 1.下载debian最新ISO映像。 <br/>
 2.下载安装所需要的vmlinuz  initrd.gz  boot.img.gz的这三个文件. <br/>
@@ -72,9 +72,9 @@ boot
   
   <entry>
     <title type="html"><![CDATA[让Debian支持ntfs文件系统读写]]></title>
-    <link href="http://tinyxd.me/blog/2012/06/30/debian-ntfs-filesysterm/"/>
+    <link href="http://blog.tinyxd.me/blog/2012/06/30/debian-ntfs-filesysterm/"/>
     <updated>2012-06-30T15:45:00+08:00</updated>
-    <id>http://tinyxd.me/blog/2012/06/30/debian-ntfs-filesysterm</id>
+    <id>http://blog.tinyxd.me/blog/2012/06/30/debian-ntfs-filesysterm</id>
     <content type="html"><![CDATA[<p>刚装好debian发现在debian下往windows盘下拷贝不过去资料，上网查了些资料发现是因为不知道ntfs的读写。 <br/>
 查看我的版本号6.0.5</p>
 
@@ -147,9 +147,9 @@ mount -t ntfs-3g /dev/sda7 /mnt/E
   
   <entry>
     <title type="html"><![CDATA[debian安装nvidia显卡驱动]]></title>
-    <link href="http://tinyxd.me/blog/2012/06/18/debianan-zhuang-nvidiaxian-qia-qu-dong/"/>
+    <link href="http://blog.tinyxd.me/blog/2012/06/18/debianan-zhuang-nvidiaxian-qia-qu-dong/"/>
     <updated>2012-06-18T20:31:00+08:00</updated>
-    <id>http://tinyxd.me/blog/2012/06/18/debianan-zhuang-nvidiaxian-qia-qu-dong</id>
+    <id>http://blog.tinyxd.me/blog/2012/06/18/debianan-zhuang-nvidiaxian-qia-qu-dong</id>
     <content type="html"><![CDATA[<p>在自己的电脑上硬盘安装了Debian.下面介绍一下我是如何安装显卡驱动的.我的显卡是GForce 7100GS的.</p>
 
 <p>1>下载显卡驱动.</p>
