@@ -88,6 +88,89 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2012/07/06/ruby-learning/">Ruby初学</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-07-06T23:43:00+08:00" pubdate data-updated="true">Jul 6<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/07/06/ruby-learning/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>这几天在学习Ruby，面对一个陌生的脚本语言，虽然陌生但是既然是脚本语言，自然也有与shell类似的地方，所以学习起来困难不是很大。 <br/>
+在感受到脚本语言的方便后，试了个例子，如下计算一个文件中单词的个数，以空格来区分。</p>
+
+<figure class='code'><figcaption><span>统计单词个数ruby脚本word.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1">#计算单词个数</span>
+</span><span class='line'><span class="n">count</span> <span class="o">=</span> <span class="no">Hash</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">##统计单字</span>
+</span><span class='line'><span class="k">while</span> <span class="n">line</span> <span class="o">=</span> <span class="nb">gets</span>
+</span><span class='line'><span class="n">words</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span>
+</span><span class='line'><span class="n">words</span><span class="o">.</span><span class="n">each</span><span class="p">{</span><span class="o">|</span><span class="n">word</span><span class="o">|</span>
+</span><span class='line'><span class="n">count</span><span class="o">[</span><span class="n">word</span><span class="o">]</span> <span class="o">+=</span> <span class="mi">1</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">##输出结果</span>
+</span><span class='line'><span class="n">count</span><span class="o">.</span><span class="n">sort</span><span class="p">{</span><span class="o">|</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="o">|</span>
+</span><span class='line'><span class="n">a</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span> <span class="o">&lt;=&gt;</span> <span class="n">b</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span>
+</span><span class='line'><span class="p">}</span><span class="o">.</span><span class="n">each</span><span class="p">{</span><span class="o">|</span><span class="n">key</span><span class="p">,</span><span class="n">value</span><span class="o">|</span>
+</span><span class='line'><span class="nb">print</span> <span class="s2">&quot;</span><span class="si">#{</span><span class="n">key</span><span class="si">}</span><span class="s2">: </span><span class="si">#{</span><span class="n">value</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>用法：<code>ruby word.rb your_file</code></p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2012/07/06/ruby-learning/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2012/07/06/linux-sleep-usage/">Linux Sleep 的用法</a></h1>
     
     
@@ -600,84 +683,6 @@ Images are wrapped in divs classed &quot;flickr_badge_image&quot; with ids &quot
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/06/27/straight-insertion-sort/">排序算法总结（一）</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-06-27T08:00:00+08:00" pubdate data-updated="true">Jun 27<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/06/27/straight-insertion-sort/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>排序算法是在学习数据结构的过程中，必须熟练掌握的。而由于其算法种类比较多，所以总结一下还是有必要的。今天先把插入排序总结下。 <br/>
-插入排序的基本操作就是将一个数据插入到已经排好序的有序数据中，从而得到一个新的、个数加一的有序数据，算法适用于少量数据的排序，时间复杂度为O(n<sup>2)。是稳定的排序方法。</sup></p>
-
-<h2>直接插入排序(straight insertion sort)</h2>
-
-<p>每次从无序表中取出第一个元素，把它插入到有序表的合适位置，使有序表仍然有序。 <br/>
-C/C++代码实现直接插入排序：</p>
-
-<figure class='code'><figcaption><span>插入排序代码(straight insertion sort)</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-</pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="kt">void</span> <span class="n">insert_sort</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">[],</span> <span class="kt">int</span> <span class="n">n</span><span class="p">)</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>  <span class="kt">int</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">temp</span><span class="p">;</span>
-</span><span class='line'>  <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
-</span><span class='line'>  <span class="p">{</span>
-</span><span class='line'>      <span class="n">temp</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
-</span><span class='line'>      <span class="k">for</span> <span class="p">(</span><span class="n">j</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span> <span class="n">j</span><span class="o">&gt;</span><span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">temp</span> <span class="o">&lt;</span> <span class="n">a</span><span class="p">[</span><span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="p">];</span> <span class="o">--</span><span class="n">j</span><span class="p">)</span>
-</span><span class='line'>      <span class="p">{</span>
-</span><span class='line'>          <span class="n">a</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="p">];</span>
-</span><span class='line'>      <span class="p">}</span>
-</span><span class='line'>      <span class="n">a</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">temp</span><span class="p">;</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2012/06/27/straight-insertion-sort/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/6/">&larr; Older</a>
@@ -703,6 +708,10 @@ C/C++代码实现直接插入排序：</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/01/23/github-hosts/">恢复访问Github</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/01/17/vim-config/">vim的一些配置</a>
       </li>
     
@@ -718,15 +727,11 @@ C/C++代码实现直接插入排序：</p>
         <a href="/blog/2012/09/10/job-hunting-2012/">开始找工作了</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2012/09/02/nginx-ssl/">个人网站上安装SSL证书</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Category Cloud</h1>
-    <span id="tag-cloud"><a href='/blog/categories/davinci' style='font-size: 102.14285714285714%'>Davinci(1)</a> <a href='/blog/categories/embedded' style='font-size: 104.28571428571429%'>Embedded(2)</a> <a href='/blog/categories/essay' style='font-size: 110.71428571428571%'>Essay(5)</a> <a href='/blog/categories/git' style='font-size: 102.14285714285714%'>Git(1)</a> <a href='/blog/categories/it' style='font-size: 104.28571428571429%'>It(2)</a> <a href='/blog/categories/java' style='font-size: 102.14285714285714%'>Java(1)</a> <a href='/blog/categories/linux' style='font-size: 160.0%'>Linux(28)</a> <a href='/blog/categories/octopress' style='font-size: 119.28571428571428%'>Octopress(9)</a> <a href='/blog/categories/php' style='font-size: 102.14285714285714%'>Php(1)</a> <a href='/blog/categories/python' style='font-size: 102.14285714285714%'>Python(1)</a> <a href='/blog/categories/ruby' style='font-size: 106.42857142857143%'>Ruby(3)</a> <a href='/blog/categories/software' style='font-size: 121.42857142857143%'>Software(10)</a> <a href='/blog/categories/vps' style='font-size: 112.85714285714286%'>Vps(6)</a> </span>
+    <span id="tag-cloud"><a href='/blog/categories/davinci' style='font-size: 102.14285714285714%'>Davinci(1)</a> <a href='/blog/categories/embedded' style='font-size: 104.28571428571429%'>Embedded(2)</a> <a href='/blog/categories/essay' style='font-size: 110.71428571428571%'>Essay(5)</a> <a href='/blog/categories/git' style='font-size: 104.28571428571429%'>Git(2)</a> <a href='/blog/categories/it' style='font-size: 104.28571428571429%'>It(2)</a> <a href='/blog/categories/java' style='font-size: 102.14285714285714%'>Java(1)</a> <a href='/blog/categories/linux' style='font-size: 160.0%'>Linux(28)</a> <a href='/blog/categories/octopress' style='font-size: 119.28571428571428%'>Octopress(9)</a> <a href='/blog/categories/php' style='font-size: 102.14285714285714%'>Php(1)</a> <a href='/blog/categories/python' style='font-size: 102.14285714285714%'>Python(1)</a> <a href='/blog/categories/ruby' style='font-size: 106.42857142857143%'>Ruby(3)</a> <a href='/blog/categories/software' style='font-size: 121.42857142857143%'>Software(10)</a> <a href='/blog/categories/vps' style='font-size: 112.85714285714286%'>Vps(6)</a> </span>
 </section>
 <section id="comment_sidebar"> 
 <h1>Recent Comments</h1> 

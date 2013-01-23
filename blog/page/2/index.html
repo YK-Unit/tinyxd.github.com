@@ -88,6 +88,91 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2012/08/23/archlinux-change-mac/">Archlinux修改mac地址</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-08-23T00:03:00+08:00" pubdate data-updated="true">Aug 23<span>rd</span>, 2012</time>
+        
+         | <a href="/blog/2012/08/23/archlinux-change-mac/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>快开学了，开学了紧接着就是找工作。由于今年的形势还不太好，所以最近一直在复习一些编程方面的东西，好久没更新文章了。 <br/>
+还没到月底，自己的流量都已经用完了，悲催啊！！！借用别人的，这就需要修改mac地址。学校流量3G真的伤不起阿！！！囧 <br/>
+查阅Archlinux Wiki可以看到有两种临时改变mac地址的方法：  <br/>
+1.使用macchanger或者使用ip命令：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>macchanger --mac<span class="o">=</span>XX:XX:XX:XX:XX:XX
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>或者</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>ip link <span class="nb">set </span>dev eth0 down
+</span><span class='line'>ip link <span class="nb">set </span>dev eth0 address XX:XX:XX:XX:XX:XX
+</span><span class='line'>ip link <span class="nb">set </span>dev eth0 up
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>2.在每次启动时自动修改MAC地址。   <br/>
+创建文件<code>/etc/rc.d/functions.d/macspoof</code></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>spoof_mac<span class="o">()</span> <span class="o">{</span>
+</span><span class='line'>  ip link <span class="nb">set </span>dev eth0 address XX:XX:XX:XX:XX:XX
+</span><span class='line'><span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>add_hook sysinit_end spoof_mac
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>具体可参见Archlinux wiki。</p>
+
+<p>inode上网可参考我以前的一篇文章:<a href="http://tinyxd.me/blog/2012/05/25/archbang-arch-linux-an-zhuang-inode/">http://tinyxd.me/blog/2012/05/25/archbang-arch-linux-an-zhuang-inode/</a> <br/>
+本文地址：<a href="http://tinyxd.me/blog/2012/08/23/archlinux-change-mac/">http://tinyxd.me/blog/2012/08/23/archlinux-change-mac/</a></p>
+
+<p class='post-footer'>本站文章如果没有特别说明，均为原创，转载请以链接方式注明本文地址：
+<a href='http://blog.tinyxd.me/blog/2012/08/23/archlinux-change-mac/'>http://blog.tinyxd.me/blog/2012/08/23/archlinux-change-mac/</a><br/>
+&nbsp;Written by <a href='http://blog.tinyxd.me'>Tiny</a>
+&nbsp;Posted at <a href='http://blog.tinyxd.me'>http://blog.tinyxd.me</a><br/>
+&nbsp;关键字： mac,修改mac,archlinux,</p>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2012/08/14/vps-lnmp-setup-and-typecho-blog/">VPS申请及博客搭建</a></h1>
     
     
@@ -508,51 +593,6 @@ ps：今天和麦子做的网站&#8212;-<a href="http://www.aitinan.com/">挨踢
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/07/31/linux-memory-management-2/">Linux内存管理（中）</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-07-31T23:16:00+08:00" pubdate data-updated="true">Jul 31<span>st</span>, 2012</time>
-        
-         | <a href="/blog/2012/07/31/linux-memory-management-2/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><strong><em>摘要</em></strong>：slab分配器是Linux内存管理中非常重要和复杂的一部分，其工作是针对一些经常分配并释放的对象，如进程描述符等，这些对象的大小一般比较小，如果直接采用伙伴系统来进行分配和释放，不仅会造成大量的内碎片，而且处理速度也太慢。而slab分配器是基于对象进行管理的，相同类型的对象归为一类(如进程描述符就是一类)，每当要申请这样一个对象，slab分配器就从一个slab列表中分配一个这样大小的单元出去，而当要释放时，将其重新保存在该列表中，而不是直接返回给伙伴系统。slab分配对象时，会使用最近释放的对象内存块，因此其驻留在CPU高速缓存的概率较高。</p>
-
-<h2>简介</h2>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2012/07/31/linux-memory-management-2/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/3/">&larr; Older</a>
@@ -578,6 +618,10 @@ ps：今天和麦子做的网站&#8212;-<a href="http://www.aitinan.com/">挨踢
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/01/23/github-hosts/">恢复访问Github</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/01/17/vim-config/">vim的一些配置</a>
       </li>
     
@@ -593,15 +637,11 @@ ps：今天和麦子做的网站&#8212;-<a href="http://www.aitinan.com/">挨踢
         <a href="/blog/2012/09/10/job-hunting-2012/">开始找工作了</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2012/09/02/nginx-ssl/">个人网站上安装SSL证书</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Category Cloud</h1>
-    <span id="tag-cloud"><a href='/blog/categories/davinci' style='font-size: 102.14285714285714%'>Davinci(1)</a> <a href='/blog/categories/embedded' style='font-size: 104.28571428571429%'>Embedded(2)</a> <a href='/blog/categories/essay' style='font-size: 110.71428571428571%'>Essay(5)</a> <a href='/blog/categories/git' style='font-size: 102.14285714285714%'>Git(1)</a> <a href='/blog/categories/it' style='font-size: 104.28571428571429%'>It(2)</a> <a href='/blog/categories/java' style='font-size: 102.14285714285714%'>Java(1)</a> <a href='/blog/categories/linux' style='font-size: 160.0%'>Linux(28)</a> <a href='/blog/categories/octopress' style='font-size: 119.28571428571428%'>Octopress(9)</a> <a href='/blog/categories/php' style='font-size: 102.14285714285714%'>Php(1)</a> <a href='/blog/categories/python' style='font-size: 102.14285714285714%'>Python(1)</a> <a href='/blog/categories/ruby' style='font-size: 106.42857142857143%'>Ruby(3)</a> <a href='/blog/categories/software' style='font-size: 121.42857142857143%'>Software(10)</a> <a href='/blog/categories/vps' style='font-size: 112.85714285714286%'>Vps(6)</a> </span>
+    <span id="tag-cloud"><a href='/blog/categories/davinci' style='font-size: 102.14285714285714%'>Davinci(1)</a> <a href='/blog/categories/embedded' style='font-size: 104.28571428571429%'>Embedded(2)</a> <a href='/blog/categories/essay' style='font-size: 110.71428571428571%'>Essay(5)</a> <a href='/blog/categories/git' style='font-size: 104.28571428571429%'>Git(2)</a> <a href='/blog/categories/it' style='font-size: 104.28571428571429%'>It(2)</a> <a href='/blog/categories/java' style='font-size: 102.14285714285714%'>Java(1)</a> <a href='/blog/categories/linux' style='font-size: 160.0%'>Linux(28)</a> <a href='/blog/categories/octopress' style='font-size: 119.28571428571428%'>Octopress(9)</a> <a href='/blog/categories/php' style='font-size: 102.14285714285714%'>Php(1)</a> <a href='/blog/categories/python' style='font-size: 102.14285714285714%'>Python(1)</a> <a href='/blog/categories/ruby' style='font-size: 106.42857142857143%'>Ruby(3)</a> <a href='/blog/categories/software' style='font-size: 121.42857142857143%'>Software(10)</a> <a href='/blog/categories/vps' style='font-size: 112.85714285714286%'>Vps(6)</a> </span>
 </section>
 <section id="comment_sidebar"> 
 <h1>Recent Comments</h1> 

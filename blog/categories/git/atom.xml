@@ -4,7 +4,7 @@
   <title><![CDATA[Category: git | Keen on Art of Tech]]></title>
   <link href="http://blog.tinyxd.me/blog/categories/git/atom.xml" rel="self"/>
   <link href="http://blog.tinyxd.me/"/>
-  <updated>2013-01-23T10:48:01+08:00</updated>
+  <updated>2013-01-23T11:10:38+08:00</updated>
   <id>http://blog.tinyxd.me/</id>
   <author>
     <name><![CDATA[Tiny]]></name>
@@ -12,6 +12,28 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[恢复访问Github]]></title>
+    <link href="http://blog.tinyxd.me/blog/2013/01/23/github-hosts/"/>
+    <updated>2013-01-23T10:55:00+08:00</updated>
+    <id>http://blog.tinyxd.me/blog/2013/01/23/github-hosts</id>
+    <content type="html"><![CDATA[<p>12306订票助手拖慢Github，最近Github被屏蔽。具体是不是这个原因导致被屏蔽还不得而知。因为使用DNS污染来屏蔽Github，所以可以通过修改Hosts来解决这一问题。  <br/>
+因为本博客源码，还有一些非常优秀的开源项目在Github上，不得以才出此下策。   <br/>
+windows下修改<code>C:\WINDOWS\system32\drivers\etc</code>，Archlinux下修改<code>/etc/hosts</code> ,在其中添加：  <br/>
+<code>  
+207.97.227.239 github.com
+65.74.177.129 www.github.com
+207.97.227.252 nodeload.github.com
+207.97.227.243 raw.github.com
+204.232.175.78 documentcloud.github.com
+204.232.175.78 pages.github.com
+</code> <br/>
+希望此次事件能够尽快过去。 <br/>
+小贴士： <br/>
+Github---全球最大的社交编程及代码托管网站。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[git分支管理策略]]></title>

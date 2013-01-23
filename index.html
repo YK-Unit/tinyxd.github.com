@@ -88,6 +88,72 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2013/01/23/github-hosts/">恢复访问Github</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-01-23T10:55:00+08:00" pubdate data-updated="true">Jan 23<span>rd</span>, 2013</time>
+        
+         | <a href="/blog/2013/01/23/github-hosts/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>12306订票助手拖慢Github，最近Github被屏蔽。具体是不是这个原因导致被屏蔽还不得而知。因为使用DNS污染来屏蔽Github，所以可以通过修改Hosts来解决这一问题。  <br/>
+因为本博客源码，还有一些非常优秀的开源项目在Github上，不得以才出此下策。   <br/>
+windows下修改<code>C:\WINDOWS\system32\drivers\etc</code>，Archlinux下修改<code>/etc/hosts</code> ,在其中添加：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>207.97.227.239 github.com 
+</span><span class='line'>65.74.177.129 www.github.com 
+</span><span class='line'>207.97.227.252 nodeload.github.com 
+</span><span class='line'>207.97.227.243 raw.github.com 
+</span><span class='line'>204.232.175.78 documentcloud.github.com 
+</span><span class='line'>204.232.175.78 pages.github.com</span></code></pre></td></tr></table></div></figure>
+
+
+<p> <br/>
+希望此次事件能够尽快过去。 <br/>
+小贴士： <br/>
+Github&#8212;全球最大的社交编程及代码托管网站。</p>
+
+<p class='post-footer'>本站文章如果没有特别说明，均为原创，转载请以链接方式注明本文地址：
+<a href='http://blog.tinyxd.me/blog/2013/01/23/github-hosts/'>http://blog.tinyxd.me/blog/2013/01/23/github-hosts/</a><br/>
+&nbsp;Written by <a href='http://blog.tinyxd.me'>Tiny</a>
+&nbsp;Posted at <a href='http://blog.tinyxd.me'>http://blog.tinyxd.me</a><br/>
+&nbsp;关键字： github屏蔽 | 修改hosts</p>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2013/01/17/vim-config/">Vim的一些配置</a></h1>
     
     
@@ -676,91 +742,6 @@ ssh username@domain
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/08/23/archlinux-change-mac/">Archlinux修改mac地址</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-08-23T00:03:00+08:00" pubdate data-updated="true">Aug 23<span>rd</span>, 2012</time>
-        
-         | <a href="/blog/2012/08/23/archlinux-change-mac/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>快开学了，开学了紧接着就是找工作。由于今年的形势还不太好，所以最近一直在复习一些编程方面的东西，好久没更新文章了。 <br/>
-还没到月底，自己的流量都已经用完了，悲催啊！！！借用别人的，这就需要修改mac地址。学校流量3G真的伤不起阿！！！囧 <br/>
-查阅Archlinux Wiki可以看到有两种临时改变mac地址的方法：  <br/>
-1.使用macchanger或者使用ip命令：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>macchanger --mac<span class="o">=</span>XX:XX:XX:XX:XX:XX
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>或者</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>ip link <span class="nb">set </span>dev eth0 down
-</span><span class='line'>ip link <span class="nb">set </span>dev eth0 address XX:XX:XX:XX:XX:XX
-</span><span class='line'>ip link <span class="nb">set </span>dev eth0 up
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>2.在每次启动时自动修改MAC地址。   <br/>
-创建文件<code>/etc/rc.d/functions.d/macspoof</code></p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>spoof_mac<span class="o">()</span> <span class="o">{</span>
-</span><span class='line'>  ip link <span class="nb">set </span>dev eth0 address XX:XX:XX:XX:XX:XX
-</span><span class='line'><span class="o">}</span>
-</span><span class='line'>
-</span><span class='line'>add_hook sysinit_end spoof_mac
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>具体可参见Archlinux wiki。</p>
-
-<p>inode上网可参考我以前的一篇文章:<a href="http://tinyxd.me/blog/2012/05/25/archbang-arch-linux-an-zhuang-inode/">http://tinyxd.me/blog/2012/05/25/archbang-arch-linux-an-zhuang-inode/</a> <br/>
-本文地址：<a href="http://tinyxd.me/blog/2012/08/23/archlinux-change-mac/">http://tinyxd.me/blog/2012/08/23/archlinux-change-mac/</a></p>
-
-<p class='post-footer'>本站文章如果没有特别说明，均为原创，转载请以链接方式注明本文地址：
-<a href='http://blog.tinyxd.me/blog/2012/08/23/archlinux-change-mac/'>http://blog.tinyxd.me/blog/2012/08/23/archlinux-change-mac/</a><br/>
-&nbsp;Written by <a href='http://blog.tinyxd.me'>Tiny</a>
-&nbsp;Posted at <a href='http://blog.tinyxd.me'>http://blog.tinyxd.me</a><br/>
-&nbsp;关键字： mac,修改mac,archlinux,</p>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -784,6 +765,10 @@ ssh username@domain
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/01/23/github-hosts/">恢复访问Github</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/01/17/vim-config/">vim的一些配置</a>
       </li>
     
@@ -799,15 +784,11 @@ ssh username@domain
         <a href="/blog/2012/09/10/job-hunting-2012/">开始找工作了</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2012/09/02/nginx-ssl/">个人网站上安装SSL证书</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Category Cloud</h1>
-    <span id="tag-cloud"><a href='/blog/categories/davinci' style='font-size: 102.14285714285714%'>Davinci(1)</a> <a href='/blog/categories/embedded' style='font-size: 104.28571428571429%'>Embedded(2)</a> <a href='/blog/categories/essay' style='font-size: 110.71428571428571%'>Essay(5)</a> <a href='/blog/categories/git' style='font-size: 102.14285714285714%'>Git(1)</a> <a href='/blog/categories/it' style='font-size: 104.28571428571429%'>It(2)</a> <a href='/blog/categories/java' style='font-size: 102.14285714285714%'>Java(1)</a> <a href='/blog/categories/linux' style='font-size: 160.0%'>Linux(28)</a> <a href='/blog/categories/octopress' style='font-size: 119.28571428571428%'>Octopress(9)</a> <a href='/blog/categories/php' style='font-size: 102.14285714285714%'>Php(1)</a> <a href='/blog/categories/python' style='font-size: 102.14285714285714%'>Python(1)</a> <a href='/blog/categories/ruby' style='font-size: 106.42857142857143%'>Ruby(3)</a> <a href='/blog/categories/software' style='font-size: 121.42857142857143%'>Software(10)</a> <a href='/blog/categories/vps' style='font-size: 112.85714285714286%'>Vps(6)</a> </span>
+    <span id="tag-cloud"><a href='/blog/categories/davinci' style='font-size: 102.14285714285714%'>Davinci(1)</a> <a href='/blog/categories/embedded' style='font-size: 104.28571428571429%'>Embedded(2)</a> <a href='/blog/categories/essay' style='font-size: 110.71428571428571%'>Essay(5)</a> <a href='/blog/categories/git' style='font-size: 104.28571428571429%'>Git(2)</a> <a href='/blog/categories/it' style='font-size: 104.28571428571429%'>It(2)</a> <a href='/blog/categories/java' style='font-size: 102.14285714285714%'>Java(1)</a> <a href='/blog/categories/linux' style='font-size: 160.0%'>Linux(28)</a> <a href='/blog/categories/octopress' style='font-size: 119.28571428571428%'>Octopress(9)</a> <a href='/blog/categories/php' style='font-size: 102.14285714285714%'>Php(1)</a> <a href='/blog/categories/python' style='font-size: 102.14285714285714%'>Python(1)</a> <a href='/blog/categories/ruby' style='font-size: 106.42857142857143%'>Ruby(3)</a> <a href='/blog/categories/software' style='font-size: 121.42857142857143%'>Software(10)</a> <a href='/blog/categories/vps' style='font-size: 112.85714285714286%'>Vps(6)</a> </span>
 </section>
 <section id="comment_sidebar"> 
 <h1>Recent Comments</h1> 
