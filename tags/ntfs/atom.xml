@@ -4,7 +4,7 @@
   <title><![CDATA[Tag: ntfs | Keen on Art of Tech]]></title>
   <link href="http://blog.tinyxd.me/tags/ntfs/atom.xml" rel="self"/>
   <link href="http://blog.tinyxd.me/"/>
-  <updated>2013-01-27T12:47:47+08:00</updated>
+  <updated>2013-02-03T12:08:16+08:00</updated>
   <id>http://blog.tinyxd.me/</id>
   <author>
     <name><![CDATA[Tiny]]></name>
@@ -82,9 +82,6 @@ Disk identifier: 0x559ed1e5</p>
 <pre><code>mount -t ntfs-3g /dev/sda6 /mnt/D
 mount -t ntfs-3g /dev/sda7 /mnt/E   
 </code></pre>
-
-<p>以上文章是对网上搜集的资料的整理。如需转载请注明出处，本文地址： <br/>
-<code>http://tinyxd.me/blog/2012/06/30/debian-ntfs-filesysterm/</code></p>
 ]]></content>
   </entry>
   

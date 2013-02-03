@@ -4,7 +4,7 @@
   <title><![CDATA[Tag: 内核 | Keen on Art of Tech]]></title>
   <link href="http://blog.tinyxd.me/tags/内核/atom.xml" rel="self"/>
   <link href="http://blog.tinyxd.me/"/>
-  <updated>2013-01-27T12:47:47+08:00</updated>
+  <updated>2013-02-03T12:08:16+08:00</updated>
   <id>http://blog.tinyxd.me/</id>
   <author>
     <name><![CDATA[Tiny]]></name>
@@ -108,8 +108,7 @@ struct vm_struct    *next;
 <br />
 
 
-<p>本文章参考自《linux内核设计与实现》、<a href="http://blog.csdn.net/jiangyuping_fyl/article/details/7268287">slab分配器</a> 及 <a href="http://blog.csdn.net/yunsongice/article/details/5536197">非连续内存区</a> 。 <br/>
-本站文章如果没有特别说明，均为<strong>原创</strong>，转载请以<strong>链接</strong>方式注明本文地址：<a href="http://tinyxd.me/blog/2012/07/31/linux-memory-management-3/">http://tinyxd.me/blog/2012/07/31/linux-memory-management-3/</a></p>
+<p>本文章参考自《linux内核设计与实现》、<a href="http://blog.csdn.net/jiangyuping_fyl/article/details/7268287">slab分配器</a> 及 <a href="http://blog.csdn.net/yunsongice/article/details/5536197">非连续内存区</a> 。</p>
 ]]></content>
   </entry>
   
@@ -246,8 +245,7 @@ struct vm_struct    *next;
 <br />
 
 
-<p>本文章参考自《深入理解linux内核》及 <a href="https://www.ibm.com/developerworks/cn/linux/l-linux-slab-allocator/">动态内存管理</a>。 <br/>
-本站文章如果没有特别说明，均为<strong>原创</strong>，转载请以<strong>链接</strong>方式注明本文地址：<a href="http://tinyxd.me/blog/2012/07/31/linux-memory-management-2/">http://tinyxd.me/blog/2012/07/31/linux-memory-management-2/</a></p>
+<p>本文章参考自《深入理解linux内核》及 <a href="https://www.ibm.com/developerworks/cn/linux/l-linux-slab-allocator/">动态内存管理</a>。</p>
 ]]></content>
   </entry>
   
@@ -301,8 +299,7 @@ struct vm_struct    *next;
 
 <p>Linux 采用伙伴系统（buddy system）算法来解决外碎片问题。把所有的空闲页框分组为11个块链表，每个块链表分别包含大小为1, 2, 4, 8, 16, 32, 64, 128, 256，512和1024 个连续的页框。对1024 个页框的最大请求对应着4MB 大小的连续RAM块。每个块的第一个页框的物理地址是该块大小的整数倍。例如，大小为16 个页框的块，其起始地址是16 × 212（212 ＝ 4096，这是一个常规页的大小）的倍数。</p>
 
-<p>本文章参考自《深入理解linux内核》及 <a href="http://www.cnblogs.com/hoys/archive/2011/09/08/2171606.html">Linux内存管理(上)</a> 。 <br/>
-本站文章如果没有特别说明，均为<strong>原创</strong>，转载请以<strong>链接</strong>方式注明本文地址：<a href="http://tinyxd.me/blog/2012/07/29/linux-memory-management-1/">http://tinyxd.me/blog/2012/07/29/linux-memory-management-1/</a></p>
+<p>本文章参考自《深入理解linux内核》及 <a href="http://www.cnblogs.com/hoys/archive/2011/09/08/2171606.html">Linux内存管理(上)</a> 。</p>
 ]]></content>
   </entry>
   
@@ -463,8 +460,7 @@ struct vm_struct    *next;
 <br />
 
 
-<p>本文章参考自《深入理解linux内核》。 <br/>
-本站文章如果没有特别说明，均为<strong>原创</strong>，转载请以<strong>链接</strong>方式注明本文地址：<a href="http://tinyxd.me/blog/2012/07/26/linux-process-scheduling/">http://tinyxd.me/blog/2012/07/26/linux-process-scheduling/</a></p>
+<p>本文章参考自《深入理解linux内核》。</p>
 ]]></content>
   </entry>
   
@@ -529,8 +525,7 @@ struct vm_struct    *next;
 
 <p>开发驱动，需要较短的时间间隔，在以上情况下，内核使用udelay()和ndelay()函数：前者接收一个微妙级的时间间隔作为它的参数，并在指定的延迟结束后返回；后者与前者类似，但是指定的延迟参数是纳秒级的。</p>
 
-<p>本文章参考自《深入理解linux内核》。 <br/>
-本站文章如果没有特别说明，均为<strong>原创</strong>，转载请以<strong>链接</strong>方式注明本文地址：<a href="http://tinyxd.me/blog/2012/07/26/linux-timing-measurements/">http://tinyxd.me/blog/2012/07/26/linux-timing-measurements/</a></p>
+<p>本文章参考自《深入理解linux内核》。</p>
 ]]></content>
   </entry>
   

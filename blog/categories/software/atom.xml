@@ -4,7 +4,7 @@
   <title><![CDATA[Category: software | Keen on Art of Tech]]></title>
   <link href="http://blog.tinyxd.me/blog/categories/software/atom.xml" rel="self"/>
   <link href="http://blog.tinyxd.me/"/>
-  <updated>2013-01-27T12:47:47+08:00</updated>
+  <updated>2013-02-03T12:08:16+08:00</updated>
   <id>http://blog.tinyxd.me/</id>
   <author>
     <name><![CDATA[Tiny]]></name>
@@ -55,13 +55,25 @@ Debug 通常称为调试版本，它包含调试信息，并且不作任何优�
 
 
 <p>Debug 版本：
-<blockquote><p>/MDd /MLd 或 /MTd 使用 Debug runtime library(调试版本的运行时刻函数库)<br/>/Od 关闭优化开关<br/>/D "<em>DEBUG" 相当于 #define </em>DEBUG,打开编译调试代码开关(主要针对assert函数)<br/>/ZI 创建 Edit and continue(编辑继续)数据库，这样在调试过程中如果修改了源代码不需重新编译<br/>/GZ 可以帮助捕获内存错误<br/>/Gm 打开最小化重链接开关，减少链接时间</p></blockquote></p>
+{% blockquote %}
+/MDd /MLd 或 /MTd 使用 Debug runtime library(调试版本的运行时刻函数库)
+/Od 关闭优化开关
+/D "<em>DEBUG" 相当于 #define </em>DEBUG,打开编译调试代码开关(主要针对assert函数)
+/ZI 创建 Edit and continue(编辑继续)数据库，这样在调试过程中如果修改了源代码不需重新编译
+/GZ 可以帮助捕获内存错误
+/Gm 打开最小化重链接开关，减少链接时间
+ {% endblockquote %}</p>
 
 <br />
 
 
 <p>Release 版本： <br/>
-<blockquote><p>/MD /ML 或 /MT 使用发布版本的运行时刻函数库<br/>/O1 或 /O2 优化开关，使程序最小或最快<br/>/D "NDEBUG" 关闭条件编译调试代码开关(即不编译assert函数)<br/>/GF 合并重复的字符串，并将字符串常量放到只读内存，防止 被修改</p></blockquote></p>
+{% blockquote %}
+/MD /ML 或 /MT 使用发布版本的运行时刻函数库
+/O1 或 /O2 优化开关，使程序最小或最快
+/D "NDEBUG" 关闭条件编译调试代码开关(即不编译assert函数)
+/GF 合并重复的字符串，并将字符串常量放到只读内存，防止 被修改
+{% endblockquote %}</p>
 
 <br />
 
@@ -105,9 +117,7 @@ if(first&lt;last)
 </code></pre>
 
 <p>}
-<code>``
-本文是查阅书籍和网络资料整理而来，转载请注明出处。并以超链接的形式注明本文地址：   
-</code>http://tinyxd.me/blog/2012/07/01/merge-sort/`</p>
+```</p>
 ]]></content>
   </entry>
   
@@ -225,11 +235,10 @@ delete [] count;
 </code></pre>
 
 <p>}
-<code>``
-实现基数排序算法时，有基于顺序队列和基于链式队列两种不同的实现方法。基于链式队列的实现中可以把桶设计成一个队列数组QueueArray，数组的每个元素中有两个域，一个队首指针（front）和一个队尾指针（rear）。
-本文是查阅书籍和网络资料整理而来，转载请注明出处。并以超链接的形式注明本文地址：   
-</code>http://tinyxd.me/blog/2012/06/29/radix-sort/` <br/>
-下一节更新归并排序。</p>
+```
+实现基数排序算法时，有基于顺序队列和基于链式队列两种不同的实现方法。基于链式队列的实现中可以把桶设计成一个队列数组QueueArray，数组的每个元素中有两个域，一个队首指针（front）和一个队尾指针（rear）。</p>
+
+<p>下一节更新归并排序。</p>
 ]]></content>
   </entry>
   
@@ -414,10 +423,9 @@ for(i=L.length;i&gt;1;i--)
 </code></pre>
 
 <p>}
-<code>``
-本文是查阅书籍和网络资料整理而来，转载请注明出处。并以超链接的形式注明本文地址：   
-</code>http://tinyxd.me/blog/2012/06/28/select-sort/` <br/>
-下一节更新基数排序。</p>
+```</p>
+
+<p>下一节更新基数排序。</p>
 ]]></content>
   </entry>
   
@@ -469,10 +477,9 @@ sort(a,i+1,right);
 </code></pre>
 
 <p>}
-<code>``
-本文是查阅书籍和网络资料整理而来，转载请注明出处。并以超链接的形式注明本文地址：   
-</code>http://tinyxd.me/blog/2012/06/27/swap-sort/` <br/>
-下一节更新选择排序。</p>
+```</p>
+
+<p>下一节更新选择排序。</p>
 ]]></content>
   </entry>
   

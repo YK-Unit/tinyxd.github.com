@@ -4,7 +4,7 @@
   <title><![CDATA[Category: linux | Keen on Art of Tech]]></title>
   <link href="http://blog.tinyxd.me/blog/categories/linux/atom.xml" rel="self"/>
   <link href="http://blog.tinyxd.me/"/>
-  <updated>2013-01-27T12:47:47+08:00</updated>
+  <updated>2013-02-03T12:08:16+08:00</updated>
   <id>http://blog.tinyxd.me/</id>
   <author>
     <name><![CDATA[Tiny]]></name>
@@ -90,8 +90,7 @@ spoof_mac() {</p>
 ```
 具体可参见Archlinux wiki。</p>
 
-<p>inode上网可参考我以前的一篇文章:<a href="http://tinyxd.me/blog/2012/05/25/archbang-arch-linux-an-zhuang-inode/">http://tinyxd.me/blog/2012/05/25/archbang-arch-linux-an-zhuang-inode/</a> <br/>
-本文地址：<a href="http://tinyxd.me/blog/2012/08/23/archlinux-change-mac/">http://tinyxd.me/blog/2012/08/23/archlinux-change-mac/</a></p>
+<p>inode上网可参考我以前的一篇文章:<a href="http://blog.tinyxd.me/blog/2012/05/25/archbang-arch-linux-an-zhuang-inode/">http://blog.tinyxd.me/blog/2012/05/25/archbang-arch-linux-an-zhuang-inode/</a></p>
 ]]></content>
   </entry>
   
@@ -239,8 +238,7 @@ goto out;
 
 <p>当然，do_brk()比do_mmap()稍快，因为前者假定线性区不映射磁盘上的文件，从而避免了检查线性区对象的几个字段。</p>
 
-<p>本文参考《深入理解linux内核》。 <br/>
-本文地址：<a href="http://tinyxd.me/blog/2012/08/09/linux-heap-management/">http://tinyxd.me/blog/2012/08/09/linux-heap-management/</a></p>
+<p>本文参考《深入理解linux内核》。</p>
 ]]></content>
   </entry>
   
@@ -380,8 +378,7 @@ Linux系统种存在许多的内核函数，有些是内核文件种自己使用
 <br >
 
 
-<p>本文参考自《深入理解linux内核》和<a href="http://chriszeng87.iteye.com/blog/1204500">linux系统调用</a> 。 <br/>
-本文地址：<a href="http://tinyxd.me/blog/2012/08/08/linux-system-calls/">http://tinyxd.me/blog/2012/08/08/linux-system-calls/</a></p>
+<p>本文参考自《深入理解linux内核》和<a href="http://chriszeng87.iteye.com/blog/1204500">linux系统调用</a> 。</p>
 ]]></content>
   </entry>
   
@@ -409,8 +406,7 @@ Linux系统种存在许多的内核函数，有些是内核文件种自己使用
 
 <p></p>
 
-<p>本文参考自《深入理解linux内核》和<a href="http://blog.csdn.net/yunsongice/article/details/5637671">缺页异常处理程序</a> 。 <br/>
-本文地址：<a href="http://tinyxd.me/blog/2012/08/07/linux-page-fault-exception/">http://tinyxd.me/blog/2012/08/07/linux-page-fault-exception/</a></p>
+<p>本文参考自《深入理解linux内核》和<a href="http://blog.csdn.net/yunsongice/article/details/5637671">缺页异常处理程序</a> 。</p>
 ]]></content>
   </entry>
   

@@ -4,7 +4,7 @@
   <title><![CDATA[Tag: ruby | Keen on Art of Tech]]></title>
   <link href="http://blog.tinyxd.me/tags/ruby/atom.xml" rel="self"/>
   <link href="http://blog.tinyxd.me/"/>
-  <updated>2013-01-27T12:47:47+08:00</updated>
+  <updated>2013-02-03T12:08:16+08:00</updated>
   <id>http://blog.tinyxd.me/</id>
   <author>
     <name><![CDATA[Tiny]]></name>
@@ -118,8 +118,6 @@ server address: www.ruby-lang.org
 
 <br />
 
-
-<p>本站文章如果没有特别说明，均为<strong>原创</strong>，转载请以<strong>链接</strong>方式注明本文地址：<code>http://tinyxd.me/blog/2012/07/07/regular-expressions-in-ruby/</code></p>
 ]]></content>
   </entry>
   
@@ -162,8 +160,6 @@ print "#{key}: #{value}\n"
 
 <br />
 
-
-<p>本站文章如果没有特别说明，均为<strong>原创</strong>，转载请以<strong>链接</strong>方式注明本文地址：<code>http://tinyxd.me/blog/2012/07/06/ruby-learning/</code></p>
 ]]></content>
   </entry>
   

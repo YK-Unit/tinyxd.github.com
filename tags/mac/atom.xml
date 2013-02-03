@@ -4,7 +4,7 @@
   <title><![CDATA[Tag: mac | Keen on Art of Tech]]></title>
   <link href="http://blog.tinyxd.me/tags/mac/atom.xml" rel="self"/>
   <link href="http://blog.tinyxd.me/"/>
-  <updated>2013-01-27T12:47:47+08:00</updated>
+  <updated>2013-02-03T12:08:16+08:00</updated>
   <id>http://blog.tinyxd.me/</id>
   <author>
     <name><![CDATA[Tiny]]></name>
@@ -45,8 +45,7 @@ spoof_mac() {</p>
 ```
 具体可参见Archlinux wiki。</p>
 
-<p>inode上网可参考我以前的一篇文章:<a href="http://tinyxd.me/blog/2012/05/25/archbang-arch-linux-an-zhuang-inode/">http://tinyxd.me/blog/2012/05/25/archbang-arch-linux-an-zhuang-inode/</a> <br/>
-本文地址：<a href="http://tinyxd.me/blog/2012/08/23/archlinux-change-mac/">http://tinyxd.me/blog/2012/08/23/archlinux-change-mac/</a></p>
+<p>inode上网可参考我以前的一篇文章:<a href="http://blog.tinyxd.me/blog/2012/05/25/archbang-arch-linux-an-zhuang-inode/">http://blog.tinyxd.me/blog/2012/05/25/archbang-arch-linux-an-zhuang-inode/</a></p>
 ]]></content>
   </entry>
   
