@@ -4,7 +4,7 @@
   <title><![CDATA[Category: octopress | Keen on Art of Tech]]></title>
   <link href="http://blog.tinyxd.me/blog/categories/octopress/atom.xml" rel="self"/>
   <link href="http://blog.tinyxd.me/"/>
-  <updated>2013-03-24T00:02:10+08:00</updated>
+  <updated>2013-03-30T17:36:55+08:00</updated>
   <id>http://blog.tinyxd.me/</id>
   <author>
     <name><![CDATA[Tiny]]></name>
@@ -20,43 +20,7 @@
     <id>http://blog.tinyxd.me/blog/2013/01/16/add-article-info-footer</id>
     <content type="html"><![CDATA[<p>为每篇post添加本文地址和keywords信息。 <br/>
 Ruby脚本如下，添加到plugins文件夹中。  <br/>
-<div><script src='https://gist.github.com/4545472.js?file=post_footer_filter.rb'></script>
-<noscript><pre><code>#
-# post_footer_filter.rb
-# Append every post some footer infomation like original url
-# Written by Kevin Lynx .
-# Modified by Tiny (http://tinyxd.me/) .
-# Email: admin#tinyxd.me
-# Date: 1.16.2013
-#
-require './plugins/post_filters'
-
-module AppendFooterFilter
-  def append(post)
-     author = post.site.config['author']
-     url = post.site.config['url']
-     pre = post.site.config['original_url_pre']
-     post.content + %Q[&lt;p class='post-footer'&gt;
-#{pre or &quot;original link:&quot;}
-&lt;a href='#{post.full_url}'&gt;`#{post.full_url}`&lt;/a&gt;&lt;br/&gt;
-&amp;nbsp;Written by &lt;a href='#{url}'&gt;#{author}&lt;/a&gt;
-&amp;nbsp;Posted at &lt;a href='#{url}'&gt;#{url}&lt;/a&gt;&lt;br/&gt;
-&amp;nbsp;Keywords : {{ page.keywords }}
-&lt;/p&gt;]
-  end
-end
-
-module Jekyll
-  class AppendFooter &lt; PostFilter
-    include AppendFooterFilter
-    def pre_render(post)
-      post.content = append(post) if post.is_post?
-    end
-  end
-end
-
-Liquid::Template.register_filter AppendFooterFilter</code></pre></noscript></div>
- <br/>
+{% gist 4545472 post_footer_filter.rb%} <br/>
 本人已将插件上传到https://github.com/tinyxd/post_footer。</p>
 
 <!--more-->
@@ -74,16 +38,7 @@ Liquid::Template.register_filter AppendFooterFilter</code></pre></noscript></div
     <updated>2012-07-09T22:38:00+08:00</updated>
     <id>http://blog.tinyxd.me/blog/2012/07/09/add-douban-aside</id>
     <content type="html"><![CDATA[<p>1.添加<code>source/_includes/custom/asides/douban.html</code> <br/>
-<div><script src='https://gist.github.com/3076932.js?file=douban.html'></script>
-<noscript><pre><code>{% if site.douban_user %}
-&lt;section&gt;
-&lt;h2&gt;Reading List&lt;/h2&gt;
-&lt;div&gt;
-&lt;script type=&quot;text/javascript&quot; src=&quot;http://www.douban.com/service/badge/tinyxd/?show=dolist&amp;amp;select=random&amp;amp;n=6&amp;amp;columns=3&amp;amp;hidelogo=yes&amp;amp;hideself=yes&quot; &gt;&lt;/script&gt;
-&lt;/div&gt;
-&lt;/section&gt;
-{% endif %}</code></pre></noscript></div>
-<br/>
+{% gist 3076932 douban.html %}<br/>
 其中<code>&lt;div&gt; &lt;/div&gt;</code>中间的代码从<a href="http://www.douban.com/service/badgemakerjs">这里</a>获取，记得改成自己的哦！ <br/>
 2.在<code>_config.yml</code>中添加：     <br/>
 douban_user: XXX<br/>
@@ -106,25 +61,7 @@ douban_user: XXX<br/>
     <id>http://blog.tinyxd.me/blog/2012/07/02/add-flickr-aside-in-octopress</id>
     <content type="html"><![CDATA[<p>octopress添加侧边栏： <br/>
 1.新建 <code>source/_includes/custom/asides/flickr.html</code>，代码如下：
-<div><script src='https://gist.github.com/1421792.js?file=flickr.html'></script>
-<noscript><pre><code>{% if site.flickr_user %}
-&lt;section class=&quot;flickr&quot;&gt;
-&lt;h1&gt;My Flickr&lt;/h1&gt;
-&lt;!-- Start of Flickr Badge --&gt;
-&lt;style type=&quot;text/css&quot;&gt;
-/*
-Images are wrapped in divs classed &quot;flickr_badge_image&quot; with ids &quot;flickr_badge_imageX&quot; where &quot;X&quot; is an integer specifying ordinal position. Below are some styles to get you started!
-*/
-#flickr_badge_wrapper {padding:10px 0 10px 0;}
-.flickr_badge_image {margin: 0 9px 8px 0px;display: inline-block;}
-&lt;/style&gt;
-&lt;div id=&quot;flickr_badge_uber_wrapper&quot;&gt;&lt;div id=&quot;flickr_badge_wrapper&quot;&gt;
-&lt;script type=&quot;text/javascript&quot; src=&quot;http://www.flickr.com/badge_code_v2.gne?count={{ site.flickr_count }}&amp;display=latest&amp;size=s&amp;layout=x&amp;source=user&amp;user={{ site.flickr_user }}&quot;&gt;&lt;/script&gt;
-&lt;/div&gt;&lt;/div&gt;
-&lt;!-- End of Flickr Badge --&gt;
-&lt;/section&gt;
-{% endif %}</code></pre></noscript></div>
-</p>
+{% gist 1421792  flickr.html %}</p>
 
 <!--more-->
 
@@ -188,13 +125,7 @@ ID在这个[网址](http://idgettr.com/)获取，只需把username换成自己�
     <content type="html"><![CDATA[<p>给octopress添加keywords和description。</p>
 
 <p>1.修改source/<em>includes/head.html <br/>
-<div><script src='https://gist.github.com/2460469.js?file=head.html'></script>
-<noscript><pre><code>&lt;meta name=&quot;author&quot; content=&quot;{{ site.author }}&quot;&gt;
-{% capture description %}{% if page.description %}{{ page.description }}{% elsif site.description %}{{ site.description }}{%else%}{{ content | raw_content }}{% endif %}{% endcapture %}
-&lt;meta name=&quot;description&quot; content=&quot;{{ description | strip_html | condense_spaces | truncate:150 }}&quot;&gt;
-{% if page.keywords %}&lt;meta name=&quot;keywords&quot; content=&quot;{{ page.keywords }}&quot;&gt;{%else%}&lt;meta name=&quot;keywords&quot; content=&quot;{{ site.keywords }}&quot;&gt;{% endif %}
-</code></pre></noscript></div>
- <br/>
+{% gist 2460469  head.html %} <br/>
 2.在</em>config.yml中添加如下内容
 <code>
 description: Keen on the software programming and Embedded development.（专注软件编程及嵌入式技术。）
