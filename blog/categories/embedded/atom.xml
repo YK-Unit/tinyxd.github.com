@@ -4,7 +4,7 @@
   <title><![CDATA[Category: embedded | Keen on Art of Tech]]></title>
   <link href="http://blog.tinyxd.me/blog/categories/embedded/atom.xml" rel="self"/>
   <link href="http://blog.tinyxd.me/"/>
-  <updated>2013-03-30T17:36:55+08:00</updated>
+  <updated>2013-04-04T18:16:24+08:00</updated>
   <id>http://blog.tinyxd.me/</id>
   <author>
     <name><![CDATA[Tiny]]></name>
@@ -56,7 +56,7 @@
 例如下图中的2个处理器和共享内存构成的系统。初始时刻，处理机P1和P2都将变量X从共享内存装入了私有Cache。
 这时，两个Cache中和共享内存中的变量X的值是一样的。在程序运行的某一时刻，处理机P1把X的值修改为X'，并更新了私有Cache中 的值。
 此时无论P1采用写直达（write-through），还是写回（write-back）策略，都不会修改P2私有Cache中X的值。这时如果P2需要读取X，则它得到的是过时的值。 <br/>
-{% img  /images/cache.gif %}</p>
+<img src="/images/cache.gif"></p>
 
 <!--more-->
 
