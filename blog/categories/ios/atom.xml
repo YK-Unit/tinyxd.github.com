@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: ios | Keen on Art of Tech]]></title>
+  <link href="http://blog.tinyxd.me/blog/categories/ios/atom.xml" rel="self"/>
+  <link href="http://blog.tinyxd.me/"/>
+  <updated>2013-09-20T13:34:00+08:00</updated>
+  <id>http://blog.tinyxd.me/</id>
+  <author>
+    <name><![CDATA[Tiny]]></name>
+    <email><![CDATA[admin@tinyxd.me]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[IOS 7隐藏APP或者文件夹]]></title>
+    <link href="http://blog.tinyxd.me/blog/2013/09/20/ios-7-hide-app/"/>
+    <updated>2013-09-20T13:11:00+08:00</updated>
+    <id>http://blog.tinyxd.me/blog/2013/09/20/ios-7-hide-app</id>
+    <content type="html"><![CDATA[<p>老罗的锤子rom有个奇葩的功能隐藏APP，现在IOS7也有这个功能了，不知道是bug还是新功能。      <br/>
+操作步骤：<br/>
+1.拖动任意一个文件夹到主屏幕，然后确保主屏幕为满屏状态。</p>
+
+<p>2.按住刚文件夹或者文件夹中的APP，并迅速双击Home按钮，这时iOS会弹出多任务管理选择窗口，这时你需要点击第一个页面返回到主屏幕，这是你会发现你想隐藏的应用颜色已经便暗。</p>
+
+<p>3.打开你刚才在第一步拖到主屏幕上的文件夹，然后按下HOME，想要隐藏的应用或者文件夹已经消失了。</p>
+
+<p>注意：如果需要重新显示被隐藏的文件夹或者应用，你需要重新启动系统。</p>
+
+<p>参考：http://www.cnbeta.com/articles/253387.htm</p>
+]]></content>
+  </entry>
+  
+</feed>

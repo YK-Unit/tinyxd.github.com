@@ -88,6 +88,60 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2012/07/13/debian-setup/">Debian硬盘安装笔记</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-07-13T11:29:00+08:00" pubdate data-updated="true">Jul 13<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/07/13/debian-setup/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>以前安装的时候都有光盘，这次换的机器，光驱坏了，那么有没有可能硬盘安装debian么？答案当然是可以的。 <br/>
+1.下载debian最新ISO映像。 <br/>
+2.下载安装所需要的vmlinuz  initrd.gz  boot.img.gz的这三个文件. <br/>
+   下载地址：<a href="http://debian.osuosl.org/debian/dists/Debian6.0.5/main/installer-i386/current/images/hd-media/">http://debian.osuosl.org/debian/dists/Debian6.0.5/main/installer-i386/current/images/hd-media/</a> <br/>
+3.下载grub4 for DOS    <br/>
+下载地址：<a href="http://download.gna.org/grub4dos/grub4dos-0.4.4-2009-06-20.zip">http://download.gna.org/grub4dos/grub4dos-0.4.4-2009-06-20.zip</a></p>
+
+<h2>安装过程：</h2>
+
+<p>1、先把WINXP安装到C盘，这里唯一要说的是如果在安装WINXP时，选择了把C盘格式化为NTFS格式，那么之后安装用的DEBIAN的ISO文件就不能放在C盘了，必须放在FAT32格式的分区的根目录下。切记哦！否则硬盘安装DEBIAN时后找不到ISO文件哦。</p>
+
+<p>WINXP安装好以后，把下载的GRUB4 for DOS包解压缩到C盘根目录，并将目录名改为grub，（个人认为不改也应该可以，不过没试，你可以试下呵），并进入GRUB目录将grldr文件复制到C盘根目录下；把vmlinuz、initrd.gz、boot.img.gz三个文件也复制到C盘根目录下：（基本上这个时候C盘是NTFS格式还是FAT32格式都没有关系的）</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2012/07/13/debian-setup/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2012/07/12/python-backup-octopress/">本地备份octopress</a></h1>
     
     
@@ -680,58 +734,6 @@ douban_user: XXX<br/>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/07/08/degrading-for-success/">互联网创业降级论</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-07-08T00:46:00+08:00" pubdate data-updated="true">Jul 8<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/07/08/degrading-for-success/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>本文来自：<a href="http://meditic.com/degrading-for-success/">meditic</a>  <br/>
-几乎一年没有写博客了，说没时间那是借口，唯一的原因是，年纪越大越发觉自己肤浅。有些想法还没提笔，就发现很幼稚，就不敢发出来贻笑大方了。这次先给大家说个小故事：</p>
-
-<p>从前有三个屌丝，聚在一起做网络，提供免费的网络服务，砸锅卖铁，通宵达旦，除了卖肾啥都做了。3年后终于做到了五百万用户，对于年轻人来说，能把五百万人玩弄于鼓掌之间，已经是很牛逼轰轰的事了，不过用户越多，成本越高，每年服务器、带宽租金、房租水电、广告运营等成本，已经达到了十七八万，屌丝们不得不面对一个终极问题：如何盈利？</p>
-
-<p>屌丝们定了三盘沙县水饺，围着一箱子的冰啤酒开始计算：按照最近一月的登陆情况来看，四百万个账号已经不活跃了，真正有商业价值的只有一百万人，如 果开通xx功能，收点高级会员费，让其中1%的人升级为高级会员，每年付30块钱年费，那么每年收入就是100万x1%x30元=30万元！不错嘛， 扣除十七八万的运营成本，还剩毛利润12万，每个屌丝年底能分到4万大洋，如果按照打工者的算法，这三个人每人月薪3333元，木有奖金，木有津贴、木有任何福利，上班还得带自家的电脑。</p>
-
-<p>尽管如此，屌丝们还是激动得热泪盈眶：老子有钱啦！老子有钱啦！！！那一夜，人们看到三个发疯的屌丝在屋顶翩翩起舞。</p>
-
-<p>韩寒说，中国人民是最有忍耐力的族群，一点好处就感激涕零。他一定不知道，IT创业界里的屌丝，才是这群傻逼中的战斗机。他们可以平静地忍受每年都持续亏钱，而且还能信心十足的对所有人说公司的状态非常好，如果有一天居然收支平衡了，他们会激动的趁夜难眠，比北朝鲜倒掉还开心。</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2012/07/08/degrading-for-success/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/5/">&larr; Older</a>
@@ -757,6 +759,10 @@ douban_user: XXX<br/>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/09/20/ios-7-hide-app/">IOS 7隐藏APP或者文件夹</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/09/09/update-now/">终于可以更新博客啦</a>
       </li>
     
@@ -772,15 +778,11 @@ douban_user: XXX<br/>
         <a href="/blog/2013/01/16/add-article-info-footer/">文章末尾自动添加本文地址</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2013/01/02/the-blog-stated/">新的一年</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Category Cloud</h1>
-    <span id="tag-cloud"><a href='/blog/categories/davinci' style='font-size: 102.14285714285714%'>Davinci(1)</a> <a href='/blog/categories/embedded' style='font-size: 104.28571428571429%'>Embedded(2)</a> <a href='/blog/categories/essay' style='font-size: 112.85714285714286%'>Essay(6)</a> <a href='/blog/categories/git' style='font-size: 104.28571428571429%'>Git(2)</a> <a href='/blog/categories/it' style='font-size: 104.28571428571429%'>It(2)</a> <a href='/blog/categories/java' style='font-size: 102.14285714285714%'>Java(1)</a> <a href='/blog/categories/linux' style='font-size: 160.0%'>Linux(28)</a> <a href='/blog/categories/octopress' style='font-size: 119.28571428571428%'>Octopress(9)</a> <a href='/blog/categories/php' style='font-size: 102.14285714285714%'>Php(1)</a> <a href='/blog/categories/python' style='font-size: 102.14285714285714%'>Python(1)</a> <a href='/blog/categories/ruby' style='font-size: 106.42857142857143%'>Ruby(3)</a> <a href='/blog/categories/software' style='font-size: 121.42857142857143%'>Software(10)</a> <a href='/blog/categories/vps' style='font-size: 112.85714285714286%'>Vps(6)</a> </span>
+    <span id="tag-cloud"><a href='/blog/categories/davinci' style='font-size: 102.14285714285714%'>Davinci(1)</a> <a href='/blog/categories/embedded' style='font-size: 104.28571428571429%'>Embedded(2)</a> <a href='/blog/categories/essay' style='font-size: 112.85714285714286%'>Essay(6)</a> <a href='/blog/categories/git' style='font-size: 104.28571428571429%'>Git(2)</a> <a href='/blog/categories/ios' style='font-size: 102.14285714285714%'>Ios(1)</a> <a href='/blog/categories/it' style='font-size: 104.28571428571429%'>It(2)</a> <a href='/blog/categories/java' style='font-size: 102.14285714285714%'>Java(1)</a> <a href='/blog/categories/linux' style='font-size: 160.0%'>Linux(28)</a> <a href='/blog/categories/octopress' style='font-size: 119.28571428571428%'>Octopress(9)</a> <a href='/blog/categories/php' style='font-size: 102.14285714285714%'>Php(1)</a> <a href='/blog/categories/python' style='font-size: 102.14285714285714%'>Python(1)</a> <a href='/blog/categories/ruby' style='font-size: 106.42857142857143%'>Ruby(3)</a> <a href='/blog/categories/software' style='font-size: 121.42857142857143%'>Software(10)</a> <a href='/blog/categories/vps' style='font-size: 112.85714285714286%'>Vps(6)</a> </span>
 </section>
 <section id="comment_sidebar"> 
 <h1>Recent Comments</h1> 

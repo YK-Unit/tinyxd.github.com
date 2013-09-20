@@ -88,6 +88,57 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2012/08/01/awk-study/">Awk 学习</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-08-01T00:15:00+08:00" pubdate data-updated="true">Aug 1<span>st</span>, 2012</time>
+        
+         | <a href="/blog/2012/08/01/awk-study/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>AWK是一种优良的文本处理工具。它不仅是 Linux 中也是任何环境中现有的功能最强大的数据处理引擎之一。这种编程及数据操作语言（其名称得自于它的创始人 Alfred Aho 、Peter Weinberger 和 Brian Kernighan 姓氏的首个字母）的最大功能取决于一个人所拥有的知识。AWK 提供了极其强大的功能：可以进行样式装入、流控制、数学运算符、进程控制语句甚至于内置的变量和函数。它具备了一个完整的语言所应具有的几乎所有精美特性。</p>
+
+<h2>一、awk调用方式 </h2>
+
+<p>1、awk [-F field-separator] &#8216;commands&#8217; input-file(s)</p>
+
+<p>commands 是真正的awk命令</p>
+
+<p>-F 为域分隔符</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2012/08/01/awk-study/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2012/07/31/linux-memory-management-3/">Linux内存管理（下）</a></h1>
     
     
@@ -541,60 +592,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/07/13/debian-setup/">Debian硬盘安装笔记</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-07-13T11:29:00+08:00" pubdate data-updated="true">Jul 13<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/07/13/debian-setup/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>以前安装的时候都有光盘，这次换的机器，光驱坏了，那么有没有可能硬盘安装debian么？答案当然是可以的。 <br/>
-1.下载debian最新ISO映像。 <br/>
-2.下载安装所需要的vmlinuz  initrd.gz  boot.img.gz的这三个文件. <br/>
-   下载地址：<a href="http://debian.osuosl.org/debian/dists/Debian6.0.5/main/installer-i386/current/images/hd-media/">http://debian.osuosl.org/debian/dists/Debian6.0.5/main/installer-i386/current/images/hd-media/</a> <br/>
-3.下载grub4 for DOS    <br/>
-下载地址：<a href="http://download.gna.org/grub4dos/grub4dos-0.4.4-2009-06-20.zip">http://download.gna.org/grub4dos/grub4dos-0.4.4-2009-06-20.zip</a></p>
-
-<h2>安装过程：</h2>
-
-<p>1、先把WINXP安装到C盘，这里唯一要说的是如果在安装WINXP时，选择了把C盘格式化为NTFS格式，那么之后安装用的DEBIAN的ISO文件就不能放在C盘了，必须放在FAT32格式的分区的根目录下。切记哦！否则硬盘安装DEBIAN时后找不到ISO文件哦。</p>
-
-<p>WINXP安装好以后，把下载的GRUB4 for DOS包解压缩到C盘根目录，并将目录名改为grub，（个人认为不改也应该可以，不过没试，你可以试下呵），并进入GRUB目录将grldr文件复制到C盘根目录下；把vmlinuz、initrd.gz、boot.img.gz三个文件也复制到C盘根目录下：（基本上这个时候C盘是NTFS格式还是FAT32格式都没有关系的）</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2012/07/13/debian-setup/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/4/">&larr; Older</a>
@@ -620,6 +617,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/09/20/ios-7-hide-app/">IOS 7隐藏APP或者文件夹</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/09/09/update-now/">终于可以更新博客啦</a>
       </li>
     
@@ -635,15 +636,11 @@
         <a href="/blog/2013/01/16/add-article-info-footer/">文章末尾自动添加本文地址</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2013/01/02/the-blog-stated/">新的一年</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Category Cloud</h1>
-    <span id="tag-cloud"><a href='/blog/categories/davinci' style='font-size: 102.14285714285714%'>Davinci(1)</a> <a href='/blog/categories/embedded' style='font-size: 104.28571428571429%'>Embedded(2)</a> <a href='/blog/categories/essay' style='font-size: 112.85714285714286%'>Essay(6)</a> <a href='/blog/categories/git' style='font-size: 104.28571428571429%'>Git(2)</a> <a href='/blog/categories/it' style='font-size: 104.28571428571429%'>It(2)</a> <a href='/blog/categories/java' style='font-size: 102.14285714285714%'>Java(1)</a> <a href='/blog/categories/linux' style='font-size: 160.0%'>Linux(28)</a> <a href='/blog/categories/octopress' style='font-size: 119.28571428571428%'>Octopress(9)</a> <a href='/blog/categories/php' style='font-size: 102.14285714285714%'>Php(1)</a> <a href='/blog/categories/python' style='font-size: 102.14285714285714%'>Python(1)</a> <a href='/blog/categories/ruby' style='font-size: 106.42857142857143%'>Ruby(3)</a> <a href='/blog/categories/software' style='font-size: 121.42857142857143%'>Software(10)</a> <a href='/blog/categories/vps' style='font-size: 112.85714285714286%'>Vps(6)</a> </span>
+    <span id="tag-cloud"><a href='/blog/categories/davinci' style='font-size: 102.14285714285714%'>Davinci(1)</a> <a href='/blog/categories/embedded' style='font-size: 104.28571428571429%'>Embedded(2)</a> <a href='/blog/categories/essay' style='font-size: 112.85714285714286%'>Essay(6)</a> <a href='/blog/categories/git' style='font-size: 104.28571428571429%'>Git(2)</a> <a href='/blog/categories/ios' style='font-size: 102.14285714285714%'>Ios(1)</a> <a href='/blog/categories/it' style='font-size: 104.28571428571429%'>It(2)</a> <a href='/blog/categories/java' style='font-size: 102.14285714285714%'>Java(1)</a> <a href='/blog/categories/linux' style='font-size: 160.0%'>Linux(28)</a> <a href='/blog/categories/octopress' style='font-size: 119.28571428571428%'>Octopress(9)</a> <a href='/blog/categories/php' style='font-size: 102.14285714285714%'>Php(1)</a> <a href='/blog/categories/python' style='font-size: 102.14285714285714%'>Python(1)</a> <a href='/blog/categories/ruby' style='font-size: 106.42857142857143%'>Ruby(3)</a> <a href='/blog/categories/software' style='font-size: 121.42857142857143%'>Software(10)</a> <a href='/blog/categories/vps' style='font-size: 112.85714285714286%'>Vps(6)</a> </span>
 </section>
 <section id="comment_sidebar"> 
 <h1>Recent Comments</h1> 
